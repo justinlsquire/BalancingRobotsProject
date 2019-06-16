@@ -1,0 +1,3708 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Rensselaer Arduino Support Package Library (RASPLib) -  File Exchange - MATLAB Central</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="canonical" href="https://www.mathworks.com/matlabcentral/fileexchange/62702-rensselaer-arduino-support-package-library-rasplib" />
+<!-- BEGIN Adobe DTM -->
+<script src="//assets.adobedtm.com/d0cc0600946eb3957f703b9fe43c3590597a8c2c/satelliteLib-e8d23c2e444abadc572df06537e2def59c01db09.js"></script>
+<!-- END Adobe DTM --> <script id="analyticsDigitalData">
+  digitalData = {
+    "pageInstanceID" : "Rensselaer Arduino Support Package Library (RASPLib) - File Exchange - MATLAB Central",
+    "page" : {
+      "pageInfo" : {
+        "pageID" : "/matlabcentral/fileexchange/62702-rensselaer-arduino-support-package-library-rasplib",
+        "destinationURL" : "https://www.mathworks.com/matlabcentral/fileexchange/62702-rensselaer-arduino-support-package-library-rasplib"
+      },
+      "category" : {
+        "primaryCategory" : "matlabcentral",
+        "subCategory1" : "matlabcentral/fileexchange",
+        "subCategory2" : "",
+      },
+      "attributes" : { }
+    },
+    "product" : [ {
+      "productInfo" : { }
+    } ],
+    "component" : [ ],
+    "events" : [ ],
+    "user": [ ]
+  };
+</script>
+<link href="/includes_content/responsive/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/includes_content/responsive/css/site6.css?201507" rel="stylesheet" type="text/css">
+<link href="/includes_content/responsive/css/site6_lg.css" rel="stylesheet" media="screen and (min-width: 1200px)">
+<link href="/includes_content/responsive/css/site6_md.css" rel="stylesheet" media="screen and (min-width: 992px) and (max-width: 1199px)">
+<link href="/includes_content/responsive/css/site6_sm+xs.css" rel="stylesheet" media="screen and (max-width: 991px)">
+<link href="/includes_content/responsive/css/site6_sm.css" rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 991px)">
+<link href="/includes_content/responsive/css/site6_xs.css" rel="stylesheet" media="screen and (max-width: 767px)">
+<!--[if IE 8]>
+<link href="/includes_content/responsive/css/site6_ie8.css" rel="stylesheet" type="text/css">
+<script src="/includes_content/responsive/scripts/bootstrap/html5shiv-printshiv.js"></script>
+<script src="/includes_content/responsive/scripts/bootstrap/respond.min.js"></script>
+<![endif]-->
+<!--[if IE 9]>
+<link href="/includes_content/responsive/css/site6_ie9.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<link href="/includes_content/responsive/css/site6_print.css" rel="stylesheet" type="text/css" media="print">
+<link rel="stylesheet" href="/includes_content/responsive/css/templates/mlc.css" type="text/css">
+<!--[if IE 8]>
+<link href="/includes_content/responsive/css/templates/mlc_ie8.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<!--[if IE 9]>
+<link href="/includes_content/responsive/css/templates/mlc_ie9.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<link rel="stylesheet" href="/includes_content/responsive/css/apps/fileexchange/fileexchange.css">
+<!--[if IE 8]>
+<link href="/includes_content/responsive/css/apps/fileexchange/fileexchange_ie8.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<!--[if IE 9]>
+<link href="/includes_content/responsive/css/apps/fileexchange/fileexchange_ie9.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<script src="/includes_content/responsive/scripts/jquery/jquery-latest.js"></script>
+<script src="/includes_content/responsive/scripts/jquery/jquery.mobile.custom.min.js"></script>
+<script src="/includes_content/responsive/scripts/bootstrap/bootstrap.min.js"></script>
+<script src="/includes_content/responsive/scripts/global.js"></script>
+<script src="/includes_content/responsive/scripts/anchor.js"></script>
+<script src="https://fonts.mathworks.com/xvy5baa.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
+<meta content="authenticity_token" name="csrf-param" />
+<meta content="ucOBZE4ULWqaj424IUTFadPBhTgNLOvezfk2tLoT6mk=" name="csrf-token" />
+<script src="/matlabcentral/fileexchange/assets/application-c36717f468d03e70e35e591b5177f57b.js" type="text/javascript"></script>
+<link href="/matlabcentral/fileexchange/assets/application-673d930dda79875b0359e985212d826f.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/matlabcentral/fileexchange/assets/ui/application-a404e1089dab69e7dabd61b596c3d7be.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/matlabcentral/fileexchange/assets/profile_link/application-dce9f9f0b526bc2636b1fd84c96835b2.css" media="all" rel="stylesheet" type="text/css" />
+<script src="/matlabcentral/fileexchange/assets/profile_link/application-113cf7c77591f99d3247c1bb213acdda.js" type="text/javascript"></script>
+<meta content="Rensselaer Arduino Support Package Library (RASPLib) - File Exchange - MATLAB Central" property="og:title" /><meta content="website" property="og:type" /><meta content="https://www.mathworks.com/matlabcentral/fileexchange/62702" property="og:url" /><meta content="b6be535d-67a4-42ac-ac30-cbb3e5b8d0b9/4ed4c710-f7d9-45f1-ac40-edce4a1fc355/images/screenshot.PNG" property="og:image" /><meta content="Simulink sensor and motor driver library for Arduino" property="og:description" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="Search File Exchange" href="/matlabcentral/fileexchange/search.xml" />
+
+<link href="/includes_content/responsive/css/site6_offcanvas.css" rel="stylesheet" type="text/css">
+<!--[if IE 8]>
+<link href="/includes_content/responsive/css/site6_offcanvas_ie8.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<script type="text/javascript" src="/includes_content/nextgen/scripts/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="/includes_content/domainSelect/akamai-country-code.js"></script>
+<script type="text/javascript">
+var domainCountryCodeMap = new Map();
+var countryCodeToDomainMap = new Map();
+domainCountryCodeMap.set('www.mathworks.com', 'www');
+countryCodeToDomainMap.set('www','www.mathworks.com')
+domainCountryCodeMap.set('www.mathworks.com', 'www');
+countryCodeToDomainMap.set('www','www.mathworks.com')
+domainCountryCodeMap.set('la.mathworks.com', 'la');
+countryCodeToDomainMap.set('la','la.mathworks.com')
+domainCountryCodeMap.set('au.mathworks.com', 'au');
+countryCodeToDomainMap.set('au','au.mathworks.com')
+domainCountryCodeMap.set('de.mathworks.com', 'de');
+countryCodeToDomainMap.set('de','de.mathworks.com')
+domainCountryCodeMap.set('nl.mathworks.com', 'nl');
+countryCodeToDomainMap.set('nl','nl.mathworks.com')
+domainCountryCodeMap.set('ww2.mathworks.cn', 'ww2');
+countryCodeToDomainMap.set('ww2','ww2.mathworks.cn')
+domainCountryCodeMap.set('se.mathworks.com', 'se');
+countryCodeToDomainMap.set('se','se.mathworks.com')
+domainCountryCodeMap.set('se.mathworks.com', 'se');
+countryCodeToDomainMap.set('se','se.mathworks.com')
+domainCountryCodeMap.set('fr.mathworks.com', 'fr');
+countryCodeToDomainMap.set('fr','fr.mathworks.com')
+domainCountryCodeMap.set('de.mathworks.com', 'de');
+countryCodeToDomainMap.set('de','de.mathworks.com')
+domainCountryCodeMap.set('in.mathworks.com', 'in');
+countryCodeToDomainMap.set('in','in.mathworks.com')
+domainCountryCodeMap.set('uk.mathworks.com', 'uk');
+countryCodeToDomainMap.set('uk','uk.mathworks.com')
+domainCountryCodeMap.set('it.mathworks.com', 'it');
+countryCodeToDomainMap.set('it','it.mathworks.com')
+domainCountryCodeMap.set('jp.mathworks.com', 'jp');
+countryCodeToDomainMap.set('jp','jp.mathworks.com')
+domainCountryCodeMap.set('kr.mathworks.com', 'kr');
+countryCodeToDomainMap.set('kr','kr.mathworks.com')
+domainCountryCodeMap.set('nl.mathworks.com', 'nl');
+countryCodeToDomainMap.set('nl','nl.mathworks.com')
+domainCountryCodeMap.set('nl.mathworks.com', 'nl');
+countryCodeToDomainMap.set('nl','nl.mathworks.com')
+domainCountryCodeMap.set('au.mathworks.com', 'au');
+countryCodeToDomainMap.set('au','au.mathworks.com')
+domainCountryCodeMap.set('se.mathworks.com', 'se');
+countryCodeToDomainMap.set('se','se.mathworks.com')
+domainCountryCodeMap.set('www.mathworks.com', 'www');
+countryCodeToDomainMap.set('www','www.mathworks.com')
+domainCountryCodeMap.set('es.mathworks.com', 'es');
+countryCodeToDomainMap.set('es','es.mathworks.com')
+domainCountryCodeMap.set('se.mathworks.com', 'se');
+countryCodeToDomainMap.set('se','se.mathworks.com')
+domainCountryCodeMap.set('ch.mathworks.com', 'ch');
+countryCodeToDomainMap.set('ch','ch.mathworks.com')
+domainCountryCodeMap.set('uk.mathworks.com', 'uk');
+countryCodeToDomainMap.set('uk','uk.mathworks.com')
+var countrySubdomains = {
+US: {name: 'United States', subdomain: 'www'},
+AD: {name: 'Andorra', subdomain: 'es'},
+AR: {name: 'Argentina', subdomain: 'la'},
+AU: {name: 'Australia', subdomain: 'au'},
+AT: {name: 'Austria', subdomain: 'de'},
+BE: {name: 'Belgium', subdomain: 'nl'},
+BO: {name: 'Bolivia', subdomain: 'la'},
+BV: {name: 'Bouvet Islands', subdomain: 'se'},
+CA: {name: 'Canada', subdomain: 'www'},
+CL: {name: 'Chile', subdomain: 'la'},
+CN: {name: 'China', subdomain: 'cn'},
+CX: {name: 'Christmas Island', subdomain: 'au'},
+CC: {name: 'Cocos-Keeling Islands', subdomain: 'au'},
+CO: {name: 'Colombia', subdomain: 'la'},
+CR: {name: 'Costa Rica', subdomain: 'la'},
+DK: {name: 'Denmark', subdomain: 'se'},
+DO: {name: 'Dominican Republic', subdomain: 'la'},
+EC: {name: 'Ecuador', subdomain: 'la'},
+SV: {name: 'El Salvador', subdomain: 'la'},
+EE: {name: 'Estonia', subdomain: 'se'},
+FO: {name: 'Faroe Islands', subdomain: 'se'},
+FJ: {name: 'Fiji', subdomain: 'au'},
+FI: {name: 'Finland', subdomain: 'se'},
+FR: {name: 'France', subdomain: 'fr'},
+GF: {name: 'French Guiana', subdomain: 'fr'},
+PF: {name: 'French Polynesia', subdomain: 'fr'},
+DE: {name: 'Germany', subdomain: 'de'},
+GL: {name: 'Greenland', subdomain: 'se'},
+GP: {name: 'Guadalupe', subdomain: 'fr'},
+GT: {name: 'Guatemala', subdomain: 'la'},
+HN: {name: 'Honduras', subdomain: 'la'},
+IS: {name: 'Iceland', subdomain: 'se'},
+IN: {name: 'India', subdomain: 'in'},
+IE: {name: 'Ireland', subdomain: 'uk'},
+IT: {name: 'Italy', subdomain: 'it'},
+JP: {name: 'Japan', subdomain: 'jp'},
+KR: {name: 'Korea', subdomain: 'kr'},
+LV: {name: 'Latvia', subdomain: 'se'},
+LI: {name: 'Liechtenstein', subdomain: 'ch'},
+LT: {name: 'Lithuania', subdomain: 'se'},
+LU: {name: 'Luxembourg', subdomain: 'nl'},
+MQ: {name: 'Martinique', subdomain: 'fr'},
+YT: {name: 'Mayotte Island', subdomain: 'fr'},
+MX: {name: 'Mexico', subdomain: 'la'},
+MC: {name: 'Monaco', subdomain: 'fr'},
+NL: {name: 'Netherlands', subdomain: 'nl'},
+NC: {name: 'New Caledonia', subdomain: 'fr'},
+NZ: {name: 'New Zealand', subdomain: 'au'},
+NI: {name: 'Nicaragua', subdomain: 'la'},
+NO: {name: 'Norway', subdomain: 'se'},
+PA: {name: 'Panama', subdomain: 'la'},
+PG: {name: 'Papua New Guinea', subdomain: 'au'},
+PY: {name: 'Paraguay', subdomain: 'la'},
+PE: {name: 'Peru', subdomain: 'la'},
+PT: {name: 'Portugal', subdomain: 'www'},
+PR: {name: 'Puerto Rico', subdomain: 'la'},
+RE: {name: 'Reunion Island', subdomain: 'fr'},
+ES: {name: 'Spain', subdomain: 'es'},
+LK: {name: 'Sri Lanka', subdomain: 'in'},
+SE: {name: 'Sweden', subdomain: 'se'},
+CH: {name: 'Switzerland', subdomain: 'ch'},
+GB: {name: 'United Kingdom', subdomain: 'uk'},
+UY: {name: 'Uruguay', subdomain: 'la'},
+VA: {name: 'Vatican City', subdomain: 'it'},
+VE: {name: 'Venezuela', subdomain: 'la'},
+};
+var domainUtils = {
+isExemptUrl: function (url) {
+if(window.overrideDomainSelector){
+return true;
+}
+var exemptions = [
+'/api/parts/',
+'nocookie=true',
+'client=addons',
+'requestedDomain'
+];
+return exemptions.some(function (exemption) {
+return url.indexOf(exemption) != -1;
+});
+},
+endsWith: function( str, suffix ) {
+return str.substring( str.length - suffix.length, str.length ) === suffix;
+},
+getDomain: function (url) {
+var segments = url.split('/');
+return segments[2];
+},
+getSubdomain: function (domain) {
+return domainCountryCodeMap.get(domain);
+},
+setCookies: function (domain, lang) {
+var domainCookie = 'mathworks.com';
+if (this.endsWith(location.host, 'mathworks.cn')) {
+domainCookie = 'mathworks.cn';
+}
+var selectedSubdomain = this.getSubdomain(domain);
+if (this.endsWith(domain, 'mathworks.cn')) {
+selectedSubdomain = 'cn';
+}
+if (selectedSubdomain === 'www') {
+// This is what ePS did in EQUUS and Ruby, so...
+// we're just following suit.
+selectedSubdomain = 'us';
+}
+if (selectedSubdomain !== 'cn' && selectedSubdomain !== 'ch') {
+lang = '';
+}
+var cookieNames = this.getCookieNames(domain);
+var expires = new Date();
+expires.setFullYear(expires.getFullYear() + 68);
+var myJSON = JSON.stringify({
+domain: selectedSubdomain,
+lang: lang,
+v: 2
+});
+$.cookie(cookieNames.mwaPrefsCookieName, myJSON, {path: '/', expires: 20*365, domain: domainCookie});
+},
+getCookieNames: function (domain) {
+var mwaLoginCookieName = 'mwa';
+var mwaPrefsCookieName = 'mwa_prefs';
+var subdomainSuffix = '';
+if (subdomainSuffix != "") {
+mwaLoginCookieName = mwaLoginCookieName + subdomainSuffix;
+mwaPrefsCookieName = mwaPrefsCookieName + subdomainSuffix;
+}
+return {
+mwaLoginCookieName: mwaLoginCookieName,
+mwaPrefsCookieName: mwaPrefsCookieName,
+};
+},
+switchDomain: function (targetDomain, targetLang) {
+var targetUri = location.pathname;
+targetLang = this.getValidLang(this.getSubdomain(targetDomain), targetLang);
+var url = '//' + targetDomain;
+url += targetUri + location.search;
+url = url.replace(/requestedDomain=[a-z]?[a-z]?&?/, '');
+url = url.replace(/\&$/, '');
+url = url.replace(/\?$/, '');
+var requestedDomainParam = 'requestedDomain=' + targetLang;
+if (url.indexOf('?') > -1) {
+url = url + '&' + requestedDomainParam;
+} else {
+url = url + '?' + requestedDomainParam;
+}
+window.location = url;
+},
+getPrefCookie: function(currentDomain) {
+var cookieNames = this.getCookieNames(currentDomain);
+// regex from: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
+var cookieRegex = new RegExp("(?:(?:^|.*;\\s*)"+cookieNames.mwaPrefsCookieName+"\\s*\\=\\s*([^;]*).*$)|^.*$");
+if (document.cookie) {
+var cookieValue = document.cookie.replace(cookieRegex, "$1");
+if (cookieValue) {
+return JSON.parse(decodeURIComponent(cookieValue));
+}
+}
+return "";
+},
+getPrefDomain: function (currentDomain) {
+var mwaPrefsCookieJsonObject = this.getPrefCookie(currentDomain);
+var visitorPrefDomain;
+if (!!mwaPrefsCookieJsonObject) {
+visitorPrefDomain = mwaPrefsCookieJsonObject.domain;
+if (visitorPrefDomain === 'us') {
+visitorPrefDomain = 'www';
+}else if (visitorPrefDomain === 'cn') {
+visitorPrefDomain = 'ww2';
+}
+}
+return countryCodeToDomainMap.get(visitorPrefDomain);
+},
+getPrefLang: function (currentDomain) {
+var mwaPrefsCookieJsonObject = this.getPrefCookie(currentDomain);
+var multilingualDomainLanguageSupport = {};
+multilingualDomainLanguageSupport['ch'] = ['en','de','fr'];
+multilingualDomainLanguageSupport['cn'] = ['zh','en'];
+var currentDomainLangOptions = multilingualDomainLanguageSupport[mwaPrefsCookieJsonObject.domain];
+if (currentDomainLangOptions) {
+var cookiePrefLang = mwaPrefsCookieJsonObject.lang;
+if (currentDomainLangOptions.indexOf(cookiePrefLang) >= 0) {
+return cookiePrefLang;
+} else {
+return currentDomainLangOptions[0];
+}
+}
+return '';
+},
+getCookieVersion: function (currentDomain) {
+var mwaPrefsCookieJsonObject = this.getPrefCookie(currentDomain);
+return mwaPrefsCookieJsonObject.v;
+},
+getTargetDomainForCookies: function() {
+var targetDomain = "";
+if (this.endsWith(location.host, 'mathworks.cn')) {
+targetDomain = window.location.protocol + "//" + countryCodeToDomainMap.get('www');
+}else{
+targetDomain = window.location.protocol + "//" + countryCodeToDomainMap.get('ww2');
+}
+return targetDomain;
+},
+getValidLang: function (subdomain, lang) {
+var multilingualDomainLanguageSupport = {};
+multilingualDomainLanguageSupport['ch'] = ['en','de','fr'];
+multilingualDomainLanguageSupport['cn'] = ['zh','en'];
+multilingualDomainLanguageSupport['ww2'] = ['zh','en'];
+var currentDomainLangOptions = multilingualDomainLanguageSupport[subdomain];
+if (currentDomainLangOptions) {
+if (currentDomainLangOptions.indexOf(lang) >= 0) {
+return lang;
+} else {
+return currentDomainLangOptions[0];
+}
+}
+return '';
+},
+isDefaultLang: function (subdomain, lang) {
+var multilingualDomainLanguageDefault = {};
+multilingualDomainLanguageDefault['ch'] = 'en';
+multilingualDomainLanguageDefault['cn'] = 'zh';
+multilingualDomainLanguageDefault['ww2'] = 'zh';
+var currentDomainLang = multilingualDomainLanguageDefault[subdomain];
+if (currentDomainLang) {
+if (currentDomainLang === lang) {
+return true;
+} else {
+return false;
+}
+} else if (lang) {
+return false;
+}
+return true;
+}
+};
+$(window).on('load', function() {
+var currentUrl = window.location.href;
+var currentDomain = domainUtils.getDomain(currentUrl);
+var currentSubdomain = domainUtils.getSubdomain(currentDomain);
+var requestedDomainLangRegEx = RegExp('[?&]requestedDomain=([^&]*)').exec(window.location.search);
+if (requestedDomainLangRegEx) {
+var setLang = domainUtils.getValidLang(currentSubdomain, requestedDomainLangRegEx[1])
+domainUtils.setCookies(currentDomain, setLang);
+var URLWithoutRequestedDomain = window.location.href.replace(/requestedDomain=[a-z]?[a-z]?&?/, '');
+URLWithoutRequestedDomain = URLWithoutRequestedDomain.replace(/\&$/, '');
+URLWithoutRequestedDomain = URLWithoutRequestedDomain.replace(/\?$/, '');
+history.replaceState({}, document.title, URLWithoutRequestedDomain);
+window.location = URLWithoutRequestedDomain;
+}
+$('body').on('click', '.domain_selector_link', function (e) {
+e.preventDefault();
+var selectedDomain = domainUtils.getDomain(this.href);
+var selectedLang = $(this).data('lang');
+domainUtils.setCookies(selectedDomain, selectedLang);
+domainUtils.switchDomain(selectedDomain, selectedLang);
+});
+var currentCountryText =
+$('a[data-subdomain=\'' + currentSubdomain + '\'][data-default-lang=\'true\'][data-selected-text]')
+.data('selected-text');
+$('#countrySelectorButtonText').text(currentCountryText);
+var visitorPrefDomain = domainUtils.getPrefDomain(currentDomain);
+var visitorPrefLang = domainUtils.getPrefLang(currentDomain);
+var akamaiCountryCode;
+var akamaiprofile = CQ_Analytics.ClientContextMgr.getRegisteredStore('akamaiprofile');
+if (akamaiprofile) {
+akamaiCountryCode = akamaiprofile.getProperty('countryCode');
+}
+var recommendedSubdomain;
+var recommendedLink;
+if (akamaiCountryCode) {
+if (countrySubdomains[akamaiCountryCode] !== undefined) {
+recommendedSubdomain = countrySubdomains[akamaiCountryCode].subdomain;
+} else {
+recommendedSubdomain = 'www';
+}
+if (recommendedSubdomain === 'us') {
+recommendedSubdomain = 'www';
+}else if (recommendedSubdomain === 'cn') {
+recommendedSubdomain = 'ww2';
+}
+recommendedLink = $('a[data-subdomain=\'' + recommendedSubdomain + '\'][data-recommended-text]');
+} else if (visitorPrefDomain) {
+recommendedSubdomain = domainUtils.getSubdomain(visitorPrefDomain);
+if (visitorPrefLang) {
+recommendedLink = $('a[data-subdomain=\'' + recommendedSubdomain + '\'][data-lang=\'' + visitorPrefLang + '\']');
+} else {
+recommendedLink = $('a[data-subdomain=\'' + recommendedSubdomain + '\'][data-default-lang=\'true\']');
+}
+}
+if (!recommendedLink) {
+recommendedSubdomain = 'www';
+recommendedLink = $('a[data-subdomain=\'' + recommendedSubdomain + '\'][data-recommended-text]');
+}
+$('.recommended-country').text(recommendedLink.data('recommended-text'));
+$('#recommended_domain_button').attr('href', recommendedLink.attr('href'));
+$('#recommended_domain_button').attr('data-lang', recommendedLink.attr('data-lang'));
+$('body').on('click', '#recommended_domain_button', function (e) {
+e.preventDefault();
+var selectedDomain = domainUtils.getDomain(this.href);
+var selectedLang = $(this).data('lang');
+domainUtils.setCookies(selectedDomain, selectedLang);
+domainUtils.switchDomain(selectedDomain, selectedLang);
+});
+$('a.worldwide_link').attr('href', recommendedLink.attr('href'));
+$('a.worldwide_link').data('lang', recommendedLink.data('lang'));
+$('body').on('click', 'a.worldwide_link', function (e) {
+e.preventDefault();
+var selectedDomain = domainUtils.getDomain(this.href);
+var selectedLang = $(this).data('lang');
+domainUtils.setCookies(selectedDomain, selectedLang);
+var href = e.target.getAttribute('href');
+var worldwideLink = '/company/worldwide.html?s_tid=dmselect_cta&requestedDomain=';
+if(href) {
+location.href = href + worldwideLink;
+}
+});
+if (akamaiCountryCode === 'CN') {
+$('#china_performance_alert').show();
+}
+var crossDomain = "";
+if(domainUtils.endsWith(currentDomain, '.mathworks.cn')){
+crossDomain = countryCodeToDomainMap.get('www');
+}else{
+crossDomain = countryCodeToDomainMap.get('ww2');
+}
+if ((!domainUtils.endsWith(currentDomain, '.mathworks.com') && !domainUtils.endsWith(currentDomain, '.mathworks.cn')) || domainUtils.isExemptUrl(currentUrl)) {
+return;
+}
+if (!visitorPrefDomain) {
+if (akamaiCountryCode) {
+var akamaiDeterminedSubdomain = $('a[data-country-code=\'' + akamaiCountryCode + '\']').data('subdomain');
+if ((akamaiCountryCode.toLowerCase() === currentSubdomain) || (akamaiDeterminedSubdomain === currentSubdomain)) {
+domainUtils.setCookies(currentDomain, "");
+} else {
+$('#country-unselected').modal('show');
+}
+return;
+}
+if (currentSubdomain === 'www') {
+domainUtils.setCookies(currentDomain, '');
+} else {
+$('#country-unselected').modal('show');
+}
+} else if (akamaiCountryCode === 'CN' && !(visitorPrefDomain === 'CN') && !domainUtils.getCookieVersion(currentDomain)) {
+$('#country-unselected').modal('show');
+}
+});
+</script> <script src="/includes_content/responsive/scripts/mwa/global_nav.js"></script>
+</head>
+  
+<body id="responsive_b" class="mlc">
+
+  <!-- Mobile TopNav: Start -->
+<div class="header visible-xs visible-sm" id="header_mobile" translate="no">
+<nav class="navbar navbar-default" role="navigation">
+<div class="container-fluid">
+<div class="row">
+<div class="col-xs-12">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle topnav_toggle" data-toggle="collapse" data-target="#topnav_collapse">
+<span class="sr-only">Toggle Main Navigation</span>
+<span class="icon-menu"></span>
+</button>
+<a href="https://www.mathworks.com?s_tid=gn_logo" class="svg_link navbar-brand">
+<img src="/images/responsive/global/pic-header-mathworks-logo.svg" class="mw_logo" alt="MathWorks">
+</a>
+</div>
+</div>
+</div>
+<div class="row visible-xs visible-sm">
+<div class="col-xs-12">
+<div class="navbar-collapse collapse" id="topnav_collapse">
+<ul class="nav navbar-nav" id="topnav">
+<li class="topnav_products "><a href="https://www.mathworks.com/products.html?s_tid=gn_ps" >Products</a></li>
+<li class="topnav_solutions "><a href="https://www.mathworks.com/solutions.html?s_tid=gn_sol">Solutions</a></li>
+<li class="topnav_academia "><a href="https://www.mathworks.com/academia.html?s_tid=gn_acad">Academia</a></li>
+<li class="topnav_support "><a href="https://www.mathworks.com/support.html?s_tid=gn_supp">Support</a></li>
+<li class="topnav_community "><a href="https://www.mathworks.com/matlabcentral/?s_tid=gn_mlc">Community</a></li>
+<li class="topnav_events "><a href="https://www.mathworks.com/company/events.html?s_tid=gn_ev">Events</a></li>
+<li class="headernav_contact"><a href="https://www.mathworks.com/company/aboutus/contact_us.html?s_tid=gn_cntus">Contact Us</a></li>
+<li class="headernav_store"><a href="https://www.mathworks.com/products/get-matlab.html?s_tid=gn_getml">Get MATLAB</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</div>
+<!-- Mobile TopNav: End -->
+<!-- Desktop TopNav: Start -->
+<div class="header hidden-xs hidden-sm" id="header_desktop" translate="no">
+<nav class="navbar navbar-default" role="navigation">
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-9">
+<div class="navbar-header">
+<div class="logo_container hidden-xs hidden-sm">
+<a href="https://www.mathworks.com?s_tid=gn_logo" class="svg_link pull-left">
+<img src="/images/responsive/global/pic-header-mathworks-logo.svg" class="mw_logo" alt="MathWorks">
+</a>
+</div>
+<div class="navbar-collapse collapse hidden-xs hidden-sm">
+<ul class="nav navbar-nav" id="topnav">
+<li class="topnav_products "><a href="https://www.mathworks.com/products.html?s_tid=gn_ps" >Products</a></li>
+<li class="topnav_solutions "><a href="https://www.mathworks.com/solutions.html?s_tid=gn_sol">Solutions</a></li>
+<li class="topnav_academia "><a href="https://www.mathworks.com/academia.html?s_tid=gn_acad">Academia</a></li>
+<li class="topnav_support "><a href="https://www.mathworks.com/support.html?s_tid=gn_supp">Support</a></li>
+<li class="topnav_community "><a href="https://www.mathworks.com/matlabcentral/?s_tid=gn_mlc">Community</a></li>
+<li class="topnav_events "><a href="https://www.mathworks.com/company/events.html?s_tid=gn_ev">Events</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-3">
+<div class="collapse navbar-collapse" id="headernav_collapse">
+<ul class="nav navbar-nav navbar-right" id="headernav">
+<li class="headernav_store"><a href="https://www.mathworks.com/products/get-matlab.html?s_tid=gn_getml" class="btn btn_color_blue companion_btn btn-xs">Get MATLAB</a></li>
+<li class="headernav_contact"><a href="https://www.mathworks.com/company/aboutus/contact_us.html?s_tid=gn_cntus" title="Contact Us"></a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</div>
+<!-- Desktop TopNav: End -->
+<!-- Conjoined Header: Start -->
+<div class="sticky_header_container includes_subnav">
+<!-- Section Header: Start -->
+<div class="section_header level_3">
+<div class="container-fluid">
+<div class="row" id="mobile_search_row">
+<div class="col-xs-12 col-sm-6 col-sm-push-6 col-md-5 col-md-push-7" id="mobile_search">
+<div class="search_nested_content_container">
+<!-- Search File Exchange -->
+<div id="search_scope_fx" class="collapse in">
+  <form id="fx_search_form" name="mlcsearch_form" method="get" data-language="en" action="/matlabcentral/fileexchange">
+    
+    <div class="input-group tokenized_search_field">
+      <label class="sr-only">Search File Exchange</label>
+      <input type="search" class="form-control conjoined_search fileexchange-search" autocomplete="off" name="q" placeholder="Search File Exchange" id="fxsearch"  value="" autofocus="autofocus" onfocus="this.value = this.value;">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn_search_adjacent dropdown-toggle" data-toggle="dropdown" tabindex="-1"><span class="caret"></span><span class="search_scope_label">File Exchange</span></button>
+        <ul class="dropdown-menu list-unstyled dropdown-menu-right" role="menu">
+          <li data-toggle="collapse" data-target="#search_scope_support" class="site_search_scope_trigger"><a href="#">Support</a></li>
+          <li data-toggle="collapse" data-target="#search_scope_site"  class="site_search_scope_trigger"><a href="#">MathWorks</a></li>
+        </ul>
+        <script>
+          $(".support_search_scope_trigger, .site_search_scope_trigger").click(function() {
+            $("#search_scope_fx").removeClass("in");
+            $("#query").val($("#fxsearch").val());
+            $("#supportsearch").val($("#fxsearch").val());
+          });
+        </script>
+        <button type="submit" id="submitsearch" class="btn icon-search btn_search_adjacent btn_search icon_16" tabindex="-1"></button>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- End Search File Exchange -->
+<!-- Support Search -->
+<div id="search_scope_support" class="collapse">
+      <form id="supportsearch_form" name="supportsearch_form" method="get" data-language="en" action="/support/search_results.html">
+        <div class="input-group tokenized_search_field">
+          <label class="sr-only">Search Support</label>
+          <input type="search" class="form-control conjoined_search" autocomplete="off" name="q" placeholder="Search Support" id="supportsearch">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn_search_adjacent dropdown-toggle" data-toggle="dropdown" tabindex="-1"><span class="caret"></span><span class="search_scope_label">Support</span></button>
+            <ul class="dropdown-menu list-unstyled dropdown-menu-right" role="menu">
+              <li data-toggle="collapse" data-target="#search_scope_fx"  class="fileexchange_search_scope_trigger"><a href="#">File Exchange</a></li>
+              <li data-toggle="collapse" data-target="#search_scope_site"  class="support_search_scope_trigger"><a href="#">MathWorks</a></li>
+            </ul>
+            <script>
+              $(".support_search_scope_trigger, .fileexchange_search_scope_trigger").click(function() {
+                $("#search_scope_support").removeClass("in");
+                $("#fxsearch").val($("#supportsearch").val());
+                $("#query").val($("#supportsearch").val());
+              });
+            </script>
+            <button type="submit" name="submitsearch" id="submitsearch" class="btn icon-search btn_search_adjacent btn_search icon_16" tabindex="-1"></button>
+          </div>
+        </div>
+      </form>
+    </div>
+<!-- End Support Search -->
+<!-- Search MathWorks.com -->
+<div id="search_scope_site" class="collapse">
+ <form name="search" id="site_search" class="site_search" action="/search/site_search.html" method="get">
+   <div class="input-group">
+     <label class="sr-only">Search MathWorks.com</label>
+     <input type="hidden" name="c[]" value="entire_site">
+     <input type="search" name="q" id="query" class="form-control conjoined_search" placeholder="Search MathWorks.com" autocomplete="off" \="">
+     <div class="input-group-btn">
+       <button type="button" class="btn btn_search_adjacent dropdown-toggle" data-toggle="dropdown" tabindex="-1"><span class="caret"></span><span class="search_scope_label">MathWorks</span></button>
+       <ul class="dropdown-menu list-unstyled dropdown-menu-right" role="menu">
+         <li data-toggle="collapse" data-target="#search_scope_fx"  class="fileexchange_search_scope_trigger"><a href="#">File Exchange</a></li>
+         <li data-toggle="collapse" data-target="#search_scope_support" class="support_search_scope_trigger"><a href="#">Support</a></li>
+       </ul>
+       <script>
+         $(".support_search_scope_trigger, .fileexchange_search_scope_trigger").click(function() {
+           $("#search_scope_site").removeClass("in");
+           $("#fxsearch").val($("#query").val());
+   $("#supportsearch").val($("#query").val());
+         });
+       </script>
+       <button type="submit" id="searchbutton" class="btn icon-search btn_search_adjacent btn_search icon_16" tabindex="-1"></button>
+     </div>
+   </div>
+ </form>
+</div>
+<!-- End Search -->
+</div>
+<button class="btn icon-remove btn_search pull-right icon_32 visible-xs" data-toggle="collapse" href="#mobile_search" aria-expanded="false" aria-controls="mobile_search"></button>
+</div>
+<div class="col-sm-6 col-sm-pull-6 col-md-7 col-md-pull-5 has_horizontal_local_nav" id="section_header_title">
+<div class="section_header_content">
+<div class="section_header_title add_cursor_pointer">
+<p class="h1">File Exchange</p>
+</div>
+<button type="button" class="navbar-toggle collapsed subnav visible-xs visible-sm" data-toggle="collapse" data-target=".mobile_subnav_content"> <span class="icon-arrow-down icon_24"></span> </button>
+</div>
+</div>
+<div class="visible-xs" id="search_actuator">
+<button class="btn icon-search btn_search pull-right icon_16" data-toggle="collapse" href="#mobile_search" aria-expanded="false" aria-controls="mobile_search"></button>
+</div>
+</div>
+<script>
+$(".section_header_title").click(function(){
+$(window.location).attr('href', '/matlabcentral/fileexchange/');
+});
+</script>
+<!-- Section Header: End -->
+<!-- Mobile Local Nav: Start -->
+<div class="row visible-xs visible-sm" id="mobile_subnav">
+<div class="col-xs-12">
+<div class="navbar-collapse collapse mobile_subnav_content">
+<ul class="nav navbar-nav subnav">
+<li class="dropdown">
+  <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MATLAB Central<span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li class="topnav_about_mlc"><a href="/matlabcentral/?s_tid=gn_mlc">Community Home</a></li>
+    <li class="topnav_answers"><a href="/matlabcentral/answers/index/?s_tid=gn_mlc_an">MATLAB Answers</a></li>
+    <li class="topnav_fileexchange"><a href="/matlabcentral/fileexchange/?s_tid=gn_mlc_fx">File Exchange</a></li>
+    <li class="topnav_cody"><a href="/matlabcentral/cody/?s_tid=gn_mlc_cody">Cody</a></li>
+    <li class="topnav_blogs"><a href="https://blogs.mathworks.com/?s_tid=gn_mlc_blg">Blogs</a></li>
+    <li class="topnav_thingspeak"><a href="/products/thingspeak.html?s_tid=gn_mlc_TS">ThingSpeak</a></li>
+    <li class="topnav_maker"><a href="/matlabcentral/maker.html?s_tid=gn_mlc_topiccom">Maker Community</a></li>
+  </ul>
+</li>
+<li><a href="https://www.mathworks.com/matlabcentral/fileexchange/" id="leftnav_files">Files</a></li>
+<li><a href="https://www.mathworks.com/matlabcentral/fileexchange/authors" id="leftnav_authors">Authors</a></li>
+<li class="cta"><a href="https://www.mathworks.com/matlabcentral/fileexchange/authors/my_fileexchange" id="leftnav_my_fx">My File Exchange</a></li>
+<li class="maincta"><a href="https://www.mathworks.com/matlabcentral/fileexchange/submissions/new" class="submitfile" id="leftnav_submit">Contribute</a></li>
+<li class="about"><a href="/matlabcentral/about/fx/" class="hintanchor" id="leftnav_about">About</a></li>
+
+</ul>
+</div>
+</div>
+</div>
+<!-- Mobile Local Nav: End -->
+</div>
+</div>
+<!-- Horo Nav: Start -->
+<div class="horizontal_nav hidden-xs hidden-sm">
+<div class="horizontal_nav_container">
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-8 col-lg-9 hidden-xs hidden-sm">
+<nav class="navbar navbar-default" role="navigation" id="subnav">
+<div class="collapse navbar-collapse">
+<ul class="nav navbar-nav">
+<li class="dropdown">
+  <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MATLAB Central<span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li class="topnav_about_mlc"><a href="/matlabcentral/?s_tid=gn_mlc">Community Home</a></li>
+    <li class="topnav_answers"><a href="/matlabcentral/answers/index/?s_tid=gn_mlc_an">MATLAB Answers</a></li>
+    <li class="topnav_fileexchange"><a href="/matlabcentral/fileexchange/?s_tid=gn_mlc_fx">File Exchange</a></li>
+    <li class="topnav_cody"><a href="/matlabcentral/cody/?s_tid=gn_mlc_cody">Cody</a></li>
+    <li class="topnav_blogs"><a href="https://blogs.mathworks.com/?s_tid=gn_mlc_blg">Blogs</a></li>
+    <li class="topnav_thingspeak"><a href="/products/thingspeak.html?s_tid=gn_mlc_TS">ThingSpeak</a></li>
+    <li class="topnav_maker"><a href="/matlabcentral/maker.html?s_tid=gn_mlc_topiccom">Maker Community</a></li>
+  </ul>
+</li>
+<li><a href="https://www.mathworks.com/matlabcentral/fileexchange/" id="leftnav_files">Files</a></li>
+<li><a href="https://www.mathworks.com/matlabcentral/fileexchange/authors" id="leftnav_authors">Authors</a></li>
+<li class="cta"><a href="https://www.mathworks.com/matlabcentral/fileexchange/authors/my_fileexchange" id="leftnav_my_fx">My File Exchange</a></li>
+<li class="maincta"><a href="https://www.mathworks.com/matlabcentral/fileexchange/submissions/new" class="submitfile" id="leftnav_submit">Contribute</a></li>
+<li class="about"><a href="/matlabcentral/about/fx/" class="hintanchor" id="leftnav_about">About</a></li>
+
+</ul>
+</div>
+</nav>
+</div>
+<div class="col-md-4 col-lg-3 hidden-xs hidden-sm">
+<div class="cta_box">
+<ul class="list-inline">
+<li class="cta_item cta_item_general"><a href="/programs/trials/trial_request.html?eventid=56763&s_iid=mlcfx_trial_mlc_cta1" class="icon-download">Trial software</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Horo Nav: End -->
+</div>
+<!-- Conjoined Header: End -->
+    
+
+    
+
+  <div class="content_container">
+    <div class="container-fluid">        
+      <div class="row">
+        <div class="col-xs-12">
+            
+
+
+
+
+
+
+
+     
+    
+
+
+
+
+    
+  
+
+  <!-- JSON-LD for SEO purpose (see more at https://schema.org/) -->
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "Rensselaer Arduino Support Package Library (RASPLib) - File Exchange - MATLAB Central",
+      "accessibilitySummary": "Simulink sensor and motor driver library for Arduino",
+      "url": "https://www.mathworks.com/matlabcentral/fileexchange/62702",
+      "datePublished": "30 May 2019",
+      "contributor": {
+        "@type": "Person",
+        "name": "Joshua Hurst"
+      },
+      "contentRating": "4.5",
+      "commentCount": "27"
+    }
+  </script>
+
+  <div data-view="detail">
+    
+    
+    
+    <div id="followSuccess" class="alert alert-success hidden"> <span class="alert_icon icon-alert-success"></span>
+  <h3>You are now following this Submission</h3>
+  <ul>
+    <li>You will see updates in your <a href='/matlabcentral/profile/authors/my_profile/activities'>activity feed</a></li>
+    <li>You may receive emails, depending on your <a href='/matlabcentral/profile/authors/my_profile/notification_preferences'>notification preferences</a></li>
+  </ul>
+</div>
+
+    
+
+
+    <!-- start-of-the-page-container -->
+    <div class="row">
+      <div class="col-xs-12">
+        <!-- start-of-the-header -->
+        <div class="row">
+          <div class="col-xs-12 col-sm-2">
+            <div id="thumbnail" class="text-center">
+  <a href="/matlabcentral/mlc-downloads/downloads/b6be535d-67a4-42ac-ac30-cbb3e5b8d0b9/4ed4c710-f7d9-45f1-ac40-edce4a1fc355/images/screenshot.PNG" border="0"><img alt="image thumbnail" itemprop="image" src="/responsive_image/165/120/0/0/0/cache/matlabcentral/mlc-downloads/downloads/b6be535d-67a4-42ac-ac30-cbb3e5b8d0b9/4ed4c710-f7d9-45f1-ac40-edce4a1fc355/images/screenshot.PNG" /></a>
+</div>
+
+          </div>
+          <div class="col-xs-12 col-sm-10">
+            <div class="row">
+              <div class="col-xs-12 col-sm-8 col-md-9">
+                <h2 id="title" class="add_font_color_emphasize add_margin_5">
+                    <span id="titleText">Rensselaer Arduino Support Package Library (RASPLib)</span>
+                </h2>
+                <div class="add_margin_5">
+                    <span id="user_version" class="small add_font_color_mediumgray">version 1.3 (11 MB) by </span>
+                  <span><a href="/matlabcentral/profile/authors/1240615-joshua-hurst" class="author_inline analyticsMlcProfileModal results_author" data-cp-link-id="1">Joshua Hurst</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="1">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/1240615-joshua-hurst">Joshua Hurst <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/1240615-joshua-hurst">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/1240615_1522086770623_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A319689"><span>6 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>453 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="4.3">
+          <div class="rate_scale">
+            <div class="rated" style="width: 86.0%">4.3</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</span>
+                </div>
+                <div id="summary" class="add_text_wrapping">
+                  <span id="summaryText">Simulink sensor and motor driver library for Arduino</span>
+                </div>
+                <div><a href="https://minseg.com/" target="_blank">https://minseg.com/</a></div>
+              </div>
+              <div class="col-xs-12 col-sm-4 col-md-3 section_downsize">
+                <div class="pull-right">
+                  <div class="rating add_margin_5" title="4.50 out of 5 Stars">
+                    <span class="numberrating">
+                      <div class="rate_scale">
+                        <div class="rated" style="width: 90.0%;">
+                          <span id="rating_value">4.5</span>
+                        </div>
+                      </div>
+                      <a href="#feedbacks"><span id="rating_count">17 Ratings</span> </a>
+                    </span>
+                  </div>
+                    <p class="add_margin_5">
+                      <span id="downloads">330 Downloads</span>
+                      <span class="icon_16 icon-info-circle" data-container="body" data-toggle="popover" role="button" tabindex="0" data-trigger="focus" data-placement="left" title="" data-content="Last 30 days: 330<br> All time: 10,687" data-original-title="Downloads" aria-describedby="popover506129"></span>
+                    </p>
+                  <p class="add_margin_5">
+                    <span id="date_updated">Updated
+                      <span content="2019-05-30">30 May 2019</span>
+                    </span>
+                  </p>
+                    <p class="add_margin_5 github_license">
+                      <a href="https://github.com/hurstj01/RASPLib" target="_blank" class="svg_link">
+                        <img src="/images/responsive/global/ico-github.svg" alt="GitHub">
+                      </a>
+                      <a href="https://github.com/hurstj01/RASPLib" target="_blank">view license on GitHub</a>
+                    </p>
+                </div>
+              </div>
+              <div class="col-xs-12">
+                <ul class="list-inline pull-right add_clear_both">
+  <li class="add_margin_0">
+      <a href="https://www.mathworks.com/login?uri=https%3A%2F%2Fwww.mathworks.com%2Fmatlabcentral%2Ffileexchange%2F62702-rensselaer-arduino-support-package-library-rasplib&amp;form_type=community" class="btn btn-sm companion_btn btn_color_blue"><span class="icon-add"></span>Follow</a>
+  </li>
+  <!-- Start Download action -->
+  <li>
+    <div class="">
+          <div class=""><a href="https://www.mathworks.com/login?uri=https%3A%2F%2Fwww.mathworks.com%2Fmatlabcentral%2Ffileexchange%2F62702-rensselaer-arduino-support-package-library-rasplib&amp;form_type=community" class="btn btn-sm btn_color_blue link--download" data-logintodownload="true" title="Download">Download from GitHub</a></div>
+    </div>
+  </li>
+  <!-- End Download action -->
+</ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end-of-the-header -->
+
+        <!-- start-of-the-tabs -->
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="all-tabs-container">
+              <div>
+  <ul role="tablist" class="nav nav-tabs responsive" id="add_on_files">
+    <li class="active">
+      <a role="tab" data-toggle="tab" href="#overview_tab">Overview</a>
+    </li>
+  </ul>
+</div>
+<div class="tab-content responsive">
+    <div class="tab-pane active" id="overview_tab" data-context="web">
+    <div class="row">
+      <div class='col-xs-12 col-md-9' >
+
+        <div id="description" data-add-on-description="true" class="add_margin_30 add_text_wrapping">
+          <div id="descriptionBody"><p>A Simulink Arduino toolbox with blocks for: quadrature encoder, compass/magnetometer, barometer, temperature, accelerometer, gyroscope, ultrasonic, driver amplifier (DC motor driver), and simple serial communication and plotting tools.</p>
+
+<p>Supported I2C Sensors: MPU6050, MPU9250, HMC5883, BMP180, BMP280, MS5611,  BMI160 (commonly found on GY-521, GY-271, GY-91, GY-87), HC-SR04, VL53L0X</p>
+
+<p>Examples are provided for basic hardware IO, step response and closed loop control of an Lego NXT motor.</p>
+
+<p>Download includes basic curriculum labs describing the following:
+<br />- Simulink Arduino Intro Blinking LED
+<br />- RASPlib Installation Instructions
+<br />- Analog and Encoder input, and PWM output
+<br />- Gyroscope Reading and Calibrating
+<br />- Magnetometer - Making a Compass 
+<br />- Serial Communication Basics 
+<br />- Bluetooth Communication 
+<br />- DC Motor Step Response 
+<br />- Realistic DC Motor Simulation 
+<br />- Basic DC Motor Control 
+<br />- Realistic PI Controller Simulation 
+<br />- DC Motor Parameter ID 
+<br />- Determining Angle with Complementary Filter 
+<br />- Basic Balancing Lab 
+<br />- Ultrasonic Distance Sensor</p>
+
+<p>Labs are draft labs.  Please contact with suggestions or help before leaving negative feedback. </p>
+
+<p>Tested Matlab Versions 2015a-2019a.  Support for Mega, Nano and Uno.  Not tested or expected to work with Due without modification.</p>
+
+<p>We highly recommend 2015a 32 bit for the best user experience.  It is the fastest for compile and connection times and it the most tested version.</p></div>
+        </div>
+
+          <div id="citation" class="add_margin_30 add_text_wrapping">
+    <h3 class="add_bottom_rule add_margin_5">
+      Cite As
+    </h3>
+        <p id="defaultCitation" class="add_margin_20">
+    Joshua Hurst (2019). <span id="defaultCitationTitle">Rensselaer Arduino Support Package Library (RASPLib)</span> (https://www.github.com/hurstj01/RASPLib), GitHub.
+    Retrieved <time datetime="2019-06-16 19:48:49 UTC">June 16, 2019</time>.
+</p>
+
+  </div>
+
+        <div id="feedbacks">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="add_bottom_rule">Comments and Ratings (<span id="feedbacks_count">41</span>)</h3>
+
+      <div id="feedbacks_edit" data-feedbacks-edit-path="/matlabcentral/fileexchange/ui/feedbacks/edit">
+      </div>
+
+      <div id="feedbacks_list" class="row add_margin_50 comment_container" data-add-on-comment-rating="true">
+          <div class="col-xs-12">
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/1240615-joshua-hurst" class="author_inline analyticsMlcProfileModal" data-cp-link-id="2">Joshua Hurst</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="2">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/1240615-joshua-hurst">Joshua Hurst <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/1240615-joshua-hurst">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/1240615_1522086770623_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A319689"><span>6 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>453 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="4.3">
+          <div class="rate_scale">
+            <div class="rated" style="width: 86.0%">4.3</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2019-06-06 12:59:33 UTC">6 Jun 2019</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>This library is only tested with Mega, Nano and Uno.  For Due you would have to modify the code for the Due libraries and pins.  I have updated the description with this information. Thanks!</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/11827592-hichem-belhadj-chikh" class="author_inline analyticsMlcProfileModal" data-cp-link-id="3">hichem belhadj chikh</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="3">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/11827592-hichem-belhadj-chikh">hichem belhadj chikh <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/11827592-hichem-belhadj-chikh">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/11827592_1551955544720_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2019-05-18 11:27:14 UTC">18 May 2019</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>i work with arduino due and i need to read postion from encoder ,which bloc of encoder i choose .</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/15140706-daniel-doscher" class="author_inline analyticsMlcProfileModal" data-cp-link-id="4">Daniel Doscher</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="4">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/15140706-daniel-doscher">Daniel Doscher <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/15140706-daniel-doscher">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/15140706_1553623446832_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2019-03-26 18:05:14 UTC">26 Mar 2019</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/1240615-joshua-hurst" class="author_inline analyticsMlcProfileModal" data-cp-link-id="5">Joshua Hurst</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="5">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/1240615-joshua-hurst">Joshua Hurst <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/1240615-joshua-hurst">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/1240615_1522086770623_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A319689"><span>6 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>453 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="4.3">
+          <div class="rate_scale">
+            <div class="rated" style="width: 86.0%">4.3</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2019-02-16 14:34:25 UTC">16 Feb 2019</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>The home MATLAB directory is where MATLAB starts by default.  In a windows machine it will be something like: C:\Users\hurstj\Documents\MATLAB   MATLAB includes this directory in its search path and if startup.m is in there will add the necessary directories for the library to its search path.   README.txt and labs 1 and 1a go over the installation of the components you need before you install RASPLib.  You may be missing the Arduino support package for Simulink.  I&#x27;m not familiar with the installation on a MAC, so if these steps do not work you may want to reach out to Mathworks technical support. </p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/14042505-hasan223" class="author_inline analyticsMlcProfileModal" data-cp-link-id="6">hasan223</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="6">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/14042505-hasan223">hasan223 <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/14042505-hasan223">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/14042505_1541172226830_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2019-02-13 18:31:46 UTC">13 Feb 2019</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>I am trying to install this package on a mac. After I unzip the folder and copy the RASPLib and startup.m file, where do I paste it? I have tried multiple directories but I can&#x27;t access the simulink blocks associated with this support package. How do I find the home directory on a mac?
+<br />Many thanks!</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/1240615-joshua-hurst" class="author_inline analyticsMlcProfileModal" data-cp-link-id="7">Joshua Hurst</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="7">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/1240615-joshua-hurst">Joshua Hurst <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/1240615-joshua-hurst">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/1240615_1522086770623_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A319689"><span>6 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>453 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="4.3">
+          <div class="rate_scale">
+            <div class="rated" style="width: 86.0%">4.3</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2019-01-16 16:08:18 UTC">16 Jan 2019</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>Sure:</p>
+
+<p>Use this command at the MATLAB command line to find out where arduino files are installed:
+<br />[~, hardwaredir] = codertarget.arduinobase.internal.getArduinoIDERoot(&#x27;hardware&#x27;)</p>
+
+<p>then navigate to &#x27;arduino\avr\cores\arduino&#x27; and you should find Tone.cpp in there.</p>
+
+<p>For example:
+<br />C:\ProgramData\MATLAB\SupportPackages\R2017b\3P.instrset\arduinoide.instrset\arduino-1.8.1\hardware\arduino\avr\cores\arduino\Tone.cpp</p>
+
+<p>Edit Tone.cpp: search for the line &quot;#ifdef USE_TIMER2&quot;  which for my file is located on linen 537 and modify this line to &quot;#ifdef USE_TIMER2_disable&quot;  (just append _disable to the end of the line)</p>
+
+<p>Which will prevent it from running the code  defining timer 2 interrupt since &#x27;USE_TIMER2_disable&#x27; is never defined.</p>
+
+<p>Note: this will affect any code that uses timer 2! so modify at your own risk!</p>
+
+<p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/11235942-dgmcik" class="author_inline analyticsMlcProfileModal" data-cp-link-id="8">dgmcik</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="8">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/11235942-dgmcik">dgmcik <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/11235942-dgmcik">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/11235942_1523559866915_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2019-01-14 18:31:16 UTC">14 Jan 2019</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:20.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/11325136-juan-andres-martin" class="author_inline analyticsMlcProfileModal" data-cp-link-id="9">Juan Andrés Martin</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="9">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/11325136-juan-andres-martin">Juan Andrés Martin <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/11325136-juan-andres-martin">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/11325136_1527619089763_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2019-01-14 14:22:52 UTC">14 Jan 2019</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>Hi Joshua</p>
+
+<p>&#x27;- Added functionality to 3 ultrasonic sensors. Code works by modifying Tone.cpp to not use Timer 2 ISR so ultrasonic library can be used&#x27;</p>
+
+<p>Can you elaborate on how exactly to do this? where is this tone.cpp file located? how to modify it?</p>
+
+<p>Thanks. Regards.
+<br />Juan A.</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/1240615-joshua-hurst" class="author_inline analyticsMlcProfileModal" data-cp-link-id="10">Joshua Hurst</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="10">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/1240615-joshua-hurst">Joshua Hurst <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/1240615-joshua-hurst">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/1240615_1522086770623_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A319689"><span>6 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>453 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="4.3">
+          <div class="rate_scale">
+            <div class="rated" style="width: 86.0%">4.3</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-11-05 13:58:46 UTC">5 Nov 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>I2C sensors need 4 wires, power, ground, SCL, and SDA.</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/7571796-john-kempf" class="author_inline analyticsMlcProfileModal" data-cp-link-id="11">John Kempf</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="11">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/7571796-john-kempf">John Kempf <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/7571796-john-kempf">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/7571796_1536519356104_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-11-04 15:07:25 UTC">4 Nov 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p>Joshua Hurst, I&#x27;m going to be using your support package to run the accelerometer and gyroscopic sensor on an MPU-6050.   I can&#x27;t seem to find any instruction on wiring it to my mega 2560.   I know of course the voltage source and ground, and I&#x27;m guessing the SCL and SDA pins go to the SCL and SDA communication pins on the arduino, but are there any other connections needed to get the sensors working?   Thanks!</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/9854427-tnagy" class="author_inline analyticsMlcProfileModal" data-cp-link-id="12">TNagy</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="12">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/9854427-tnagy">TNagy <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/9854427-tnagy">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/9854427_1522134472056_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-10-21 18:41:16 UTC">21 Oct 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/1240615-joshua-hurst" class="author_inline analyticsMlcProfileModal" data-cp-link-id="13">Joshua Hurst</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="13">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/1240615-joshua-hurst">Joshua Hurst <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/1240615-joshua-hurst">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/1240615_1522086770623_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A319689"><span>6 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>453 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="4.3">
+          <div class="rate_scale">
+            <div class="rated" style="width: 86.0%">4.3</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-10-07 00:39:53 UTC">7 Oct 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>- Added support for ultrasonic sensor up to 2018a 
+<br />- Added functionality to 3 ultrasonic sensors. Code works by modifying Tone.cpp to not use Timer 2 ISR so ultrasonic library can be used</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/12304594-mohd-azri-abd-mutalib" class="author_inline analyticsMlcProfileModal" data-cp-link-id="14">Mohd Azri Abd Mutalib</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="14">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/12304594-mohd-azri-abd-mutalib">Mohd Azri Abd Mutalib <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/12304594-mohd-azri-abd-mutalib">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/12304594_1535003250955_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-09-29 01:30:16 UTC">29 Sep 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p>Joshua Hurst, i`m using your support package to run Ultrasonic Distance Sensor. what if i`m using 2 unit of it? if i`m not mistaken, that support package only support for one unit. please help..</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/1240615-joshua-hurst" class="author_inline analyticsMlcProfileModal" data-cp-link-id="15">Joshua Hurst</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="15">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/1240615-joshua-hurst">Joshua Hurst <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/1240615-joshua-hurst">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/1240615_1522086770623_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A319689"><span>6 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>453 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="4.3">
+          <div class="rate_scale">
+            <div class="rated" style="width: 86.0%">4.3</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-09-15 12:54:28 UTC">15 Sep 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>2018a now supported, in addition:</p>
+
+<p>- added support for BMI160 Gyroscope Accelerometer (BMI160 seems to be more robust to noise than MPU6050) 
+<br />- added serial plot for multiple channels (useful for boards without external mode like nano) 
+</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/1240615-joshua-hurst" class="author_inline analyticsMlcProfileModal" data-cp-link-id="16">Joshua Hurst</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="16">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/1240615-joshua-hurst">Joshua Hurst <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/1240615-joshua-hurst">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/1240615_1522086770623_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A319689"><span>6 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>453 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="4.3">
+          <div class="rate_scale">
+            <div class="rated" style="width: 86.0%">4.3</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-07-05 16:08:55 UTC">5 Jul 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>I have fixed this for 2018a, but had not had the time to test it extensively yet.  If you would like to test this release before it posted send me an email: joshua.hurst.rpi@gmail.com and I will help you.</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/6299352-elric-thomas" class="author_inline analyticsMlcProfileModal" data-cp-link-id="17">Elric Thomas</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="17">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/6299352-elric-thomas">Elric Thomas <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/6299352-elric-thomas">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/6299352_1523492565317_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-07-05 03:11:07 UTC">5 Jul 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>Hello,
+<br />This toolbox work fine with Matlab 2015a and my Arduino device, it&#x27;s very useful. Since march 2018, my coworker team want to install and use Matlab 2018 a for other purposes (Simscape).
+<br />When I try to install your package with Matlab 2018, there is no problem but when I want to use it, the accelerometer, barometer and MPU 9250 blocks appears with &quot;system not found&quot; in red. When I try to use this block, I have this error in the diagnostic viewer :&quot;Incorrect definition of setupImpl in soMPU9250. setupImpl can have at most 0 input(s) because stepImpl defines 0 input(s) (in addition to System object).&quot;
+<br />Can you help me ?
+<br />Thank you.</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/12734847-chawki-mey" class="author_inline analyticsMlcProfileModal" data-cp-link-id="18">chawki mey</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="18">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/12734847-chawki-mey">chawki mey <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/12734847-chawki-mey">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/12734847_1524856055641_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-05-12 19:00:07 UTC">12 May 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>Hello,
+<br />I have a matlab 2017a and I work with arduino. When I try to run the simulink in external mode, I receive the error message &quot;### Unable to generate all binary outputs
+<br />can help me?</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/12708495-kri-ratta" class="author_inline analyticsMlcProfileModal" data-cp-link-id="19">Kri Ratta</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="19">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/12708495-kri-ratta">Kri Ratta <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/12708495-kri-ratta">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/12708495_1524558948453_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-05-03 14:27:18 UTC">3 May 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:20.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/5358782-zakarya-motea" class="author_inline analyticsMlcProfileModal" data-cp-link-id="20">zakarya Motea</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="20">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/5358782-zakarya-motea">zakarya Motea <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/5358782-zakarya-motea">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/5358782_1519608120262_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-03-26 02:29:50 UTC">26 Mar 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/1240615-joshua-hurst" class="author_inline analyticsMlcProfileModal" data-cp-link-id="21">Joshua Hurst</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="21">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/1240615-joshua-hurst">Joshua Hurst <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/1240615-joshua-hurst">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/1240615_1522086770623_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A319689"><span>6 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>453 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="4.3">
+          <div class="rate_scale">
+            <div class="rated" style="width: 86.0%">4.3</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-03-22 00:00:57 UTC">22 Mar 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>This error is usually a result of: 1.) not installing the Arduino Support package 2.) not installing a compiler properly 3.) not installing the RASPLib folder and the startup.m file in the correct location.  All the steps are outlined in labs 1 Simulink Arduino installation PDF and 1a RASPLib installation PDF.  If you have followed the steps in labs 1 and 1a PDFs and still have this error please send me an email joshua.hurst.rpi@gmail.com and I will help you.</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/6496334-john-stricker" class="author_inline analyticsMlcProfileModal" data-cp-link-id="22">John Stricker</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="22">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/6496334-john-stricker">John Stricker <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/6496334-john-stricker">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/6496334_1518531356682_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-03-21 18:01:34 UTC">21 Mar 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>Hi,
+<br />When try to run this in external mode I get the error message &quot;### Failed to generate all binary outputs.&quot; The error message says it&#x27;s looking for something called &quot;stream.h&quot;. Any idea why that would be?
+<br />Thanks</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/5358782-zakarya-motea" class="author_inline analyticsMlcProfileModal" data-cp-link-id="23">zakarya Motea</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="23">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/5358782-zakarya-motea">zakarya Motea <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/5358782-zakarya-motea">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/5358782_1519608120262_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-03-21 11:25:24 UTC">21 Mar 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>Thanks. email has been sent.</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/1240615-joshua-hurst" class="author_inline analyticsMlcProfileModal" data-cp-link-id="24">Joshua Hurst</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="24">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/1240615-joshua-hurst">Joshua Hurst <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/1240615-joshua-hurst">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/1240615_1522086770623_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A319689"><span>6 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>453 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="4.3">
+          <div class="rate_scale">
+            <div class="rated" style="width: 86.0%">4.3</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-03-20 11:59:24 UTC">20 Mar 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>send me an email: joshua.hurst.rpi@gmail.com and I will help you</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/5358782-zakarya-motea" class="author_inline analyticsMlcProfileModal" data-cp-link-id="25">zakarya Motea</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="25">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/5358782-zakarya-motea">zakarya Motea <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/5358782-zakarya-motea">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/5358782_1519608120262_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-03-20 10:20:04 UTC">20 Mar 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>Hi  Joshua Hurst</p>
+
+<p>why when I use Gyro block in the same Simulink model with Accelero block or Barometer block the plot of Gyro become undesirable. but when i use it alone it is ok as explained in the tutorial.</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/8991161-saeed-ahmed" class="author_inline analyticsMlcProfileModal" data-cp-link-id="26">Saeed Ahmed</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="26">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/8991161-saeed-ahmed">Saeed Ahmed <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/8991161-saeed-ahmed">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/8991161_1519697319015_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-03-08 12:05:50 UTC">8 Mar 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/12293793-mike" class="author_inline analyticsMlcProfileModal" data-cp-link-id="27">mike</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="27">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/12293793-mike">mike <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/12293793-mike">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/images/profilepic_default.gif" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-03-04 19:08:49 UTC">4 Mar 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/1240615-joshua-hurst" class="author_inline analyticsMlcProfileModal" data-cp-link-id="28">Joshua Hurst</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="28">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/1240615-joshua-hurst">Joshua Hurst <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/1240615-joshua-hurst">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/1240615_1522086770623_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A319689"><span>6 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>453 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="4.3">
+          <div class="rate_scale">
+            <div class="rated" style="width: 86.0%">4.3</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-03-04 13:37:35 UTC">4 Mar 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>BMP180 is supported.  The image file was old.  The image file has been updated.</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/8991161-saeed-ahmed" class="author_inline analyticsMlcProfileModal" data-cp-link-id="29">Saeed Ahmed</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="29">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/8991161-saeed-ahmed">Saeed Ahmed <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/8991161-saeed-ahmed">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/8991161_1519697319015_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-03-04 10:39:02 UTC">4 Mar 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>why BMP180 block is not shown in the library?</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/1240615-joshua-hurst" class="author_inline analyticsMlcProfileModal" data-cp-link-id="30">Joshua Hurst</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="30">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/1240615-joshua-hurst">Joshua Hurst <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/1240615-joshua-hurst">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/1240615_1522086770623_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A319689"><span>6 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>453 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="4.3">
+          <div class="rate_scale">
+            <div class="rated" style="width: 86.0%">4.3</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-03-02 01:41:11 UTC">2 Mar 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>send me an email: joshua.hurst.rpi@gmail.com and I will help you</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/12173537-vladimir-so" class="author_inline analyticsMlcProfileModal" data-cp-link-id="31">vladimir so</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="31">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/12173537-vladimir-so">vladimir so <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/12173537-vladimir-so">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/12173537_1518756601599.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-03-01 16:39:00 UTC">1 Mar 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>At the end of running everything in simulink external mode I get this error:</p>
+
+<p>### Failed to generate all binary outputs.</p>
+
+<p>What could be happening, thanks for your answers.</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/11059151-jacob-blaustein" class="author_inline analyticsMlcProfileModal" data-cp-link-id="32">Jacob Blaustein</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="32">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/11059151-jacob-blaustein">Jacob Blaustein <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/11059151-jacob-blaustein">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/images/profilepic_default.gif" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2018-02-14 21:32:56 UTC">14 Feb 2018</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/1240615-joshua-hurst" class="author_inline analyticsMlcProfileModal" data-cp-link-id="33">Joshua Hurst</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="33">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/1240615-joshua-hurst">Joshua Hurst <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/1240615-joshua-hurst">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/1240615_1522086770623_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A319689"><span>6 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>453 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="4.3">
+          <div class="rate_scale">
+            <div class="rated" style="width: 86.0%">4.3</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2017-12-15 12:32:06 UTC">15 Dec 2017</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>The ultrasonic sensor is not supported by default after 2015b since the compilation libraries for Arduino changed.  There is a workaround you can try.  If you open the file &quot;soHCSR04Sonar.m&quot; you will see some instructions that will exclude Tone.cpp from the build path allowing compilation of the current block.</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/11235942-dgmcik" class="author_inline analyticsMlcProfileModal" data-cp-link-id="34">dgmcik</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="34">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/11235942-dgmcik">dgmcik <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/11235942-dgmcik">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/11235942_1523559866915_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2017-12-13 15:14:07 UTC">13 Dec 2017</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container add_opacity_50">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:20.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/9687985-ivan-dominguez" class="author_inline analyticsMlcProfileModal" data-cp-link-id="35">Ivan Dominguez</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="35">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/9687985-ivan-dominguez">Ivan Dominguez <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/9687985-ivan-dominguez">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/images/profilepic_default.gif" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2017-12-12 09:36:12 UTC">12 Dec 2017</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>Hi! I have tried ultrasonic distance sensor in Simulink and it is doesn&#x27;t work. My version is 2017 b and Simulink show me this:</p>
+
+<p>MATLAB\Add-Ons\Toolboxes\HC-SR04 Add-On Library for Arduino\code\sensor_ert_rtw&gt;echo The make command returned an error of 2  
+<br />\code\sensor_ert_rtw&gt;An_error_occurred_during_the_call_to_make 
+<br />    &quot;An_error_occurred_during_the_call_to_make&quot; no se reconoce como un comando interno o externo, 
+<br />    programa o archivo por lotes ejecutable. 
+<br /> ### Build procedure for model: &#x27;sensor&#x27; aborted due to an error.
+<br />    Error:Error(s) encountered while building &quot;sensor&quot;:
+<br />    ### Failed to generate all binary outputs.</p>
+
+<p>Someone know why happen this?</p>
+
+<p>Thanks!</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/9687985-ivan-dominguez" class="author_inline analyticsMlcProfileModal" data-cp-link-id="36">Ivan Dominguez</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="36">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/9687985-ivan-dominguez">Ivan Dominguez <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/9687985-ivan-dominguez">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/images/profilepic_default.gif" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2017-12-12 09:23:40 UTC">12 Dec 2017</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+          <p>Sorry for telling now but my Matlab is 2017 b. Maybe it is for that</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/10693564-guolong-jiang" class="author_inline analyticsMlcProfileModal" data-cp-link-id="37">Guolong Jiang</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="37">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/10693564-guolong-jiang">Guolong Jiang <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/10693564-guolong-jiang">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/10693564_1523805345435_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2017-11-20 16:56:03 UTC">20 Nov 2017</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p>Very good! Thanks!</p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/10302872-ramon-angel" class="author_inline analyticsMlcProfileModal" data-cp-link-id="38">Ramon Angel</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="38">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/10302872-ramon-angel">Ramon Angel <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/10302872-ramon-angel">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/images/profilepic_default.gif" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2017-09-22 02:50:26 UTC">22 Sep 2017</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/7219036-qiao-chen" class="author_inline analyticsMlcProfileModal" data-cp-link-id="39">Qiao Chen</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="39">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/7219036-qiao-chen">Qiao Chen <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/7219036-qiao-chen">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/7219036_1524190407314_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2017-07-23 22:27:13 UTC">23 Jul 2017</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/2215625-n-kando" class="author_inline analyticsMlcProfileModal" data-cp-link-id="40">N Kando</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="40">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/2215625-n-kando">N Kando <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/2215625-n-kando">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/2215625_1522089175927_DEF.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2017-05-18 04:38:15 UTC">18 May 2017</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/5191002-davide-marzatico" class="author_inline analyticsMlcProfileModal" data-cp-link-id="41">Davide Marzatico</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="41">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/5191002-davide-marzatico">Davide Marzatico <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/5191002-davide-marzatico">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/profiles/5191002_1528291641420.jpg" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2017-05-09 12:32:05 UTC">9 May 2017</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+      <div class="row section_downsize add_padding_5">
+        <div class="col-xs-3 col-sm-2">
+          <strong><a href="/matlabcentral/profile/authors/3733116-jeerawat-pokanit" class="author_inline analyticsMlcProfileModal" data-cp-link-id="42">jeerawat pokanit</a>
+<div class="profile mlc_author_popover" data-cp-popup-id="42">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="profile__name anlalyticsMlcProfileView" property="name"><a href="/matlabcentral/profile/authors/3733116-jeerawat-pokanit">jeerawat pokanit <span>(view profile)</span></a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="profile__image">
+        <a href="/matlabcentral/profile/authors/3733116-jeerawat-pokanit">
+            <img src="/responsive_image/100/0/0/0/0/cache/matlabcentral/images/profilepic_default.gif" />
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-8   profile__stats analyticsMlcProfileLink">
+      
+  <ul>
+    <li>
+      <span class="icon-fileexchange"></span> <a href="/matlabcentral/fileexchange/?term=authorid%3A"><span>0 files</a>
+    </li>
+    <li>
+      <span class="icon-download"></span> <span>0 downloads</span>
+    </li>
+      <li>
+        <div class="rating" title="0.0">
+          <div class="rate_scale">
+            <div class="rated" style="width: 0.0%">0.0</div>
+          </div>
+        </div>
+      </li>
+  </ul>
+
+    </div>
+
+  </div>
+</div>
+</strong>
+          <p class="add_margin_0 add_font_color_mediumgray"><time datetime="2017-04-26 22:28:16 UTC">26 Apr 2017</time></p>
+        </div>
+        <div class="col-xs-9 col-sm-10 comment-body add_text_wrapping">
+            <div class="rating_container ">
+              <div class="rating_scale">
+                <div class="rating">
+                  <div class="rated" style="width:100.0%;"></div>
+                </div>
+              </div>
+            </div>
+          <p></p>
+        </div>
+      </div>
+  </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+          <div id="update_notes" class="row add_margin_50 update_notes_container" data-add-on-update-note=true>
+    <div class="col-xs-12">
+      <h3 class="add_bottom_rule" id="releaseNotes">Updates</h3>
+      <div class="section_downsize">
+        <table>
+          <tbody>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2019-05-30 19:32:57 UTC">30 May 2019</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.3</td>
+                <td class="add_padding_10 add_text_wrapping"><p>PWM frequency bug fix. Added support for MinSegMegaV3 and MinSegShield M2V5.  Changed file naming convention for clarity. VL53L0X time-of-flight sensor support block added.  Other minor fixes. Verified support with 2019a.</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2019-02-21 00:03:00 UTC">21 Feb 2019</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.2.4.3</td>
+                <td class="add_padding_10 add_text_wrapping"><p>Bug fix for 2015a serial plot</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2018-12-13 13:40:53 UTC">13 Dec 2018</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.2.4.2</td>
+                <td class="add_padding_10 add_text_wrapping"><p>formatting update</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2018-12-13 13:39:43 UTC">13 Dec 2018</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.2.4.1</td>
+                <td class="add_padding_10 add_text_wrapping"><p>updated description to recommend 2015a</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2018-10-07 13:38:40 UTC">7 Oct 2018</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.2.4.0</td>
+                <td class="add_padding_10 add_text_wrapping"><p>Data sync improvements for serial plotting of with multiple channels</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2018-10-06 19:07:16 UTC">6 Oct 2018</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.2.3.0</td>
+                <td class="add_padding_10 add_text_wrapping"><p>- Added support for ultrasonic sensor up to 2018a
+<br />- Added functionality to 3 ultrasonic sensors.  Code works by modifying Tone.cpp to not use Timer 2 ISR so ultrasonic library can be used. </p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2018-09-19 10:26:16 UTC">19 Sep 2018</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.2.1.0</td>
+                <td class="add_padding_10 add_text_wrapping"><p>- Added a synchronization string to the SerialPlot block.  This allows versions after 2017a to sync data sent to the serial line for plotting/saving data.</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2018-09-15 12:51:32 UTC">15 Sep 2018</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.2.0.0</td>
+                <td class="add_padding_10 add_text_wrapping"><p>- added support for BMI160 Gyroscope Accelerometer (BMI160 seems to be more robust to noise than MPU6050)
+<br />- added serial plot for multiple channels (useful for boards without external mode like nano)
+<br />- fixed system objects to be compatible with 2018a</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2018-03-15 15:22:43 UTC">15 Mar 2018</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.1.0.0</td>
+                <td class="add_padding_10 add_text_wrapping"><p>updated image file</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2017-06-07 12:49:22 UTC">7 Jun 2017</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.1.0.0</td>
+                <td class="add_padding_10 add_text_wrapping"><p>added:
+<br />- PWM frequency selection blocks (for Magnetic Levitation kits)
+<br />- BMP180 barometer driver
+<br />- support MinSegNano, MinSegPro, and MinSegShield M1V5 
+<br />- HCSR04 ultrasonic driver workaround for 2015b or later</p>
+
+<p>minor bugs and fixes</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2017-05-02 14:42:51 UTC">2 May 2017</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.0.0.0</td>
+                <td class="add_padding_10 add_text_wrapping"><p>minor edits</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2017-05-02 14:42:17 UTC">2 May 2017</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.0.0.0</td>
+                <td class="add_padding_10 add_text_wrapping"><p>minor edits</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2017-05-02 11:14:08 UTC">2 May 2017</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.0.0.0</td>
+                <td class="add_padding_10 add_text_wrapping"><p>minor updates</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2017-04-26 11:41:02 UTC">26 Apr 2017</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.0.0.0</td>
+                <td class="add_padding_10 add_text_wrapping"><p>added library image</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2017-04-25 23:13:16 UTC">25 Apr 2017</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.0.0.0</td>
+                <td class="add_padding_10 add_text_wrapping"><p>minor edit</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2017-04-25 22:55:32 UTC">25 Apr 2017</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.0.0.0</td>
+                <td class="add_padding_10 add_text_wrapping"><p>minor edit</p></td>
+              </tr>
+              <tr>
+                <td class="add_padding_10 add_font_color_mediumgray cell_20">
+                  <time datetime="2017-04-25 22:47:33 UTC">25 Apr 2017</time>
+                </td>
+                  <td class="add_padding_10 add_text_wrapping">1.0.0.0</td>
+                <td class="add_padding_10 add_text_wrapping"><p>minor formatting updates</p></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+      </div>
+
+      <div class="col-xs-12 col-md-3 section_downsize">
+            <div id="dependency" class="sidebar-dependency add_margin_20">
+    <h5 class="add_bottom_rule add_margin_5">Requires</h5>
+
+      <ul id="product_requirements" class="list-unstyled">
+          <li>
+            <span class="visible-xs-inline-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+            data-toggle="tooltip" data-placement="top" title=""><a href="/products/matlab.html?s_tid=FX_PR_info" class="" target="_blank">MATLAB</a></span>
+          </li>
+          <li>
+            <span class="visible-xs-inline-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+            data-toggle="tooltip" data-placement="top" title=""><a href="/products/simulink.html?s_tid=FX_PR_info" class="" target="_blank">Simulink</a></span>
+          </li>
+      </ul>
+
+      <div id="other_requirements" class="add_text_wrapping">
+        Simulink Support Package For Arduino Hardware
+      </div>
+  </div>
+
+
+          <div id="matlab_release" class="add_margin_20">
+            <h5 class="add_bottom_rule add_margin_5">MATLAB Release Compatibility</h5>
+            <div>
+              Created with
+              R2015a
+            </div>
+            <div>
+              Compatible with R2015a to R2019a
+            </div>
+          </div>
+
+        <div id="os_platforms" class="add_margin_20">
+          <h5 class="add_bottom_rule add_margin_5">Platform Compatibility</h5>
+          <span class='icon-checkbox-checked add_padding_5'></span><span>Windows</span> <span class='icon-checkbox-checked add_padding_5'></span><span>macOS</span> <span class='icon-checkbox-checked add_padding_5'></span><span>Linux</span>
+        </div>
+
+        <div class="add_margin_20">
+  <div data-tags-path="">
+    <h5 class="add_bottom_rule add_margin_5">Tags
+      <span id="add_tags_span" class="add-tags-span pull_right hide">
+        <a href="#" class="add-tags-link">Add Tags</a>
+      </span>
+    </h5>
+    <div id="tags" class="tag-list">
+        <a href="/matlabcentral/fileexchange/?term=tag:%22accelerometer%22" class="tag_component" rel="nofollow">accelerometer</a> <a href="/matlabcentral/fileexchange/?term=tag:%22amplifier%22" class="tag_component" rel="nofollow">amplifier</a> <a href="/matlabcentral/fileexchange/?term=tag:%22arduino%22" class="tag_component" rel="nofollow">arduino</a> <a href="/matlabcentral/fileexchange/?term=tag:%22arduino+support+package%22" class="tag_component" rel="nofollow">arduino support p...</a> <a href="/matlabcentral/fileexchange/?term=tag:%22balance%22" class="tag_component" rel="nofollow">balance</a> <a href="/matlabcentral/fileexchange/?term=tag:%22balance+robot%22" class="tag_component" rel="nofollow">balance robot</a> <a href="/matlabcentral/fileexchange/?term=tag:%22barometer%22" class="tag_component" rel="nofollow">barometer</a> <a href="/matlabcentral/fileexchange/?term=tag:%22bmi160%22" class="tag_component" rel="nofollow">bmi160</a> <a href="/matlabcentral/fileexchange/?term=tag:%22bmp180%22" class="tag_component" rel="nofollow">bmp180</a> <a href="/matlabcentral/fileexchange/?term=tag:%22bmp280%22" class="tag_component" rel="nofollow">bmp280</a> <a href="/matlabcentral/fileexchange/?term=tag:%22closed+loop%22" class="tag_component" rel="nofollow">closed loop</a> <a href="/matlabcentral/fileexchange/?term=tag:%22compass%22" class="tag_component" rel="nofollow">compass</a> <a href="/matlabcentral/fileexchange/?term=tag:%22complementary+filter%22" class="tag_component" rel="nofollow">complementary filter</a> <a href="/matlabcentral/fileexchange/?term=tag:%22control%22" class="tag_component" rel="nofollow">control</a> <a href="/matlabcentral/fileexchange/?term=tag:%22dc+motor%22" class="tag_component" rel="nofollow">dc motor</a> <a href="/matlabcentral/fileexchange/?term=tag:%22dc+motor+driver%22" class="tag_component" rel="nofollow">dc motor driver</a> <a href="/matlabcentral/fileexchange/?term=tag:%22device+driver%22" class="tag_component" rel="nofollow">device driver</a> <a href="/matlabcentral/fileexchange/?term=tag:%22driver+amplifier%22" class="tag_component" rel="nofollow">driver amplifier</a> <a href="/matlabcentral/fileexchange/?term=tag:%22electric_motor_control%22" class="tag_component" rel="nofollow">electric_motor_co...</a> <a href="/matlabcentral/fileexchange/?term=tag:%22encoder%22" class="tag_component" rel="nofollow">encoder</a> <a href="/matlabcentral/fileexchange/?term=tag:%22feedback+control%22" class="tag_component" rel="nofollow">feedback control</a> <a href="/matlabcentral/fileexchange/?term=tag:%22gy271%22" class="tag_component" rel="nofollow">gy271</a> <a href="/matlabcentral/fileexchange/?term=tag:%22gy521%22" class="tag_component" rel="nofollow">gy521</a> <a href="/matlabcentral/fileexchange/?term=tag:%22gy87%22" class="tag_component" rel="nofollow">gy87</a> <a href="/matlabcentral/fileexchange/?term=tag:%22gy91%22" class="tag_component" rel="nofollow">gy91</a> <a href="/matlabcentral/fileexchange/?term=tag:%22gyroscope%22" class="tag_component" rel="nofollow">gyroscope</a> <a href="/matlabcentral/fileexchange/?term=tag:%22hmc5883%22" class="tag_component" rel="nofollow">hmc5883</a> <a href="/matlabcentral/fileexchange/?term=tag:%22magnetic+levitation%22" class="tag_component" rel="nofollow">magnetic levitation</a> <a href="/matlabcentral/fileexchange/?term=tag:%22magnetometer%22" class="tag_component" rel="nofollow">magnetometer</a> <a href="/matlabcentral/fileexchange/?term=tag:%22maker%22" class="tag_component" rel="nofollow">maker</a> <a href="/matlabcentral/fileexchange/?term=tag:%22mechatronics%22" class="tag_component" rel="nofollow">mechatronics</a> <a href="/matlabcentral/fileexchange/?term=tag:%22motor+control%22" class="tag_component" rel="nofollow">motor control</a> <a href="/matlabcentral/fileexchange/?term=tag:%22mpu6050%22" class="tag_component" rel="nofollow">mpu6050</a> <a href="/matlabcentral/fileexchange/?term=tag:%22mpu9250%22" class="tag_component" rel="nofollow">mpu9250</a> <a href="/matlabcentral/fileexchange/?term=tag:%22ms5611%22" class="tag_component" rel="nofollow">ms5611</a> <a href="/matlabcentral/fileexchange/?term=tag:%22power_conversion_control%22" class="tag_component" rel="nofollow">power_conversion_...</a> <a href="/matlabcentral/fileexchange/?term=tag:%22power_electronics_control%22" class="tag_component" rel="nofollow">power_electronics...</a> <a href="/matlabcentral/fileexchange/?term=tag:%22quadrature+encoder%22" class="tag_component" rel="nofollow">quadrature encoder</a> <a href="/matlabcentral/fileexchange/?term=tag:%22rasplib%22" class="tag_component" rel="nofollow">rasplib</a> <a href="/matlabcentral/fileexchange/?term=tag:%22simulink%22" class="tag_component" rel="nofollow">simulink</a> <a href="/matlabcentral/fileexchange/?term=tag:%22temperature%22" class="tag_component" rel="nofollow">temperature</a> <a href="/matlabcentral/fileexchange/?term=tag:%22time+of+flight%22" class="tag_component" rel="nofollow">time of flight</a> <a href="/matlabcentral/fileexchange/?term=tag:%22time-of-flight%22" class="tag_component" rel="nofollow">time-of-flight</a> <a href="/matlabcentral/fileexchange/?term=tag:%22vl53l0x%22" class="tag_component" rel="nofollow">vl53l0x</a>
+    </div>
+
+    <div id="add_tags_form">
+      <form accept-charset="UTF-8" action="/matlabcentral/fileexchange/ui/tags" data-remote="true" id="add_new_tags_form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="ucOBZE4ULWqaj424IUTFadPBhTgNLOvezfk2tLoT6mk=" /></div>
+  <input type="hidden" name="add_on_uuid" value="b6be535d-67a4-42ac-ac30-cbb3e5b8d0b9" />
+  <input type="hidden" id="add_tags_profile_id" name="profile_id" value="0" />
+  <input class="form-control add_margin_5" id="add_tags" name="tags" type="text" value="" />
+  <button class="btn btn-xs companion_btn btn_color_blue cancel_button" type="button">Cancel</button>
+  <input class="btn btn-xs btn_secondary save_button" type="submit" value="Save" />
+</form>
+    </div>
+  </div>
+</div>
+
+<script>
+  $("#add_tags").multicomplete({
+    data_source: { url: "/matlabcentral/fileexchange/ui/tags/auto_suggest" }
+  });
+
+  $(".add-tags-link").click(function() {
+    $("#add_tags_form").show();
+    $("#add_tags").focus();
+    return false;
+  });
+
+  $("#add_tags_form .cancel_button").click(function() {
+    $("#add_tags").val('').blur();
+    $("#add_tags_form").hide();
+    return false;
+  });
+
+  $("#add_new_tags_form").on('ajax:complete', function(){
+    $('.multicomplete > .multicomplete-selected-item').remove()
+    $("#add_tags").val('').blur();
+    $("#add_tags_form").hide();
+    return false;
+  });
+</script>
+
+
+        <div id="related_content" data-related-content-path="/matlabcentral/fileexchange/ui/related_content/b6be535d-67a4-42ac-ac30-cbb3e5b8d0b9"></div>
+
+          <div id="acknowledgements" class="add_margin_20">
+    <h5 class="add_bottom_rule add_margin_5">
+    Acknowledgements</h5>
+        <p class="add_margin_10 add_text_wrapping">
+          <strong>Inspired by:</strong>
+          <a href="/matlabcentral/fileexchange/39354-device-drivers">Device Drivers</a>
+        </p>
+  </div>
+
+
+          <div class="add_margin_20">
+    <h5 class="add_bottom_rule add_margin_5">
+      Communities
+    </h5>
+      <div id="pec_communities">
+        More Files in the <a href="/matlabcentral/topics/power-electronics-control.html?s_tid=topiccom_pec_fex" target="_blank"><span class="icon-community">&nbsp;</span>Power Electronics Control Community</a>
+      </div>
+  </div>
+
+
+        <div class="panel panel-default">
+  <div class="panel-heading add_padding_40 add_background_position_left add_background_cover" style="background-image: url(/images/responsive/supporting/apps/downloads/panel-live-editor-spotlight.png);"></div>
+    <div class="panel-body">
+      <h3 class="add_font_color_darkorange">Discover Live Editor</h3>
+      <p>Create scripts with code, output, and formatted text in a single executable document.</p>
+      <hr class="add_hr_spacing_10">
+      <p><a class="icon-chevron" href="https://www.mathworks.com/products/matlab/live-editor.html?s_tid=fx_mlle" target="liveeditor">Learn About Live Editor</a></p>
+    </div>
+  </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  $(function() {
+    var incrementViewCount = new UI.IncrementViewCount(
+      "/matlabcentral/fileexchange/ui/view_count",
+      "b6be535d-67a4-42ac-ac30-cbb3e5b8d0b9"
+    );
+
+    incrementViewCount.execute();
+  });
+</script>
+
+
+</div>
+
+            </div>
+          </div>
+        </div>
+        <!-- end-of-the-tabs -->
+      </div>
+    </div>
+    <!-- end-of-the-page-container -->
+    
+    <script src="/matlabcentral/fileexchange/assets/file_infos/show-d7081af9206e181c2e9975b8be084a98.js" type="text/javascript"></script>
+    <script src="/matlabcentral/fileexchange/assets/ui/application-53e6088b9b2564c2648614b5a2bb65c9.js" type="text/javascript"></script>
+  </div>
+<script type="text/javascript">
+  $(function () {
+    $('[data-toggle="popover"]').popover({
+      html: true
+    });
+  });
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  })
+</script>
+
+    <script src="/includes_content/responsive/scripts/offcanvas.js?20150311"></script>
+
+  
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+<div id="location_content" style="display:none;"></div>
+
+
+<div class="modal fade" id="country-unselected" translate="no">
+<div id="country-select-container">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <object type="image/svg+xml" width="167px" class="mw_logo" alt="MathWorks" data="/images/responsive/global/pic-header-mathworks-logo2.svg">
+          <img alt="MathWorks" width="167px" src="/images/responsive/global/pic-header-mathworks-logo.png">
+        </object>
+      </div>
+      <div class="modal-body">
+        <div class="row add_margin_40">
+          <div class="col-xs-12">
+            <h1 class="icon-globe icon_color_secondary">Select a Web Site</h1>
+            <p>Choose a web site to get translated content where available and see local events and offers. Based on your location, we recommend that you select: <strong class="recommended-country"></strong>.</p>
+            <a href="#" id="recommended_domain_button"
+						   class="btn btn_color_blue containsResourceName resourceClass-button">Select <span
+							class="recommended-country"></span> web site</a>
+          </div>
+        </div>
+        <p>You can also select a web site from the following list:</p>
+				<div class="alert alert-warning" id="china_performance_alert" style="display:none;"> <span class="alert_icon icon-alert-warning"></span>
+					<h3>How to Get Best Site Performance</h3>
+					<p>Select the China site (in Chinese or English) for best site performance. Other MathWorks country sites are not optimized for visits from your location.</p>
+				</div>
+        <div class="row add_margin_30">
+          <div class="col-sm-4 col-md-3">
+            <h3 class="add_bottom_rule">Americas</h3>
+            <ul class="list-unstyled">
+              <li><a href="https://la.mathworks.com" class="domain_selector_link" data-country-code="LA" data-subdomain="la" data-lang="es" data-default-lang="true" data-selected-text="América Latina" data-recommended-text="América Latina" data-do-not-rewrite="true">Am&eacute;rica Latina</a> (Español)</li>
+              <li><a href="https://www.mathworks.com" class="domain_selector_link" data-country-code="CA" data-subdomain="www" data-lang="en" data-do-not-rewrite="true">Canada</a> (English)</li>
+              <li><a href="https://www.mathworks.com" class="domain_selector_link" data-country-code="US" data-subdomain="www" data-lang="en" data-default-lang="true" data-selected-text="United States" data-recommended-text="United States" data-do-not-rewrite="true">United States</a> (English)</li>
+            </ul>
+          </div>
+          <div class="col-sm-4 col-md-6">
+            <h3 class="add_bottom_rule">Europe</h3>
+            <div class="row">
+              <div class="col-xs-6 col-sm-12 col-md-6">
+                <ul class="list-unstyled add_margin_0_sm">
+                  <li><a href="https://nl.mathworks.com" class="domain_selector_link" data-country-code="BE" data-subdomain="nl" data-lang="en" data-do-not-rewrite="true">Belgium</a> (English)</li>
+                  <li><a href="https://se.mathworks.com" class="domain_selector_link" data-country-code="DK" data-subdomain="se" data-lang="en" data-do-not-rewrite="true">Denmark</a> (English)</li>
+                  <li><a href="https://de.mathworks.com" class="domain_selector_link" data-country-code="DE" data-subdomain="de" data-lang="de" data-default-lang="true" data-selected-text="Deutschland" data-recommended-text="Deutschland" data-do-not-rewrite="true">Deutschland</a> (Deutsch)</li>
+                  <li><a href="https://es.mathworks.com" class="domain_selector_link" data-country-code="ES" data-subdomain="es" data-lang="es" data-default-lang="true" data-selected-text="España" data-recommended-text="España" data-do-not-rewrite="true">España</a> (Español)</li>
+                  <li><a href="https://se.mathworks.com"  class="domain_selector_link" data-country-code="FI" data-subdomain="se" data-lang="en" data-do-not-rewrite="true">Finland</a> (English)</li>
+                  <li><a href="https://fr.mathworks.com" class="domain_selector_link" data-country-code="FR" data-subdomain="fr" data-lang="fr" data-default-lang="true" data-selected-text="France" data-recommended-text="France" data-do-not-rewrite="true">France</a> (Français)</li>
+                  <li><a href="https://uk.mathworks.com" class="domain_selector_link" data-country-code="IE" data-subdomain="uk" data-lang="en" data-do-not-rewrite="true">Ireland</a> (English)</li>
+                  <li><a href="https://it.mathworks.com" class="domain_selector_link" data-country-code="IT" data-subdomain="it" data-lang="it" data-default-lang="true" data-selected-text="Italia" data-recommended-text="Italia" data-do-not-rewrite="true">Italia</a> (Italiano)</li>
+                  <li><a href="https://nl.mathworks.com" class="domain_selector_link" data-country-code="LU" data-subdomain="nl" data-lang="en" data-do-not-rewrite="true">Luxembourg</a> (English)</li>
+                </ul>
+              </div>
+              <div class="col-xs-6 col-sm-12 col-md-6">
+                <ul class="list-unstyled">
+                  <li><a href="https://nl.mathworks.com" class="domain_selector_link" data-country-code="NL" data-subdomain="nl" data-lang="en" data-default-lang="true" data-selected-text="Benelux" data-recommended-text="Netherlands" data-do-not-rewrite="true">Netherlands</a> (English)</li>
+                  <li><a href="https://se.mathworks.com" class="domain_selector_link" data-country-code="NO" data-subdomain="se" data-lang="en" data-do-not-rewrite="true">Norway</a> (English)</li>
+                  <li><a href="https://de.mathworks.com" class="domain_selector_link" data-country-code="AT" data-subdomain="de" data-lang="de" data-do-not-rewrite="true">Österreich</a> (Deutsch)</li>
+                  <li><a href="https://www.mathworks.com" class="domain_selector_link" data-country-code="PT" data-subdomain="www" data-lang="en" data-do-not-rewrite="true">Portugal</a> (English)</li>
+                  <li><a href="https://se.mathworks.com" class="domain_selector_link" data-country-code="Sweden" data-subdomain="se" data-lang="en" data-default-lang="true" data-selected-text="Nordic" data-recommended-text="Sweden" data-do-not-rewrite="true">Sweden</a> (English)</li>
+                  <li>Switzerland
+                    <ul class="list-unstyled add_indent_20">
+                      <li><a href="https://ch.mathworks.com" class="domain_selector_link" data-country-code="CH" data-subdomain="ch" data-lang="de" data-selected-text="Schweiz" data-recommended-text="Schweiz" data-do-not-rewrite="true">Deutsch</a></li>
+                      <li><a href="https://ch.mathworks.com" id="swiss_english" class="domain_selector_link" data-country-code="CH" data-subdomain="ch" data-lang="en" data-default-lang="true" data-selected-text="Switzerland" data-recommended-text="Switzerland" data-do-not-rewrite="true">English</a></li>
+                      <li><a href="https://ch.mathworks.com" class="domain_selector_link" data-country-code="CH" data-subdomain="ch" data-lang="fr" data-selected-text="Suisse" data-recommended-text="Suisse" data-do-not-rewrite="true">Français</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="https://uk.mathworks.com" class="domain_selector_link" data-country-code="GB" data-subdomain="uk" data-lang="en" data-default-lang="true" data-selected-text="United Kingdom" data-recommended-text="United Kingdom" data-do-not-rewrite="true">United Kingdom</a> (English)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-3">
+            <h3 class="add_bottom_rule">Asia Pacific</h3>
+            <ul class="list-unstyled">
+              <li><a href="https://au.mathworks.com" class="domain_selector_link" data-country-code="AU" data-subdomain="au" data-lang="en" data-default-lang="true" data-selected-text="Australia" data-recommended-text="Australia" data-do-not-rewrite="true">Australia</a> (English)</li>
+              <li><a href="https://in.mathworks.com" class="domain_selector_link" data-country-code="IN" data-subdomain="in" data-lang="en" data-default-lang="true" data-selected-text="India" data-recommended-text="India" data-do-not-rewrite="true">India</a> (English)</li>
+              <li><a href="https://au.mathworks.com" class="domain_selector_link" data-country-code="NZ" data-subdomain="au" data-lang="en" data-do-not-rewrite="true">New Zealand</a> (English)</li>
+              <li>中国
+                    <ul class="list-unstyled add_indent_20">
+                      <li><a href="https://ww2.mathworks.cn" class="domain_selector_link" data-country-code="CN" data-subdomain="ww2" data-lang="zh" data-default-lang="true" data-selected-text="中国" data-recommended-text="中国" data-do-not-rewrite="true">简体中文</a></li>
+                      <li><a href="https://ww2.mathworks.cn" class="domain_selector_link" data-country-code="CN" data-subdomain="ww2" data-lang="en" data-default-lang="true" data-selected-text="China" data-recommended-text="China" data-do-not-rewrite="true">English</a></li>
+                    </ul>
+               </li>
+              <li><a href="https://jp.mathworks.com" class="domain_selector_link" data-country-code="JP" data-subdomain="jp" data-lang="ja" data-default-lang="true" data-selected-text="日本" data-recommended-text="日本" data-do-not-rewrite="true">日本</a> (日本語)</li>
+              <li><a href="https://kr.mathworks.com" class="domain_selector_link" data-country-code="KR" data-subdomain="kr" data-lang="ko" data-default-lang="true" data-selected-text="한국" data-recommended-text="한국" data-do-not-rewrite="true">한국</a> (한국어)</li>
+            </ul>
+          </div>
+        </div>
+        <p class="text-center"><a href="#" class="worldwide_link">Contact your local office</a></p>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+  
+
+        </div>
+      </div>
+    </div>
+  </div>
+      
+  
+  <!-- MOBILE CTA - Begin -->
+  <div class="cta_container_mobile visible-sm visible-xs">
+    <div class="container-fluid">      
+      <div class="row add_margin_20">
+        <div class="col-xs-12">
+          <div class="cta_box">
+<ul class="list-inline">
+<li class="cta_item cta_item_general"><a href="/programs/trials/trial_request.html?eventid=56763&s_iid=mlcfx_trial_mlc_cta1" class="icon-download">Trial software</a></li>
+</ul>
+</div> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- MOBILE CTA - End -->
+
+  <footer id="footer" class="bs-footer"> 
+      <!-- FAT FOOTER - Begin --> 
+        <div class="fat_footer_container">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="grid_192">
+<div class="fat_footer">
+<div class="execmatlabweb"> <!--Requried for Doc Test -->
+<div class="row">
+<div class="col-xs-12 col-md-12 col-lg-9 col-lg-push-3 add_margin_20">
+<div class="row">
+<div class="col-xs-12 col-sm-2">
+<p class="ff_section_title">Explore Products</p>
+<ul class="list-unstyled">
+<li><a href="/products/matlab.html?s_tid=hp_ff_p_matlab">MATLAB</a></li>
+<li><a href="/products/simulink.html?s_tid=hp_ff_p_simulink">Simulink</a></li>
+<li><a href="/academia/student_version.html?s_tid=hp_ff_p_student">Student Software</a></li>
+<li><a href="/hardware-support/home.html?s_tid=hp_ff_p_hwsupport">Hardware Support</a></li>
+<li><a href="/matlabcentral/fileexchange/?s_tid=hp_ff_p_fx">File Exchange</a></li>
+</ul>
+</div>
+<div class="col-xs-12 col-sm-2">
+<p class="ff_section_title">Try or Buy</p>
+<ul class="list-unstyled">
+<li><a href="/downloads/web_downloads/?s_iid=hp_ff_t_downloads">Downloads</a></li>
+<li><a href="/campaigns/products/trials.html?s_iid=hp_ff_p_trial">Trial Software</a></li>
+<li><a href="/company/aboutus/contact_us/contact_sales.html?s_iid=hp_ff_t_sales">Contact Sales</a></li>
+<li><a href="/pricing-licensing.html?s_iid=hp_ff_t_pricing">Pricing and Licensing</a></li>
+<li><a href="/store?s_tid=hp_ff_t_buy">How to Buy</a></li>
+</ul>
+</div>
+<div class="col-xs-12 col-sm-2">
+<p class="ff_section_title">Learn to Use</p>
+<ul class="list-unstyled">
+<li><a href="/help/?s_tid=hp_ff_l_doc">Documentation</a></li>
+<li><a href="/support/learn-with-matlab-tutorials.html?s_tid=hp_ff_l_tutorials">Tutorials</a></li>
+<li><a href="/help/examples.html?s_tid=hp_ff_l_examples">Examples</a></li>
+<li><a href="/videos.html?s_tid=hp_ff_l_videos">Videos and Webinars</a></li>
+<li><a href="/services/training.html?s_tid=hp_ff_l_training">Training</a></li>
+</ul>
+</div>
+<div class="clearfix" id="offcanvas_clearfix" style="display:none"></div>
+<div class="col-xs-12 col-sm-2">
+<p class="ff_section_title">Get Support</p>
+<ul class="list-unstyled">
+<li><a href="/support/install-matlab.html?s_tid=hp_ff_s_install">Installation Help</a></li>
+<li><a href="/matlabcentral/answers/index?s_tid=hp_ff_s_answers">Answers</a></li>
+<li><a href="/services/consulting.html?s_tid=hp_ff_s_consulting">Consulting</a></li>
+<li><a href="/licensecenter/?s_tid=hp_ff_s_license">License Center</a></li>
+</ul>
+</div>
+<div class="col-xs-12 col-sm-2">
+<p class="ff_section_title">About <span translate="no">MathWorks</span></p>
+<ul class="list-unstyled">
+<li><a href="/company/jobs/opportunities/?s_tid=hp_ff_a_careers">Careers</a></li>
+<li><a href="/company/newsroom.html?s_tid=hp_ff_a_newsroom">Newsroom</a></li>
+<li><a href="/company/aboutus/soc_mission.html?s_tid=hp_ff_a_socialmission">Social Mission</a></li>
+<li><a href="/company/aboutus/contact_us.html?s_tid=hp_ff_a_contact">Contact Us</a></li>
+<li><a href="/company.html?s_tid=hp_ff_a_company">About <span translate="no">MathWorks</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-md-12 col-lg-3 col-lg-pull-9">
+<p class="h4 add_font_futura_medium add_margin_0"><span translate="no">MathWorks</span></p>
+<p><em>Accelerating the pace of engineering and science</em></p>
+<p><span translate="no">MathWorks</span> is the leading developer of mathematical computing software for engineers and scientists.</p>
+<p><a href="/discovery.html?s_tid=all_disc_mw_ff">Discover...</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- FAT FOOTER - End -->
+    <!-- BASIC FOOTER CONTENT - Begin --> 
+    <div class="container-fluid"> 
+      <div class="footer" translate="no">
+<div class="row">
+<div class="col-xs-12 col-md-9">
+<ul class="countrynav" id="countrynav">
+<li class="footernav_country">
+<a onclick="$('#country-unselected').modal('show');">
+<span class="icon-globe icon_color_quinary icon_16"></span>United States
+</a>
+</li>
+</ul>
+<div class="clearfix"></div>
+<ul class="footernav">
+<li class="footernav_patents"><a href="https://www.mathworks.com/company/aboutus/policies_statements/patents.html?s_tid=gf_pat">Patents</a></li>
+<li class="footernav_trademarks"><a href="https://www.mathworks.com/company/aboutus/policies_statements/trademarks.html?s_tid=gf_trd">Trademarks</a></li>
+<li class="footernav_privacy"><a href="https://www.mathworks.com/company/aboutus/policies_statements.html?s_tid=gf_priv">Privacy Policy</a></li>
+<li class="footernav_piracy"><a href="https://www.mathworks.com/company/aboutus/policies_statements/piracy.html?s_tid=gf_pir">Preventing Piracy</a></li>
+<li class="footernav_status"><a href="https://status.mathworks.com/?s_tid=gf_application">Application Status</a></li>
+<li class="footernav_terms"><a href="https://www.mathworks.com/matlabcentral/termsofuse.html ">Terms of Use</a></li>
+</ul>
+<div class="clearfix"></div>
+<div class="clearfix"></div>
+<p class="copyright" translate="no">&copy; 1994-2019 The MathWorks, Inc.</p>
+</div>
+<div class="clearfix visible-sm add_margin_10"></div>
+<div class="col-xs-12 col-md-3">
+<div class="social_media">
+<ul class="social_media_icons">
+<li>
+<a href="http://www.facebook.com/MATLAB" target="_blank" class="svg_link">
+<img src="/images/responsive/global/ico-facebook.svg" alt="Facebook" class="ico_facebook">
+</a>
+</li>
+<li>
+<a href="http://www.twitter.com/MATLAB" target="_blank" class="svg_link">
+<img src="/images/responsive/global/ico-twitter.svg" alt="Twitter" class="ico_twitter">
+</a>
+</li>
+<li>
+<a href="https://www.instagram.com/matlab/" class="svg_link" target="_blank">
+<img class="ico_instagram" alt="Instagram" src="/images/responsive/global/ico-instagram.svg">
+</a>
+</li>
+<li>
+<a href="https://www.youtube.com/user/MATLAB" class="svg_link" target="_blank">
+<img class="ico_youtube" alt="YouTube" src="/images/responsive/global/ico-youtube.svg">
+</a>
+</li>
+<li>
+<a href="http://www.linkedin.com/company/the-mathworks_2" target="_blank" class="svg_link">
+<img src="/images/responsive/global/ico-linkedin.svg" alt="LinkedIn" class="ico_linkedin">
+</a>
+</li>
+<li>
+<a href="https://www.mathworks.com/company/rss.html" class="svg_link">
+<img src="/images/responsive/global/ico-rss.svg" alt="RSS" class="ico_rss">
+</a>
+</li>
+</ul>
+<div class="clearfix"></div>
+<p><em>Join the conversation</em></p>
+</div>
+</div>
+</div>
+</div>
+<div id="cookie-banner-text" style="display:none;"></div>
+<!-- BEGIN Adobe DTM -->
+<script type="text/javascript">
+try {
+_satellite.pageBottom();
+} catch (e) {
+//something went wrong
+}
+</script>
+<!-- END Adobe DTM -->
+    </div>
+    <!-- BASIC FAT FOOTER CONTENT - End -->
+  </footer>
+
+    <script src="/includes_content/responsive/scripts/lightbox-min.js"></script> 
+    <script>
+      $(document).ready(function ($) {
+
+        // delegate calls to data-toggle="lightbox"
+        $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+          event.preventDefault();
+          return $(this).ekkoLightbox({
+            onShown: function() {
+				if ($('.ekko-lightbox-container iframe').length) {
+				  $(".ekko-lightbox-container iframe").attr("scrolling","no");
+				  $(".ekko-lightbox-container iframe").load(lightboxIframeHeight);
+				}
+            },
+            onNavigate: function(direction, itemIndex) {
+              if (window.console) {
+                return console.log('Navigating '+direction+'. Current item: '+itemIndex);
+              }
+            }
+          });
+        });
+		
+		// resize
+		$(window).resize(lightboxIframeHeight)	
+
+		// lightbox height function
+		function lightboxIframeHeight() {
+			if ($('.ekko-lightbox-container iframe').length) {
+				whichIframeHeight = $('.ekko-lightbox-container iframe').contents().find('body').height() + 20;
+				$(".ekko-lightbox-container iframe").css("height",whichIframeHeight);
+			}
+		}
+
+        //Programatically call
+        $('#open-image').click(function (e) {
+          e.preventDefault();
+          $(this).ekkoLightbox();
+        });
+        $('#open-youtube').click(function (e) {
+          e.preventDefault();
+          $(this).ekkoLightbox();
+        });
+      });
+    </script> 
+
+</body>
+</html>
