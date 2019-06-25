@@ -1,0 +1,10 @@
+
+avrdude: AVR device initialized and ready to accept instructions
+avrdude: Device signature = 0x1e9801
+avrdude: reading input file "LabC_CompensatorOverRobot.hex"
+avrdude: input file LabC_CompensatorOverRobot.hex auto detected as Intel Hex
+avrdude: writing flash (20696 bytes):
+avrdude: 20696 bytes of flash written
+
+avrdude done.  Thank you.
+

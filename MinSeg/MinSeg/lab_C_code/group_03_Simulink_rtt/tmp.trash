@@ -1,0 +1,4 @@
+avrdude: ser_open(): can't open device "//./COM6": The system cannot find the file specified.
+
+avrdude: ser_drain(): read error: The handle is invalid.
+
