@@ -1,0 +1,3 @@
+Minseg	KEYWORD1
+setupHardware	KEYWORD2
+toggleLED	KEYWORD2
