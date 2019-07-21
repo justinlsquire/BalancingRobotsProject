@@ -2,9 +2,9 @@
 #ifndef BALANCELIBRARY_h
 #define BALANCELIBRARY_h                   
 
-//#ifdef __cplusplus
-//extern "C"{
-//#endif
+#ifdef __cplusplus
+extern "C"{
+#endif
 
 #include <stdint.h>
 
@@ -100,8 +100,8 @@
     void updateController(struct robot * rbt);
 
 
-//#ifdef __cplusplus
-//} // extern "C"
-//#endif
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif

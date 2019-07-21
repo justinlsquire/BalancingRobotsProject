@@ -3,15 +3,15 @@
 #define MINSEG_h                   
 
 
-//#ifdef __cplusplus
-//extern "C"{
-//#endif
+#ifdef __cplusplus
+extern "C"{
+#endif
 
-#include "I2Cdev.h"
-#include "MPU6050.h"
-#include "Wire.h"
+#include <I2Cdev.h>
+#include <MPU6050.h>
+#include <Wire.h>
 #include "balanceLibrary.h"
-#include "Arduino.h"
+#include <Arduino.h>
 
 
 // define macros here
@@ -43,9 +43,9 @@
     void setupMotor(void);
     //void setupEncoder(void);
 
-//#ifdef __cplusplus
-//} // extern "C"
-//#endif
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif
 
