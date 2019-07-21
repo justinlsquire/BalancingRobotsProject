@@ -2,14 +2,16 @@
 #ifndef MINSEG_h
 #define MINSEG_h                   
 
-#ifdef __cplusplus
-extern "C"{
-#endif
+
+//#ifdef __cplusplus
+//extern "C"{
+//#endif
 
 #include "I2Cdev.h"
 #include "MPU6050.h"
 #include "Wire.h"
 #include "balanceLibrary.h"
+#include "Arduino.h"
 
 
 // define macros here
@@ -32,15 +34,18 @@ extern "C"{
 #define MAX_INTEGRAL 6.0
     
 // define variables here
-MPU6050 accelgyro;
+//MPU6050 accelgyro;
 
 
     // function prototypes
-    void updateIMU(struct robot * rbt);
+    //void updateIMU(struct robot * rbt);
+    void setupLED(void);
+    void setupMotor(void);
+    //void setupEncoder(void);
 
-#ifdef __cplusplus
-} // extern "C"
-#endif
+//#ifdef __cplusplus
+//} // extern "C"
+//#endif
 
 #endif
 
