@@ -6,7 +6,9 @@
 #include "MINSEG.h"
 
 
-static volatile long Minseg::encCnt;
+// initialize static variables here
+volatile long Minseg::encCnt;
+MPU6050 Minseg::accelgyro;
 
 
 Minseg::Minseg(){
@@ -31,7 +33,25 @@ void Minseg::setupHardware(void){
 	
 	
 	// setup IMU object
+	// begin wire (i2c) 
+	Wire.begin();
 	
+	if (accelgyro.testConnection())
+	{
+		accelgyro.setDLPFMode(5);
+		accelgyro.initialize();
+		_imuAvailable = 1;
+#ifdef DEBUG		
+		Serial.println("imu is connected");	
+#endif		
+	}
+	else
+	{
+		_imuAvailable = 0;
+#ifdef DEBUG
+		Serial.println("imu is NOT connected");
+#endif		
+	}
 	
 	// setup encoder ports and pins, and ISR
 	// encoder is on pins 2 and 3
@@ -47,6 +67,27 @@ void Minseg::setupHardware(void){
 void Minseg::toggleLED(void){
 	LED_PORT ^= (1<<LED_PORT_OFFSET);
 } // end of toggleLED
+
+void Minseg::setMotorPWM(int pwmVal){
+	uint8_t tempMtrOut;
+	
+	// update motor command
+	if (pwmVal < 0)
+	{
+		// set direction 0
+		MTR_DIR_PORT &= ~(1<<MTR_DIR_OFFSET);
+		tempMtrOut = -pwmVal;
+	}
+	else
+	{
+		// set direction 1
+		MTR_DIR_PORT |= (1<<MTR_DIR_OFFSET);
+		tempMtrOut = 255-pwmVal;
+	}
+
+	// write PWM
+	analogWrite(MTR_PWM_PIN,tempMtrOut);	
+} // end of setMotorPWM
 
 
 void Minseg::enc1ISR(void){
@@ -129,3 +170,21 @@ void Minseg::enc2ISR(void){
 		}
 	} // else - from if (tempReg & (1<<ENC1_PORT_OFFSET))	
 } // end of enc2ISR
+
+uint8_t Minseg::imuStatus(void){
+	// returns the status of the IMU
+	return _imuAvailable;
+} // end of imuStatus
+
+
+int16_t Minseg::getAccY(void){
+	return accelgyro.getAccelerationY();
+} // and of getAccY
+
+int16_t Minseg::getAccZ(void){
+	return accelgyro.getAccelerationZ();
+} // and of getAccZ
+
+int16_t Minseg::getGyroX(void){
+	return accelgyro.getRotationX();
+} // and of getAccY

@@ -11,7 +11,13 @@
 #include "MPU6050.h"
 #include "Wire.h"
 
+
 // define macros here
+
+// debug flag
+#define DEBUG 1
+
+
 #define MTR_DIR_PIN 4
 #define MTR_PWM_PIN 5
 #define MTR_DIR_PORT PORTG
@@ -31,7 +37,7 @@ class Minseg
 {
   public:
 	static volatile long encCnt; // declare
-	MPU6050 accelgyro;
+	static MPU6050 accelgyro;
 	// everything else is hard-coded
 	// only thing we need to set up for now is the led pin
     Minseg();
@@ -40,8 +46,18 @@ class Minseg
 	void setMotorPWM(int pwmVal);
 	static void enc1ISR();
 	static void enc2ISR();
+	uint8_t imuStatus();
+	
+	// only adding a few of these, but they can be expanded 
+	// to include way more
+	int16_t getGyroX();
+	int16_t getAccY();
+	int16_t getAccZ();
+	
+	
   private:
     int _pwmVal;
+	uint8_t _imuAvailable;
 	//static long encCnt;
 	
 	
