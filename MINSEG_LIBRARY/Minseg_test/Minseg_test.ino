@@ -16,6 +16,7 @@
 
 // create object for the robot (either Minseg or Balboa)
 // but it must be called 'robot' for the code to work correctly
+//Balboa robot; // - not ready yet
 Minseg robot; 
 
 
@@ -38,7 +39,7 @@ void setup() {
   delay(3000);
   // initialize the serial port for communications
   Serial.begin(115200);
-  robot.setupHardware(); // sets up all of the stock hardware on the MinSeg 
+  robot.setupHardware(); // sets up all of the stock hardware on the robot
   
   // temp - for debugging
   pinMode(8,OUTPUT);
@@ -111,7 +112,9 @@ void loop() {
 /*---------------------------------------------------------------------------------------------------------------*/
 void controllerUpdate(void)
 {
-  
+  // update sensors
+  // update controller output (calculate it)
+  // update actuator with this output
 } // end of controller update
 
 /*---------------------------------------------------------------------------------------------------------------
