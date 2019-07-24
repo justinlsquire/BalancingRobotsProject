@@ -4,6 +4,7 @@
 
 #include "Arduino.h"
 #include "MINSEG.h"
+#include "ctrlTest.h"
 
 
 // initialize static variables here
@@ -177,14 +178,22 @@ uint8_t Minseg::imuStatus(void){
 } // end of imuStatus
 
 
-int16_t Minseg::getAccY(void){
+int16_t Minseg::getAccYRaw(void){
 	return accelgyro.getAccelerationY();
 } // and of getAccY
 
-int16_t Minseg::getAccZ(void){
+int16_t Minseg::getAccZRaw(void){
 	return accelgyro.getAccelerationZ();
 } // and of getAccZ
 
-int16_t Minseg::getGyroX(void){
+int16_t Minseg::getGyroXRaw(void){
 	return accelgyro.getRotationX();
 } // and of getAccY
+
+float Minseg::getAccYg(void){
+	return (float)(Minseg::getAccYRaw() - Minseg::ay_raw_offset) * ay_scale;
+}
+
+void Minseg::updateController(){
+	mtr1Voltage = controllerCalcTest(gy);
+} // end of updateController

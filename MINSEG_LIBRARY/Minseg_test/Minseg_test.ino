@@ -10,14 +10,21 @@
  |_____/ \___|_| |_|_| |_|\___| |______|_|_.__/|_|  \__,_|_|  |_|\___||___/                                                                                                                                                   
 /*---------------------------------------------------------------------------------------------------------------*/
 
+// hardware-dependent library for robots
 // Choose which library to use, based on the hardware
 //#include<BALBOA.h> 
 #include <MINSEG.h>
+// platform-independent control and estimation library
+#include <SEG_CONTROL.h> 
+#include <ctrlTest.h>
 
 // create object for the robot (either Minseg or Balboa)
 // but it must be called 'robot' for the code to work correctly
 //Balboa robot; // - not ready yet
 Minseg robot; 
+
+// create object for the controller (universal)
+segControl controller;
 
 
 //*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^**^*^*^*
@@ -36,13 +43,23 @@ Minseg robot;
              |___/                                                                         |_|    
 /*---------------------------------------------------------------------------------------------------------------*/
 void setup() {
+  // delay - temporary for debugging
   delay(3000);
   // initialize the serial port for communications
   Serial.begin(115200);
+
+  // call the library function to set up and initialize all
+  // the platform specific hardware (ports, pins, peripherals, etc.)
   robot.setupHardware(); // sets up all of the stock hardware on the robot
-  
-  // temp - for debugging
-  pinMode(8,OUTPUT);
+
+  // configure the controller for this application
+  controller.updateRate = 100; // 100 Hz - per function documentation
+  // other stuff
+
+  // call the libarary function to take these parameters just entered
+  // and do some background calculations to set up the controller for 
+  // being ready to use
+  controller.setupController();
 } // end of setup()
 /*---------------------------------------------------------------------------------------------------------------
   ______           _                    _       _                _____      _               
@@ -82,7 +99,17 @@ void loop() {
   //robot.setMotorPWM(-255);
   digitalWrite(8,LOW);
 
-  controllerUpdate();
+  // check the timer to see if it is time to 
+  // run the controller update
+  if ((micros() - controller.lastUpdateTime) >= controller.updateDtMicros)
+  {
+    // reset the last time to the current time - so that 
+    // next time we go to this loop, we will be operating 
+    // on the updated value
+    controller.lastUpdateTime = micros();
+    // call the update function
+    controllerUpdate();
+  } // end of if - for time inverval check
 } // end of loop()
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -112,9 +139,32 @@ void loop() {
 /*---------------------------------------------------------------------------------------------------------------*/
 void controllerUpdate(void)
 {
-  // update sensors
+  robot.updateController();
+  // update sensors - read sensor data from robot 
+  //robot.updateAccel();
+  //robot.updateGyro();
+  //robot.updateEncoders();
+  // and pass it to the controller object
+  
+  // accelerometer value in the vertical (gravity) direction 
+//  controller.accV = robot.ay;
+  // accelerometer value in the horizontal direction
+ // controller.accH = robot.az;
+  // gyro value around the rotational axis of the robot
+ // controller.g = robot.gx;
+  // encoder distance traveled
+  //controller.enc1 = robot.x1;
+  //controller.enc2 = robot.x2;
+  
+  //controller.getSensorData();
+  // update estimator (if present)
+ // controller.updateEstimator();
   // update controller output (calculate it)
+  //controller.updateController();
   // update actuator with this output
+  //robot.updateMotor1(controller.motorVoltage1); 
+  // if the robot has two motors, uncomment and figure out this part
+  //robot.updateMotor2(controller.motorVoltage2);
 } // end of controller update
 
 /*---------------------------------------------------------------------------------------------------------------
