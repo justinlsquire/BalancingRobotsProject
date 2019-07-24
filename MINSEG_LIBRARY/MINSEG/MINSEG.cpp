@@ -4,7 +4,6 @@
 
 #include "Arduino.h"
 #include "MINSEG.h"
-#include "ctrlTest.h"
 
 
 // initialize static variables here
@@ -14,7 +13,17 @@ MPU6050 Minseg::accelgyro;
 
 Minseg::Minseg(){
 	
-	// define pinModes for circuit operation
+	// initialize some stuff
+	gx_scale = GYRO_SCALE_DEFAULT;
+	gy_scale = GYRO_SCALE_DEFAULT;
+	gz_scale = GYRO_SCALE_DEFAULT;
+	
+	ax_scale = ACCEL_SCALE_DEFAULT;
+	ay_scale = ACCEL_SCALE_DEFAULT;
+	az_scale = ACCEL_SCALE_DEFAULT;
+	
+	maxVoltage = MAX_VOLTAGE_DEFAULT;
+	
 	
 } // end of constructor
 
@@ -190,10 +199,61 @@ int16_t Minseg::getGyroXRaw(void){
 	return accelgyro.getRotationX();
 } // and of getAccY
 
-float Minseg::getAccYg(void){
-	return (float)(Minseg::getAccYRaw() - Minseg::ay_raw_offset) * ay_scale;
-}
+void Minseg::updateAccYg(void){
+	ay = (float)(Minseg::getAccYRaw() - ay_raw_offset) * ay_scale;
+} // end of updateAccYg
 
-void Minseg::updateController(){
-	mtr1Voltage = controllerCalcTest(gy);
-} // end of updateController
+void Minseg::updateAccZg(void){
+	az = (float)(Minseg::getAccZRaw() - az_raw_offset) * az_scale;
+} // end of updateAccZg
+
+void Minseg::updateGyroXdps(void){
+	gx = (float)(Minseg::getGyroXRaw() - gx_raw_offset) * gx_scale;
+} // end of updateGyroXdps
+
+void Minseg::updateGyro(void){
+	Minseg::updateGyroXdps();
+	//Minseg::updateGyroYdps(); // for example - if more gyro values desired
+} // end of updateGyro
+
+void Minseg::updateAccel(void){
+	Minseg::updateAccYg();
+	Minseg::updateAccZg();
+	//Minseg::updateAccXg(); // if this is ever important - needs defined
+} // end of updateAccel
+
+void Minseg::updateEncoders(void){
+	// get current time
+	
+	// get time difference
+	
+	// convert counts to revolutions
+	
+	// divide revolutions by time difference
+	
+	// integrate this to add on to the displacement
+	x1 = 2.0; // temporary - for testing
+} // end of updateEncoders
+
+
+void Minseg::updateMotor1(float Vin){
+	// convert to percentage of max
+	
+	// simplified - do better job in the future of checking 
+	int16_t tempDuty;
+	
+	tempDuty = (int16_t)(Vin/maxVoltage * 255.0);
+	
+	if (tempDuty > 255)
+	{
+		tempDuty = 255;
+	}
+	else if (tempDuty < (-255))
+	{
+		tempDuty = -255;
+	}
+	
+	// update the actual PWM
+	Minseg::setMotorPWM(tempDuty);
+	
+} // end of updateMotor1

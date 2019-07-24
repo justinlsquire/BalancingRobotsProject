@@ -16,7 +16,6 @@
 #include <MINSEG.h>
 // platform-independent control and estimation library
 #include <SEG_CONTROL.h> 
-#include <ctrlTest.h>
 
 // create object for the robot (either Minseg or Balboa)
 // but it must be called 'robot' for the code to work correctly
@@ -139,30 +138,29 @@ void loop() {
 /*---------------------------------------------------------------------------------------------------------------*/
 void controllerUpdate(void)
 {
-  robot.updateController();
-  // update sensors - read sensor data from robot 
-  //robot.updateAccel();
-  //robot.updateGyro();
-  //robot.updateEncoders();
+  // update sensors on the robot hardware
+  robot.updateAccel();
+  robot.updateGyro();
+  robot.updateEncoders();
+  
   // and pass it to the controller object
   
   // accelerometer value in the vertical (gravity) direction 
-//  controller.accV = robot.ay;
+  controller.ay = robot.ay;
   // accelerometer value in the horizontal direction
- // controller.accH = robot.az;
+  controller.az = robot.az;
   // gyro value around the rotational axis of the robot
- // controller.g = robot.gx;
+  controller.gx = robot.gx;
   // encoder distance traveled
-  //controller.enc1 = robot.x1;
-  //controller.enc2 = robot.x2;
+  controller.x1 = robot.x1;
+  //controller.x2 = robot.x2;
   
-  //controller.getSensorData();
   // update estimator (if present)
- // controller.updateEstimator();
+  controller.updateEulerEstimate();
   // update controller output (calculate it)
-  //controller.updateController();
+  controller.updateController();
   // update actuator with this output
-  //robot.updateMotor1(controller.motorVoltage1); 
+  robot.updateMotor1(controller.Vout); 
   // if the robot has two motors, uncomment and figure out this part
   //robot.updateMotor2(controller.motorVoltage2);
 } // end of controller update

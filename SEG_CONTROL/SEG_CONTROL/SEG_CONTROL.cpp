@@ -13,6 +13,9 @@
 // class constructor
 segControl::segControl(){
 	
+	// default initializations
+	alphaComplementary = ALPHA_COMPLEMENTARY_DEFAULT;
+	
 } // end of constructor
 
 
@@ -25,6 +28,25 @@ void segControl::setupController(void){
 	segControl::updateDtMicros = (long)(dt * 1000000); 
 } // end of setupController
 
-void getSensorData(void){
-	//switch()
-} // end of getSensorData
+
+void segControl::updateEulerEstimate(void){
+	// only complementary for now 
+	float atanAngle;
+	atanAngle = atan2(ax,az);
+	ex += (alphaComplementary) * (gx * actualDt) + (1-alphaComplementary) * (atanAngle);
+} // end of updateEulerEstimate
+
+void segControl::updateController(void){
+	// do PID only for now - but in the future, do checks to see which is selected
+	
+	// calculate difference between setpoint and actual value
+	float error;
+	error = 0.0 - ex;
+	integralTerm += error * actualDt * Ki;
+	// check for anti-windup here
+	
+	
+	// calculate controller output for PID
+	Vout = Kp * error + Kd * gx + integralTerm;
+	
+} // end of updateController

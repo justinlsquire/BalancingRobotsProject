@@ -10,7 +10,6 @@
 #include "I2Cdev.h"
 #include "MPU6050.h"
 #include "Wire.h"
-#include "ctrlTest.h"
 
 
 // define macros here
@@ -33,6 +32,14 @@
 #define LED_PIN 13 // digital pin 13
 #define LED_PORT PORTB // PB7
 #define LED_PORT_OFFSET 7 // PB7 - digital pin 13
+
+
+// SCALING FACTORS
+#define GYRO_SCALE_DEFAULT 0.0001332312406 // converts to rad/s
+#define ACCEL_SCALE_DEFAULT 0.00006103515625 // converts to g
+
+
+#define MAX_VOLTAGE_DEFAULT 6.0
 
 class Minseg
 {
@@ -113,12 +120,14 @@ class Minseg
 	int16_t getAccZRaw();
 	
 	// get the scaled values of the raw values
-	float getGyroXdps();
-	float getAccYg();
-	float getAccZg();
+	void updateGyroXdps();
+	void updateAccYg();
+	void updateAccZg();
+	void updateGyro(); // for doing all at once
+	void updateAccel(); // for doing all at once
+	void updateEncoders();
 	
-	void updateController();
-	
+	void updateMotor1(float Vin);
 	
   private:
     int _pwmVal;

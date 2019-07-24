@@ -17,6 +17,8 @@
 #define ESTIMATOR_COMPLEMENTARY 1
 #define ESTIMATOR_KALMAN 2
 
+#define ALPHA_COMPLEMENTARY_DEFAULT 0.99 // 99 percent gyro 
+
 
 
 class segControl
@@ -26,8 +28,8 @@ class segControl
 	// only thing we need to set up for now is the led pin
     segControl();
 	void setupController(void);
-	void getSensorData(void);
-	void updateEstimator(void);
+	//void updateEstimator(void);
+	void updateEulerEstimate(void);
 	void updateController(void);
 	
 	
@@ -37,9 +39,41 @@ class segControl
   
   uint16_t updateRate; // controller update rate (in Hz)
   float dt; // controller update rate (in seconds)
-  long updateDtMicros; // time inverval between controller updates (
-  long lastUpdateTime; // time (micros) for the 
+  unsigned long updateDtMicros; // time inverval between controller updates (
+  unsigned long lastUpdateTime; // time (micros) for the 
+  
+  // estimated parameters
+  // euler angles
+  float ex, ey, ez; // in rad  
+  float gx, gy, gz; // in rad/s
+  float ax, ay, az; // in g
 
+  float x1; // displacement of motor 1 (left/default)
+  float x2; // displacement of motor 2 (right)
+
+  // controller related
+  uint8_t controlType; // PID, State Space, etc. - based on enumeration of the different types
+
+  // PID related
+  float Vout; // calculated motor output voltage
+  float Kp; // proportional
+  float Ki; // integral
+  float Kd; // derivative
+  float N; // derivative filter
+  float integralTerm; // for keeping track of integral
+  float integralMax; // max windup for integral term
+  float deadZone; // controller voltage level that remains zero output
+  float actualDt; // time interval between controller updates (calculated each time)
+
+  // state space related
+  float Kf[5]; // feedback terms (up to 5 state) for state space control
+
+  // estimation related
+  uint8_t estimatorType; // complementary filter, kalman filter, full state feedback, partial estimator, etc.
+
+  float alphaComplementary; // value to use for gyro ((1-alphaComplementary) for accelerometer contribution)
+
+  float Ke[5]; // kalman filter feedback values (up to 5 state)
 /*
   // motor related
   uint8_t numberMotors;
