@@ -37,16 +37,26 @@ void segControl::updateEulerEstimate(void){
 } // end of updateEulerEstimate
 
 void segControl::updateController(void){
+	// update time between control calculations
+	actualDt = ((float)(micros() - lastControlMicros)) * 0.000001; // convert to seconds
+	lastControlMicros = micros();
+
 	// do PID only for now - but in the future, do checks to see which is selected
 	
 	// calculate difference between setpoint and actual value
 	float error;
-	error = 0.0 - ex;
+	error = 0.0 - ex; // use 0 degrees as the setpoint for now
+	// update integral term
 	integralTerm += error * actualDt * Ki;
 	// check for anti-windup here
 	
 	
 	// calculate controller output for PID
 	Vout = Kp * error + Kd * gx + integralTerm;
+	// use the gyro as the derivative term for now, since for
+	// balancing at a setpoint zero, the gyro represents the rate
+	// of change of both the angle and the error
+
+	// in the future - add actual filtered derivative
 	
 } // end of updateController
