@@ -1,17 +1,20 @@
 ﻿/*
-  MINSEG.cpp - Library for using MinSeg with balancing and estimation library
+  BALBOA.cpp - Library for using Balboa 32U4 with balancing and estimation library
 */
 
 #include "Arduino.h"
+#include "FastGPIO.h"
 #include "BALBOA.h"
 
 
 // initialize static variables here
-volatile long Minseg::encCnt;
-MPU6050 Minseg::accelgyro;
+volatile long Balboa::encCnt;
+LSM6 Balboa::accelgyro;
+Balboa32U4Motors Balboa::motors;
+Balboa32U4Encoders Balboa::encoders;
 
 
-Minseg::Minseg(){
+Balboa::Balboa(){
 	
 	// initialize some stuff
 	gx_scale = GYRO_SCALE_DEFAULT;
@@ -22,213 +25,101 @@ Minseg::Minseg(){
 	ay_scale = ACCEL_SCALE_DEFAULT;
 	az_scale = ACCEL_SCALE_DEFAULT;
 	
-	maxVoltage = MAX_VOLTAGE_DEFAULT;
-	
-	
+	maxVoltage = MAX_VOLTAGE_DEFUALT;
 } // end of constructor
 
 
-void Minseg::setupHardware(void){
-	// setup LED for debugging and heartbeat 
-	pinMode(LED_PIN,OUTPUT);
-	digitalWrite(LED_PIN,1);
-	
-	// setup Motor ports and pins
-	pinMode(MTR_PWM_PIN,OUTPUT); // PWM pin for motor driver
-	pinMode(MTR_DIR_PIN,OUTPUT); // direction pin for motor driver
-
-	// set at 0 initially
-	digitalWrite(MTR_DIR_PIN,LOW);
-	analogWrite(MTR_PWM_PIN,0);	
-	
-	
-	// setup IMU object
-	// begin wire (i2c) 
+void Balboa::setupHardware(void){
 	Wire.begin();
-	
-	if (accelgyro.testConnection())
+	if (accelgyro.init())
 	{
-		accelgyro.setDLPFMode(5);
-		accelgyro.initialize();
 		_imuAvailable = 1;
-#ifdef DEBUG		
-		Serial.println("imu is connected");	
-#endif		
+#if DEBUG
+		//Serial.println("Initialized IMU successfully");
+#endif
 	}
 	else
 	{
 		_imuAvailable = 0;
-#ifdef DEBUG
-		Serial.println("imu is NOT connected");
-#endif		
+#if DEBUG
+		//Serial.println("Failed to detect and initialize IMU!");
+#endif
 	}
-	
-	// setup encoder ports and pins, and ISR
-	// encoder is on pins 2 and 3
-	// set up pullup resistors to prevent floating
-	pinMode(ENC1_PIN,INPUT_PULLUP);
-	pinMode(ENC2_PIN,INPUT_PULLUP);
 
-	attachInterrupt(digitalPinToInterrupt(ENC1_PIN),Minseg::enc1ISR,CHANGE);
-	attachInterrupt(digitalPinToInterrupt(ENC2_PIN),Minseg::enc2ISR,CHANGE);	
-	
+	// Sets IMU default config:
+	// - Gyro:  1.66 kHz output rate, +-245 degrees/s full scale
+	// - Accel: 1.66 kHz output rate, +-2 g full scale
+	accelgyro.enableDefault();
+
+	// Init encoder click counter
+	encoders.init();
 } // end of setupHardware
 
-void Minseg::toggleLED(void){
-	LED_PORT ^= (1<<LED_PORT_OFFSET);
+void Balboa::toggleLED(void){
+	FastGPIO::Pin<LED_PIN>::setOutputToggle();
 } // end of toggleLED
 
-void Minseg::setMotorPWM(int pwmVal){
-	uint8_t tempMtrOut;
-	
-	// update motor command
-	if (pwmVal < 0)
-	{
-		// set direction 0
-		MTR_DIR_PORT &= ~(1<<MTR_DIR_OFFSET);
-		tempMtrOut = -pwmVal;
-	}
-	else
-	{
-		// set direction 1
-		MTR_DIR_PORT |= (1<<MTR_DIR_OFFSET);
-		tempMtrOut = 255-pwmVal;
-	}
 
-	// write PWM
-	analogWrite(MTR_PWM_PIN,tempMtrOut);	
-} // end of setMotorPWM
-
-
-void Minseg::enc1ISR(void){
-	
-	// temporary
-	LED_PORT ^= (1<<LED_PORT_OFFSET);
-	
-	// read the whole register
-	uint8_t tempReg = ENC_READ_PORT;
-	// read the pin to see if it is high or low
-	if (tempReg & (1<<ENC1_PORT_OFFSET))
-	{
-		// low to high transition happened on enc pin 1
-		// check enc pin 2
-		if (tempReg & (1<<ENC2_PORT_OFFSET))
-		{
-			// enc pin 2 is high - moving negative direction
-			encCnt--;
-		}
-		else
-		{
-			// enc pin 2 is low - moving positive direction
-			encCnt++;
-		}
-	} // if (tempReg & (1<<ENC1_PORT_OFFSET))
-	else
-	{
-		// high to low transition happened on enc pin 1
-		// check enc pin 2
-		if (tempReg & (1<<ENC2_PORT_OFFSET))
-		{
-			// enc pin 2 is high - moving negative direction
-			encCnt++;
-		}
-		else
-		{
-			// enc pin 2 is low - moving positive direction
-			encCnt--;
-		}
-	} // else - from if (tempReg & (1<<ENC1_PORT_OFFSET))	
-} // end of enc1ISR
-
-
-void Minseg::enc2ISR(void){
-	
-	// temporary
-	LED_PORT ^= (1<<LED_PORT_OFFSET);
-	
-	// read the whole register
-	uint8_t tempReg = ENC_READ_PORT;
-	// read the pin to see if it is high or low
-	if (tempReg & (1<<ENC2_PORT_OFFSET))
-	{
-		// low to high transition happened on enc pin 1
-		// check enc pin 2
-		if (tempReg & (1<<ENC1_PORT_OFFSET))
-		{
-			// enc pin 2 is high - moving negative direction
-			encCnt++;
-		}
-		else
-		{
-			// enc pin 2 is low - moving positive direction
-			encCnt--;
-		}
-	} // if (tempReg & (1<<ENC1_PORT_OFFSET))
-	else
-	{
-		// high to low transition happened on enc pin 1
-		// check enc pin 2
-		if (tempReg & (1<<ENC1_PORT_OFFSET))
-		{
-			// enc pin 2 is high - moving negative direction
-			encCnt--;
-		}
-		else
-		{
-			// enc pin 2 is low - moving positive direction
-			encCnt++;
-		}
-	} // else - from if (tempReg & (1<<ENC1_PORT_OFFSET))	
-} // end of enc2ISR
-
-uint8_t Minseg::imuStatus(void){
+uint8_t Balboa::imuStatus(void){
 	// returns the status of the IMU
 	return _imuAvailable;
 } // end of imuStatus
 
 
-int16_t Minseg::getAccYRaw(void){
-	return accelgyro.getAccelerationY();
-} // and of getAccY
+/*
+	Currently all of these read the IMU every time
+	Can be combined to a single read, should performance be needed
+*/
 
-int16_t Minseg::getAccZRaw(void){
-	return accelgyro.getAccelerationZ();
-} // and of getAccZ
+int16_t Balboa::getAccYRaw(void){
+	accelgyro.readAcc();
+	return accelgyro.a.y;
+} // and of getAccYRaw
 
-int16_t Minseg::getGyroXRaw(void){
-	return accelgyro.getRotationX();
-} // and of getAccY
+int16_t Balboa::getAccZRaw(void){
+	accelgyro.readAcc();
+	return accelgyro.a.z;
+} // and of getAccZRaw
 
-void Minseg::updateAccYg(void){
-	ay = (float)(Minseg::getAccYRaw() - ay_raw_offset) * ay_scale;
+int16_t Balboa::getGyroXRaw(void){
+	accelgyro.readGyro();
+	return accelgyro.g.x;
+} // and of getGyroXRaw
+
+void Balboa::updateAccYg(void){
+	ay = (float)(Balboa::getAccYRaw() - ay_raw_offset) * ay_scale;
 } // end of updateAccYg
 
-void Minseg::updateAccZg(void){
-	az = (float)(Minseg::getAccZRaw() - az_raw_offset) * az_scale;
+void Balboa::updateAccZg(void){
+	az = (float)(Balboa::getAccZRaw() - az_raw_offset) * az_scale;
 } // end of updateAccZg
 
-void Minseg::updateGyroXdps(void){
-	gx = (float)(Minseg::getGyroXRaw() - gx_raw_offset) * gx_scale;
+void Balboa::updateGyroXdps(void){
+	gx = (float)(Balboa::getGyroXRaw() - gx_raw_offset) * gx_scale;
 } // end of updateGyroXdps
 
-void Minseg::updateGyro(void){
-	Minseg::updateGyroXdps();
+void Balboa::updateGyro(void){
+	Balboa::updateGyroXdps();
 	//Minseg::updateGyroYdps(); // for example - if more gyro values desired
 } // end of updateGyro
 
-void Minseg::updateAccel(void){
-	Minseg::updateAccYg();
-	Minseg::updateAccZg();
+void Balboa::updateAccel(void){
+	Balboa::updateAccYg();
+	Balboa::updateAccZg();
 	//Minseg::updateAccXg(); // if this is ever important - needs defined
 } // end of updateAccel
 
-void Minseg::updateEncoders(void){
+void Balboa::updateEncoders(void){
 	// get current time
 	
 	// get time difference
-	
+
+	// example of how counts can be fetched with Balboa lib
+	enc1counts += encoders.getCountsAndResetLeft();
+	enc2counts += encoders.getCountsAndResetRight();
+
 	// convert counts to revolutions
-	
+
 	// divide revolutions by time difference
 	
 	// integrate this to add on to the displacement
@@ -236,24 +127,24 @@ void Minseg::updateEncoders(void){
 } // end of updateEncoders
 
 
-void Minseg::updateMotor1(float Vin){
-	// convert to percentage of max
-	
-	// simplified - do better job in the future of checking 
-	int16_t tempDuty;
-	
-	tempDuty = (int16_t)(Vin/maxVoltage * 255.0);
-	
-	if (tempDuty > 255)
-	{
-		tempDuty = 255;
-	}
-	else if (tempDuty < (-255))
-	{
-		tempDuty = -255;
-	}
-	
-	// update the actual PWM
-	Minseg::setMotorPWM(tempDuty);
-	
+void Balboa::updateMotor1(float Vin){
+	static const int max_speed = 300;
+
+	// If wanting to use mtr1Active, mtr1Speed, etc.
+	// then set these here
+
+	// convert to percentage of max, update the actual speed
+	// (Clamping to +- max_speed is done by setLeftSpeed)
+	motors.setLeftSpeed((Vin / maxVoltage) * max_speed);
+} // end of updateMotor1
+
+void Balboa::updateMotor2(float Vin){
+	static const int max_speed = 300;
+
+	// If wanting to use mtr1Active, mtr1Speed, etc.
+	// then set these here
+
+	// convert to percentage of max, update the actual speed
+	// (Clamping to +- max_speed is done by setRightSpeed)
+	motors.setRightSpeed((Vin / maxVoltage) * max_speed);
 } // end of updateMotor1
