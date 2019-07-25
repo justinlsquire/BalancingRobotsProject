@@ -88,15 +88,15 @@ void setup() {
 void loop() {
 
   // temp - for debugging
-  delay(1000);
-  Serial.println(robot.encCnt);
+ // delay(1000);
+ // Serial.println(robot.encCnt);
   //robot.setMotorPWM(255);
   //minseg.toggleLED();
-  digitalWrite(8,HIGH);
-  delay(1000);
-  Serial.println(robot.encCnt);
+ // digitalWrite(8,HIGH);
+ // delay(1000);
+ // Serial.println(robot.encCnt);
   //robot.setMotorPWM(-255);
-  digitalWrite(8,LOW);
+  //digitalWrite(8,LOW);
 
   // check the timer to see if it is time to 
   // run the controller update
@@ -154,13 +154,19 @@ void controllerUpdate(void)
   // encoder distance traveled
   controller.x1 = robot.x1;
   //controller.x2 = robot.x2;
+
+  
   
   // update estimator (if present)
   controller.updateEulerEstimate();
+
+
+  Serial.println(controller.ex * 57.3);
+  
   // update controller output (calculate it)
   controller.updateController();
   // update actuator with this output
-  robot.updateMotor1(controller.Vout); 
+  //robot.updateMotor1(controller.Vout); 
   // if the robot has two motors, uncomment and figure out this part
   //robot.updateMotor2(controller.motorVoltage2);
 } // end of controller update
