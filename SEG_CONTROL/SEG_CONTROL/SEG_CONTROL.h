@@ -63,6 +63,7 @@ class segControl
   float integralTerm; // for keeping track of integral
   float integralMax; // max windup for integral term
   float deadZone; // controller voltage level that remains zero output
+  unsigned long lastControlMicros; // last microsecond measurement from control routine
   float actualDt; // time interval between controller updates (calculated each time)
 
   // state space related
