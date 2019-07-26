@@ -26,6 +26,17 @@ Balboa::Balboa(){
 	az_scale = ACCEL_SCALE_DEFAULT;
 	
 	maxVoltage = MAX_VOLTAGE_DEFUALT;
+
+	wheelRadius = WHEEL_RADIUS_DEFUALT;
+	gearRatio = GEAR_RATIO_DEFAULT;
+	enc1cpr = ENCODER_CPR_DEFAULT;
+	enc2cpr = ENCODER_CPR_DEFAULT;
+
+	hasEncoders = 1;
+	hasAccel = 1;
+	hasMagnetometer = 0; // Has the hardware, can be implemented later
+
+	_msLastEncoderUpdate = 0;
 } // end of constructor
 
 
@@ -111,19 +122,31 @@ void Balboa::updateAccel(void){
 
 void Balboa::updateEncoders(void){
 	// get current time
+	unsigned long msTime = millis();
 	
 	// get time difference
+	unsigned long msPassed = msTime - _msLastEncoderUpdate;
+	_msLastEncoderUpdate = msTime;
 
-	// example of how counts can be fetched with Balboa lib
-	enc1counts += encoders.getCountsAndResetLeft();
-	enc2counts += encoders.getCountsAndResetRight();
+	// Update counts with Balboa lib
+	int16_t enc1countsDelta = encoders.getCountsAndResetLeft();
+	int16_t enc2countsDelta = encoders.getCountsAndResetRight();
+	enc1counts += enc1countsDelta;
+	enc2counts += enc2countsDelta;
 
 	// convert counts to revolutions
+	float enc1RevsDelta = gearRatio * enc1countsDelta / enc1cpr;
+	float enc2RevsDelta = gearRatio * enc2countsDelta / enc2cpr;
+	float enc1Revs = gearRatio * enc1counts / enc1cpr;
+	float enc2Revs = gearRatio * enc2counts / enc2cpr;
 
 	// divide revolutions by time difference
+	mtr1Speed = (enc1RevsDelta / msPassed) * 1000 * 2 * M_PI;// / msPassed;
+	mtr2Speed = (enc2RevsDelta / msPassed) * 1000 * 2 * M_PI;// / msPassed;
 	
-	// integrate this to add on to the displacement
-	x1 = 2.0; // temporary - for testing
+	// convert total revs to total distance by using wheel raidus
+	x1 = enc1Revs * 2 * wheelRadius * PI;
+	x2 = enc2Revs * 2 * wheelRadius * PI;
 } // end of updateEncoders
 
 

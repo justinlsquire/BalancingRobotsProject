@@ -14,6 +14,10 @@
 // define macros here
 #define LED_PIN 13
 
+#define WHEEL_RADIUS_DEFUALT 0.04
+#define GEAR_RATIO_DEFAULT 0.34693877551 // 17:49 exact ratio
+#define ENCODER_CPR_DEFAULT 358.32  // Using 12 CPR encoder with 29.86:1 builtin motor gearbox
+
 // SCALING FACTORS (from datasheet)
 // For Full Scale +-245 degs/s, gyro sens is typically 8.75 mdeg/LSB
 #define GYRO_SCALE_DEFAULT  0.00015271631  // converts to rad/s
@@ -66,7 +70,7 @@ class Balboa
 	// # 1 (Right) Motor
 	uint8_t mtr1Active; // 0 = inactive, 1 = active
 	uint8_t mtr1Direction; // 0 = normal, 1 = inverted
-	float mtr1Speed; // angular speed of motor in rad/s
+	float mtr1Speed; // angular speed of motor (at wheel shaft) in rad/s
     long enc1counts; // counts (+ or -) of the encoder pulses
     uint16_t enc1cpr; // counts per revolution of motor
     uint8_t enc1Direction; // 0 = normal, 1 = inverted	
@@ -75,7 +79,7 @@ class Balboa
 	// # 2 (Left) Motor
 	uint8_t mtr2Active; // 0 = inactive, 1 = active
 	uint8_t mtr2Direction; // 0 = normal, 1 = inverted
-	float mtr2Speed; // angular speed of motor in rad/s			
+	float mtr2Speed; // angular speed of motor (at wheel shaft) in rad/s			
     long enc2counts; // counts (+ or -) of the encoder pulses
     uint16_t enc2cpr; // counts per revolution of motor
     uint8_t enc2Direction; // 0 = normal, 1 = inverted	
@@ -109,6 +113,8 @@ class Balboa
 	
   private:
 	uint8_t _imuAvailable;
+	// Time (in ms) of last encoder count reading
+	uint32_t _msLastEncoderUpdate;
 };
 
 #endif
