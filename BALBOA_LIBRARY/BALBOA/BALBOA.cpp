@@ -46,14 +46,14 @@ void Balboa::setupHardware(void){
 	{
 		_imuAvailable = 1;
 #if DEBUG
-		//Serial.println("Initialized IMU successfully");
+		Serial.println("Initialized IMU successfully");
 #endif
 	}
 	else
 	{
 		_imuAvailable = 0;
 #if DEBUG
-		//Serial.println("Failed to detect and initialize IMU!");
+		Serial.println("Failed to detect and initialize IMU!");
 #endif
 	}
 
@@ -62,9 +62,37 @@ void Balboa::setupHardware(void){
 	// - Accel: 1.66 kHz output rate, +-2 g full scale
 	accelgyro.enableDefault();
 
+	// Example of setting gyro to non-default configuration:
+	// First 4 bits (1000) gives 1.66 kHz output data rate
+	// Bit 5 and 6 (10) gives 1000 deg/s full scale
+	//accelgyro.writeReg(LSM6::CTRL2_G, 0b10001000);
+
 	// Init encoder click counter
 	encoders.init();
 } // end of setupHardware
+
+void Balboa::calcGyroOffsets(int samples){
+	int32_t totalX = 0, totalY = 0, totalZ = 0;
+	for (int i = 0; i < samples; i++)
+	{
+		accelgyro.readGyro();
+		totalX += accelgyro.g.x;
+		totalY += accelgyro.g.y;
+		totalZ += accelgyro.g.z;
+		delay(1); // 1.66 kHz output rate => enough to delay 1 ms for new reading
+	}
+	
+	gx_raw_offset = totalX / samples;
+	gy_raw_offset = totalY / samples;
+	gz_raw_offset = totalZ / samples;
+
+#if DEBUG
+	Serial.println("Raw offsets (x,y,z) are: ");
+	Serial.println(gx_raw_offset);
+	Serial.println(gy_raw_offset);
+	Serial.println(gz_raw_offset);
+#endif
+} // end of calcGyroOffsets
 
 void Balboa::toggleLED(void){
 	FastGPIO::Pin<LED_PIN>::setOutputToggle();
@@ -97,6 +125,11 @@ int16_t Balboa::getGyroXRaw(void){
 	return accelgyro.g.x;
 } // and of getGyroXRaw
 
+int16_t Balboa::getGyroYRaw(void){
+	accelgyro.readGyro();
+	return accelgyro.g.y;
+} // and of getGyroYRaw
+
 void Balboa::updateAccYg(void){
 	ay = (float)(Balboa::getAccYRaw() - ay_raw_offset) * ay_scale;
 } // end of updateAccYg
@@ -109,8 +142,13 @@ void Balboa::updateGyroXdps(void){
 	gx = (float)(Balboa::getGyroXRaw() - gx_raw_offset) * gx_scale;
 } // end of updateGyroXdps
 
+void Balboa::updateGyroYdps(void){
+	gy = (float)(Balboa::getGyroYRaw() - gy_raw_offset) * gy_scale;
+} // end of updateGyroYdps
+
 void Balboa::updateGyro(void){
 	Balboa::updateGyroXdps();
+	Balboa::updateGyroYdps();
 	//Minseg::updateGyroYdps(); // for example - if more gyro values desired
 } // end of updateGyro
 
@@ -119,6 +157,7 @@ void Balboa::updateAccel(void){
 	Balboa::updateAccZg();
 	//Minseg::updateAccXg(); // if this is ever important - needs defined
 } // end of updateAccel
+
 
 void Balboa::updateEncoders(void){
 	// get current time

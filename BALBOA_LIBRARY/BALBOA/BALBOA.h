@@ -91,17 +91,21 @@ class Balboa
 	// everything else is hard-coded
     Balboa();
 	void setupHardware();
+	// Calculates and sets offsets for gyro. Assumes robot is at rest.
+	void calcGyroOffsets(int samples = 10);
 	void toggleLED();
 	uint8_t imuStatus();
 	
 	// only adding a few of these, but they can be expanded 
 	// to include way more
 	int16_t getGyroXRaw();
+	int16_t getGyroYRaw();
 	int16_t getAccYRaw();
 	int16_t getAccZRaw();
 	
 	// get the scaled values of the raw values
 	void updateGyroXdps();
+	void updateGyroYdps();
 	void updateAccYg();
 	void updateAccZg();
 	void updateGyro(); // for doing all at once
