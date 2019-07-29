@@ -1,1 +1,5 @@
 segControl	KEYWORD1
+setupController KEYWORD2
+updateEulerEstimate KEYWORD2
+updateEstimator KEYWORD2
+updateController KEYWORD2

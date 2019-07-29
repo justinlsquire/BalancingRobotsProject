@@ -24,7 +24,26 @@ Minseg::Minseg(){
 	
 	maxVoltage = MAX_VOLTAGE_DEFAULT;
 	
+	wheelRadius = WHEEL_RADIUS_DEFUALT;
+	gearRatio = GEAR_RATIO_DEFAULT;
+	enc1cpr = ENCODER_CPR_DEFAULT;
 	
+	mtr1Active = MTR1_ACTIVE_DEFAULT;
+	
+	// initialize these floating point constants here so that 
+	// floating point division is not carried out every time in the loop
+	// floating point multiplication is much faster
+	countsToRevsMotor1 = 1/enc1cpr;
+	countsToRevsWheel1 = 1/(enc1cpr * gearRatio);
+	countsToPositionWheel1 = countsToRevsWheel1 * 2 * M_PI * wheelRadius;
+	countsToWheelSpeed1 = countsToPositionWheel1 * 1000;// this accounts for the delta-time in milliseconds
+	countsToMtrSpeed1 = 2 * M_PI / enc1cpr * 1000; // this accounts for the delta-time in milliseconds
+
+	// flags - reserved for potential future use 
+	hasEncoders = 1;
+	hasAccel = 1;
+	hasMagnetometer = 0; // Has the hardware, can be implemented later
+
 } // end of constructor
 
 
@@ -48,6 +67,7 @@ void Minseg::setupHardware(void){
 	
 	if (accelgyro.testConnection())
 	{
+		// low pass filter mode
 		accelgyro.setDLPFMode(5);
 		accelgyro.initialize();
 		_imuAvailable = 1;
@@ -224,35 +244,56 @@ void Minseg::updateAccel(void){
 
 void Minseg::updateEncoders(void){
 	// get current time
+	unsigned long msTime = millis();
+	
 	
 	// get time difference
+	unsigned long msPassed = msTime - _msLastEncoderUpdate;
+	// update last time
+	_msLastEncoderUpdate = msTime;
 	
-	// convert counts to revolutions
+	// get counts since last time
+	int16_t encCountsDelta = encCnt;
+	// reset the delta counter 
+	encCnt = 0;
+	// add to the total count
+	enc1counts += encCountsDelta;
+	// update wheel position
+	x1 = enc1counts * countsToPositionWheel1;
 	
-	// divide revolutions by time difference
+	// only use motor speed if it is of interest
+	//mtr1Speed = encCountsDelta * countsToMtrSpeed1 / msPassed;
 	
-	// integrate this to add on to the displacement
-	x1 = 2.0; // temporary - for testing
+	// update wheel angular speed - probably shouldn't do this here, but instead in estimation library
+	//x1_dot = encCountsDelta * countsToWheelSpeed1 / msPassed;
+	
 } // end of updateEncoders
 
 
 void Minseg::updateMotor1(float Vin){
 	// convert to percentage of max
 	
+		
 	// simplified - do better job in the future of checking 
 	int16_t tempDuty;
 	
-	tempDuty = (int16_t)(Vin/maxVoltage * 255.0);
+	if (mtr1Active)
+	{	
+		tempDuty = (int16_t)(Vin/maxVoltage * 255.0) + FRICTION_COMPENSATION;
 	
-	if (tempDuty > 255)
+		if (tempDuty > 255)
+		{
+			tempDuty = 255;
+		}
+		else if (tempDuty < (-255))
+		{
+			tempDuty = -255;
+		}
+	} // if (mtr1Active)
+	else
 	{
-		tempDuty = 255;
+		tempDuty = 0;
 	}
-	else if (tempDuty < (-255))
-	{
-		tempDuty = -255;
-	}
-	
 	// update the actual PWM
 	Minseg::setMotorPWM(tempDuty);
 	
