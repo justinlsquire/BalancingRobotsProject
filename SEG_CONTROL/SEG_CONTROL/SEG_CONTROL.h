@@ -5,7 +5,7 @@
 #define SEG_CONTROL_h
 
 #include "Arduino.h"
-#include "MINSEG.h"
+
 
 
 // define macros here
@@ -16,8 +16,42 @@
 // enumeration of estimator types
 #define ESTIMATOR_COMPLEMENTARY 1
 #define ESTIMATOR_KALMAN 2
+#define ESTIMATOR_NUMERICAL 3
+
+// default controller settings - can be changed in code
+#define CONTROL_TYPE_DEFAULT CONTROLLER_PID
+
+// default estimator settings - can be changed in code
+#define ESTIMATOR_TYPE_DEFAULT ESTIMATOR_COMPLEMENTARY
 
 #define ALPHA_COMPLEMENTARY_DEFAULT 0.99 // 99 percent gyro 
+
+// percentage given to new value of wheel speed calculation
+#define ALPHA_WHEEL_SPEED_DEFAULT 0.85 
+
+// For the MinSeg, the euler estimate produces 90 degrees when upright 
+// this needs to be subtracted so it is balancing around the zero position
+#define ORIENTATION_OFFSET_DEFAULT 1.5708 // 90 deg offset (converted to rad)
+
+
+// some default PID values that kind of worked for MinSeg
+#define KP_DEFAULT 100
+#define KI_DEFAULT 10
+#define KD_DEFAULT 0.4
+#define N_DEFAULT 0.0 // derivative filter not implemented yet (maybe never)
+#define DEADZONE_DEFAULT 0.01 // volts under which motor output is cutoff
+#define INTEGRAL_MAX_DEFAULT 10 // anti-windup
+
+
+// some default state space values that worked for MinSeg
+#define KF_DEFAULT_0 -0.3162 // x position
+#define KF_DEFAULT_1 -42.4163 // x velocity
+#define KF_DEFAULT_2 -63.0683 // body angle
+#define KF_DEFAULT_3 -10.5755 // body angular rate
+
+
+// the angle at which the motor output is not active
+#define CONTROLLER_SHUTOFF_ANGLE 0.5 // in radians
 
 
 
@@ -28,7 +62,7 @@ class segControl
 	// only thing we need to set up for now is the led pin
     segControl();
 	void setupController(void);
-	//void updateEstimator(void);
+	void updateEstimator(void);
 	void updateEulerEstimate(void);
 	void updateController(void);
 	
@@ -47,9 +81,24 @@ class segControl
   float ex, ey, ez; // in rad  
   float gx, gy, gz; // in rad/s
   float ax, ay, az; // in g
+  
+  uint8_t angleInitialized;
+  
+  float orientationOffsetX; // in rad
 
   float x1; // displacement of motor 1 (left/default)
   float x2; // displacement of motor 2 (right)
+  float lastx1; // previous value
+  float lastx2; // previous value
+  float x1_dot; //angular speed of motor 1 (left/default) 
+  float x2_dot;//angular speed of motor 2 (right) 
+  float lastx1_dot; // last value (for filtering) 
+  float lastx2_dot; // last value (for filtering)
+  
+  unsigned long lastEstimatorMicros; // last microsecond measurement from estimation routine
+  float actualDtEstimator;
+  
+  float alphaWheelSpeed;
 
   // controller related
   uint8_t controlType; // PID, State Space, etc. - based on enumeration of the different types
@@ -75,73 +124,10 @@ class segControl
   float alphaComplementary; // value to use for gyro ((1-alphaComplementary) for accelerometer contribution)
 
   float Ke[5]; // kalman filter feedback values (up to 5 state)
-/*
-  // motor related
-  uint8_t numberMotors;
-  struct motor * motor1; // the default motor if 1 motor
-  struct motor * motor2; // second motor if there are two
-
-  // displacement related
-  float wheelRadius; // radius (in meters) of wheel(s) used
-  float gearRatio; // total gear ratio from motor output to wheel output
-  float x1; // displacement of motor 1 (left/default)
-  float x2; // displacement of motor 2 (right)
-
-  // IMU related
-  uint8_t hasAccel; // flag for whether or not it has accelerometer
-  uint8_t hasMagnetometer; // flag for whether or not it has magnetometer
-
-  // gyro
-  int16_t gx_raw, gy_raw, gz_raw; // raw (integer) values of gyro
-  int16_t gx_raw_offset, gy_raw_offset, gz_raw_offset; // raw (integer) offset values of gyro
-  float gx_scale, gy_scale, gz_scale; // scale factors for converting raw gyro values to g* (rad/s)
-  float gx, gy, gz; // gyro values (in rad/s)
-
-  // accelerometer
-  int16_t ax_raw, ay_raw, az_raw; // raw (integer) values of accelerometer
-  int16_t ax_raw_offset, ay_raw_offset, az_raw_offset; // raw (integer) offset values of accelerometer
-  float ax_scale, ay_scale, az_scale; // scale factor for converting a*_raw to a* (in g);
-  float ax, ay, az; // acceleration values (in g)
-
-  // magnetometer
-  int16_t mx_raw, my_raw, mz_raw; // raw (integer) values of magnetometer
-  int16_t mx_raw_offset, my_raw_offset, mz_raw_offset; // raw (integer) offset values of magnetometer
-  float mx_scale, my_scale, mz_scale; // scale factor for converting m*_raw to m* (gauss)
-  float mx, my, mz;
-
-  // euler angles
-  float ex, ey, ez; // in rad
-
-  // controller related
-  uint8_t controlType; // PID, State Space, etc. - based on enumeration of the different types
-
-  // PID related
-  float Kp; // proportional
-  float Ki; // integral
-  float Kd; // derivative
-  float N; // derivative filter
-  float integralTerm; // for keeping track of integral
-  float integralMax; // max windup for integral term
-  float deadZone; // controller voltage level that remains zero output
-  float actualDt; // time interval between controller updates (calculated each time)
-
-  // state space related
-  float Kf[5]; // feedback terms (up to 5 state) for state space control
-
-  // estimation related
-  uint8_t estimatorType; // complementary filter, kalman filter, full state feedback, partial estimator, etc.
-
-  float alphaComplementary; // value to use for gyro ((1-alphaComplementary) for accelerometer contribution)
-
-  float Ke[5]; // kalman filter feedback values (up to 5 state)	
-	
-	*/
 	
 	
   private:
-	
-	// functions 
-	//void setControllerType(uint8_t ctrlType);
+	// functions or variables 
 };
 
 #endif

@@ -19,7 +19,7 @@
 
 // create object for the robot (either Minseg or Balboa)
 // but it must be called 'robot' for the code to work correctly
-//Balboa robot; // - not ready yet
+//Balboa robot; 
 Minseg robot; 
 
 // create object for the controller (universal)
@@ -52,13 +52,26 @@ void setup() {
   robot.setupHardware(); // sets up all of the stock hardware on the robot
 
   // configure the controller for this application
-  controller.updateRate = 100; // 100 Hz - per function documentation
-  // other stuff
+  controller.updateRate = 200; // in Hz - per function documentation
 
   // call the libarary function to take these parameters just entered
   // and do some background calculations to set up the controller for 
   // being ready to use
   controller.setupController();
+
+  // temporary - for my setup with MinSeg - JS/28Jul2019
+  robot.gx_raw_offset = -315; // my gyro offset 
+  controller.orientationOffsetX = -1.44; // radians - mine is not too straight because I broke it and had to repair it
+
+  // some experimental PID settings, before moving on to state space
+  controller.Kp = 150;
+  controller.Ki = 50;
+  controller.Kd = 4;
+
+  // set up numerical estimator and state space controller for now
+  controller.estimatorType = ESTIMATOR_NUMERICAL;
+  controller.controlType = CONTROLLER_SS;
+  
 } // end of setup()
 /*---------------------------------------------------------------------------------------------------------------
   ______           _                    _       _                _____      _               
@@ -86,17 +99,6 @@ void setup() {
              |___/                                                                     |_|    
 /*---------------------------------------------------------------------------------------------------------------*/
 void loop() {
-
-  // temp - for debugging
- // delay(1000);
- // Serial.println(robot.encCnt);
-  //robot.setMotorPWM(255);
-  //minseg.toggleLED();
- // digitalWrite(8,HIGH);
- // delay(1000);
- // Serial.println(robot.encCnt);
-  //robot.setMotorPWM(-255);
-  //digitalWrite(8,LOW);
 
   // check the timer to see if it is time to 
   // run the controller update
@@ -158,15 +160,23 @@ void controllerUpdate(void)
   
   
   // update estimator (if present)
-  controller.updateEulerEstimate();
+  controller.updateEstimator();
 
-
-  Serial.println(controller.ex * 57.3);
+  // temporary stuff for debugging 
+  //Serial.println(robot.getGyroXRaw());
+  //Serial.println(robot.gx);
+  //Serial.println(robot.getAccYRaw());
+  //Serial.println(robot.az);
+  //Serial.println(controller.ex*57.4);
+  //Serial.println(controller.x1_dot);
+  //Serial.println(controller.x1);
+  //Serial.println(robot.mtr1Speed);
   
   // update controller output (calculate it)
   controller.updateController();
+  //Serial.println(controller.Vout);
   // update actuator with this output
-  //robot.updateMotor1(controller.Vout); 
+  robot.updateMotor1(controller.Vout); 
   // if the robot has two motors, uncomment and figure out this part
   //robot.updateMotor2(controller.motorVoltage2);
 } // end of controller update

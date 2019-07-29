@@ -35,11 +35,23 @@
 
 
 // SCALING FACTORS
+// default 250 deg/s setting is 131 LSB/(deg/s) - divide by 131 and then multiply by 2 * pi / 360 to get rad/s
 #define GYRO_SCALE_DEFAULT 0.0001332312406 // converts to rad/s
 #define ACCEL_SCALE_DEFAULT 0.00006103515625 // converts to g
 
 
-#define MAX_VOLTAGE_DEFAULT 6.0
+// found great info at this website about NXT motor parameters
+// http://www.philohome.com/nxtmotor/nxtmotor.htm
+// http://web.archive.org/web/20111010092210/http://web.mac.com/ryo_watanabe/iWeb/Ryo's%20Holiday/NXT%20Motor.html
+//
+#define WHEEL_RADIUS_DEFUALT 0.0216 // in meters
+#define GEAR_RATIO_DEFAULT 48 // 48:1
+#define ENCODER_CPR_DEFAULT 15  // Using 15 CPR encoder
+
+#define FRICTION_COMPENSATION 10 // added boost (from Simulink model) to compensate for Coulomb friction
+#define MAX_VOLTAGE_DEFAULT 9.0 // based on MinSeg stock hardware with 6x1.5V AA batteries
+
+#define MTR1_ACTIVE_DEFAULT 1 // active / on by default
 
 class Minseg
 {
@@ -52,6 +64,8 @@ class Minseg
 	float gearRatio; // total gear ratio from motor output to wheel output
 	float x1; // displacement of motor 1 (left/default)
 	float x2; // displacement of motor 2 (right)
+	float x1_dot; // speed of motor 1 (left/default)
+	float x2_dot; // speed of motor 2 (right)
 	
 	// IMU related
 	uint8_t hasAccel; // flag for whether or not it has accelerometer
@@ -87,6 +101,11 @@ class Minseg
 	float mtr1Speed; // angular speed of motor in rad/s
     long enc1counts; // counts (+ or -) of the encoder pulses
     uint16_t enc1cpr; // counts per revolution of motor
+	float countsToRevsWheel1; // multiplication factor that is calculated once (to avoid slow floating point division)
+	float countsToRevsMotor1; // multiplication factor that is calculated once (to avoid slow floating point division)
+	float countsToPositionWheel1; // multiplication factor that is calculated once (to avoid slow floating point division)
+	float countsToWheelSpeed1; // multiplication factor that is calculated once (to avoid slow floating point division)
+	float countsToMtrSpeed1; // multiplication factor that is calculated once (to avoid slow floating point division)
     uint8_t enc1Direction; // 0 = normal, 1 = inverted	
 	float mtr1Voltage;
 		
@@ -97,6 +116,11 @@ class Minseg
 	float mtr2Speed; // angular speed of motor in rad/s			
     long enc2counts; // counts (+ or -) of the encoder pulses
     uint16_t enc2cpr; // counts per revolution of motor
+	float countsToRevsWheel2; // multiplication factor that is calculated once (to avoid slow floating point division)
+	float countsToRevsMotor2; // multiplication factor that is calculated once (to avoid slow floating point division)
+	float countsToPositionWheel2; // multiplication factor that is calculated once (to avoid slow floating point division)
+	float countsToWheelSpeed2; // multiplication factor that is calculated once (to avoid slow floating point division)
+	float countsToMtrSpeed2; // multiplication factor that is calculated once (to avoid slow floating point division)	
     uint8_t enc2Direction; // 0 = normal, 1 = inverted	
 	float mtr2Voltage;
 	
@@ -132,6 +156,8 @@ class Minseg
   private:
     int _pwmVal;
 	uint8_t _imuAvailable;
+	// time (in ms) of last encoder count reading
+	long _msLastEncoderUpdate;
 	//static long encCnt;
 	
 	
