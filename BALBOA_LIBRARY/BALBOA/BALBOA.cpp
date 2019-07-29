@@ -1,14 +1,12 @@
-/*
+﻿/*
   BALBOA.cpp - Library for using Balboa 32U4 with balancing and estimation library
 */
 
-#include "Arduino.h"
-#include "FastGPIO.h"
+#include <Arduino.h>
+#include <FastGPIO.h>
 #include "BALBOA.h"
 
-
 // initialize static variables here
-volatile long Balboa::encCnt;
 LSM6 Balboa::accelgyro;
 Balboa32U4Motors Balboa::motors;
 Balboa32U4Encoders Balboa::encoders;
@@ -75,29 +73,6 @@ void Balboa::setupHardware(void){
 	encoders.init();
 } // end of setupHardware
 
-void Balboa::calcGyroOffsets(int samples){
-	int32_t totalX = 0, totalY = 0, totalZ = 0;
-	for (int i = 0; i < samples; i++)
-	{
-		accelgyro.readGyro();
-		totalX += accelgyro.g.x;
-		totalY += accelgyro.g.y;
-		totalZ += accelgyro.g.z;
-		delay(1); // 1.66 kHz output rate => enough to delay 1 ms for new reading
-	}
-	
-	gx_raw_offset = totalX / samples;
-	gy_raw_offset = totalY / samples;
-	gz_raw_offset = totalZ / samples;
-
-#if DEBUG
-	Serial.println("Raw offsets (x,y,z) are: ");
-	Serial.println(gx_raw_offset);
-	Serial.println(gy_raw_offset);
-	Serial.println(gz_raw_offset);
-#endif
-} // end of calcGyroOffsets
-
 void Balboa::toggleLED(void){
 	FastGPIO::Pin<LED_PIN>::setOutputToggle();
 } // end of toggleLED
@@ -116,23 +91,30 @@ uint8_t Balboa::imuStatus(void){
 
 int16_t Balboa::getAccYRaw(void){
 	accelgyro.readAcc();
+#if ROTATE_XYZ_DIRECTIONS
+	return accelgyro.a.z;
+#else
 	return accelgyro.a.y;
+#endif
 } // and of getAccYRaw
 
 int16_t Balboa::getAccZRaw(void){
 	accelgyro.readAcc();
+#if ROTATE_XYZ_DIRECTIONS
+	return accelgyro.a.x;
+#else
 	return accelgyro.a.z;
+#endif
 } // and of getAccZRaw
 
 int16_t Balboa::getGyroXRaw(void){
 	accelgyro.readGyro();
-	return accelgyro.g.x;
-} // and of getGyroXRaw
-
-int16_t Balboa::getGyroYRaw(void){
-	accelgyro.readGyro();
+#if ROTATE_XYZ_DIRECTIONS
 	return accelgyro.g.y;
-} // and of getGyroYRaw
+#else
+	return accelgyro.g.x;
+#endif
+} // and of getGyroXRaw
 
 void Balboa::updateAccYg(void){
 	ay = (float)(Balboa::getAccYRaw() - ay_raw_offset) * ay_scale;
@@ -146,13 +128,8 @@ void Balboa::updateGyroXdps(void){
 	gx = (float)(Balboa::getGyroXRaw() - gx_raw_offset) * gx_scale;
 } // end of updateGyroXdps
 
-void Balboa::updateGyroYdps(void){
-	gy = (float)(Balboa::getGyroYRaw() - gy_raw_offset) * gy_scale;
-} // end of updateGyroYdps
-
 void Balboa::updateGyro(void){
 	Balboa::updateGyroXdps();
-	Balboa::updateGyroYdps();
 	//Minseg::updateGyroYdps(); // for example - if more gyro values desired
 } // end of updateGyro
 
@@ -188,7 +165,7 @@ void Balboa::updateEncoders(void){
 	// update wheel angular speed - probably shouldn't do this here, but instead in estimation library
 	//x1_dot = enc1countsDelta * countsToWheelSpeed / msPassed;
 	//x2_dot = enc2countsDelta * countsToWheelSpeed / msPassed;
-	
+
 } // end of updateEncoders
 
 

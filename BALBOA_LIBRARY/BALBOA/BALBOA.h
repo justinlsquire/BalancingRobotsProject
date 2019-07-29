@@ -1,13 +1,16 @@
-/*
+﻿/*
   BALBOA.h - Library for using Balboa 32U4 with balancing and estimation library
+
+  Directions are defined as follows, when the robot is "standing up" (balancing):
+	X: Wheel axis
+	Y: Horizontal axis, perpendicular to wheel axis
+	Z: Vertical axis (Positve direction down towards the ground)
 */
 #ifndef BALBOA_h
 #define BALBOA_h
 
-// The Balboa32U4 library must be installed (can be found on github or via the Arduino IDE)
-#include "Balboa32U4.h"
-// The LSM6 library (for the IMU) can also be found on github or via the IDE
-#include "LSM6.h"
+#include <Balboa32U4.h>
+#include <LSM6.h>
 #include "Wire.h"
 
 
@@ -29,10 +32,17 @@
 
 #define MAX_VOLTAGE_DEFUALT 6.0
 
+
+// Whether to rotate all directions when reading from gyro and accelerometer
+// (e.g. when calling GetGyroXRaw(), actually read y direction)
+// This is neccessary to obtain the directions defined at the top of this file,
+// which should be consistent with the MinSeg default
+#define ROTATE_XYZ_DIRECTIONS 1
+
+
 class Balboa
 {
   public:
-	static volatile long encCnt; // declare
 	static LSM6 accelgyro;
 	static Balboa32U4Encoders encoders;
 	static Balboa32U4Motors motors;
@@ -92,21 +102,17 @@ class Balboa
 	// everything else is hard-coded
     Balboa();
 	void setupHardware();
-	// Calculates and sets offsets for gyro. Assumes robot is at rest.
-	void calcGyroOffsets(int samples = 10);
 	void toggleLED();
 	uint8_t imuStatus();
 	
 	// only adding a few of these, but they can be expanded 
 	// to include way more
 	int16_t getGyroXRaw();
-	int16_t getGyroYRaw();
 	int16_t getAccYRaw();
 	int16_t getAccZRaw();
 	
 	// get the scaled values of the raw values
 	void updateGyroXdps();
-	void updateGyroYdps();
 	void updateAccYg();
 	void updateAccZg();
 	void updateGyro(); // for doing all at once
