@@ -16,8 +16,8 @@
 
 // radius (in meters) of wheel(s) used
 #define WHEEL_RADIUS 0.04  // in meters
-// total gear ratio from motor output to wheel output
-#define GEAR_RATIO 0.34693877551 // 17:49 exact ratio
+// total gear ratio: motor revolutions per wheel revolution
+#define GEAR_RATIO 2.88235294118 // 49:17 exact ratio
 // Encoder counts per revolution of motor
 #define ENCODER_CPR 358.32  // Using 12 CPR encoder with 29.86:1 builtin motor gearbox
 
