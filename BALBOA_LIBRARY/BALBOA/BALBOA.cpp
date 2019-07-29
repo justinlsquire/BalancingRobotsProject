@@ -1,4 +1,4 @@
-﻿/*
+/*
   BALBOA.cpp - Library for using Balboa 32U4 with balancing and estimation library
 */
 
@@ -15,7 +15,6 @@ Balboa32U4Encoders Balboa::encoders;
 
 
 Balboa::Balboa(){
-	
 	// initialize some stuff
 	gx_scale = GYRO_SCALE_DEFAULT;
 	gy_scale = GYRO_SCALE_DEFAULT;
@@ -27,11 +26,16 @@ Balboa::Balboa(){
 	
 	maxVoltage = MAX_VOLTAGE_DEFUALT;
 
-	wheelRadius = WHEEL_RADIUS_DEFUALT;
-	gearRatio = GEAR_RATIO_DEFAULT;
-	enc1cpr = ENCODER_CPR_DEFAULT;
-	enc2cpr = ENCODER_CPR_DEFAULT;
+	// initialize these floating point constants here so that 
+	// floating point division is not carried out every time in the loop
+	// floating point multiplication is much faster
+	countsToRevsMotor = 1/ENCODER_CPR;
+	countsToRevsWheel = 1/(ENCODER_CPR * GEAR_RATIO);
+	countsToPositionWheel = countsToRevsWheel * 2 * M_PI * WHEEL_RADIUS;
+	countsToWheelSpeed = countsToPositionWheel * 1000;// this accounts for the delta-time in milliseconds
+	countsToMotorSpeed = 2 * M_PI / ENCODER_CPR * 1000; // this accounts for the delta-time in milliseconds
 
+	// flags - reserved for potential future use 
 	hasEncoders = 1;
 	hasAccel = 1;
 	hasMagnetometer = 0; // Has the hardware, can be implemented later
@@ -173,19 +177,18 @@ void Balboa::updateEncoders(void){
 	enc1counts += enc1countsDelta;
 	enc2counts += enc2countsDelta;
 
-	// convert counts to revolutions
-	float enc1RevsDelta = gearRatio * enc1countsDelta / enc1cpr;
-	float enc2RevsDelta = gearRatio * enc2countsDelta / enc2cpr;
-	float enc1Revs = gearRatio * enc1counts / enc1cpr;
-	float enc2Revs = gearRatio * enc2counts / enc2cpr;
+	// update wheel position
+	x1 = enc1counts * countsToPositionWheel;
+	x2 = enc2counts * countsToPositionWheel;
 
-	// divide revolutions by time difference
-	mtr1Speed = (enc1RevsDelta / msPassed) * 1000 * 2 * M_PI;// / msPassed;
-	mtr2Speed = (enc2RevsDelta / msPassed) * 1000 * 2 * M_PI;// / msPassed;
+	// only use motor speed if it is of interest
+	//mtr1Speed = enc1countsDelta * countsToMotorSpeed / msPassed;
+	//mtr2Speed = enc2countsDelta * countsToMotorSpeed / msPassed;
+
+	// update wheel angular speed - probably shouldn't do this here, but instead in estimation library
+	//x1_dot = enc1countsDelta * countsToWheelSpeed / msPassed;
+	//x2_dot = enc2countsDelta * countsToWheelSpeed / msPassed;
 	
-	// convert total revs to total distance by using wheel raidus
-	x1 = enc1Revs * 2 * wheelRadius * PI;
-	x2 = enc2Revs * 2 * wheelRadius * PI;
 } // end of updateEncoders
 
 

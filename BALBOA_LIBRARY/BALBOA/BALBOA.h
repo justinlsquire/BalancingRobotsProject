@@ -1,4 +1,4 @@
-﻿/*
+/*
   BALBOA.h - Library for using Balboa 32U4 with balancing and estimation library
 */
 #ifndef BALBOA_h
@@ -14,9 +14,12 @@
 // define macros here
 #define LED_PIN 13
 
-#define WHEEL_RADIUS_DEFUALT 0.04
-#define GEAR_RATIO_DEFAULT 0.34693877551 // 17:49 exact ratio
-#define ENCODER_CPR_DEFAULT 358.32  // Using 12 CPR encoder with 29.86:1 builtin motor gearbox
+// radius (in meters) of wheel(s) used
+#define WHEEL_RADIUS 0.04  // in meters
+// total gear ratio from motor output to wheel output
+#define GEAR_RATIO 0.34693877551 // 17:49 exact ratio
+// Encoder counts per revolution of motor
+#define ENCODER_CPR 358.32  // Using 12 CPR encoder with 29.86:1 builtin motor gearbox
 
 // SCALING FACTORS (from datasheet)
 // For Full Scale +-245 degs/s, gyro sens is typically 8.75 mdeg/LSB
@@ -35,10 +38,10 @@ class Balboa
 	static Balboa32U4Motors motors;
 	
 	// displacement related
-	float wheelRadius; // radius (in meters) of wheel(s) used
-	float gearRatio; // total gear ratio from motor output to wheel output
 	float x1; // displacement of motor 1 (left/default)
 	float x2; // displacement of motor 2 (right)
+	float x1_dot; // speed of motor 1 (left/default)
+	float x2_dot; // speed of motor 2 (right)
 	
 	// IMU related
 	uint8_t hasAccel; // flag for whether or not it has accelerometer
@@ -70,18 +73,16 @@ class Balboa
 	// # 1 (Right) Motor
 	uint8_t mtr1Active; // 0 = inactive, 1 = active
 	uint8_t mtr1Direction; // 0 = normal, 1 = inverted
-	float mtr1Speed; // angular speed of motor (at wheel shaft) in rad/s
+	float mtr1Speed; // angular speed of motor in rad/s
     long enc1counts; // counts (+ or -) of the encoder pulses
-    uint16_t enc1cpr; // counts per revolution of motor
     uint8_t enc1Direction; // 0 = normal, 1 = inverted	
 	float mtr1Voltage;
 		
 	// # 2 (Left) Motor
 	uint8_t mtr2Active; // 0 = inactive, 1 = active
 	uint8_t mtr2Direction; // 0 = normal, 1 = inverted
-	float mtr2Speed; // angular speed of motor (at wheel shaft) in rad/s			
+	float mtr2Speed; // angular speed of motor in rad/s			
     long enc2counts; // counts (+ or -) of the encoder pulses
-    uint16_t enc2cpr; // counts per revolution of motor
     uint8_t enc2Direction; // 0 = normal, 1 = inverted	
 	float mtr2Voltage;
 	
@@ -119,6 +120,13 @@ class Balboa
 	uint8_t _imuAvailable;
 	// Time (in ms) of last encoder count reading
 	uint32_t _msLastEncoderUpdate;
+
+	// Precalculated multiplication factors (based on gear ratio, encoder cpr, etc.):
+	float countsToRevsWheel;     // Conversion from counts to wheel revolutions 
+	float countsToRevsMotor;     // Conversion from counts to motor revolutions
+	float countsToPositionWheel; // Conversion from counts to wheel displacement
+	float countsToWheelSpeed;    // Conversion from counts/ms counts to wheel speed
+	float countsToMotorSpeed;    // Conversion from counts/ms counts to motor speed
 };
 
 #endif
