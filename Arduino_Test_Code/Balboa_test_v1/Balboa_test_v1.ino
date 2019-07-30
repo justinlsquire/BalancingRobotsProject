@@ -67,14 +67,30 @@ void setup() {
   //controller.orientationOffsetX = -1.44; // radians - mine is not too straight because I broke it and had to repair it
 
   // For my setup with Balboa - Mattias
-  robot.gx_raw_offset = -529;
-  // A small offset to stop it from driving in one direction
-  controller.orientationOffsetX = 3.0 / 57.3;
+  robot.gx_raw_offset = -544;
+  // A small 10 degree offset seems stop it from driving in one direction and then falling
+  controller.orientationOffsetX = 10.0 / 57.3;
 
   // some experimental PID settings, before moving on to state space
   controller.Kp = 150;
   controller.Ki = 50;
   controller.Kd = 4;
+
+  // Some SS settings that seem to work for the Balboa
+  //  x position
+  controller.Kf[0] = -0.3;
+  //  x velocity
+  controller.Kf[1] = -40;
+  // body angle
+  controller.Kf[2] = -60;
+  // body angular rate
+  controller.Kf[3] = -5;
+
+  Serial.print("Feedback vector: [");
+  for(int i = 0; i < 4; i++) {
+    Serial.print(controller.Kf[i]);
+    Serial.print(i == 3 ? "]\n" : ", ");
+  }
 
   // set up numerical estimator and state space controller for now
   controller.estimatorType = ESTIMATOR_NUMERICAL;
@@ -148,6 +164,8 @@ void loop() {
               __/ |                                                                             
              |___/                                                                              
 /*---------------------------------------------------------------------------------------------------------------*/
+static long long xRawSum;
+static long count;
 void controllerUpdate(void)
 {
   // update sensors on the robot hardware
@@ -167,7 +185,12 @@ void controllerUpdate(void)
   controller.x1 = robot.x1;
   //controller.x2 = robot.x2;
 
-  
+  /*
+  // To find the offset
+  xRawSum += robot.getGyroXRaw();
+  count++;
+  Serial.println((long) (xRawSum / count));
+  */
   
   // update estimator (if present)
   controller.updateEstimator();
