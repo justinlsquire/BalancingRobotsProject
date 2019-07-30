@@ -14,14 +14,9 @@ Balboa32U4Encoders Balboa::encoders;
 
 Balboa::Balboa(){
 	// initialize some stuff
-	gx_scale = GYRO_SCALE_DEFAULT;
-	gy_scale = GYRO_SCALE_DEFAULT;
-	gz_scale = GYRO_SCALE_DEFAULT;
-	
-	ax_scale = ACCEL_SCALE_DEFAULT;
-	ay_scale = ACCEL_SCALE_DEFAULT;
-	az_scale = ACCEL_SCALE_DEFAULT;
-	
+	gx_scale = gy_scale = gz_scale = GYRO_SCALE_DEFAULT;	
+	ax_scale = ay_scale = az_scale = ACCEL_SCALE_DEFAULT;
+
 	maxVoltage = MAX_VOLTAGE_DEFUALT;
 
 	// initialize these floating point constants here so that 
@@ -65,9 +60,11 @@ void Balboa::setupHardware(void){
 	accelgyro.enableDefault();
 
 	// Example of setting gyro to non-default configuration:
-	// First 4 bits (1000) gives 1.66 kHz output data rate
+	// First 4 bits (0101) gives 208 Hz output data rate
 	// Bit 5 and 6 (10) gives 1000 deg/s full scale
-	//accelgyro.writeReg(LSM6::CTRL2_G, 0b10001000);
+	//accelgyro.writeReg(LSM6::CTRL2_G, 0b01011000);
+	// Scale for +- 1000dps
+	//gx_scale = gy_scale = gz_scale = 0.000610865238198;
 
 	// Init encoder click counter
 	encoders.init();
@@ -130,13 +127,11 @@ void Balboa::updateGyroXdps(void){
 
 void Balboa::updateGyro(void){
 	Balboa::updateGyroXdps();
-	//Minseg::updateGyroYdps(); // for example - if more gyro values desired
 } // end of updateGyro
 
 void Balboa::updateAccel(void){
 	Balboa::updateAccYg();
 	Balboa::updateAccZg();
-	//Minseg::updateAccXg(); // if this is ever important - needs defined
 } // end of updateAccel
 
 
@@ -172,9 +167,6 @@ void Balboa::updateEncoders(void){
 void Balboa::updateMotor1(float Vin){
 	static const int max_speed = 300;
 
-	// If wanting to use mtr1Active, mtr1Speed, etc.
-	// then set these here
-
 	// convert to percentage of max, update the actual speed
 	// (Clamping to +- max_speed is done by setLeftSpeed)
 	motors.setLeftSpeed((Vin / maxVoltage) * max_speed);
@@ -182,9 +174,6 @@ void Balboa::updateMotor1(float Vin){
 
 void Balboa::updateMotor2(float Vin){
 	static const int max_speed = 300;
-
-	// If wanting to use mtr1Active, mtr1Speed, etc.
-	// then set these here
 
 	// convert to percentage of max, update the actual speed
 	// (Clamping to +- max_speed is done by setRightSpeed)
