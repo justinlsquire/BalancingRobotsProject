@@ -67,24 +67,25 @@ void setup() {
   //controller.orientationOffsetX = -1.44; // radians - mine is not too straight because I broke it and had to repair it
 
   // For my setup with Balboa - Mattias
-  robot.gx_raw_offset = -544;
+  //robot.gx_raw_offset = -544;
+  robot.gx_raw_offset = -493;
   // A small 10 degree offset seems stop it from driving in one direction and then falling
-  controller.orientationOffsetX = 10.0 / 57.3;
+  controller.orientationOffsetX = 5.0 / 57.3;
 
   // some experimental PID settings, before moving on to state space
-  controller.Kp = 150;
-  controller.Ki = 50;
-  controller.Kd = 4;
+  controller.Kp = 30;
+  controller.Ki = 2;
+  controller.Kd = 0.1;
 
   // Some SS settings that seem to work for the Balboa
   //  x position
   controller.Kf[0] = -0.3;
   //  x velocity
-  controller.Kf[1] = -40;
+  controller.Kf[1] = -30;
   // body angle
-  controller.Kf[2] = -60;
+  controller.Kf[2] = -50;
   // body angular rate
-  controller.Kf[3] = -5;
+  controller.Kf[3] = -2;
 
   Serial.print("Feedback vector: [");
   for(int i = 0; i < 4; i++) {
@@ -183,7 +184,7 @@ void controllerUpdate(void)
   controller.gx = robot.gx;
   // encoder distance traveled
   controller.x1 = robot.x1;
-  //controller.x2 = robot.x2;
+  controller.x2 = robot.x2;
 
   /*
   // To find the offset
@@ -203,16 +204,16 @@ void controllerUpdate(void)
   //Serial.println(controller.ex*57.4);
   //Serial.println(controller.ex);
   //Serial.println(controller.x1_dot);
-  //Serial.println(controller.x1);
+  //Serial.println(controller.x2);
   //Serial.println(robot.mtr1Speed);
   
   // update controller output (calculate it)
   controller.updateController();
   //Serial.println(controller.Vout);
   // update actuator with this output
-  robot.updateMotor1(controller.Vout);
+  robot.updateMotor1(-controller.Vout);
   // Use the same output on motor 2 for now
-  robot.updateMotor2(controller.Vout);
+  robot.updateMotor2(-controller.Vout);
 } // end of controller update
 
 /*---------------------------------------------------------------------------------------------------------------
