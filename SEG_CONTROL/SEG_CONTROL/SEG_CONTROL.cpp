@@ -126,17 +126,26 @@ void segControl::updateController(void){
 		
 		
 				// calculate controller output for PID
-				Vout = Kp * error - Kd * gx + integralTerm;
+				//Vout1 = Kp * error - Kd * gx + integralTerm;
+				
+				
+				float dTerm;
+				
+				dTerm = (error - lastErr) / actualDt;
+				
+				Vout1 = Kp * error + Kd * dTerm + integralTerm;
 				// use the gyro as the derivative term for now, since for
 				// balancing at a setpoint zero, the gyro represents the rate
 				// of change of both the angle and the error
 
 				// in the future - add actual filtered derivative?
+				
+				lastErr = error;
 		
 				// check for dead-zone
-				if ((Vout > (-deadZone)) && (Vout < deadZone))
+				if ((Vout1 > (-deadZone)) && (Vout1 < deadZone))
 				{
-					Vout = 0.0;
+					Vout1 = 0.0;
 				}
 		
 				// saturation will be handled on the robot side
@@ -146,14 +155,14 @@ void segControl::updateController(void){
 				if ((ex > CONTROLLER_SHUTOFF_ANGLE) || (ex < (-CONTROLLER_SHUTOFF_ANGLE)))
 				{
 					// Kill output
-					Vout = 0.0;
+					Vout1 = 0.0;
 					// reset integral stuff
 					integralTerm = 0.0;
 				}
 			} // if (angleInitialized)
 			else
 			{
-				Vout = 0.0;
+				Vout1 = 0.0;
 			}		
 			break;
 		case CONTROLLER_SS:
@@ -170,12 +179,12 @@ void segControl::updateController(void){
 				// also, the body angle (ex) and the body angle rate (gx) are negated
 				// here due to the sign convention being opposite of that from the 
 				// system model
-				Vout = -(Kf[0] * x1 + Kf[1] * x1_dot + Kf[2] * (-ex) + Kf[3] * (-gx));
+				Vout1 = -(Kf[0] * x1 + Kf[1] * x1_dot + Kf[2] * (-ex) + Kf[3] * (-gx));
 								
 				// check for dead-zone
-				if ((Vout > (-deadZone)) && (Vout < deadZone))
+				if ((Vout1 > (-deadZone)) && (Vout1 < deadZone))
 				{
-					Vout = 0.0;
+					Vout1 = 0.0;
 				}
 				
 				// saturation will be handled on the robot side
@@ -185,12 +194,12 @@ void segControl::updateController(void){
 				if ((ex > CONTROLLER_SHUTOFF_ANGLE) || (ex < (-CONTROLLER_SHUTOFF_ANGLE)))
 				{
 					// Kill output
-					Vout = 0.0;
+					Vout1 = 0.0;
 				}
 			} // if (angleInitialized)
 			else
 			{
-				Vout = 0.0;
+				Vout1 = 0.0;
 			}		
 			break;
 		default:

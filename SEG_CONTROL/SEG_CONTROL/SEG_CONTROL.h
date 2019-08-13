@@ -104,7 +104,9 @@ class segControl
   uint8_t controlType; // PID, State Space, etc. - based on enumeration of the different types
 
   // PID related
-  float Vout; // calculated motor output voltage
+  float Vout1; // calculated motor output voltage
+  float Vout2; // motor voltage 2
+  float lastErr;
   float Kp; // proportional
   float Ki; // integral
   float Kd; // derivative
