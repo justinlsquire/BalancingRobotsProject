@@ -8,7 +8,8 @@
 // I2Cdev and MPU6050 must be installed as libraries, or else the .cpp/.h files
 // for both classes must be in the include path of your project
 #include "I2Cdev.h"
-#include "MPU6050.h"
+//#include "MPU6050.h"
+#include "MPU9250.h"
 #include "Wire.h"
 
 
@@ -58,7 +59,7 @@ class Minseg
 {
   public:
 	static volatile long encCnt; // declare
-	static MPU6050 accelgyro;
+	static MPU9250 accelgyro;
 	
 	// displacement related
 	float wheelRadius; // radius (in meters) of wheel(s) used

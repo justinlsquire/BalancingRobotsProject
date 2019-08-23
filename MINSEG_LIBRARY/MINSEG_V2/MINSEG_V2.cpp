@@ -8,7 +8,7 @@
 
 // initialize static variables here
 volatile long Minseg::encCnt;
-MPU6050 Minseg::accelgyro;
+MPU9250 Minseg::accelgyro;
 
 
 Minseg::Minseg(){
@@ -64,19 +64,30 @@ void Minseg::setupHardware(void){
 	setMotorPWM(2,0);
 	
 	
+	int status;
 	// setup IMU object
-	// begin wire (i2c) 
+	
 	Wire.begin();
 	
-	if (accelgyro.testConnection())
+	accelgyro.initialize();
+	
+	status = accelgyro.getDeviceID();
+	
+	if (status == 0x71)
 	{
-		// low pass filter mode
-		accelgyro.setDLPFMode(0);
-		accelgyro.initialize();
 		_imuAvailable = 1;
 #ifdef DEBUG		
 		Serial.println("imu is connected");	
+		Serial.println(status);
 #endif		
+		
+		//accelgyro.setFullScaleGyroRange(MPU9250_GYRO_FS_250);
+		//accelgyro.setFullScaleAccelRange(MPU9250_ACCEL_FS_2);
+		// set up hardware
+		//accelgyro.setAccelRange(MPU9250::ACCEL_RANGE_2G);
+		//accelgyro.setGyroRange(MPU9250::GYRO_RANGE_250DPS);
+		//accelgyro.setDlpfBandwidth()
+
 	}
 	else
 	{
@@ -85,6 +96,9 @@ void Minseg::setupHardware(void){
 		Serial.println("imu is NOT connected");
 #endif		
 	}
+	
+	
+	
 	
 	// setup encoder ports and pins, and ISR
 	// encoder is on pins 2 and 3
@@ -256,6 +270,7 @@ int16_t Minseg::getAccZRaw(void){
 
 int16_t Minseg::getGyroXRaw(void){
 	return accelgyro.getRotationX();
+	
 } // and of getAccY
 
 void Minseg::updateAccYg(void){
