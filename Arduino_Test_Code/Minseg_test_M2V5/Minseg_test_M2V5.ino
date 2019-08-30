@@ -26,6 +26,8 @@ Minseg robot;
 // create object for the controller (universal)
 segControl controller;
 
+unsigned long lastUpdateMicrosIMU;
+
 
 //*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^**^*^*^*
 //*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^**^*^*^*
@@ -63,18 +65,20 @@ void setup() {
   controller.setupController();
 
   // temporary - for my setup with MinSeg - JS/28Jul2019
-  robot.gx_raw_offset = 230; // my gyro offset 
-  controller.orientationOffsetX = -1.57; // radians - mine is not too straight because I broke it and had to repair it
+  robot.gx_raw_offset = -60; // my gyro offset 
+  controller.orientationOffsetX = -1.73; // radians - mine is not too straight because I broke it and had to repair it
 
   // some experimental PID settings, before moving on to state space
   controller.Kp = 40;
-  controller.Ki = 3;
-  controller.Kd = 0.5;
+  controller.Ki = 2;
+  controller.Kd = 1.5;
 
   // set up numerical estimator and state space controller for now
   controller.estimatorType = ESTIMATOR_NUMERICAL;
   //controller.controlType = CONTROLLER_SS;
+
   
+  //robot.clearIMU_FIFO();
 } // end of setup()
 /*---------------------------------------------------------------------------------------------------------------
   ______           _                    _       _                _____      _               
@@ -114,6 +118,15 @@ void loop() {
     // call the update function
     controllerUpdate();
   } // end of if - for time inverval check
+
+  //robot.updateIMU_FIFO();
+
+  //if ((micros() - lastUpdateMicrosIMU) >= 1000)
+  //{
+   // lastUpdateMicrosIMU = micros();
+    // update the IMU stuff
+    robot.updateIMU_RAW();
+  //}
 } // end of loop()
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -166,7 +179,8 @@ void controllerUpdate(void)
   controller.updateEstimator();
 
   // temporary stuff for debugging 
-  Serial.println(robot.getGyroXRaw());
+  //Serial.println(robot.getGyroXRaw());
+  //Serial.println(robot.gxFifoAvg);
   //Serial.println(robot.gx);
   //Serial.println(robot.getAccYRaw());
   //Serial.println(robot.az);

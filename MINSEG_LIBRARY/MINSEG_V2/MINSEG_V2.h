@@ -72,18 +72,30 @@ class Minseg
 	// IMU related
 	uint8_t hasAccel; // flag for whether or not it has accelerometer
 	uint8_t hasMagnetometer; // flag for whether or not it has magnetometer
+	
+	// FIFO buffer
+	uint8_t imuFifoBuf[64]; // should be data for 8 samples of everything
 
 	// gyro
 	int16_t gx_raw, gy_raw, gz_raw; // raw (integer) values of gyro
 	int16_t gx_raw_offset, gy_raw_offset, gz_raw_offset; // raw (integer) offset values of gyro
 	float gx_scale, gy_scale, gz_scale; // scale factors for converting raw gyro values to g* (rad/s)
 	float gx, gy, gz; // gyro values (in rad/s)
+	int16_t gxFifoBuffer[20];
+	int16_t gxFifoAvg;
+	uint8_t gxFifoCnt;
 
 	// accelerometer
 	int16_t ax_raw, ay_raw, az_raw; // raw (integer) values of accelerometer
 	int16_t ax_raw_offset, ay_raw_offset, az_raw_offset; // raw (integer) offset values of accelerometer
 	float ax_scale, ay_scale, az_scale; // scale factor for converting a*_raw to a* (in g);
 	float ax, ay, az; // acceleration values (in g)
+	int16_t ayFifoBuffer[20];
+	int16_t ayFifoAvg;
+	uint8_t ayFifoCnt;
+	int16_t azFifoBuffer[20];
+	int16_t azFifoAvg;
+	uint8_t azFifoCnt;
 
 	// magnetometer
 	int16_t mx_raw, my_raw, mz_raw; // raw (integer) values of magnetometer
@@ -152,6 +164,11 @@ class Minseg
 	void updateGyro(); // for doing all at once
 	void updateAccel(); // for doing all at once
 	void updateEncoders();
+	
+	void updateIMU_RAW();
+	
+	void updateIMU_FIFO();
+	void clearIMU_FIFO();
 	
 	void updateMotor1(float Vin);
 	void updateMotor2(float Vin);

@@ -81,6 +81,27 @@ void Minseg::setupHardware(void){
 		Serial.println(status);
 #endif		
 		
+		//uint8_t tempData;
+		
+		// set FIFO to not overflow if full
+		//tempData = 0b01000000;
+		//tempData = 0b00000001;
+		//I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_CONFIG,tempData);
+		
+		// set gyro to 3600 Hz bandwidth, Fs = 32 kHz
+		//tempData = 0b00000010; 
+		//I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_GYRO_CONFIG,tempData);
+		
+		// set accelerometer to fastest output rate
+		//tempData = 0b000001000;
+		//I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_FF_THR,tempData);
+		
+		//tempData = 255;
+		//I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_SMPLRT_DIV,tempData);
+		
+		//accelgyro.setXGyroFIFOEnabled(true);
+		//accelgyro.setAccelFIFOEnabled(true);
+		//accelgyro.setFIFOEnabled(true);
 		//accelgyro.setFullScaleGyroRange(MPU9250_GYRO_FS_250);
 		//accelgyro.setFullScaleAccelRange(MPU9250_ACCEL_FS_2);
 		// set up hardware
@@ -286,15 +307,151 @@ void Minseg::updateGyroXdps(void){
 } // end of updateGyroXdps
 
 void Minseg::updateGyro(void){
-	Minseg::updateGyroXdps();
+	//Minseg::updateGyroXdps();
 	//Minseg::updateGyroYdps(); // for example - if more gyro values desired
+	float tempAvg = 0.0;
+	
+	if (gxFifoCnt)
+	{
+		//Serial.println(gxFifoCnt);
+		for (int z = 0; z < gxFifoCnt; z++)
+		{
+			tempAvg += gxFifoBuffer[z];
+		}
+		
+		tempAvg /= gxFifoCnt;
+		
+		gx = (tempAvg - gx_raw_offset) * gx_scale;
+		
+		gxFifoCnt = 0;
+	}
+	else
+	{
+		gx = (gxFifoBuffer[0] - gx_raw_offset) * gx_scale;
+	}	
 } // end of updateGyro
 
 void Minseg::updateAccel(void){
-	Minseg::updateAccYg();
-	Minseg::updateAccZg();
+	//Minseg::updateAccYg();
+	//Minseg::updateAccZg();
+	
+	float tempAvg = 0.0;
+	if (ayFifoCnt)
+	{
+		for (int z = 0; z < ayFifoCnt; z++)
+		{
+			tempAvg += ayFifoBuffer[z];
+		}
+		
+		tempAvg /= ayFifoCnt;
+		
+		ay = (tempAvg - ay_raw_offset) * ay_scale;
+		
+		ayFifoCnt = 0;
+	}
+	else
+	{
+		ay = (ayFifoBuffer[0] - ay_raw_offset) * ay_scale;
+	}
+	
+	tempAvg = 0.0;
+	
+	if (azFifoCnt)
+	{
+		for (int z = 0; z < azFifoCnt; z++)
+		{
+			tempAvg += azFifoBuffer[z];
+		}
+		
+		tempAvg /= azFifoCnt;
+		
+		az = (tempAvg - az_raw_offset) * az_scale;
+		
+		azFifoCnt = 0;
+	}
+	else
+	{
+		az = (azFifoBuffer[0] - az_raw_offset) * az_scale;
+	}	
+	
 	//Minseg::updateAccXg(); // if this is ever important - needs defined
 } // end of updateAccel
+
+void Minseg::updateIMU_FIFO(void)
+{
+	Serial.println(accelgyro.getFIFOCount());
+	// check for FIFO count
+	if (accelgyro.getFIFOCount() >= 32)
+	{
+		// read all the bytes into a big buffer
+		accelgyro.getFIFOBytes(imuFifoBuf,32);
+		
+		int z = 0;
+		int y = 0;
+		while (z < 32)
+		{
+			// forget about first two bytes - they are ax
+			z++;
+			z++;
+			// MSB of ay
+			ayFifoBuffer[y] = (imuFifoBuf[z]<<8);
+			z++;
+			// LSB of ay
+			ayFifoBuffer[y] |= imuFifoBuf[z];
+			z++;
+			// MSB of az
+			azFifoBuffer[y] = (imuFifoBuf[z]<<8);
+			z++;
+			// LSB of az
+			azFifoBuffer[y] |= imuFifoBuf[z];
+			z++;
+			// MSB of gx
+			gxFifoBuffer[y] = (imuFifoBuf[z]<<8);
+			z++;
+			// LSB of gx
+			gxFifoBuffer[y] |= imuFifoBuf[z];
+			z++;
+			y++;
+		}
+		
+		// average them
+		ayFifoAvg = 0;
+		azFifoAvg = 0;
+		gxFifoAvg = 0;
+		for (int zz = 0; zz < 4; zz++)
+		{
+			ayFifoAvg += ayFifoBuffer[zz] * 0.125; // divide by 8
+			azFifoAvg += azFifoBuffer[zz] * 0.125; // divide by 8
+			gxFifoAvg += gxFifoBuffer[zz] * 0.125; // divide by 8
+		}
+		
+		// apply a small filter?
+	}
+} // end of updateIMU_FIFO
+
+void Minseg::clearIMU_FIFO(void)
+{
+	accelgyro.resetFIFO();
+} // end of clearIMU_FIFO
+
+void Minseg::updateIMU_RAW(void)
+{
+	gxFifoBuffer[gxFifoCnt] = Minseg::getGyroXRaw();
+	if (gxFifoCnt < 19)
+	{
+		gxFifoCnt++;
+	}
+	ayFifoBuffer[ayFifoCnt] = Minseg::getAccYRaw();
+	if (ayFifoCnt < 19)
+	{
+		ayFifoCnt++;
+	}
+	azFifoBuffer[azFifoCnt] = Minseg::getAccZRaw();
+	if (azFifoCnt < 19)
+	{
+		azFifoCnt++;
+	}		
+} // end of updateIMU_RAW
 
 void Minseg::updateEncoders(void){
 	// get current time
