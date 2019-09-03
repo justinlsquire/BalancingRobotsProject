@@ -40,7 +40,7 @@
 #define KD_DEFAULT 0.4
 #define N_DEFAULT 0.0 // derivative filter not implemented yet (maybe never)
 #define DEADZONE_DEFAULT 0.01 // volts under which motor output is cutoff
-#define INTEGRAL_MAX_DEFAULT 10 // anti-windup
+#define INTEGRAL_MAX_DEFAULT 4 // anti-windup
 
 
 // some default state space values that worked for MinSeg

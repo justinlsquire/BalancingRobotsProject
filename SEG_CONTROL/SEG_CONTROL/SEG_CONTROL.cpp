@@ -158,7 +158,7 @@ void segControl::updateController(void){
 				}
 				//wheelIntegralX1 = 0.3 * x1;
 				
-				Vout1 = Kp * error + Kd * dTerm + integralTerm;// + 5.0 * x1_dot - wheelIntegralX1 - x1 * 2;
+				Vout1 = Kp * error + Kd * dTerm + integralTerm;// + 5.0 * x1_dot;// - wheelIntegralX1;// - x1 * 2;
 				// use the gyro as the derivative term for now, since for
 				// balancing at a setpoint zero, the gyro represents the rate
 				// of change of both the angle and the error
