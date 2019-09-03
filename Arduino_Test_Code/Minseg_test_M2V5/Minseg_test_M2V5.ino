@@ -46,7 +46,7 @@ unsigned long lastUpdateMicrosIMU;
 /*---------------------------------------------------------------------------------------------------------------*/
 void setup() {
   // delay - temporary for debugging
-  delay(3000);
+  //delay(3000);
   // initialize the serial port for communications
   Serial.begin(115200);
 
@@ -54,7 +54,7 @@ void setup() {
   // the platform specific hardware (ports, pins, peripherals, etc.)
   robot.setupHardware(); // sets up all of the stock hardware on the robot
 
-  delay(3000);
+ // delay(3000);
 
   // configure the controller for this application
   controller.updateRate = 200; // in Hz - per function documentation
@@ -65,13 +65,16 @@ void setup() {
   controller.setupController();
 
   // temporary - for my setup with MinSeg - JS/28Jul2019
-  robot.gx_raw_offset = -60; // my gyro offset 
-  controller.orientationOffsetX = -1.73; // radians - mine is not too straight because I broke it and had to repair it
+  //robot.gx_raw_offset = -60; // my gyro offset 
+  robot.gx_raw_offset = 180; // my gyro offset 
+  controller.orientationOffsetX = -1.58; // radians - mine is not too straight because I broke it and had to repair it
 
   // some experimental PID settings, before moving on to state space
-  controller.Kp = 40;
-  controller.Ki = 2;
-  controller.Kd = 1.5;
+  controller.Kp = 65;
+  controller.Kp = 75;
+  //controller.Kp = 130;
+  controller.Ki = 1;
+  controller.Kd = 1.0;
 
   // set up numerical estimator and state space controller for now
   controller.estimatorType = ESTIMATOR_NUMERICAL;
@@ -191,7 +194,7 @@ void controllerUpdate(void)
   
   // update controller output (calculate it)
   controller.updateController();
-  //Serial.println(controller.Vout);
+  Serial.println(controller.Vout1);
 
   //controller.Vout1 = 2; 
   

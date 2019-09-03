@@ -126,13 +126,97 @@ void Balboa::updateGyroXdps(void){
 } // end of updateGyroXdps
 
 void Balboa::updateGyro(void){
-	Balboa::updateGyroXdps();
+	float tempAvg = 0.0;
+	
+	if (gxFifoCnt)
+	{
+		//Serial.println(gxFifoCnt);
+		for (int z = 0; z < gxFifoCnt; z++)
+		{
+			tempAvg += gxFifoBuffer[z];
+		}
+		
+		tempAvg /= gxFifoCnt;
+		
+		gx = (tempAvg - gx_raw_offset) * gx_scale;
+		
+		// add some filtering here?
+		gx  = (ALFA_GYRO) * gx + (1-ALFA_GYRO) * last_gx;
+		last_gx = gx;
+		
+		gxFifoCnt = 0;
+	}
+	else
+	{
+		gx = (gxFifoBuffer[0] - gx_raw_offset) * gx_scale;
+	}	
+	
+	//Balboa::updateGyroXdps();
 } // end of updateGyro
 
 void Balboa::updateAccel(void){
-	Balboa::updateAccYg();
-	Balboa::updateAccZg();
+	
+	float tempAvg = 0.0;
+	if (ayFifoCnt)
+	{
+		for (int z = 0; z < ayFifoCnt; z++)
+		{
+			tempAvg += ayFifoBuffer[z];
+		}
+		
+		tempAvg /= ayFifoCnt;
+		
+		ay = (tempAvg - ay_raw_offset) * ay_scale;
+		
+		ayFifoCnt = 0;
+	}
+	else
+	{
+		ay = (ayFifoBuffer[0] - ay_raw_offset) * ay_scale;
+	}
+	
+	tempAvg = 0.0;
+	
+	if (azFifoCnt)
+	{
+		for (int z = 0; z < azFifoCnt; z++)
+		{
+			tempAvg += azFifoBuffer[z];
+		}
+		
+		tempAvg /= azFifoCnt;
+		
+		az = (tempAvg - az_raw_offset) * az_scale;
+		
+		azFifoCnt = 0;
+	}
+	else
+	{
+		az = (azFifoBuffer[0] - az_raw_offset) * az_scale;
+	}	
+	
+	//Balboa::updateAccYg();
+	//Balboa::updateAccZg();
 } // end of updateAccel
+
+void Balboa::updateIMU_RAW(void)
+{
+	gxFifoBuffer[gxFifoCnt] = Balboa::getGyroXRaw();
+	if (gxFifoCnt < 19)
+	{
+		gxFifoCnt++;
+	}
+	ayFifoBuffer[ayFifoCnt] = Balboa::getAccYRaw();
+	if (ayFifoCnt < 19)
+	{
+		ayFifoCnt++;
+	}
+	azFifoBuffer[azFifoCnt] = Balboa::getAccZRaw();
+	if (azFifoCnt < 19)
+	{
+		azFifoCnt++;
+	}
+} // end of updateIMU_RAW
 
 
 void Balboa::updateEncoders(void){
@@ -169,7 +253,7 @@ void Balboa::updateMotor1(float Vin){
 
 	// convert to percentage of max, update the actual speed
 	// (Clamping to +- max_speed is done by setLeftSpeed)
-	motors.setLeftSpeed((Vin / maxVoltage) * max_speed);
+	motors.setLeftSpeed((Vin / maxVoltage) * max_speed + RL_OFFSET);
 } // end of updateMotor1
 
 void Balboa::updateMotor2(float Vin){
@@ -177,5 +261,5 @@ void Balboa::updateMotor2(float Vin){
 
 	// convert to percentage of max, update the actual speed
 	// (Clamping to +- max_speed is done by setRightSpeed)
-	motors.setRightSpeed((Vin / maxVoltage) * max_speed);
+	motors.setRightSpeed((Vin / maxVoltage) * max_speed - RL_OFFSET);
 } // end of updateMotor1

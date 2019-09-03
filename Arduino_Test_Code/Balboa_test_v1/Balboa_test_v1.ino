@@ -75,7 +75,7 @@ void setup() {
   // some experimental PID settings, before moving on to state space
   controller.Kp = 30;
   controller.Ki = 2;
-  controller.Kd = 0.1;
+  controller.Kd = 0.2;
 
   // Some SS settings that seem to work for the Balboa
   //  x position
@@ -95,7 +95,7 @@ void setup() {
 
   // set up numerical estimator and state space controller for now
   controller.estimatorType = ESTIMATOR_NUMERICAL;
-  controller.controlType = CONTROLLER_SS;
+  //controller.controlType = CONTROLLER_SS;
 
   // Toggle LED to signify that setup is done
   robot.toggleLED();
@@ -138,6 +138,8 @@ void loop() {
     // call the update function
     controllerUpdate();
   } // end of if - for time inverval check
+
+  robot.updateIMU_RAW();
 } // end of loop()
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -172,7 +174,7 @@ void controllerUpdate(void)
   // update sensors on the robot hardware
   robot.updateAccel();
   robot.updateGyro();
-  robot.updateEncoders();
+  //robot.updateEncoders();
   
   // and pass it to the controller object
   
@@ -209,11 +211,12 @@ void controllerUpdate(void)
   
   // update controller output (calculate it)
   controller.updateController();
-  //Serial.println(controller.Vout);
+  Serial.println(controller.Vout1);
   // update actuator with this output
-  robot.updateMotor1(-controller.Vout);
+  //robot.updateMotor2(-controller.Vout1);
+  robot.updateMotor1(-controller.Vout1);
   // Use the same output on motor 2 for now
-  robot.updateMotor2(-controller.Vout);
+  robot.updateMotor2(-controller.Vout1);
 } // end of controller update
 
 /*---------------------------------------------------------------------------------------------------------------

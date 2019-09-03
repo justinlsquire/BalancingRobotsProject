@@ -81,7 +81,7 @@ void Minseg::setupHardware(void){
 		Serial.println(status);
 #endif		
 		
-		//uint8_t tempData;
+		uint8_t tempData;
 		
 		// set FIFO to not overflow if full
 		//tempData = 0b01000000;
@@ -89,12 +89,12 @@ void Minseg::setupHardware(void){
 		//I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_CONFIG,tempData);
 		
 		// set gyro to 3600 Hz bandwidth, Fs = 32 kHz
-		//tempData = 0b00000010; 
-		//I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_GYRO_CONFIG,tempData);
+		tempData = 0b00000011; 
+		I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_GYRO_CONFIG,tempData);
 		
 		// set accelerometer to fastest output rate
-		//tempData = 0b000001000;
-		//I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_FF_THR,tempData);
+		tempData = 0b000001000;
+		I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_FF_THR,tempData);
 		
 		//tempData = 255;
 		//I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_SMPLRT_DIV,tempData);
@@ -322,6 +322,10 @@ void Minseg::updateGyro(void){
 		tempAvg /= gxFifoCnt;
 		
 		gx = (tempAvg - gx_raw_offset) * gx_scale;
+		
+		// add some filtering here?
+		gx  = (ALFA_GYRO) * gx + (1-ALFA_GYRO) * last_gx;
+		last_gx = gx;
 		
 		gxFifoCnt = 0;
 	}

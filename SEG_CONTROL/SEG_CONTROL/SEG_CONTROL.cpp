@@ -62,8 +62,13 @@ void segControl::updateEulerEstimate(void){
 	else
 	{
 		// perhaps do a count in here to get good angles before proceeding
-		ex = atanAngle;
-		angleInitialized = 1;
+		ex = (alphaComplementary) * (ex + gx * actualDtEstimator) + (1-alphaComplementary) * (atanAngle);
+		
+		// wait until it is close to the balance point to start
+		if ((ex > (-.05)) && (ex < 0.05))
+		{
+			angleInitialized = 1;
+		}
 	}
 		
 } // end of updateEulerEstimate
@@ -131,9 +136,29 @@ void segControl::updateController(void){
 				
 				float dTerm;
 				
-				dTerm = (error - lastErr) / actualDt;
+				//dTerm = (error - lastErr) / actualDt;
 				
-				Vout1 = Kp * error + Kd * dTerm + integralTerm;
+				if ((gx > (-GYRO_DEADBAND)) && (gx < GYRO_DEADBAND))
+				{
+					dTerm = 0;
+				}
+				else
+				{
+					dTerm = -gx;
+				}
+				
+				wheelIntegralX1 += x1 * actualDt * 1;
+				if (wheelIntegralX1 > 6)
+				{
+					wheelIntegralX1 = 6;
+				}
+				else if (wheelIntegralX1 < (-6))
+				{
+					wheelIntegralX1 = -6;
+				}
+				//wheelIntegralX1 = 0.3 * x1;
+				
+				Vout1 = Kp * error + Kd * dTerm + integralTerm;// + 5.0 * x1_dot - wheelIntegralX1 - x1 * 2;
 				// use the gyro as the derivative term for now, since for
 				// balancing at a setpoint zero, the gyro represents the rate
 				// of change of both the angle and the error

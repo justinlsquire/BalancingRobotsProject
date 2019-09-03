@@ -39,6 +39,10 @@
 // which should be consistent with the MinSeg default
 #define ROTATE_XYZ_DIRECTIONS 1
 
+#define ALFA_GYRO 0.9 // amount given to new value
+
+#define RL_OFFSET 0//-3 // number of points to add/subtract from right, compared to left
+
 
 class Balboa
 {
@@ -62,12 +66,23 @@ class Balboa
 	int16_t gx_raw_offset, gy_raw_offset, gz_raw_offset; // raw (integer) offset values of gyro
 	float gx_scale, gy_scale, gz_scale; // scale factors for converting raw gyro values to g* (rad/s)
 	float gx, gy, gz; // gyro values (in rad/s)
+	float last_gx,last_gy,last_gz;
+	int16_t gxFifoBuffer[20];
+	int16_t gxFifoAvg;
+	uint8_t gxFifoCnt;	
 
 	// accelerometer
 	int16_t ax_raw, ay_raw, az_raw; // raw (integer) values of accelerometer
 	int16_t ax_raw_offset, ay_raw_offset, az_raw_offset; // raw (integer) offset values of accelerometer
 	float ax_scale, ay_scale, az_scale; // scale factor for converting a*_raw to a* (in g);
 	float ax, ay, az; // acceleration values (in g)
+	
+	int16_t ayFifoBuffer[20];
+	int16_t ayFifoAvg;
+	uint8_t ayFifoCnt;
+	int16_t azFifoBuffer[20];
+	int16_t azFifoAvg;
+	uint8_t azFifoCnt;
 
 	// magnetometer
 	int16_t mx_raw, my_raw, mz_raw; // raw (integer) values of magnetometer
@@ -117,6 +132,9 @@ class Balboa
 	void updateAccZg();
 	void updateGyro(); // for doing all at once
 	void updateAccel(); // for doing all at once
+	
+	void updateIMU_RAW();
+	
 	void updateEncoders();
 	
 	void updateMotor1(float Vin);

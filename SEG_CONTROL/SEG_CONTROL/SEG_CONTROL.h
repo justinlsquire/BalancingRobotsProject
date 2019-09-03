@@ -24,7 +24,7 @@
 // default estimator settings - can be changed in code
 #define ESTIMATOR_TYPE_DEFAULT ESTIMATOR_COMPLEMENTARY
 
-#define ALPHA_COMPLEMENTARY_DEFAULT 0.99 // 99 percent gyro 
+#define ALPHA_COMPLEMENTARY_DEFAULT 0.993 // 99 percent gyro 
 
 // percentage given to new value of wheel speed calculation
 #define ALPHA_WHEEL_SPEED_DEFAULT 0.85 
@@ -52,6 +52,8 @@
 
 // the angle at which the motor output is not active
 #define CONTROLLER_SHUTOFF_ANGLE 0.5 // in radians
+
+#define GYRO_DEADBAND 0.02 // gyro is zero outside of this range
 
 
 
@@ -94,6 +96,7 @@ class segControl
   float x2_dot;//angular speed of motor 2 (right) 
   float lastx1_dot; // last value (for filtering) 
   float lastx2_dot; // last value (for filtering)
+  float wheelIntegralX1;
   
   unsigned long lastEstimatorMicros; // last microsecond measurement from estimation routine
   float actualDtEstimator;
@@ -116,6 +119,7 @@ class segControl
   float deadZone; // controller voltage level that remains zero output
   unsigned long lastControlMicros; // last microsecond measurement from control routine
   float actualDt; // time interval between controller updates (calculated each time)
+  
 
   // state space related
   float Kf[5]; // feedback terms (up to 5 state) for state space control

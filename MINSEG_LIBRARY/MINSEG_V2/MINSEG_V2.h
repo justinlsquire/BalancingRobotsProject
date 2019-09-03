@@ -55,6 +55,8 @@
 #define MTR1_ACTIVE_DEFAULT 1 // active / on by default
 #define MTR2_ACTIVE_DEFAULT 1 // active / on by default
 
+#define ALFA_GYRO 0.9 // amount given to new value
+
 class Minseg
 {
   public:
@@ -81,6 +83,7 @@ class Minseg
 	int16_t gx_raw_offset, gy_raw_offset, gz_raw_offset; // raw (integer) offset values of gyro
 	float gx_scale, gy_scale, gz_scale; // scale factors for converting raw gyro values to g* (rad/s)
 	float gx, gy, gz; // gyro values (in rad/s)
+	float last_gx,last_gy,last_gz;
 	int16_t gxFifoBuffer[20];
 	int16_t gxFifoAvg;
 	uint8_t gxFifoCnt;
