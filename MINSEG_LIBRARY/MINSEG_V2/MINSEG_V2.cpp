@@ -73,7 +73,7 @@ void Minseg::setupHardware(void){
 	
 	status = accelgyro.getDeviceID();
 	
-	if (status == 0x71)
+	if ((status == 0x71) || (status == 0x73))
 	{
 		_imuAvailable = 1;
 #ifdef DEBUG		
@@ -90,11 +90,11 @@ void Minseg::setupHardware(void){
 		
 		// set gyro to 3600 Hz bandwidth, Fs = 32 kHz
 		tempData = 0b00000011; 
-		I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_GYRO_CONFIG,tempData);
+		//I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_GYRO_CONFIG,tempData);
 		
 		// set accelerometer to fastest output rate
 		tempData = 0b000001000;
-		I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_FF_THR,tempData);
+		//I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_FF_THR,tempData);
 		
 		//tempData = 255;
 		//I2Cdev::writeByte(MPU9250_DEFAULT_ADDRESS,MPU9250_RA_SMPLRT_DIV,tempData);
@@ -115,6 +115,7 @@ void Minseg::setupHardware(void){
 		_imuAvailable = 0;
 #ifdef DEBUG
 		Serial.println("imu is NOT connected");
+		Serial.println(status);
 #endif		
 	}
 	
@@ -492,6 +493,10 @@ void Minseg::updateMotor1(float Vin){
 	
 	// convert to percentage of max
 	
+	if(!mtrsActive)
+	{
+		Vin = 0;
+	}	
 		
 	// simplified - do better job in the future of checking 
 	int16_t tempDuty;
@@ -499,6 +504,8 @@ void Minseg::updateMotor1(float Vin){
 	if (mtr1Active)
 	{	
 		tempDuty = (int16_t)(Vin/maxVoltage * 255.0) + FRICTION_COMPENSATION;
+		
+		tempDuty += mtrDiff;
 	
 		if (tempDuty > 255)
 		{
@@ -526,6 +533,12 @@ void Minseg::updateMotor2(float Vin){
 	
 	// convert to percentage of max
 	
+	// check for motor being active
+	if(!mtrsActive)
+	{
+		Vin = 0;
+	}
+	
 	
 	// simplified - do better job in the future of checking
 	int16_t tempDuty;
@@ -533,6 +546,8 @@ void Minseg::updateMotor2(float Vin){
 	if (mtr2Active)
 	{
 		tempDuty = (int16_t)(Vin/maxVoltage * 255.0) + FRICTION_COMPENSATION;
+		
+		tempDuty -= mtrDiff;
 		
 		if (tempDuty > 255)
 		{
@@ -551,3 +566,21 @@ void Minseg::updateMotor2(float Vin){
 	Minseg::setMotorPWM(2,tempDuty);
 	
 } // end of updateMotor2
+
+
+void Minseg::beginTurn(uint8_t direction, int amount)
+{
+	if (direction == RIGHT)
+	{
+		mtrDiff = amount;
+	}
+	if (direction == LEFT)
+	{
+		mtrDiff = -amount;
+	}
+} // end of beginTurn
+
+void Minseg::endTurn(void)
+{
+	mtrDiff = 0;
+} // end of endTurn

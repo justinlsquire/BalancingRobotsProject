@@ -24,7 +24,8 @@
 // default estimator settings - can be changed in code
 #define ESTIMATOR_TYPE_DEFAULT ESTIMATOR_COMPLEMENTARY
 
-#define ALPHA_COMPLEMENTARY_DEFAULT 0.993 // 99 percent gyro 
+//#define ALPHA_COMPLEMENTARY_DEFAULT 0.993 // 99 percent gyro 
+#define ALPHA_COMPLEMENTARY_DEFAULT 0.998 // 99 percent gyro 
 
 // percentage given to new value of wheel speed calculation
 #define ALPHA_WHEEL_SPEED_DEFAULT 0.85 
@@ -44,10 +45,15 @@
 
 
 // some default state space values that worked for MinSeg
-#define KF_DEFAULT_0 -0.3162 // x position
-#define KF_DEFAULT_1 -42.4163 // x velocity
-#define KF_DEFAULT_2 -63.0683 // body angle
-#define KF_DEFAULT_3 -10.5755 // body angular rate
+//#define KF_DEFAULT_0 -0.3162 // x position
+//#define KF_DEFAULT_1 -42.4163 // x velocity
+//#define KF_DEFAULT_2 -63.0683 // body angle
+//#define KF_DEFAULT_3 -10.5755 // body angular rate
+
+#define KF_DEFAULT_0 -0.4400 // x position
+#define KF_DEFAULT_1 -0.2919 // x velocity
+#define KF_DEFAULT_2 -28.8721 // body angle
+#define KF_DEFAULT_3 -1.6327 // body angular rate
 
 
 // the angle at which the motor output is not active
@@ -83,6 +89,8 @@ class segControl
   float ex, ey, ez; // in rad  
   float gx, gy, gz; // in rad/s
   float ax, ay, az; // in g
+  
+  float exIntegral;
   
   uint8_t angleInitialized;
   
@@ -121,7 +129,7 @@ class segControl
   float actualDt; // time interval between controller updates (calculated each time)
   
 
-  // state space related
+  // state space related   
   float Kf[5]; // feedback terms (up to 5 state) for state space control
 
   // estimation related
@@ -130,6 +138,8 @@ class segControl
   float alphaComplementary; // value to use for gyro ((1-alphaComplementary) for accelerometer contribution)
 
   float Ke[5]; // kalman filter feedback values (up to 5 state)
+  
+  uint8_t mtrsActive;
 	
 	
   private:

@@ -69,6 +69,7 @@ void segControl::updateEulerEstimate(void){
 		{
 			angleInitialized = 1;
 		}
+		exIntegral += ex * actualDtEstimator;
 	}
 		
 } // end of updateEulerEstimate
@@ -183,6 +184,12 @@ void segControl::updateController(void){
 					Vout1 = 0.0;
 					// reset integral stuff
 					integralTerm = 0.0;
+					// set flag
+					mtrsActive = 0;
+				}
+				else
+				{
+					mtrsActive = 1;
 				}
 			} // if (angleInitialized)
 			else
@@ -204,7 +211,30 @@ void segControl::updateController(void){
 				// also, the body angle (ex) and the body angle rate (gx) are negated
 				// here due to the sign convention being opposite of that from the 
 				// system model
-				Vout1 = -(Kf[0] * x1 + Kf[1] * x1_dot + Kf[2] * (-ex) + Kf[3] * (-gx));
+				
+				
+				// collect terms as in Simulink model 
+				float x_;
+				float xdot_;
+				float alpha_;
+				float alphadot_;
+				
+				x_ = ex - x1;
+				xdot_ = gx - x1_dot;
+				alpha_ = ex;
+				alphadot_ = gx;
+				
+				//Vout1 = -(Kf[0] * x1 + Kf[1] * x1_dot + Kf[2] * (-ex) + Kf[3] * (-gx));
+				Vout1 = (Kf[0] * x_ + Kf[1] * xdot_ + Kf[2] * alpha_ + Kf[3] * alphadot_);
+				
+				
+				// add integral action
+				//Vout1 += (0.01 * exIntegral);
+				
+				//Vout1 *= 1.5;
+				
+				// apply control output filter?
+				
 								
 				// check for dead-zone
 				if ((Vout1 > (-deadZone)) && (Vout1 < deadZone))
@@ -220,6 +250,12 @@ void segControl::updateController(void){
 				{
 					// Kill output
 					Vout1 = 0.0;
+					// set flag
+					mtrsActive = 0;					
+				}
+				else
+				{
+					mtrsActive = 1;
 				}
 			} // if (angleInitialized)
 			else

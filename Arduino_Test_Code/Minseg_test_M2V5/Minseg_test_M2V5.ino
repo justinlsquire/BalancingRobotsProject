@@ -28,6 +28,8 @@ segControl controller;
 
 unsigned long lastUpdateMicrosIMU;
 
+unsigned long turnTimer;
+
 
 //*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^**^*^*^*
 //*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^**^*^*^*
@@ -65,24 +67,28 @@ void setup() {
   controller.setupController();
 
   // temporary - for my setup with MinSeg - JS/28Jul2019
-  robot.gx_raw_offset = -60; // my gyro offset 
-  //robot.gx_raw_offset = 180; // my gyro offset 
-  //controller.orientationOffsetX = -1.58; // radians - mine is not too straight because I broke it and had to repair it
-  controller.orientationOffsetX = -1.7; // radians - mine is not too straight because I broke it and had to repair it
+  //robot.gx_raw_offset = -60; // my gyro offset 
+  robot.gx_raw_offset = 180; // my gyro offset 
+  controller.orientationOffsetX = -1.57; // radians - mine is not too straight because I broke it and had to repair it
+  //controller.orientationOffsetX = -1.7; // radians - mine is not too straight because I broke it and had to repair it
 
   // some experimental PID settings, before moving on to state space
   controller.Kp = 65;
-  controller.Kp = 22;
+  controller.Kp = 26;
   //controller.Kp = 130;
-  controller.Ki = 125;
-  controller.Kd = 1.0;
+  controller.Ki = 165;
+  controller.Kd = 1.2;
 
   // set up numerical estimator and state space controller for now
   controller.estimatorType = ESTIMATOR_NUMERICAL;
-  //controller.controlType = CONTROLLER_SS;
+  controller.controlType = CONTROLLER_SS;
 
   
   //robot.clearIMU_FIFO();
+
+
+  // update turn timer
+  turnTimer = millis();
 } // end of setup()
 /*---------------------------------------------------------------------------------------------------------------
   ______           _                    _       _                _____      _               
@@ -131,6 +137,21 @@ void loop() {
     // update the IMU stuff
     robot.updateIMU_RAW();
   //}
+
+
+
+
+  if ((millis() - turnTimer) >= 25000)
+  {
+    robot.endTurn();
+  }
+  else if ((millis() - turnTimer) >= 20000)
+  {
+    // start the turning
+    //robot.beginTurn(RIGHT,10);
+  }
+
+  
 } // end of loop()
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -195,9 +216,11 @@ void controllerUpdate(void)
   
   // update controller output (calculate it)
   controller.updateController();
-  Serial.println(controller.Vout1);
+  //Serial.println(controller.Vout1);
 
-  //controller.Vout1 = 2; 
+  //controller.Vout1 = 2;
+
+  robot.mtrsActive = controller.mtrsActive;
   
   // update actuator with this output
   robot.updateMotor1(controller.Vout1); 

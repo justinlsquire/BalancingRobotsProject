@@ -34,6 +34,9 @@
 #define LED_PORT PORTB // PB7
 #define LED_PORT_OFFSET 7 // PB7 - digital pin 13
 
+#define RIGHT 1
+#define LEFT 2
+
 
 // SCALING FACTORS
 // default 250 deg/s setting is 131 LSB/(deg/s) - divide by 131 and then multiply by 2 * pi / 360 to get rad/s
@@ -46,8 +49,8 @@
 // http://web.archive.org/web/20111010092210/http://web.mac.com/ryo_watanabe/iWeb/Ryo's%20Holiday/NXT%20Motor.html
 //
 #define WHEEL_RADIUS_DEFUALT 0.022098 // in meters
-#define GEAR_RATIO_DEFAULT 48 // 48:1
-#define ENCODER_CPR_DEFAULT 15  // Using 15 CPR encoder
+#define GEAR_RATIO_DEFAULT 50 // 48:1
+#define ENCODER_CPR_DEFAULT 28  // Using 15 CPR encoder
 
 #define FRICTION_COMPENSATION 10 // added boost (from Simulink model) to compensate for Coulomb friction
 #define MAX_VOLTAGE_DEFAULT 7.5 // based on MinSeg stock hardware with 6x1.5V AA batteries
@@ -141,8 +144,10 @@ class Minseg
     uint8_t enc2Direction; // 0 = normal, 1 = inverted	
 	float mtr2Voltage;
 	
+	uint8_t mtrsActive;
 	
-	
+	// motor difference for turning
+	int mtrDiff;
 	
 	// everything else is hard-coded
 	// only thing we need to set up for now is the led pin
@@ -175,6 +180,9 @@ class Minseg
 	
 	void updateMotor1(float Vin);
 	void updateMotor2(float Vin);
+	
+	void beginTurn(uint8_t direction, int amount);
+	void endTurn();
 	
   private:
     int _pwmVal;
