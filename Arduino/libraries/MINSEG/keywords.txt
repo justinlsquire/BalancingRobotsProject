@@ -1,0 +1,15 @@
+Minseg	KEYWORD1
+setupHardware	KEYWORD2
+toggleLED	KEYWORD2
+setMotorPWM KEYWORD2
+imuStatus KEYWORD2
+getAccYRaw KEYWORD2
+getAccZRaw KEYWORD2
+getGyroXRaw KEYWORD2
+updateAccYg KEYWORD2
+updateAccZg KEYWORD2
+updateGyroXdps KEYWORD2
+updateGyro KEYWORD2
+updateAccel KEYWORD2
+updateEncoders KEYWORD2
+updateMotor1 KEYWORD2
