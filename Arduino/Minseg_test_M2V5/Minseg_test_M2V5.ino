@@ -69,7 +69,7 @@ void setup() {
   // temporary - for my setup with MinSeg - JS/28Jul2019
   //robot.gx_raw_offset = -60; // my gyro offset 
   robot.gx_raw_offset = 180; // my gyro offset 
-  controller.orientationOffsetX = -1.57; // radians - mine is not too straight because I broke it and had to repair it
+  controller.orientationOffsetX = -1.56; // radians - mine is not too straight because I broke it and had to repair it
   //controller.orientationOffsetX = -1.7; // radians - mine is not too straight because I broke it and had to repair it
 
   // some experimental PID settings, before moving on to state space
@@ -81,7 +81,8 @@ void setup() {
 
   // set up numerical estimator and state space controller for now
   controller.estimatorType = ESTIMATOR_NUMERICAL;
-  controller.controlType = CONTROLLER_SS;
+  //controller.controlType = CONTROLLER_SS;
+  controller.controlType = CONTROLLER_PID;
 
   
   //robot.clearIMU_FIFO();
@@ -209,7 +210,7 @@ void controllerUpdate(void)
   //Serial.println(robot.gx);
   //Serial.println(robot.getAccYRaw());
   //Serial.println(robot.az);
-  Serial.println(controller.ex*57.4);
+  //Serial.println(controller.ex*57.4);
   //Serial.println(controller.x1_dot);
   //Serial.println(controller.x1);
   //Serial.println(robot.mtr1Speed);
