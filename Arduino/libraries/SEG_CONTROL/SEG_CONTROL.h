@@ -36,12 +36,12 @@
 
 
 // some default PID values that kind of worked for MinSeg
-#define KP_DEFAULT 100
-#define KI_DEFAULT 10
-#define KD_DEFAULT 0.4
+#define KP_DEFAULT -18.0965 //100
+#define KI_DEFAULT 0.0 //10
+#define KD_DEFAULT -0.7904 // 0.4
 #define N_DEFAULT 0.0 // derivative filter not implemented yet (maybe never)
 #define DEADZONE_DEFAULT 0.01 // volts under which motor output is cutoff
-#define INTEGRAL_MAX_DEFAULT 4 // anti-windup
+#define INTEGRAL_MAX_DEFAULT 10.0 // anti-windup
 
 
 // some default state space values that worked for MinSeg
@@ -50,10 +50,15 @@
 //#define KF_DEFAULT_2 -63.0683 // body angle
 //#define KF_DEFAULT_3 -10.5755 // body angular rate
 
-#define KF_DEFAULT_0 -0.4400 // x position
-#define KF_DEFAULT_1 -0.2919 // x velocity
-#define KF_DEFAULT_2 -28.8721 // body angle
-#define KF_DEFAULT_3 -1.6327 // body angular rate
+// #define KF_DEFAULT_0 -0.4400 // x position
+// #define KF_DEFAULT_1 -0.2919 // x velocity
+// #define KF_DEFAULT_2 -28.8721 // body angle
+// #define KF_DEFAULT_3 -1.6327 // body angular rate
+
+#define KF_DEFAULT_0 1.2910 // x position
+#define KF_DEFAULT_1 12.5746 // x velocity
+#define KF_DEFAULT_2 -18.0965 // body angle
+#define KF_DEFAULT_3 -0.7904 // body angular rate
 
 
 // the angle at which the motor output is not active
@@ -61,6 +66,8 @@
 
 #define GYRO_DEADBAND 0.02 // gyro is zero outside of this range
 
+// default wheel radius to use in calculations
+#define CONTROLLER_WHEEL_RADIUS_DEFUALT 0.022098; // from Minseg M2V5
 
 
 class segControl
@@ -105,6 +112,9 @@ class segControl
   float lastx1_dot; // last value (for filtering) 
   float lastx2_dot; // last value (for filtering)
   float wheelIntegralX1;
+  
+  // wheel radius - that needs to be received from the robot object
+  float wheelRadius;
   
   unsigned long lastEstimatorMicros; // last microsecond measurement from estimation routine
   float actualDtEstimator;

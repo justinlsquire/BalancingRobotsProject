@@ -49,7 +49,7 @@
 // http://web.archive.org/web/20111010092210/http://web.mac.com/ryo_watanabe/iWeb/Ryo's%20Holiday/NXT%20Motor.html
 //
 #define WHEEL_RADIUS_DEFUALT 0.022098 // in meters
-#define GEAR_RATIO_DEFAULT 50 // 48:1
+#define GEAR_RATIO_DEFAULT 48 // 48:1
 #define ENCODER_CPR_DEFAULT 28  // Using 15 CPR encoder
 
 #define FRICTION_COMPENSATION 10 // added boost (from Simulink model) to compensate for Coulomb friction

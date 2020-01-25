@@ -35,6 +35,9 @@ segControl::segControl(){
 	controlType = CONTROL_TYPE_DEFAULT;
 	estimatorType = ESTIMATOR_TYPE_DEFAULT;
 	
+	// initialize default wheel radius
+	wheelRadius = CONTROLLER_WHEEL_RADIUS_DEFUALT;
+	
 	
 	
 } // end of constructor
@@ -116,7 +119,11 @@ void segControl::updateController(void){
 			{
 				// calculate difference between setpoint and actual value
 				float error;
-				error = 0.0 - ex; // use 0 degrees as the setpoint for now
+				
+				//error = 0.0 - ex; // use 0 degrees as the setpoint for now
+				
+				error = ex;
+				
 				// update integral term
 				integralTerm += error * actualDt * Ki;
 				// check for anti-windup here
@@ -145,16 +152,21 @@ void segControl::updateController(void){
 				}
 				else
 				{
-					dTerm = -gx;
+					dTerm = gx;
 				}
 				
 				
+				float x1_;
+				float x1_dot_;
+				x1_ = -(wheelRadius * ex + x1);
+				x1_dot_ = -(wheelRadius * gx + x1_dot);
+				
 				//wheelIntegralX1 += (ex-x1) * actualDt;
-				wheelIntegralX1 += (x1) * actualDt;
+				wheelIntegralX1 += (x1_) * actualDt;
 				
 				
 				
-				Serial.println(x1);
+				//Serial.println(x1);
 				//Serial.println(wheelIntegralX1);
 				
 				
@@ -175,8 +187,12 @@ void segControl::updateController(void){
 				//Vout1 += 0.5 * (x1_dot + dTerm);
 				//Vout1 += 1.5 * wheelIntegralX1;
 				//Vout1 += 0.5 * wheelIntegralX1;
-				Vout1 += 0.5 * x1;
-				Vout1 += 0.3 * (x1_dot+dTerm);
+				//Vout1 += 0.5 * x1;
+				//Vout1 += 0.3 * (x1_dot+dTerm);
+				
+				Vout1 += 1.2910 * x1_;
+				Vout1 += 12.5746 * x1_dot_;
+				Vout1 += wheelIntegralX1 * (-0.01);
 				
 				// use the gyro as the derivative term for now, since for
 				// balancing at a setpoint zero, the gyro represents the rate
@@ -237,8 +253,12 @@ void segControl::updateController(void){
 				float alpha_;
 				float alphadot_;
 				
-				x_ = ex - x1;
-				xdot_ = gx - x1_dot;
+				//x_ = ex - x1;
+				//xdot_ = gx - x1_dot;
+				
+				x_ = -(wheelRadius * ex + x1);
+				xdot_ = -(wheelRadius * gx + x1_dot);
+				
 				alpha_ = ex;
 				alphadot_ = gx;
 				

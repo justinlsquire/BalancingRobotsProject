@@ -61,6 +61,9 @@ void setup() {
   // configure the controller for this application
   controller.updateRate = 200; // in Hz - per function documentation
 
+  // pass the robot-specific parameters to the controller object
+  controller.wheelRadius = robot.wheelRadius;
+
   // call the libarary function to take these parameters just entered
   // and do some background calculations to set up the controller for 
   // being ready to use
@@ -69,15 +72,15 @@ void setup() {
   // temporary - for my setup with MinSeg - JS/28Jul2019
   //robot.gx_raw_offset = -60; // my gyro offset 
   robot.gx_raw_offset = 180; // my gyro offset 
-  controller.orientationOffsetX = -1.56; // radians - mine is not too straight because I broke it and had to repair it
+  controller.orientationOffsetX = -1.55; // radians - mine is not too straight because I broke it and had to repair it
   //controller.orientationOffsetX = -1.7; // radians - mine is not too straight because I broke it and had to repair it
 
   // some experimental PID settings, before moving on to state space
-  controller.Kp = 65;
-  controller.Kp = 26;
+  //controller.Kp = 65;
+  //controller.Kp = 26;
   //controller.Kp = 130;
-  controller.Ki = 165;
-  controller.Kd = 1.2;
+  //controller.Ki = 165;
+  //controller.Kd = 1.2;
 
   // set up numerical estimator and state space controller for now
   controller.estimatorType = ESTIMATOR_NUMERICAL;
@@ -183,6 +186,7 @@ void loop() {
 void controllerUpdate(void)
 {
   // update sensors on the robot hardware
+  
   robot.updateAccel();
   robot.updateGyro();
   robot.updateEncoders();
@@ -221,6 +225,8 @@ void controllerUpdate(void)
 
   //controller.Vout1 = 2;
 
+  // this is detected based on the body angle of the robot
+  // if the robot is tilted past about 30 degrees
   robot.mtrsActive = controller.mtrsActive;
   
   // update actuator with this output
