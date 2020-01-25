@@ -77,10 +77,10 @@ void setup() {
 
   // some experimental PID settings, before moving on to state space
   //controller.Kp = 65;
-  //controller.Kp = 26;
+  controller.Kp = -26;
   //controller.Kp = 130;
-  //controller.Ki = 165;
-  //controller.Kd = 1.2;
+  controller.Ki = -165;
+  controller.Kd = -1.2;
 
   // set up numerical estimator and state space controller for now
   controller.estimatorType = ESTIMATOR_NUMERICAL;

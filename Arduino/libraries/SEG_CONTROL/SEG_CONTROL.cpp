@@ -190,9 +190,13 @@ void segControl::updateController(void){
 				//Vout1 += 0.5 * x1;
 				//Vout1 += 0.3 * (x1_dot+dTerm);
 				
-				Vout1 += 1.2910 * x1_;
-				Vout1 += 12.5746 * x1_dot_;
-				Vout1 += wheelIntegralX1 * (-0.01);
+				//Vout1 += 1.2910 * x1_;
+				//Vout1 += 12.5746 * x1_dot_;
+				
+				Vout1 += 15.0 * x1_;
+				Vout1 += 15.0 * x1_dot_;
+				
+				Vout1 -= wheelIntegralX1 * (-0.01);
 				
 				// use the gyro as the derivative term for now, since for
 				// balancing at a setpoint zero, the gyro represents the rate
