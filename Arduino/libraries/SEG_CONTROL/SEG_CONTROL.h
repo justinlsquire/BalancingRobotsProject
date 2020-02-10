@@ -113,6 +113,8 @@ class segControl
   float lastx2_dot; // last value (for filtering)
   float wheelIntegralX1;
   
+  uint8_t wheelIntegralOnPID;
+  
   // wheel radius - that needs to be received from the robot object
   float wheelRadius;
   

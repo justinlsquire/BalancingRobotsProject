@@ -14,6 +14,7 @@
 // Choose which library to use, based on the hardware
 //#include<BALBOA.h> 
 //#include <MINSEG.h>
+// MinSeg M2V5
 #include <MINSEG_V2.h>
 // platform-independent control and estimation library
 #include <SEG_CONTROL.h> 
@@ -59,7 +60,7 @@ void setup() {
  // delay(3000);
 
   // configure the controller for this application
-  controller.updateRate = 200; // in Hz - per function documentation
+  controller.updateRate = 200; // in Hz - per function documentation in library
 
   // pass the robot-specific parameters to the controller object
   controller.wheelRadius = robot.wheelRadius;
@@ -73,7 +74,6 @@ void setup() {
   //robot.gx_raw_offset = -60; // my gyro offset 
   robot.gx_raw_offset = 180; // my gyro offset 
   controller.orientationOffsetX = -1.55; // radians - mine is not too straight because I broke it and had to repair it
-  //controller.orientationOffsetX = -1.7; // radians - mine is not too straight because I broke it and had to repair it
 
   // some experimental PID settings, before moving on to state space
   //controller.Kp = 65;
@@ -87,12 +87,9 @@ void setup() {
   //controller.controlType = CONTROLLER_SS;
   controller.controlType = CONTROLLER_PID;
 
-  
-  //robot.clearIMU_FIFO();
 
-
-  // update turn timer
-  turnTimer = millis();
+  // update turn timer - not needed currently (Feb, 2020)
+  //turnTimer = millis();
 } // end of setup()
 /*---------------------------------------------------------------------------------------------------------------
   ______           _                    _       _                _____      _               
@@ -139,12 +136,15 @@ void loop() {
   //{
    // lastUpdateMicrosIMU = micros();
     // update the IMU stuff
+
+    // update IMU every iteration through loop
     robot.updateIMU_RAW();
   //}
 
 
 
 
+  /* Turn Related Stuff - not functional currently
   if ((millis() - turnTimer) >= 25000)
   {
     robot.endTurn();
@@ -154,7 +154,11 @@ void loop() {
     // start the turning
     //robot.beginTurn(RIGHT,10);
   }
+  */
 
+
+  // Call function to check for serial data being sent to update PID and settings
+  checkForSerial();
   
 } // end of loop()
 
@@ -186,12 +190,11 @@ void loop() {
 void controllerUpdate(void)
 {
   // update sensors on the robot hardware
-  
   robot.updateAccel();
   robot.updateGyro();
   robot.updateEncoders();
   
-  // and pass it to the controller object
+  // and then pass it to the controller object
   
   // accelerometer value in the vertical (gravity) direction 
   controller.ay = robot.ay;
@@ -201,11 +204,9 @@ void controllerUpdate(void)
   controller.gx = robot.gx;
   // encoder distance traveled
   controller.x1 = robot.x1;
-  //controller.x2 = robot.x2;
+  //controller.x2 = robot.x2; // second encoder not used currently (Feb 2020)
 
-  
-  
-  // update estimator (if present)
+  // update estimator for control feedback signals
   controller.updateEstimator();
 
   // temporary stuff for debugging 
@@ -223,8 +224,6 @@ void controllerUpdate(void)
   controller.updateController();
   //Serial.println(controller.Vout1);
 
-  //controller.Vout1 = 2;
-
   // this is detected based on the body angle of the robot
   // if the robot is tilted past about 30 degrees
   robot.mtrsActive = controller.mtrsActive;
@@ -234,6 +233,114 @@ void controllerUpdate(void)
   // if the robot has two motors, uncomment and figure out this part
   robot.updateMotor2(controller.Vout1);
 } // end of controller update
+
+
+
+
+void checkForSerial(void)
+{
+  // variable to hold the command code received over serial
+  int commandCode;
+  // string to hold data for values
+  String recvString = "";
+  // temporary byte for reading bytes we don't care about
+  int trash;
+  // temporary character for reading into string
+  int inChar;
+  // temporary integer for conversion to value
+  int tempInt;
+  
+  if (Serial.available()>=5)
+  {
+    // check to see if the command code is present, otherwise flush
+    
+    commandCode = Serial.read();
+
+    switch(commandCode)
+    {
+      case 'P':
+        while(Serial.available()>0)
+        {
+          inChar = Serial.read();
+          if(isDigit(inChar))
+          {
+            recvString += (char)inChar;
+          }          
+        }
+        tempInt = recvString.toInt();
+        // assign Kp value
+        controller.Kp = -((float)(tempInt));
+        Serial.print('P');
+        Serial.println(tempInt);
+        break;
+      case 'I':
+        while(Serial.available()>0)
+        {
+          inChar = Serial.read();
+          if(isDigit(inChar))
+          {
+            recvString+= (char)inChar;
+          }          
+        }
+        tempInt = recvString.toInt();
+        // assign Ki value
+        controller.Ki = -((float)(tempInt));
+        Serial.print('I');
+        Serial.println(tempInt);  
+        // zero the integral term
+        controller.integralTerm = 0;
+        break;
+      case 'D':
+        while(Serial.available()>0)
+        {
+          inChar = Serial.read();
+          if(isDigit(inChar))
+          {
+            recvString+= (char)inChar;
+          }          
+        }
+        tempInt = recvString.toInt();
+        // assign Kd value
+        controller.Kd = -((float)(tempInt))*0.01; // Kd is x 100
+        Serial.print('D');
+        Serial.println(tempInt);        
+        break;
+      case 'W':
+        while(Serial.available()>0)
+        {
+          inChar = Serial.read();
+          if(isDigit(inChar))
+          {
+            recvString+= (char)inChar;
+          }          
+        }
+        tempInt = recvString.toInt();
+
+        if (tempInt == 0)
+        {
+          controller.wheelIntegralOnPID = 0;
+        }
+        else if (tempInt == 1)
+        {
+          controller.wheelIntegralOnPID = 1;
+          // zero the integral
+          controller.wheelIntegralX1 = 0;
+        }
+        // assign Kd value
+        //controller.Kd = -((float)(tempInt))*0.01; // Kd is x 100
+        Serial.print('W');
+        Serial.println(tempInt);        
+        break;        
+      default:
+        // read out the rest of the bytes to clear it, since we didn't receive a valid command code
+        while(Serial.available())
+        {
+          trash = Serial.read();        
+        }
+        break;
+    } // end of switch(commandCode)
+  } // end of if(Serial.available()>=5)
+} // end of checkForSerial function
 
 /*---------------------------------------------------------------------------------------------------------------
   ______           _   _    _                 ______                _   _                 

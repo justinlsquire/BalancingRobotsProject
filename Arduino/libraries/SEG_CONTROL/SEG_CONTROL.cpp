@@ -38,6 +38,7 @@ segControl::segControl(){
 	// initialize default wheel radius
 	wheelRadius = CONTROLLER_WHEEL_RADIUS_DEFUALT;
 	
+	wheelIntegralOnPID = 1; // turn on by default
 	
 	
 } // end of constructor
@@ -193,10 +194,13 @@ void segControl::updateController(void){
 				//Vout1 += 1.2910 * x1_;
 				//Vout1 += 12.5746 * x1_dot_;
 				
-				Vout1 += 15.0 * x1_;
-				Vout1 += 15.0 * x1_dot_;
+				if (wheelIntegralOnPID)
+				{
+					Vout1 += 15.0 * x1_;
+					Vout1 += 15.0 * x1_dot_;
 				
-				Vout1 -= wheelIntegralX1 * (-0.01);
+					Vout1 -= wheelIntegralX1 * (-0.01);
+				}
 				
 				// use the gyro as the derivative term for now, since for
 				// balancing at a setpoint zero, the gyro represents the rate
