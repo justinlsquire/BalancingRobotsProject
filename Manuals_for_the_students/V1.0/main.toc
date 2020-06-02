@@ -1,0 +1,2 @@
+\babel@toc {english}{}
+\beamer@subsectionintoc {0}{1}{Instructions for installing the software}{3}{0}{0}

@@ -1,0 +1,11 @@
+% in the preamble
+\pgfdeclarelayer{ultrabackground}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{ultrabackground,background,main,foreground}
+
+% in the document
+\begin{pgfonlayer}{ultrabackground}
+	\node ...
+\end{pgfonlayer}
+

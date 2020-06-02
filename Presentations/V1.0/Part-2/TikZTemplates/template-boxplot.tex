@@ -1,0 +1,44 @@
+% requires
+% \usepgfplotslibrary{statistics}
+
+\def\BoxplotColor{black!30!white}
+\pgfplotsset
+{
+	AxisStyle/.style =
+	{
+		boxplot/draw direction	= y,
+		axis y line				= left,
+	},
+	BoxplotsStyle/.style =
+	{
+		mark			= *,
+		mark options	=
+		{
+			scale 		= 0.5,
+			draw		= \BoxplotColor,
+			fill		= \BoxplotColor,
+		},
+		boxplot =
+		{
+			draw position			= \E,
+			every box/.style		= {draw = \BoxplotColor, fill = white},
+			every whisker/.style	= {\BoxplotColor},
+			every median/.style		= {\BoxplotColor},
+		},
+	},
+}
+
+\begin{tikzpicture}
+	\begin{axis}
+	[
+		AxisStyle,
+	]
+		%
+		\foreach \E in {5,10,...,30}
+		{\addplot+ [BoxplotsStyle] table [y index=1] {../Data/ConservativenessOfBound/BoxplotsFB_M10000_E\E.txt};}
+		%
+		\addplot+ [BoxplotsStyle, boxplot = {box extend = 20, draw position = 100}] table [y index=1] {../Data/EffectivenessOfEstimators/BoxplotsFA_M100_E10.txt};
+		%
+	\end{axis}
+\end{tikzpicture}
+

@@ -1,0 +1,201 @@
+% for beamer animations
+\tikzset
+{
+    invisible/.style={opacity=0},
+    visible on/.style={alt={#1{}{invisible}}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+    },
+}
+
+\pgfplotscreateplotcyclelist{mycyclelist}{%
+solid,	line width=0.02cm,	black,			opacity=0.8,	mark=none\\%
+dashed,	line width=0.02cm,	black,			opacity=0.8,	mark=none\\%
+solid,	line width=0.05cm,	black!30!white,	opacity=0.8,	mark=none\\%
+dashed,	line width=0.05cm,	black!30!white,	opacity=0.8,	mark=none\\%
+solid,	line width=0.07cm,	black!50!white,	opacity=0.8,	mark=none\\%
+dashed,	line width=0.07cm,	black!50!white,	opacity=0.8,	mark=none\\%
+}
+
+\tikzstyle{every pin} = [fill = \SoftPrimary, draw = black, font = \footnotesize, align = center]
+
+\pgfplotsset
+{
+	MyStyle/.style =
+	{
+		width = 0.7\columnwidth,
+	}
+}
+
+\begin{tikzpicture}
+[
+	xscale	= 1,	% to scale horizontally everything but the text
+	yscale	= 1,	% to scale vertically everything but the text
+%	scale	= 0.6, every node/.style={transform shape}, % to scale everything, also the text
+	remember picture, overlay	% to do absolute positioning
+]
+	%
+	\begin{axis}
+	[
+		xmode					= log,			% can't go in user-defined style (limitations of pgfplots)
+		ymode					= linear,		% can't go in user-defined style (limitations of pgfplots)
+%		enlarge x limits		= 0.5,
+		width					= 0.8\columnwidth,
+		height					= 0.8\columnwidth,
+		%
+		axis x line				= bottom,	% bottom | middle | top
+		every inner x axis line/.append style	= {-latex},
+		hide x axis,
+		x dir					= reverse,
+		%
+		axis y line				= left,		% left | middle | right
+		every inner y axis line/.append style	= {-latex},
+		hide y axis,
+		y dir					= reverse,
+		%
+		axis on top,
+		%
+		xmin					= 0,
+		xmax					= 1,
+		ymin					= 0,
+		ymax					= 1,
+		%
+		xlabel					= {$x$},
+		xlabel style			= {align = right, text width = 1cm},
+		xlabel near ticks,
+		xlabel shift			= -15,
+		every axis x label/.style		= {at={(xticklabel cs:1)}, anchor = west, yshift = 0.55cm, align = right, text width = 1cm},
+		%
+		xtick					= {0, 0.2, ..., 1},
+		x tick style 			= {thick},
+		xticklabels				= {0, 0.2, ..., 1},
+		xticklabels from table	= {../Data/LTU.courses-centrality-indexes.tex}{xticks}
+		x tick label style		= {rotate = -60, anchor = west},
+		xmajorgrids,
+		%
+		extra x ticks			= {3, 7, 10},
+		extra x tick labels		= {$t - N$, $t - T$, $t$},
+		extra x tick style		= {grid = major, rotate = -60, anchor = west},
+		%
+		ylabel					= {$y$},
+		ylabel near ticks,
+		ylabel shift			= -15,
+		y label style			= {rotate = -60, anchor = west},
+		%
+		ytick					= {0, 0.2, ..., 1},
+		y tick style 			= {thick},
+		yticklabels				= {0, 0.2, ..., 1},
+		y tick label style		= {rotate = -60, anchor = west},
+		ymajorgrids,
+		%
+		scaled x ticks			= base 10:-3, % will put 10^3 | notice that the sign is inverted
+		scaled x ticks			= false,						% | will remove ticks with scientific notation
+		y tick label style		= {/pgf/number format/fixed},	% |
+		%
+		every y tick scale label/.style = {at={(-0.07,1.1)}},	% to position the 10^x wherever one wants
+		%
+		cycle list name			= mycyclelist,
+		%
+		legend pos				= south east, % south west | north east | north west | outer south east | outer south west | outer north east | outer north west | 
+		legend plot pos			= left, % right | none    [where to draw the line specifications]
+		legend columns			= -1, % [-1 to draw all entries horizontally]
+		legend entries			= {$\delta = 0.1 \;\;\;$, $\delta = 1$},
+		legend style			=
+		{
+			draw				= none,
+			fill				= none,
+			only marks,
+			inner xsep			= 0.1cm,
+			inner ysep			= 0.1cm,
+			nodes				= {inner ysep = 0.4cm, text depth = 0.15cm, text width = 1.5cm},
+			cells				= {anchor = east},
+% 			at					= {(1,0.5)}, % overrides 'legend pos'
+% 			anchor				= west,
+		},
+		legend cell align		= left, % left | center | right
+		%
+		title style				= { text width = 6cm, align = center, font = \bf, yshift = 1cm },
+		legend to name			= mylegend,
+		reverse legend			= false, % true | false
+		transpose legend		= false, % true | false
+		%
+		title					= {$p = b = 0.1$ \\ $N_{\max} = 200$},
+		%
+		axis background/.style	= {fill = black!05!white},
+		grid style 				= {thin, dashed, black!20},
+		%
+		name					= firstplot,
+		at						= {($(previousplot.east)+(1cm,0)$)},
+% 		at						= (current page.center),
+		anchor					= west,
+		%
+		% for plots having dates as coordinates
+		% note: this requires including
+		% \usepgfplotslibrary{dateplot}
+% 		date coordinates in		= x,
+% 		xticklabel				= {\hour:\minute},
+% 		x tick label style		= {align = center},
+% 		date ZERO				= {2013-06-25},
+% 		xmin					= {2013-06-25 00:00},
+% 		xmax					= {2013-06-29 23:59},
+% 		xtick					= {2013-06-28 08:00,
+% 								   2013-06-28 08:15,
+% 								   2013-06-28 08:30,
+% 								   2013-06-28 08:45,
+% 								   2013-06-28 09:00}
+	]
+		%
+		\foreach \e in {15,20,...,50}
+		{
+			% --------------------------------------------------------------
+			\addplot
+			[
+				const plot, % smooth | sharp plot | const plot | const plot mark right | jump mark left | jump mark right | xbar | ybar | xbar interval | ybar interval | xcomb | ycomb | only marks
+				dashed, % solid | dotted | densely dotted | loosely dotted | dashed | densely dashed | loosely dashed | dashdotted | densely dashdotted | loosely dashdotted | dashdotdotted | densely dashdotdotted | loosely dashdotdotted 
+				draw			= black,
+				mark			= none, % triangle | triangle* | diamond | diamond* | square | square* | pentagon | pentagon* | none
+				line width		= 0.06cm,
+				area legend, % line legend | empty legend | xbar legend | xbar interval legend | mesh legend
+				visible on		= <1->, % for beamer animations
+			]
+			table
+			[
+% 				col sep			= comma, % for plots having dates as coordinates
+% 				trim cells		= true,
+				x				= actual,
+				y				= bound3sigma,
+			]
+			{../DatavisualizationsTables/file_\e.txt};
+			\addlegendentry{$\delta = 0.1$};
+% 			\addlegendentryexpanded{$\delta = \e$}; % in case one needs to expand the argument of the foreach
+% 			coordinates
+% 			{
+% 				(0,0)
+% 				(1,2)
+% 				(2,8)
+% 			};
+% 			\closedcycle; % NOTE: in case you use this then you have to remove the ';' in the row above!
+		}
+		%
+		\node[coordinate, pin={[pin distance = 2cm]above:{$\alpha = 0.08, N = 5573$}}] at (axis cs:4.17,2673.92) {};
+		%
+		% --------------------------------------------------------------
+		\addplot
+		[
+			mesh,
+			draw 	= black,
+			opacity	= 0.5,
+			domain	= 0:1,
+			dashed,
+		]
+		{x};
+		%
+		% --------------------------------------------------------------
+		\node at (axis cs:  0.3, 1)	{$\mathcal{L}^+$};
+		%
+	\end{axis}
+	%
+\end{tikzpicture}
+
+
+

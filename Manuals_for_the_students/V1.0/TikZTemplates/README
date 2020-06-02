@@ -1,0 +1,30 @@
+==== example on how to use these templates with Matlab ====
+
+1) create your Matlab results as a matrix of signals (one column = one signal), i.e.,
+
+x = (1:100)';
+y = sin(x)';
+
+Notice that you may have as many signals (i.e., columns) as you want. The number of rows (i.e., samples per signal) must be the same for all the signals in a specific .txt.
+
+2) import the package in Matlab by using
+
+import MatlabToTikZ.*;
+
+in your .m files. In this way you will be able to call the methods in the +MatlabToTikZ folder.
+
+3) export the signals into a .txt file using the appropriate method in the +MatlabToTikZ folder. The "simplest" one is "ExportLineplot.m", for making standard 2D plots. There are also other methods for more specialized things, but it is better to start simple. An example is:
+
+MatlabToTikZ.ExportLineplot(	'./Data/MyDataset.txt',		...
+								[x y],						...
+								[ {'time'}, {'power'} ]		);
+
+Read the help of the ExportLineplot.m function to understand what the method can do. Troubleshoot: depending on which version of Matlab you have you may get an error around line 153 or line 183, because Matlab changed the way of managing cells in time (thanks Mathworks). In case let me know that I will fix the code once for all with some version control.
+
+4) use the .tex templates to produce a plot. Suggestion: start with "template-lineplot-simple.tex". Notes:
+4.1) the various styles are defined in opportune files that you should import and edit accordingly;
+4.2) the "x" and "y" in the "table" part refer to the headers you gave in "ExportLineplot.m". Thus if you exported 100 signals you can use as x and as y whatever you prefer.
+
+ 
+
+

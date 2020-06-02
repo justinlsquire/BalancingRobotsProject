@@ -1,0 +1,24 @@
+\tikzset
+{
+	-|-/.style =
+	{
+		to path =
+		{
+			(\tikztostart) -| ($(\tikztostart)!#1!(\tikztotarget)$) |- (\tikztotarget)
+			\tikztonodes
+		}
+	},
+	-|-/.default = 0.5,
+	|-|/.style =
+	{
+		to path =
+		{
+			(\tikztostart) |- ($(\tikztostart)!#1!(\tikztotarget)$) -| (\tikztotarget)
+			\tikztonodes
+		}
+	},
+	|-|/.default = 0.5,
+}
+% usage:
+% \draw (physiological) to[-|-] (cancer);
+

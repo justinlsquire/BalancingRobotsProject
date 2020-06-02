@@ -1,0 +1,19 @@
+\begin{tikzpicture}[remember picture,overlay] % requires compiling twice for getting the correct position
+
+	\node [xshift = 10cm, yshift = -5cm] at (current page.center) {this is an absolutely positioned text};
+	% valid placements: .south | .north | .south west | etc.
+
+	% other option:
+% 	\node at ($(current page.west)!0.333!(current page.east)$) {this is an absolutely positioned text};
+
+	% most complicated option, defining an exact position in percentage on the page
+% 	\node at 
+% 		($
+% 			($(current page.north west)!0.333!(current page.north east)$) % first point
+% 			!0.666!														  % ratio between first and second point
+% 			($(current page.south west)!0.333!(current page.south east)$) % second point
+% 		$)
+% 		{this is an absolutely positioned text};
+
+\end{tikzpicture}
+

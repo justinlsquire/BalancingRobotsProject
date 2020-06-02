@@ -1,0 +1,22 @@
+
+\begin{tikzpicture}
+[
+	transform canvas = {scale = 0.3}
+]
+
+\path
+[
+	xshift = -1cm,
+	yshift = 0.4cm,
+	draw = blue,
+	decorate,
+	decoration = 
+	{
+		text along path,
+		text = {entirely written in |\color{\StrongPrimary} \LaTeXe| ||using |\color{\StrongPrimary} \texttt{Beamer}| ||and |\color{\StrongPrimary}|Ti|||\color{\StrongPrimary}\emph{k}| |||\color{\StrongPrimary}|Z|| },
+		text color = \StrongSecondary,
+	}
+]
+(0,0) sin (1,1) cos (2,0) sin (3,-1) cos (4,0) sin (7,-1);
+
+\end{tikzpicture}

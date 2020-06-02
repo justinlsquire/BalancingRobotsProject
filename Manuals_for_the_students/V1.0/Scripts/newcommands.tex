@@ -1,0 +1,263 @@
+\input{./Scripts/newcommands__generic_operators}
+\input{./Scripts/newcommands__matricial_operators}
+\input{./Scripts/newcommands__probability_distributions}
+\input{./Scripts/newcommands__set_theoretic_operators}
+\input{./Scripts/newcommands__statistical_operators}
+\input{./Scripts/newcommands__text}
+\input{./Scripts/newcommands__questions}
+
+
+\pgfdeclarelayer{ultrabackground}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{ultrabackground,background,main,foreground}
+% \begin{pgfonlayer}{background} 
+% \end{pgfonlayer}
+
+
+\newcommand{\JustPrimary}		[1]{\textcolor{\StrongPrimary}{#1}}
+\newcommand{\ItPrimary}			[1]{\textcolor{\StrongPrimary}{\textit{#1}}}
+\newcommand{\BoldPrimary}		[1]{\textcolor{\StrongPrimary}{\textbf{#1}}}
+\newcommand{\BoldItPrimary}		[1]{\textcolor{\StrongPrimary}{\textit{ \textbf{#1} }}}
+\newcommand{\ItBoldPrimary}		[1]{\BoldItPrimary{#1}}
+\newcommand{\MathBoxPrimary}	[1]{\colorbox{\SoftPrimary}{#1}}
+%
+\newcommand{\JustSecondary}		[1]{\textcolor{\StrongSecondary}{#1}}
+\newcommand{\ItSecondary}		[1]{\textcolor{\StrongSecondary}{\textit{#1}}}
+\newcommand{\BoldSecondary}		[1]{\textcolor{\StrongSecondary}{\textbf{#1}}}
+\newcommand{\BoldItSecondary}	[1]{\textcolor{\StrongSecondary}{\textit{ \textbf{#1} }}}
+\newcommand{\ItBoldSecondary}	[1]{\BoldItSecondary{#1}}
+\newcommand{\MathBoxSecondary}	[1]{\colorbox{\SoftSecondary}{#1}}
+%
+\newcommand{\Code}				[1]{\texttt{\textcolor{\StrongSecondary}{#1}}}
+
+
+\newcommand{\NewSection}		[1]
+{
+	\subsection{#1}
+	\label{sec: #1}
+	\setbeamercolor{background canvas}{bg=\SoftPrimary}
+	\begin{frame}
+		\begin{center}
+			\Large #1
+		\end{center}
+		\note<1-1>{\begin{itemize}
+			\item 
+		\end{itemize}}
+	\end{frame}
+	\setbeamercolor{background canvas}{bg=white}
+}
+
+\newcommand{\QuestionMark}		[0]
+{
+	\setbeamercolor{background canvas}{bg=\SoftSecondary}
+	\begin{frame}
+		\begin{center}
+			\Large ?
+		\end{center}
+		\note<1-1>{\begin{itemize}
+			\item 
+		\end{itemize}}
+	\end{frame}
+	\setbeamercolor{background canvas}{bg=white}
+}
+
+\newcommand {\PrimaryRectangle} [1]
+{
+	\begin{center}
+	\begin{tikzpicture}
+		%
+		\node
+		[
+			shape			= rectangle,		% shape
+			rounded corners	= 0.2cm,			% shape
+			minimum width	= 0.7cm,			%
+			minimum height	= 0.7cm,			%
+			line width		= 0cm,				% thickness of the border
+			fill			= \SoftPrimary,		%
+			draw			= \StrongPrimary,	% draw the border with this color
+			line width		= 0.1cm,			% thickness
+			text width		= 0.8\textwidth,	% max. width of the text
+			align			= center,			% text alignment
+			inner xsep		= 0.2cm,			%
+			inner ysep		= 0.2cm,			%
+		]
+		{#1};
+		%
+	\end{tikzpicture}
+	\end{center}
+}
+
+\newcommand {\SecondaryRectangle} [1]
+{
+	\begin{center}
+	\begin{tikzpicture}
+		%
+		\node
+		[
+			shape			= rectangle,		% shape
+			rounded corners	= 0.2cm,			% shape
+			minimum width	= 0.7cm,			%
+			minimum height	= 0.7cm,			%
+			line width		= 0cm,				% thickness of the border
+			fill			= \SoftSecondary,	%
+			draw			= \StrongSecondary,	% draw the border with this color
+			line width		= 0.1cm,			% thickness
+			text width		= 0.9\textwidth,	% max. width of the text
+			align			= center,			% text alignment
+			inner xsep		= 0.2cm,			%
+			inner ysep		= 0.2cm,			%
+		]
+		{#1};
+		%
+	\end{tikzpicture}
+	\end{center}
+}
+
+\newcommand {\PrimaryRectangleWithCaption} [3]
+{
+	\begin{center}
+	\begin{tikzpicture}
+		%
+		\node (a)
+		[
+			shape			= rectangle,		% shape
+			rounded corners	= 0.2cm,			% shape
+			minimum width	= 0.7cm,			%
+			minimum height	= 0.7cm,			%
+			fill			= \SoftPrimary,		%
+			draw			= \StrongPrimary,	% draw the border with this color
+			line width		= 0.1cm,			% thickness
+			text width		= 0.8\textwidth,	% max. width of the text
+			align			= center,			% text alignment
+			inner xsep		= 0.3cm,			%
+			inner ysep		= 0.3cm,			%
+		]
+		{#2};
+		%
+		\node
+		[
+			shape			= rectangle,		% shape
+			rounded corners	= 0.2cm,			% shape
+			anchor			= mid,
+			fill			= \SoftPrimary,		%
+			draw			= \StrongPrimary,	% draw the border with this color
+			text			= \StrongPrimary,	%
+			align			= center,			% text alignment
+			line width		= 0.1cm,			% thickness
+			inner xsep		= 0.2cm,			%
+			inner ysep		= 0.2cm,			%
+		]
+		at (a.#3)
+		{#1};
+		%
+	\end{tikzpicture}
+	\end{center}
+}
+
+\newcommand {\SecondaryRectangleWithCaption} [3]
+{
+	\begin{center}
+	\begin{tikzpicture}
+		%
+		\node (a)
+		[
+			shape			= rectangle,		% shape
+			rounded corners	= 0.2cm,			% shape
+			minimum width	= 0.7cm,			%
+			minimum height	= 0.7cm,			%
+			fill			= \SoftSecondary,	%
+			draw			= \StrongSecondary,	% draw the border with this color
+			line width		= 0.1cm,			% thickness
+			text width		= 0.8\textwidth,	% max. width of the text
+			align			= center,			% text alignment
+			inner xsep		= 0.3cm,			%
+			inner ysep		= 0.3cm,			%
+		]
+		{#2};
+		%
+		\node
+		[
+			shape			= rectangle,		% shape
+			rounded corners	= 0.2cm,			% shape
+			anchor			= mid,
+			fill			= \SoftSecondary,	%
+			draw			= \StrongSecondary,	% draw the border with this color
+			text			= \StrongSecondary,	%
+			align			= center,			% text alignment
+			line width		= 0.1cm,			% thickness
+			inner xsep		= 0.2cm,			%
+			inner ysep		= 0.2cm,			%
+		]
+		at (a.#3)
+		{#1};
+		%
+	\end{tikzpicture}
+	\end{center}
+}
+
+\newcommand{\InsertImage}[3] % path / height / width
+{
+	\begin{tikzpicture}[remember picture, overlay]
+	\node
+	[
+		shape			= rectangle,		% shape
+		minimum height	= #2cm,				% | minimum size of the node
+		minimum width	= #3cm,				% |
+ 		path picture	=
+		{\node at (path picture bounding box.center)
+		{\includegraphics[height = #2cm, width = #3cm]
+		{#1}};}
+	]{};
+	\end{tikzpicture}
+}
+
+\newcommand{\InsertImageAt}[5] % path / height / width / xshift / yshift
+{
+	\begin{tikzpicture}[remember picture, overlay]
+	\node
+	[
+		shape			= rectangle,		% shape
+		minimum height	= #2cm,				% | minimum size of the node
+		minimum width	= #3cm,				% |
+		xshift 			= #4cm,
+		yshift			= #5cm,
+ 		path picture	=
+		{\node at (path picture bounding box.center)
+		{\includegraphics[height = #2cm, width = #3cm]
+		{#1}};}
+	]
+	at (current page.center)
+	{};
+	\end{tikzpicture}
+}
+
+\newcommand{\InsertTextAt}[3] % text / xshift / yshift
+{
+	\begin{tikzpicture}[remember picture, overlay]
+	\node
+	[
+		shape			= rectangle,		% shape
+		xshift 			= #2cm,
+		yshift			= #3cm,
+	]
+	at (current page.center)
+	{#1};
+	\end{tikzpicture}
+}
+
+\newcommand{\Formula}[2]
+{
+	\begin{frame}[t]
+	\ifexternalize
+		\tikzsetnextfilename{formula-#1}
+	\fi
+	\begin{tikzpicture}
+		\node
+		{$
+			#2
+		$};
+	\end{tikzpicture}
+	\end{frame}
+}
+

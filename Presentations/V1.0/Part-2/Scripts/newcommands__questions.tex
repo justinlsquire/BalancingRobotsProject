@@ -1,0 +1,40 @@
+\setbeamertemplate{theorems}[numbered]
+\newtheorem{question}{Question}
+
+\newcounter{QuestionsCounter}
+\stepcounter{QuestionsCounter}
+
+\newcommand	{\QuestionID}		[1]	{\JustSecondary{(ID: #1)} \label{question:#1} \stepcounter{QuestionsCounter}}
+\newcommand	{\QuestionKCs}		[1] {}
+\newcommand	{\QuestionKCsTaxonomies}	[1] {}
+\newcommand	{\QuestionNotes}	[1] {}
+\newcommand	{\QuestionBody}		[1] {#1}
+\newcommand	{\QuestionImage}	[2] {\begin{center} \includegraphics[#1]{#2} \end{center}}
+\newcommand	{\QuestionAnswers}	[1] {\begin{enumerate} #1 \end{enumerate}}
+\newcommand	{\QuestionSolution}	[1] {\ifshowsolutions \note<1->{#1} \fi}
+\newcommand	{\QuestionAuthor}	[1] {}
+\newcommand	{\QuestionVersion}	[1] {}
+
+
+
+
+
+
+
+\newcommand{\answer}		[0]
+{
+	\item[\addtocounter{enumi}{1} \tikz{ \node [anchor = base, baseline, minimum width = 0.6cm, minimum height = 0.6cm, draw] {\arabic{enumi}};}]
+}
+
+\newcommand{\correctanswer}	[0]
+{
+	\ifshowsolutions
+		\item[\addtocounter{enumi}{1} \tikz{ \node [anchor = base, baseline, minimum width = 0.6cm, minimum height = 0.6cm, draw, fill = red!30!white] {\arabic{enumi}};}]
+	\else
+		\answer
+	\fi
+}
+
+% \newcommand{\hideableanswer}[1]{\item \ifshowsolutions #1 \fi}
+
+

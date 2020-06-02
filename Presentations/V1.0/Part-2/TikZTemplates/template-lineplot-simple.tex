@@ -1,0 +1,49 @@
+\begin{tikzpicture}
+[
+	xscale	= 1,	% to scale horizontally everything but the text
+	yscale	= 1,	% to scale vertically everything but the text
+]
+	%
+	\begin{axis}
+	[
+		xmode			= log,		% can't go in user-defined style
+		ymode			= linear,	% can't go in user-defined style
+		width			= 0.8\columnwidth,
+		height			= 0.8\columnwidth,
+		%
+		AxesStyle,		% requires style-axes.tex
+		LabelsStyle,	% requires style-labels.tex
+		TicksStyle,		% requires style-ticks.tex
+		LegendStyle,	% requires style-legend.tex
+		TitleStyle,		% requires style-title.tex
+		GridStyle,		% requires style-grid.tex
+		%
+		xmin			= 0,
+		xmax			= 1,
+		ymin			= 0,
+		ymax			= 1,
+		xlabel			= {$x$},
+		ylabel			= {$y$},
+		title			= {$p = 0.1$},
+	]
+		%
+		\addplot
+		[
+			smooth,		% smooth | sharp plot | const plot | only marks
+			dashed,		% solid | dashed | dotted | dashdotted
+			draw		= black!30!red,	% 70% black, 30% red
+			mark		= none, % triangle | triangle* | diamond | diamond*
+			line width	= 0.02cm,
+		]
+		table
+		[
+			x			= myX,
+			y			= myY,
+		]
+		{data-lineplot.txt};
+		\addlegendentry{$\delta = 0.1$};
+		%
+	\end{axis}
+	%
+\end{tikzpicture}
+

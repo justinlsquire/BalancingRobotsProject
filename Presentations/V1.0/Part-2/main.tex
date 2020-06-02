@@ -1,0 +1,416 @@
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+\newif	\ifexternalize					%\externalizetrue			%
+\newif	\ifshowonlynotes				%\showonlynotestrue			%
+\newif	\ifhandout						%\handouttrue				%
+\newif	\ifshowsolutions				%\showsolutionstrue			%
+\newif	\ifshownotes					%\shownotestrue				%
+%																	%
+% enablers for conditional compiling through bash scripting			%
+\ifdefined\EXTERNALIZE	\externalizetrue	\fi						%
+\ifdefined\ONLYNOTES	\showonlynotestrue	\fi						%
+\ifdefined\HANDOUT		\handouttrue		\fi						%
+\ifdefined\SOLUTIONS	\showsolutionstrue	\fi						%
+\ifdefined\NOTES		\shownotestrue		\fi						%
+%																	%
+\input{./Scripts/preamble}											%
+\title		[Balancing Robots]	{Making robots balance \\ Part 2}	%
+\date		{} % empty = no dates. Alternatives: {\today} / {April 20, 2099}
+% \institute	[<++>]	{<++>}											%
+% \author		[<++>]	{<++>}											%
+\begin{document}													%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item start by showing a short video of Sofie balancing some pen
+	\end{itemize}
+	\note<1-1>{\begin{itemize}
+		\item 
+	\end{itemize}}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item (turning around from a chair)
+		\item amazing, Sofie! you are an automatic control girl!
+		\item hello, I am Steffi, and today we are continuing our learning how to make a robot balance on its wheels
+	\end{itemize}
+	\note<1-1>{\begin{itemize}
+		\item 
+	\end{itemize}}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}
+	\titlepage
+	\begin{center}
+		\includegraphics[height = 4.5cm]{minseg-M2V5}
+	\end{center}
+	\note<1-1>{\begin{itemize}
+		\item maybe make Florian do some simple 'voice-music'
+	\end{itemize}}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}{What are we doing today?}
+	\begin{itemize}
+		\item show how making the pen stand is similar to making the robot stand
+		\item make a demo of a nice pre-made controller that we know it works -- but we won't say how it works at the beginning
+		\item we will discover how it works little by little, and eventually discover the simplest, but probably the most important strategy: the P controller!
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{Our purposes}
+	\pause
+	\begin{itemize}
+		\item have fun
+		\pause
+		\item understand the world a bit better
+		\pause
+		\item see that math is useful
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What is going to happen in today's part}
+	\pause
+	\begin{itemize}
+		\item connect the pen-balancing and the robot-balancing problems
+		\pause
+		\item discover together what is the ``P controller''
+	\end{itemize}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}{Connecting things}
+	\begin{itemize}
+		\item the robot: this is something that connects to the pen-balancing problem before
+		\item also the robot tips
+		\item but then the wheels act like the hands!
+		\item so the intuition is to make the wheels spin as one would move the hands
+		\item but just a moment: when we were balancing the pen we were first of all seeing what was happening, and then also thinking at what to do!
+		\item where are the eyes here? and where is the brain?
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{Connecting the robot with the pen - a small recap, first}{The case of the shower}
+	\begin{center}
+		\begin{tikzpicture}
+			[
+				myblock/.style = {draw, rectangle, thick, rounded corners, minimum height = 1.8cm, minimum width = 3.2cm},
+				myvariable/.style = {},
+				myarrow/.style = {rounded corners, -latex, thick}
+			]
+			%
+			\node (plant) [myblock] {you};
+			%
+			\node (output) [myvariable, right = 3cm of plant.east] {how you feel};
+			\draw [myarrow] (plant) -- (output) node (auxnode) [coordinate, pos = 0.5] {};
+			%
+			\node (controller) [myvariable, below = 2cm of plant] {your brain};
+			\draw [myarrow] (auxnode) |- (controller);
+			%
+			\node (actuator) [myvariable, left = 2cm of plant.west] {the knob};
+			\draw [myarrow] (controller) -| (actuator);
+			%
+			\draw [myarrow] (actuator) -- (plant);
+			%
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Connecting the robot with the pen - a small recap, first}{The case of the balancing pen}
+	\begin{center}
+		\begin{tikzpicture}
+			[
+				myblock/.style = {draw, rectangle, thick, rounded corners, minimum height = 1.8cm, minimum width = 3.2cm},
+				myvariable/.style = {},
+				myarrow/.style = {rounded corners, -latex, thick}
+			]
+			%
+			\node (plant) [myblock] {you};
+			%
+			\node (output) [myvariable, right = 3cm of plant.east] {what you see};
+			\draw [myarrow] (plant) -- (output) node (auxnode) [coordinate, pos = 0.5] {};
+			%
+			\node (controller) [myvariable, below = 2cm of plant] {your brain};
+			\draw [myarrow] (auxnode) |- (controller);
+			%
+			\node (actuator) [myvariable, left = 2cm of plant.west] {your hand};
+			\draw [myarrow] (controller) -| (actuator);
+			%
+			\draw [myarrow] (actuator) -- (plant);
+			%
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Connecting the robot with the pen - what is what}
+	\centering
+	\begin{tabular}{p{0.4\textwidth}|p{0.4\textwidth}}
+		\ItPrimary{you} & \ItPrimary{the robot} \\
+		\pause
+		your hands & the wheels (and the motors) \\
+		\pause
+		your eyes & sensors that measure ``how tilted'' \\
+		\pause
+		your brain & a small embedded computer \\
+	\end{tabular}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}{What is what}
+	\begin{itemize}
+		\item let's see what is what in the robot
+		\item the wheels are these ones
+		\item the motors are these ones
+		\item the sensors are these ones - there are similar ones in the smartphones
+		\item the embedded computer is this one
+		\item all the rest is stuff that is needed to bring the power here and there
+		\item if you find this fascinating then consider becoming a electronics engineer!
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{The robot as a block scheme}
+	\begin{center}
+		\begin{tikzpicture}
+			[
+				myblock/.style = {draw, rectangle, thick, rounded corners, minimum height = 1.8cm, minimum width = 3.2cm},
+				myvariable/.style = {},
+				myarrow/.style = {rounded corners, -latex, thick}
+			]
+			%
+			\node (plant) [myblock] {the robot};
+			%
+			\node (output) [myvariable, right = 3cm of plant.east] {what the robot measures};
+			\draw [myarrow] (plant) -- (output) node (auxnode) [coordinate, pos = 0.5] {};
+			%
+			\node (controller) [myvariable, below = 2cm of plant] {the robot's computer};
+			\draw [myarrow] (auxnode) |- (controller);
+			%
+			\node (actuator) [myvariable, left = 2cm of plant.west] {the motors and wheels};
+			\draw [myarrow] (controller) -| (actuator);
+			%
+			\draw [myarrow] (actuator) -- (plant);
+			%
+		\end{tikzpicture}
+	\end{center}
+	\note<1-1>{\begin{itemize}
+		\item say that what we need to do is to create a 'brain' to be put inside the computer, a brain that understands how to move the motors and wheels given what the robot measures
+	\end{itemize}}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}{What is what}
+	\begin{itemize}
+		\item but now I have been talking too much!
+		\item let's do as following: now I give you a pre-made brain, and we see if this brain work
+		\item I don't tell you how I have created it, I just want you to try it so to see if things work and get something moving
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{Tryout pause!}
+	\begin{itemize}
+		\item follow the instructions in the ``tryout A'' manual
+		\item does the robot stand on its own?
+	\end{itemize}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}{post-experience discussion}
+	\begin{itemize}
+		\item hope things worked!
+		\item so now let's discover the most important part of the brain we just inserted in the computer, the famous ``P controller''
+		\item we will arrive at it little by little, listing and testing some heuristics control strategies, and eventually arriving to the P controller
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{A first heuristic}
+	\pause
+	\begin{center}
+		\begin{tikzpicture}
+			[
+				body/.style = {rectangle, minimum width = 0.7cm, minimum height = 2.4cm, rounded corners, fill = black},
+				wheel/.style = {circle, minimum size = 1.4cm, thick, fill = black!50!white, draw = black},
+			]
+			\node (body) [body] {};
+			\node (wheel) [wheel] at (body.south) {};
+		\end{tikzpicture} \\
+		$\implies$ do nothing
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{A first heuristic}
+	\begin{center}
+		\begin{tikzpicture}
+			[
+				body/.style = {rectangle, minimum width = 0.7cm, minimum height = 2.4cm, rounded corners, fill = black},
+				wheel/.style = {circle, minimum size = 1.4cm, thick, fill = black!50!white, draw = black},
+			]
+			\node (body) [body, rotate = -30] {};
+			\node (wheel) [wheel] at (body.south) {};
+		\end{tikzpicture} \\
+		$\implies$ spin the wheels as fast as possible clockwise
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{A first heuristic}
+	\begin{center}
+		\begin{tikzpicture}
+			[
+				body/.style = {rectangle, minimum width = 0.7cm, minimum height = 2.4cm, rounded corners, fill = black},
+				wheel/.style = {circle, minimum size = 1.4cm, thick, fill = black!50!white, draw = black},
+			]
+			\node (body) [body, rotate = 30] {};
+			\node (wheel) [wheel] at (body.south) {};
+		\end{tikzpicture} \\
+		$\implies$ spin the wheels as fast as possible counterclockwise
+	\end{center}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item this approach is problematic
+		\item this controller is ``too nervous'': as soon as we are not perfectly aligned then it reacts as much as it can
+		\item let me show what this means in practice with the problem of making the pen stand
+		\item (example)
+		\item see? this 'brain', this controller, does not have too much sense
+		\item let's make another heuristic
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{A second heuristic}
+	\begin{center}
+		\begin{tikzpicture}
+			[
+				body/.style = {rectangle, minimum width = 0.7cm, minimum height = 2.4cm, rounded corners, fill = black},
+				wheel/.style = {circle, minimum size = 1.4cm, thick, fill = black!50!white, draw = black},
+				myline/.style = {dashed, \StrongPrimary, thick},
+			]
+			\node (body) [body, rotate = -5] {};
+			\node (wheel) [wheel] at (body.south) {};
+			\draw [myline] (wheel) -- ++(0,3);
+			\draw [myline] (wheel) -- ++(0.3,2.7);
+			\draw [myline] (wheel) -- ++(0.6,2.3);
+		\end{tikzpicture} \\
+		$\implies$ depending on the zone, spin the wheels more or less fast
+	\end{center}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item also this approach is a bit problematic
+		\item when the system is traversing the transition zones the behavior is 'bumpy': sudden increase, sudden decrease
+		\item did you ever went in a car with somebody that drives turning the wheel like in this way? It is kind of a similar thing, you see what I mean? And it is not so comfortable, true?
+		\item I would say i prefer somebody that drives smoothly, that moves the wheel in a fluid way, without abrupt changes 
+		\item and this is the intuition that leads us to the P controller
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{The P (i.e., proportional) controller}
+	\begin{center}
+		\begin{tikzpicture}
+			[
+				body/.style = {rectangle, minimum width = 0.7cm, minimum height = 2.4cm, rounded corners, fill = black},
+				wheel/.style = {circle, minimum size = 1.4cm, thick, fill = black!50!white, draw = black},
+				myline/.style = {dashed, \StrongPrimary, thick},
+			]
+			\node (body) [body, rotate = -5] {};
+			\node (wheel) [wheel] at (body.south) {};
+			\draw [myline] (wheel) -- ++(0,3);
+		\end{tikzpicture} \\
+		$\implies$ speed of the wheels = $P \cdot $ angular error
+	\end{center}
+	\note<1-1>{\begin{itemize}
+		\item make clear that $P$ is a design choice
+	\end{itemize}}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item but how do we design $P$?
+		\item to understand we should ask ourselves: what is the effect of having different $P$s?
+		\item if I put $P = $ a tiny tiny number, what is going to happen?
+		\item if I put $P = $ a huge number, what is going to happen?
+		\item let's have a chat all together, and see what we think about this
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{Discussion pause!}
+	\begin{itemize}
+		\item if I put $P = $ a tiny tiny number, what is going to happen?
+		\item if I put $P = $ a huge number, what is going to happen?
+	\end{itemize}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item amazing, I am proud of your chatting!
+		\item but I will leave you with a cliffhanger; we are going to discuss the effects of choosing $P$ in the next part
+		\item so, be ready to move to the next part of the experience! See you in 'part 3', where we add two ingredients to this controller, and then make our own version of the robot brain!
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+\end{document}														%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+% ./FramesTemplates/template__citation.tex
+% ./FramesTemplates/template__empty_frame.tex
+% ./FramesTemplates/template__frame_with_blocks.tex
+% ./FramesTemplates/template__frame_with_colored_background.tex
+% ./FramesTemplates/template__frame_with_itemized_list.tex
+% ./FramesTemplates/template__frame_with_overlayed_figures.tex
+% ./FramesTemplates/template__frame_with_two_columns.tex
+% ./FramesTemplates/template__frame_with_two_columns_and_overlayed_figures.tex
+
+
+\begin{frame}{<++>}{<++>}
+	<++>
+	\note<1-1>{\begin{itemize}
+		\item <++>
+	\end{itemize}}
+\end{frame}
+<++>
+
+

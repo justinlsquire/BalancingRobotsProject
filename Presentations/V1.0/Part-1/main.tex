@@ -1,0 +1,248 @@
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+\newif	\ifexternalize					%\externalizetrue			%
+\newif	\ifshowonlynotes				%\showonlynotestrue			%
+\newif	\ifhandout						%\handouttrue				%
+\newif	\ifshowsolutions				%\showsolutionstrue			%
+\newif	\ifshownotes					%\shownotestrue				%
+%																	%
+% enablers for conditional compiling through bash scripting			%
+\ifdefined\EXTERNALIZE	\externalizetrue	\fi						%
+\ifdefined\ONLYNOTES	\showonlynotestrue	\fi						%
+\ifdefined\HANDOUT		\handouttrue		\fi						%
+\ifdefined\SOLUTIONS	\showsolutionstrue	\fi						%
+\ifdefined\NOTES		\shownotestrue		\fi						%
+%																	%
+\input{./Scripts/preamble}											%
+\title		[Balancing Robots]	{Making robots balance \\ Part 1}	%
+\date		{} % empty = no dates. Alternatives: {\today} / {April 20, 2099}
+% \institute	[<++>]	{<++>}											%
+% \author		[<++>]	{<++>}											%
+\begin{document}													%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item start by showing https://www.youtube.com/watch?v=-7xvqQeoA8c from second 0 to second 17
+	\end{itemize}
+	\note<1-1>{\begin{itemize}
+		\item 
+	\end{itemize}}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item (turning around from a chair)
+		\item did you ever wonder how ``handle'' works? Like, photoshop? magic? aliens? Well, even better: automatic control!
+		\item hello, I am Steffi, and today we are starting our learning how to make a robot balance on its wheels
+	\end{itemize}
+	\note<1-1>{\begin{itemize}
+		\item 
+	\end{itemize}}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}
+	\titlepage
+	\begin{center}
+		\includegraphics[height = 4.5cm]{minseg-M2V5}
+	\end{center}
+	\note<1-1>{\begin{itemize}
+		\item maybe make Florian do some simple 'voice-music'
+	\end{itemize}}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}{What are we doing here?}
+	\begin{itemize}
+		\item before jumping in the details, let's discuss what is the purpose of this project, what is going to happen, what you are going to do, and what you are going to learn
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{Our purposes}
+	\pause
+	\begin{itemize}
+		\item have fun
+		\pause
+		\item understand the world a bit better
+		\pause
+		\item see that math is useful
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What is going to happen in the whole series}
+	\pause
+	\begin{itemize}
+		\item build a robot
+		\pause
+		\item fiddle with it
+		\pause
+		\item fiddle with our intuitions
+		\pause
+		\item see that math is useful
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What we are going to learn in the whole series}
+	\pause
+	\begin{itemize}
+		\item get intuitions of what control means
+		\pause
+		\item touch with hand how to create a controller 
+		\pause
+		\item get intuitions of the pervasiveness of control
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What is going to happen in today's part}
+	\pause
+	\begin{itemize}
+		\item think at what happens when we take a shower
+		\pause
+		\item play with some pens
+	\end{itemize}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!red}
+\begin{frame}{A controller? What is it, mom?}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item let's make an example
+		\item you enter a shower, and turn on the water
+		\item is it too cold? then you turn the knob to make it warmer
+		\item is it too warm? then you do the viceversa
+		\item is there too little water? you increase the flux
+		\item are you happy now? well done, you controlled the shower!
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{More seriously\ldots what is control?}
+	\pause
+	\begin{center}
+		\begin{tikzpicture}
+			[
+				myblock/.style = {draw, rectangle, thick, rounded corners, minimum height = 1.8cm, minimum width = 3.2cm},
+				myvariable/.style = {},
+				myarrow/.style = {rounded corners, -latex, thick}
+			]
+			%
+			\node (plant) [myblock] {you};
+			\pause
+			%
+			\node (output) [myvariable, right = 3cm of plant.east] {how you feel};
+			\draw [myarrow] (plant) -- (output) node (auxnode) [coordinate, pos = 0.5] {};
+			\pause
+			%
+			\node (controller) [myvariable, below = 2cm of plant] {your brain};
+			\draw [myarrow] (auxnode) |- (controller);
+			\pause
+			%
+			\node (actuator) [myvariable, left = 2cm of plant.west] {the knob};
+			\draw [myarrow] (controller) -| (actuator);
+			\pause
+			%
+			\draw [myarrow] (actuator) -- (plant);
+			%
+		\end{tikzpicture}
+	\end{center}
+	\note<1-1>{\begin{itemize}
+		\item say about ``feedback''
+	\end{itemize}}
+\end{frame}
+
+
+\begin{frame}{Control and Automation}
+	\begin{center}
+		\url{https://www.youtube.com/watch?v=XJLMW6l303g} \vspace{0.2cm} \\
+		\ItSecondary{Automation, by Alessandro Falsone - IEEE CSS Video Clip Contest 2014}
+	\end{center}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item another example from everyday life, that we can connect to the concept of control is to balance a pen in your hand
+		\item in practice what do one do to balance the pen?
+		\item see and feel how the pen is tipping, and counteract with your hands
+		\item the visual stimuli you see is called feedback 
+		\item and somehow what you have to do is to counteract the tipping
+		\item but I don't want to chat all the time, and remove all the fun; try to do it by yourself!
+		\item try to use different pens with different heights and weights, and get an intuitive understanding of the following things:
+			\begin{itemize}
+				\item how would you describe how you do to your friends?
+				\item do you feel it is more difficult to balance a longer pen or a shorter one? a heavier pen or a lighter one? and why?
+				\item try and discuss!
+				\item and, let me tell you a secret: for me it took 10 minutes to learn, so don't worry: it is actually difficult
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{Tryout pause!}
+	\begin{itemize}
+		\item what do you do with your hand to balance the pen?
+		\item more difficult to balance a longer or a shorter pen? A heavier or a lighter pen? And why?
+		\item is it easier to start with the pen vertical? And why?
+		\item how do you adapt your strategy?
+	\end{itemize}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item amazing, I am proud of your trying!
+		\item and I am proud that you also learned
+			\begin{itemize}
+				\item what control and feedback mean
+				\item how to connect this concept with real life examples
+			\end{itemize}
+		\item now we are ready to move to the next part of the experience! See you in 'part 2'
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+\end{document}														%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+% ./FramesTemplates/template__citation.tex
+% ./FramesTemplates/template__empty_frame.tex
+% ./FramesTemplates/template__frame_with_blocks.tex
+% ./FramesTemplates/template__frame_with_colored_background.tex
+% ./FramesTemplates/template__frame_with_itemized_list.tex
+% ./FramesTemplates/template__frame_with_overlayed_figures.tex
+% ./FramesTemplates/template__frame_with_two_columns.tex
+% ./FramesTemplates/template__frame_with_two_columns_and_overlayed_figures.tex
+
+
+\begin{frame}{<++>}{<++>}
+	<++>
+	\note<1-1>{\begin{itemize}
+		\item <++>
+	\end{itemize}}
+\end{frame}
+<++>
+
+

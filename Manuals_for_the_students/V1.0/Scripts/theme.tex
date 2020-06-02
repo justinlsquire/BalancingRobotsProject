@@ -1,0 +1,226 @@
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+%																						%
+\usetheme			[]							{default}								%
+\usefonttheme		[]							{default}								%
+\usecolortheme		[]							{default}								%
+\useinnertheme		[shadow]					{rounded}								%
+\useoutertheme		[]							{default}								%
+%																						%
+\setbeamercolor		{normal text}				{bg=\SoftSecondary,	fg=\StrongPrimary}	%
+\setbeamercolor		{structure}					{bg=\SoftSecondary,	fg=\StrongPrimary}	%
+%																						%
+\setbeamercolor		{frametitle}				{bg=, fg=\StrongPrimary}				%
+\setbeamercolor		{block title}				{bg=\SoftSecondary,	fg=\StrongPrimary}	%
+\setbeamercolor		{block title alerted}		{bg=\SoftSecondary,	fg=\StrongPrimary}	%
+\setbeamercolor		{block title example}		{bg=\SoftSecondary,	fg=\StrongPrimary}	%
+\setbeamercolor		{block body}				{bg=\Background,	fg=\Foreground}		%
+\setbeamercolor		{block body alerted}		{bg=\Background,	fg=\Foreground}		%
+\setbeamercolor		{block body example}		{bg=\Background,	fg=\Foreground}		%
+%																						%
+\setbeamercolor		{alerted text}				{bg=\Background,	fg=\StrongPrimary}	%
+\setbeamercolor		{section in toc}			{bg=\Background,	fg=\Foreground}		%
+\setbeamercolor		{math text}					{bg=\Background,	fg=\Foreground}		%
+\setbeamercolor		{math text inlined}			{bg=\Background,	fg=\Foreground}		%
+\setbeamercolor		{math text displayed}		{bg=\Background,	fg=\Foreground}		%
+\setbeamercolor		{normal text}				{bg=\Background,	fg=\Foreground}		%
+\setbeamercolor		{normal text in math text}	{bg=\Background,	fg=\Foreground}		%
+%																						%
+\setbeamercolor		{item}						{use={structure,normal text}}			%
+\setbeamercolor		{background canvas}			{bg=\Background}						%
+\setbeamertemplate	{navigation symbols}		{}										%
+\setbeamercovered	{transparent=0}														%
+\setbeamersize		{description width of={a}}											%
+%																						%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+
+\everymath={\displaystyle}
+
+% \useinnertheme	[]{default}
+% \useinnertheme	[]{circles}
+% \useinnertheme	[]{rectangles}
+% \useinnertheme	[]{rounded}
+% \useinnertheme	[shadow]{rounded}
+% \useinnertheme	[]{inmargin}
+
+
+% -------------------------------------------------------------------------
+% Logo settings
+%\logo{\includegraphics[height = 1cm]{logo}}
+
+
+% -------------------------------------------------------------------------
+% if you DO want the navigation symbols you have to comment the following line
+\setbeamertemplate{navigation symbols}{}
+
+
+% -------------------------------------------------------------------------
+% slides number
+\setbeamertemplate{footline}{\hfill \insertframenumber \vspace{0.1cm} \hspace{0.1cm}} 
+
+
+% -------------------------------------------------------------------------
+% settings of the text to be unshown. Options:
+% -> invisible	[text is invisible until it must appear]
+% -> trasparent	[text is opaque (in %) until it must appear]
+% -> dynamic	[text appears dynamically: initially invisible, then opaque and then appears fully]
+\setbeamercovered{transparent=0}
+
+
+% -------------------------------------------------------------------------
+% if the frame is not fully occupied by text put the white space on the bottom
+\raggedbottom
+
+
+\providecommand\thispdfpagelabel[1]{}			% TEMPORARY
+
+
+% -------------------------------------------------------------------------
+% linespread definition
+\linespread{1.1}
+
+
+% -------------------------------------------------------------------------
+% in order to remove some useless warnings
+\let\Tiny=\tiny
+
+
+% -------------------------------------------------------------------------
+% to have a fancier notes page
+\makeatletter
+\defbeamertemplate{note page}{lookahead}
+{
+	\vskip0.5cm
+	\begin{tikzpicture}
+		\node (note) [text width = 1.3\textwidth, minimum width = 1.3\textwidth, minimum height = 0.85\textheight, draw, rounded corners, align = justify] {\begin{varwidth}{\linewidth} \insertnote \end{varwidth}};
+		\node [above = 0cm of note] {\emph{notes}};
+	\end{tikzpicture}
+}
+\makeatother
+\setbeamertemplate{note page}[lookahead]
+
+
+% -------------------------------------------------------------------------
+% measurement units:
+%
+% in - inches
+% mm - millimeters
+% cm - centimeters
+% pt - points (about 1/72 inch)
+% em - approximately the width of an "M" in the current font
+% ex - approximately the height of an "x" in the current font 
+%
+% usage:
+%\setlength{\thing_to_be_modified}{my_offset}
+%
+% modifiable things:
+%
+%--- Page Layout
+%\columnsep:		gap between columns
+%\topmargin:		gap above header
+%\topskip:			between header and text
+%\textheight:		height of main text
+%\textwidth:		width of text
+%\linewidth:		width of a line in the local environment
+%\oddsidemargin:	odd page left margin
+%\evensidemargin:	even page left margin
+%\baselineskip:		normal vertical distance between lines in a paragraph
+%\baselinestretch:	multiplies \baselineskip
+%\voffset:
+%
+%--- Paragraphs
+%\parindent:		indentation of paragraphs
+%\parskip:			gap between paragraphs
+%
+%--- Floats (tables and figures)
+%\floatsep:			space left between floats.
+%\textfloatsep:		space between last top float or first bottom float and the text.
+%\intextsep:		space left on top and bottom of an in-text float.
+%\dbltextfloatsep:	is \textfloatsep for 2 column output.
+%\dblfloatsep:		is \floatsep for 2 column output.
+%\abovecaptionskip:	space above caption
+%\belowcaptionskip:	space below caption
+%\unitlength:		units of lenght in Picture Environment 
+%
+%--- Maths
+%\abovedisplayskip:	space before maths
+%\belowdisplayskip:	space after maths
+%\arraycolsep:		gap between columns of an array
+%
+%--- Lists
+%\topsep:			space between first item and preceding paragraph.
+%\partopsep:		extra space added to \topsep when environment starts a new paragraph.
+%\itemsep:			space between successive items.
+
+
+% BACKGROUND:
+% DECOMMENT THE PREFERRED OPTION
+
+
+% -------------------------------------------------------------------
+% image
+%
+% \setbeamertemplate{background}
+% {
+% 	\centering
+% 	{
+% 		\includegraphics[width=\paperwidth,height=\paperheight]{background_file.jpg}
+% 	}
+% }
+
+
+
+% -------------------------------------------------------------------
+% horizontal shading
+%
+% \pgfdeclarehorizontalshading
+% {horizontal}					% name of the shading
+% {2cm}							% shading height
+% {	rgb(0cm)=(1.0, 1.0, 1.0);	% initial color
+% 	rgb(1cm)=(1.0, 1.0, 0.8)}	% final color
+%
+% \AddToShipoutPicture
+% {
+% 	\begin{tikzpicture}[remember picture,overlay,shading=horizontal]
+% 		\node (aa)	[xshift=-\textwidth,yshift=-\textheight]	at	(current page.south west)	{};
+% 		\node (bb)	[xshift=+\textwidth,yshift=+\textheight]	at	(current page.north east)	{};
+% 		\shade[shading angle=-90]	(aa)	rectangle	(bb);
+% 	\end{tikzpicture}
+% }
+
+
+
+% -------------------------------------------------------------------
+% radial shading
+%
+% \pgfdeclareradialshading
+% {radial}						% nome
+% {\pgfpoint{1.0cm}{0.7cm}}		% posizione del centro di illuminazione (0,0 è in mezzo alla sfera)
+% {	rgb(0cm)=(0.9, 0.0, 0.0);	% colore iniziale
+% 	rgb(2cm)=(0.5, 0.0, 0.0)}	% colore finale
+%
+% \AddToShipoutPicture
+% {
+% 	\begin{tikzpicture}[remember picture,overlay,shading=radial]
+% 		\node (aa)	[xshift=-\textwidth,yshift=-\textheight]	at	(current page.south west)	{};
+% 		\node (bb)	[xshift=+\textwidth,yshift=+\textheight]	at	(current page.north east)	{};
+% 		\shade (aa)	rectangle	(bb);
+% 	\end{tikzpicture}
+% }
+
+
+
+% -------------------------------------------------------------------
+% text
+%
+% \AddToShipoutPicture
+% {
+% 	\begin{tikzpicture}[remember picture,overlay]
+% 		\node [rotate=-60,scale=10,text opacity=0.1]
+% 		at (current page.center)
+% 		{For peer review only};
+% 	\end{tikzpicture}
+% }
+
+
+
+

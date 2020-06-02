@@ -1,0 +1,160 @@
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+\newif	\ifexternalize					%\externalizetrue			%
+\newif	\ifshowonlynotes				%\showonlynotestrue			%
+\newif	\ifhandout						%\handouttrue				%
+\newif	\ifshowsolutions				%\showsolutionstrue			%
+\newif	\ifshownotes					%\shownotestrue				%
+%																	%
+% enablers for conditional compiling through bash scripting			%
+\ifdefined\EXTERNALIZE	\externalizetrue	\fi						%
+\ifdefined\ONLYNOTES	\showonlynotestrue	\fi						%
+\ifdefined\HANDOUT		\handouttrue		\fi						%
+\ifdefined\SOLUTIONS	\showsolutionstrue	\fi						%
+\ifdefined\NOTES		\shownotestrue		\fi						%
+%																	%
+\input{./Scripts/preamble}											%
+\title		[Balancing Robots]	{Balancing Robots \\ guide for the hands-on experiences}
+\date		{} % empty = no dates. Alternatives: {\today} / {April 20, 2099}
+\institute	[<++>]	{<++>}											%
+\author		[<++>]	{<++>}											%
+\begin{document}													%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+
+
+\begin{frame}
+	\titlepage
+	\begin{center}
+		\includegraphics[height = 3.5cm]{minseg-M2V5}
+	\end{center}
+	\note<1-1>{\begin{itemize}
+		\item 
+	\end{itemize}}
+\end{frame}
+
+
+\begin{frame}{Table of contents}
+	\tableofcontents
+\end{frame}
+
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+\NewSection{Instructions for installing the software}
+
+
+\begin{frame}[t]{Instructions for installing the software}
+	go to \url{https://github.com/justinlsquire/BalancingRobotsProject}, \\ it should look like this:
+	\begin{center}
+		\includegraphics[width = 0.9\textwidth]{screenshot-github}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}[t]{Instructions for installing the software}
+	download the software by clicking the ``clone or download'' button:
+	\begin{center}
+		\includegraphics[width = 0.9\textwidth]{screenshot-github}
+	\end{center}
+	in any folder you prefer, then unzip the downloaded file
+\end{frame}
+
+
+\begin{frame}{Instructions for installing the software}
+	open the unzipped file (sometimes called also ``repository'') in your file explorer:
+	\begin{center}
+		\includegraphics[width = 0.9\textwidth]{github-repository-explorer}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Instructions for installing the software}
+	go to the ``Arduino'' folder, then the ``libraries'' folder, then highlight and \BoldItPrimary{copy} the two folders called ``MINSEG\_V2'' and ``SEG\_CONTROL'':
+	\begin{center}
+		\includegraphics[width = 0.9\textwidth]{github-repository-explorer-2}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Instructions for installing the software}
+	go to your Arduino Libraries folder (note that the default location for Windows is \texttt{Documents $\mapsto$ Arduino $\mapsto$ Libraries}) and paste the two folders there
+	\begin{center}
+		\includegraphics[width = 0.9\textwidth]{github-repository-explorer-3}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Instructions for installing the software}
+	go back to the GitHub repository folder \texttt{BalancingRobotsProject $\mapsto$ Arduino $\mapsto$ Minseg\_test\_M2V5}, and then open the ``Minseg\_test\_M2V5.ino'' file in Arduino
+	\begin{center}
+		\includegraphics[width = 0.9\textwidth]{github-repository-explorer-minseg-test}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Instructions for installing the software}
+	go to \texttt{Tools $\mapsto$ Board} and select ``Arduino/Genuino Mega or Mega 2560''
+	\begin{center}
+		\includegraphics[width = 0.9\textwidth]{arduino-board-manager}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Instructions for installing the software}
+	go to \texttt{Tools $\mapsto$ Port} and select the COM port associated with the MinSeg you plugged in via the USB port (If you unplug the MinSeg and check this Port field again, you should see one missing\ldots This is the port that you should select when you plug back in the MinSeg)
+	\begin{center}
+		\includegraphics[width = 0.9\textwidth]{arduino-board-tool}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Instructions for installing the software}
+	Click the ``Upload'' button to load the code to the MinSeg
+	\begin{center}
+		\includegraphics[width = 0.9\textwidth]{arduino-board-manager-upload}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Instructions for installing the software}
+	Check that, depending on your hardware, the connections with the motor are as in figure (1/2):
+	\begin{center}
+		\includegraphics[width = 0.9\textwidth]{M2V3.2.png}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Instructions for installing the software}
+	Check that, depending on your hardware, the connections with the motor are as in figure (2/2):
+	\begin{center}
+		\includegraphics[width = 0.9\textwidth]{M1V4.png}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Instructions for installing the software}
+	Hold the Robot upright and make sure the switches are set to ``ON'', ``BATT'', and ``ON'' from the top down - the robot should start balancing if everything went well!
+\end{frame}
+
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+\end{document}														%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+% ./FramesTemplates/template__citation.tex
+% ./FramesTemplates/template__empty_frame.tex
+% ./FramesTemplates/template__frame_with_blocks.tex
+% ./FramesTemplates/template__frame_with_colored_background.tex
+% ./FramesTemplates/template__frame_with_itemized_list.tex
+% ./FramesTemplates/template__frame_with_overlayed_figures.tex
+% ./FramesTemplates/template__frame_with_two_columns.tex
+% ./FramesTemplates/template__frame_with_two_columns_and_overlayed_figures.tex
+
+
+\begin{frame}{<++>}{<++>}
+	<++>
+	\note<1-1>{\begin{itemize}
+		\item <++>
+	\end{itemize}}
+\end{frame}
+<++>
+
+
+

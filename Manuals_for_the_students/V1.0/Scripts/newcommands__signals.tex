@@ -1,0 +1,81 @@
+\newcommand{\Signal}							[0]	{f}
+\newcommand{\SignalOne}							[0]	{f}
+\newcommand{\SignalTwo}							[0]	{g}
+\newcommand{\SignalAt}							[1]	{\Signal \left( #1 \right)}
+\newcommand{\SignalOneAt}						[1]	{\SignalOne \left( #1 \right)}
+\newcommand{\SignalTwoAt}						[1]	{\SignalTwo \left( #1 \right)}
+
+
+
+\newcommand{\StochasticProcess}					[0]	{\mathcal{F}}
+\newcommand{\StochasticProcessRealization}		[0]	{\textsl{f}}
+\newcommand{\StochasticProcessAt}				[1]	{\StochasticProcess \left( #1 \right)}
+\newcommand{\StochasticProcessRealizationAt}	[1]	{\StochasticProcessRealization \left( #1 \right)}
+
+
+
+\newcommand{\InfiniteVector}				[0]	{\mathbf{v}}
+\newcommand{\InfiniteVectorOne}				[0]	{\mathbf{v}}
+\newcommand{\InfiniteVectorTwo}				[0]	{\mathbf{w}}
+
+
+
+\newcommand{\InputLocationsDomain}			[0] {\mathcal{D}}
+\newcommand{\InputLocationsDomainOfSensor}	[1] {\InputLocationsDomain_{#1}}
+\newcommand{\MeasurementsDomain}			[0] {\mathcal{M}}
+\newcommand{\MeasurementsDomainOfSensor}	[1] {\MeasurementsDomain_{#1}}
+
+
+
+\newcommand{\InputLocation}							[0]	{x}
+\newcommand{\InputLocationOne}						[0]	{x}
+\newcommand{\InputLocationTwo}						[0]	{x'}
+\newcommand{\InputLocationOfSensor}					[1]	{\InputLocation_{#1}}
+\newcommand{\InputLocationOfIndex}					[1]	{\InputLocation^{#1}}
+\newcommand{\InputLocationOfSensorAndIndex}			[2]	{\InputLocationOfSensor{#1}^{#2}}
+\newcommand{\InputLocationOfAuxiliaryGridAndIndex}	[1]	{\InputLocationOfSensor{G}^{#1}}
+%
+\newcommand{\SetOfInputLocations}					[0]	{\mathcal{X}}
+\newcommand{\SetOfInputLocationsOfSensor}			[1]	{\SetOfInputLocations_{#1}}
+\newcommand{\SetOfInputLocationsOfAuxiliaryGrid}	[0]	{\SetOfInputLocations^{G}}
+%
+\newcommand{\Measurement}									[0]	{y}
+\newcommand{\MeasurementOfSensor}							[1]	{\Measurement_{#1}}
+\newcommand{\MeasurementOfIndex}							[1]	{\Measurement^{#1}}
+\newcommand{\MeasurementOfSensorAndIndex}					[2]	{\MeasurementOfSensor{#1}^{#2}}
+\newcommand{\MeasurementOfAuxiliaryGridAndIndex}			[1]	{\MeasurementOfSensor{G}^{#1}}
+\newcommand{\MeasurementOfAuxiliaryGridAndSensorAndIndex}	[2]	{\MeasurementOfSensor{G, #1}^{#2}}
+%
+\newcommand{\SetOfMeasurements}							[0]	{\mathcal{Y}}
+\newcommand{\SetOfMeasurementsOfSensor}					[1]	{\SetOfMeasurements_{#1}}
+\newcommand{\SetOfMeasurementsOfAuxiliaryGrid}			[0]	{\SetOfMeasurements^{G}}
+\newcommand{\SetOfMeasurementsOfAuxiliaryGridOfSensor}	[1]	{\SetOfMeasurementsOfAuxiliaryGrid_{#1}}
+\newcommand{\SetOfTransformedMeasurementsOfAuxiliaryGridOfSensor}	[1]	{\overline{\SetOfMeasurementsOfAuxiliaryGrid_{#1}}}
+%
+\newcommand{\MeasurementNoise}									[0]	{\nu}
+\newcommand{\MeasurementNoiseOfSensor}							[1]	{\MeasurementNoise_{#1}}
+\newcommand{\MeasurementNoiseOfIndex}							[1]	{\MeasurementNoise^{#1}}
+\newcommand{\MeasurementNoiseOfSensorAndIndex}					[2]	{\MeasurementNoiseOfSensor{#1}^{#2}}
+\newcommand{\MeasurementNoiseOfAuxiliaryGridAndIndex}			[1]	{\MeasurementNoiseOfSensor{G}^{#1}}
+\newcommand{\MeasurementNoiseOfAuxiliaryGridAndSensorAndIndex}	[2]	{\MeasurementNoiseOfSensor{G, #1}^{#2}}
+%
+\newcommand{\SetOfMeasurementNoises}			[0]	{\mathcal{V}}
+\newcommand{\SetOfMeasurementNoisesOfSensor}	[1]	{\SetOfMeasurementNoises_{#1}}
+\newcommand{\SetOfMeasurementNoisesOfAuxiliaryGridOfSensor}	[1]	{\SetOfMeasurementNoises_{#1}^{G}}
+
+
+\newcommand{\CovarianceOfMeasurementNoise}					[0]	{\sigma^{2}}
+\newcommand{\CovarianceOfMeasurementNoiseOfSensor}			[1]	{\CovarianceOfMeasurementNoise_{#1}}
+\newcommand{\CovarianceOfMeasurementNoiseOfSensorAndIndex}	[2]	{\CovarianceOfMeasurementNoise_{#1 , #2}}
+\newcommand{\CovarianceOfMeasurementNoiseOfAuxiliaryGridAndSensorAndIndex}	[2]	{{\CovarianceOfMeasurementNoise_{#1 , #2}}^{G}}
+\newcommand{\CovarianceOfSetOfMeasurementNoises}			[0]	{\Sigma_{\SetOfMeasurementNoises}}
+\newcommand{\CovarianceOfSetOfMeasurementNoisesOfAuxiliaryGrid}	[0]	{\Sigma_{\SetOfMeasurementNoises}^{G}}
+\newcommand{\CovarianceOfSetOfMeasurementNoisesOfSensor}		[1]	{\Sigma_{\SetOfMeasurementNoises, #1}}
+\newcommand{\CovarianceOfSetOfMeasurementNoisesOfAuxiliaryGridOfSensor}		[1]	{\Sigma_{\SetOfMeasurementNoises, #1}^{G}}
+
+
+\newcommand{\JitterOnInputLocation}						[0]	{u}
+\newcommand{\JitterOnInputLocationOfSensorAndIndex}		[2]	{\JitterOnInputLocation_{#1}^{#2}}
+%
+\newcommand{\JitterOnInputLocationMaximalAmplitude}		[0]	{\ell}
+

@@ -1,0 +1,135 @@
+% ~~~~~~~~~~~~ %
+% tab size = 4 %
+% ~~~~~~~~~~~~ %
+
+% WARNING: if the compiler returns the error ``incompatible list can't be unboxed''
+% try to decomment the following \RequirePackage command:
+%\RequirePackage{atbegshi} 
+
+\ifhandout
+	\documentclass % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+	[																%
+		11pt,														%
+		professionalfont,											%
+		hyperref={pdfpagelabels=false},								%
+		xcolor	={dvipsnames, table},								%
+		aspectratio	= 169,											%
+		notheorems,													%
+		handout,													%
+	]																%
+	{beamer}														%
+	\usepackage{pgfpages}											%
+	\ifshownotes													%
+		\setbeameroption{show notes}								%
+	\fi																%
+	\ifshowonlynotes												%
+		\setbeameroption{show only notes}							%
+	\fi																%
+	\pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,landscape]	%
+\else																%
+	\documentclass % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+	[																%
+		11pt,														%
+		professionalfont,											%
+		hyperref={pdfpagelabels=false},								%
+		xcolor	={dvipsnames, table},								%
+		aspectratio	= 169,											%
+		notheorems,													%
+	]																%
+	{beamer}														%
+	\usepackage{pgfpages}											%
+	\ifshownotes													%
+		\setbeameroption{show notes on second screen=left}			%
+	\fi																%
+	\ifshowonlynotes												%
+		\setbeameroption{show only notes}							%
+	\fi																%
+\fi																	%
+%																	%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+%																	%
+\usepackage{etex}													%
+\usepackage[english]{babel}											%
+\usepackage{type1cm}												%
+\usepackage{type1ec}												%
+\usepackage[T1]{fontenc}											%
+\usepackage{lmodern}												%
+\usepackage{amsmath,amssymb,amsfonts,amsthm}						%
+\usepackage{graphicx}												%
+\usepackage{hyperref}												%
+\usepackage{booktabs}												%
+\usepackage{bm}														%
+\usepackage{dsfont}													%
+\usepackage{array}													%
+\usepackage{upquote}												%
+\usepackage{acronym}												%
+\usepackage{MnSymbol}												%
+\usepackage[official]{eurosym}										%
+\usepackage{xr}														%
+\usepackage{varwidth}												%
+\usepackage{tikz}													%
+\usepackage[european]{circuitikz}									%
+\usepackage{enumerate}												%
+% \usepackage{enumitem}												%
+\usetikzlibrary{shapes.geometric}									%
+\usetikzlibrary{positioning}										%
+\usetikzlibrary{calc}												%
+\usetikzlibrary{matrix}												%
+\usetikzlibrary{fit}												%
+\usetikzlibrary{arrows.meta}										%
+\usetikzlibrary{decorations.text}									%
+\newcommand{\figurefilename}[1]{\ifexternalize \tikzsetnextfilename{#1} \fi}
+\ifexternalize														%
+	\usetikzlibrary{external}										%
+	\tikzexternalize[shell escape=-enable-write18]					%
+	\tikzset{external/force remake} 								%
+\fi																	%
+\usepackage{pgfplots}												%
+\pgfplotsset{compat=1.14}											%
+%																	%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+%																	%
+\def\DarkBlue		{black!40!blue}									%
+\def\DarkGray		{black!70!white}								%
+\def\DarkGreen		{black!40!green}								%
+\def\DarkRed		{black!40!red}									%
+\def\DarkYellow		{black!40!yellow}								%
+\def\DarkOrange		{black!40!orange}								%
+%																	%
+\def\Blue			{black!10!blue}									%
+\def\Gray			{black!50!white}								%
+\def\Green			{black!10!green}								%
+\def\Red			{black!10!red}									%
+\def\Yellow			{black!10!yellow}								%
+\def\Orange			{black!10!orange}								%
+%																	%
+\def\LightBlue		{white!40!blue}									%
+\def\LightGray		{white!70!white}								%
+\def\LightGreen		{white!40!green}								%
+\def\LightRed		{white!40!red}									%
+\def\LightYellow	{white!40!yellow}								%
+\def\LightOrange	{white!40!orange}								%
+%																	%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+%																	%
+\def\Background		{white}											%
+\def\Foreground		{black}											%
+\def\Primary		{Bittersweet!30!red}							%
+\def\Secondary		{\Gray}											%
+%																	%
+\def\StrongPrimary	{\Primary!80!black}								%
+\def\SoftPrimary	{\Primary!20!white}								%
+\def\StrongSecondary{\Secondary!80!black}							%
+\def\SoftSecondary	{\Secondary!20!white}							%
+%																	%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+%																	%
+\graphicspath{{./Images/}}											%
+\everymath{\displaystyle}											%
+%																	%
+\input{./Scripts/newcommands}										%
+\input{./Scripts/figuresgraphicalsettings}							%
+\input{./Scripts/theme}												%
+%																	%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+

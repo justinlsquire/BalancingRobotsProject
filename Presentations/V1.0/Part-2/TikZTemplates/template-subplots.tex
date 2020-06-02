@@ -1,0 +1,61 @@
+\begin{tikzpicture}
+[
+	xscale	= 1,	% to scale horizontally everything but the text
+	yscale	= 1,	% to scale vertically everything but the text
+]
+	%
+	% -----------------------------------------------------------------
+	% first plot
+	\begin{axis}
+	[
+		name					= firstPlot,
+		width					= 0.4\columnwidth,
+		height					= 0.4\columnwidth,
+		xlabel					= {A},
+		ylabel					= {B},
+	]
+		%
+		\addplot
+		[
+			smooth,
+			solid,
+			draw			= black!30!white,
+			mark			= none,
+		]
+		table
+		[
+			x = time,
+			y = tempc,
+		]
+		{../Data/data_single_component.txt};
+		%
+	\end{axis}
+	%
+	\begin{axis}
+	[
+		name					= secondPlot,
+		at						= {($(firstPlot.east)+(3.2cm,0)$)},
+		anchor					= west,
+		width					= 0.4\columnwidth,
+		height					= 0.4\columnwidth,
+		xlabel					= {A},
+		ylabel					= {B},
+	]
+		%
+		\addplot
+		[
+			smooth,
+			solid,
+			draw			= black!30!white,
+			mark			= none,
+		]
+		table
+		[
+			x = time,
+			y = power,
+		]
+		{../Data/data_single_component.txt};
+		%
+	\end{axis}
+	%
+\end{tikzpicture}
