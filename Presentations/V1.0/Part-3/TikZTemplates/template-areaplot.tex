@@ -1,0 +1,121 @@
+\begin{center}
+\begin{tikzpicture}
+[
+	xscale	= 1,	% to scale horizontally everything but the text
+	yscale	= 1,	% to scale vertically everything but the text
+]
+	%
+	\begin{axis}
+	[
+		width					= 0.8\columnwidth,
+		height					= 0.6\columnwidth,
+		axis x line				= bottom,	% bottom | middle | top
+		axis y line				= left,		% left | middle | right
+		xlabel					= {year},
+		ylabel					= {tons},
+		ymin					= 0,
+		ymax					= 150000,
+		ytick					= {0, 25000, 50000, 75000, 100000, 125000, 150000},
+		yticklabels				= {0, 25000, 50000, 75000, 100000, 125000, 150000},
+		scaled ticks			= false, % true => will put, e.g., 10^4 | false won't
+		ylabel near ticks,
+		ylabel shift			= 0,
+		stack plots				= y,
+		area style,
+		enlarge x limits		= false,
+		legend style			=
+		{
+			draw				= none,
+			fill				= none,
+			inner xsep			= 0.1cm,
+			inner ysep			= 0.5cm,
+		},
+		reverse legend			= true,
+		legend pos				= outer north east,
+	]
+		%
+		\addplot
+		[
+			draw			= black,
+			fill			= blue!90!white,
+			mark			= none,
+			area legend,
+		]
+		table
+		[
+			x				= year,
+			y				= densifiedWood,
+		]
+		{./Datasets/data_biomass_use_in_sweden.txt}
+		\closedcycle;
+		\addlegendentry{densified wood};
+		%
+		\addplot
+		[
+			draw			= black,
+			fill			= blue!50!white,
+			mark			= none,
+			area legend,
+		]
+		table
+		[
+			x				= year,
+			y				= undensifiedWood,
+		]
+		{./Datasets/data_biomass_use_in_sweden.txt}
+		\closedcycle;
+		\addlegendentry{undensified wood};
+		%
+		\addplot
+		[
+			draw			= black,
+			fill			= blue!10!white,
+			mark			= none,
+			area legend,
+		]
+		table
+		[
+			x				= year,
+			y				= otherSolid,
+		]
+		{./Datasets/data_biomass_use_in_sweden.txt}
+		\closedcycle;
+		\addlegendentry{other solid biomasses};
+		%
+		\addplot
+		[
+			draw			= black,
+			fill			= red!30!white,
+			mark			= none,
+			area legend,
+		]
+		table
+		[
+			x				= year,
+			y				= municipalWaste,
+		]
+		{./Datasets/data_biomass_use_in_sweden.txt}
+		\closedcycle;
+		\addlegendentry{municipal waste};
+		%
+		\addplot
+		[
+			draw			= black,
+			fill			= red!70!white,
+			mark			= none,
+			area legend,
+		]
+		table
+		[
+			x				= year,
+			y				= others,
+		]
+		{./Datasets/data_biomass_use_in_sweden.txt}
+		\closedcycle;
+		\addlegendentry{others};
+		%
+	\end{axis}
+	%
+\end{tikzpicture}
+\end{center}
+

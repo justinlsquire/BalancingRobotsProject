@@ -1,0 +1,132 @@
+\pgfdeclarelayer{ultrabackground}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{ultrabackground,background,main,foreground}
+
+\tikzset
+{
+	FancyCircle/.style =
+	{
+		shape					= circle,
+		line width				= 0.1cm,
+		align					= center,
+		inner xsep				= 0.1cm,
+		inner ysep				= 0.1cm,
+		text width				= 2.4cm,
+%		circular drop shadow	= { shadow scale = 1.05 },
+		minimum size			= 0.5cm,
+		fill					= \SoftSecondary,
+		draw					= \StrongPrimary,
+	},
+	NormalNodeStyle/.style =
+	{
+		circle,									% shape
+		minimum size	= 0.25cm,				%
+		rotate			= 0,					% angle of rotation
+		scale			= 1.0,					% scaling factor
+		thick,									% thickness of the border
+		fill			= \LightGray,			% monocolored
+		text			= black,				% colour of the fonts
+		draw			= black,				% colour of the border
+		font			= \scriptsize,			%
+		text centered,							% text alignment 
+		inner xsep		= 0mm,					%
+		inner ysep		= 0mm					%
+	},
+	NormalEdgeStyle/.style = 
+	{
+		dash pattern	= on .05cm off .02cm,
+		line width		= 0.03cm,
+		color 			= \DarkGray,
+		shorten	<		= 0.05cm,
+		shorten	>		= 0.05cm,
+	},
+	AlertedNodeStyle/.style =
+	{
+		NormalNodeStyle,						% shape
+		fill			= \SoftPrimary,			% monocolored
+		draw			= \StrongPrimary,		% colour of the border
+	},
+	SecondaryRectangleStyle/.style =
+	{
+		shape			= rectangle,		% shape
+		rounded corners	= 0.2cm,			% shape
+		minimum width	= 0.7cm,			%
+		minimum height	= 0.7cm,			%
+		line width		= 0cm,				% thickness of the border
+		fill			= \SoftSecondary,		%
+		draw			= \SoftSecondary,		% draw the border with this color
+		line width		= 0.1cm,			% thickness
+%		text width		= 0.8\textwidth,	% max. width of the text
+		align			= center,			% text alignment
+		inner xsep		= 0.2cm,			%
+		inner ysep		= 0.2cm,			%
+	},
+	PrimaryRectangleStyle/.style =
+	{
+		SecondaryRectangle,
+		fill			= white,
+		draw			= \StrongPrimary,
+	},
+	SecondaryArrowStyle/.style =
+	{
+		line width		= 0.05cm,
+		color			= \SoftSecondary,
+		shorten <		= 0.1cm,
+		shorten >		= 0.1cm,
+		-latex
+	},
+	PrimaryArrowStyle/.style =
+	{
+		SecondaryArrow,
+		color			= \SoftPrimary,
+	},
+	-|-/.style =
+	{
+		to path =
+		{
+			(\tikztostart) -| ($(\tikztostart)!#1!(\tikztotarget)$) |- (\tikztotarget)
+			\tikztonodes
+		}
+	},
+	-|-/.default = 0.5,
+	|-|/.style =
+	{
+		to path =
+		{
+			(\tikztostart) |- ($(\tikztostart)!#1!(\tikztotarget)$) -| (\tikztotarget)
+			\tikztonodes
+		}
+	},
+	|-|/.default = 0.5,
+}
+
+% 
+% \pgfplotsset
+% {
+% 	every axis/.append style = 
+% 	{
+% 		anchor					= north,
+% 		width					= 0.7\columnwidth,
+% 		height					= 0.5\columnwidth,
+% 		axis x line				= center,
+% 		axis y line				= left,
+% 		xlabel near ticks,
+% 		xmin					= 0,
+% 		xmax					= 9.5,
+% 		cycle list name			= mycyclelist,
+% 		ymin					= -0.5,
+% 		ymax					= 1.2,
+% 		xtick					= {\empty},
+% 		ytick					= {0},
+% 		legend pos				= outer north east,
+% 		legend style			=
+% 		{
+% 			draw				= none,
+% 			fill				= none,
+% 		},
+% 		legend cell align		= left, % left | center | right
+% 		title style				= {text width = 0.9\columnwidth, align = center, draw, rounded corners, fill = white!95!black},
+% 	}
+% }
+% 

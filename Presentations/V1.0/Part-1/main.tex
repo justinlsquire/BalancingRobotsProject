@@ -37,8 +37,10 @@
 \begin{frame}
 	\begin{itemize}
 		\item (turning around from a chair)
-		\item did you ever wonder how ``handle'' works? Like, photoshop? magic? aliens? Well, even better: automatic control!
-		\item hello, I am Steffi, and today we are starting our learning how to make a robot balance on its wheels
+		\item did you ever wonder how ``handle'' works? looks like magic, right? looks impossible, right? like they are cheating or using photoshop or so?
+		\item Well, as you will discover in this project, this is neither magic magic nor impossible.
+		\item This is automatic control and in fact - it is all around us!
+		\item hello, I am Steffi, and today we are starting our learning how to make a robot balance on its wheels and learn lot's of cool stuff about control, automatic control and how things around us work.
 	\end{itemize}
 	\note<1-1>{\begin{itemize}
 		\item 
@@ -49,8 +51,9 @@
 
 \begin{frame}
 	\titlepage
+	\vspace{-1.8cm} 
 	\begin{center}
-		\includegraphics[height = 4.5cm]{minseg-M2V5}
+		\includegraphics[height = 5.5cm]{minseg-M2V5}
 	\end{center}
 	\note<1-1>{\begin{itemize}
 		\item maybe make Florian do some simple 'voice-music'
@@ -88,7 +91,7 @@
 		\pause
 		\item fiddle with our intuitions
 		\pause
-		\item see that math is useful
+		\item see what we can achieve using math and control
 	\end{itemize}
 \end{frame}
 
@@ -96,9 +99,9 @@
 \begin{frame}{What we are going to learn in the whole series}
 	\pause
 	\begin{itemize}
-		\item get intuitions of what control means
+		\item understand what control and automatic control mean
 		\pause
-		\item touch with hand how to create a controller 
+		\item create and tune a controller 
 		\pause
 		\item get intuitions of the pervasiveness of control
 	\end{itemize}
@@ -108,7 +111,7 @@
 \begin{frame}{What is going to happen in today's part}
 	\pause
 	\begin{itemize}
-		\item think at what happens when we take a shower
+		\item look into some examples of control
 		\pause
 		\item play with some pens
 	\end{itemize}
@@ -145,7 +148,7 @@
 				myarrow/.style = {rounded corners, -latex, thick}
 			]
 			%
-			\node (plant) [myblock] {you};
+			\node (plant) [myblock] {you under the shower};
 			\pause
 			%
 			\node (output) [myvariable, right = 3cm of plant.east] {how you feel};
@@ -181,20 +184,43 @@
 \setbeamercolor{background canvas}{bg=white!80!black}
 \begin{frame}
 	\begin{itemize}
+		\item which examples can you come up with?
+		\item look around you and try to find examples of control!
+		\item which other control tasks can you accomplish?
+		\item pause this video and discuss with your friend!
+		\item Let's see, who can find the most examples!
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item how did it go?
+		\item did you find many examples?
+		\item here is one I found: 
 		\item another example from everyday life, that we can connect to the concept of control is to balance a pen in your hand
-		\item in practice what do one do to balance the pen?
+		\item try at desk with the pen
+		\item ok, let's go outside and do some practise!
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	videos outside balancing sticks etc
+	\end{frame}
+	
+
+\begin{frame}
+		ok, now it's your turn! Take a pen or a stick or a ruler and try to balance it with your hand. 
+		
+	\begin{itemize}
 		\item see and feel how the pen is tipping, and counteract with your hands
-		\item the visual stimuli you see is called feedback 
-		\item and somehow what you have to do is to counteract the tipping
-		\item but I don't want to chat all the time, and remove all the fun; try to do it by yourself!
-		\item try to use different pens with different heights and weights, and get an intuitive understanding of the following things:
+%		\item but I don't want to chat all the time, and remove all the fun; try to do it by yourself!
+		\item try to use different pens or sticks or brooms with different heights and weights, and get an intuitive understanding of the following things:
 			\begin{itemize}
-				\item how would you describe how you do to your friends?
 				\item do you feel it is more difficult to balance a longer pen or a shorter one? a heavier pen or a lighter one? and why?
 				\item try and discuss!
-				\item and, let me tell you a secret: for me it took 10 minutes to learn, so don't worry: it is actually difficult
 			\end{itemize}
 	\end{itemize}
+	no worries if it takes a bit of practise. believe me, we produced a lot of outtakes here as well!
 \end{frame}
 \setbeamercolor{background canvas}{bg=white}
 
@@ -210,6 +236,16 @@
 
 
 \setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item you are actually applying feedback and control when you are balancing your pen!
+		\item what you have to do is to counteract the tipping by observing how the pen tips and reacting with your hand
+		\item your eyes = your sensors seeing the pen tip
+		\item your hand = actuator moving around to balance the pen
+		\item your brain = the computer deciding how to move
+		\end{itemize}
+	\end{frame}
+
 \begin{frame}
 	\begin{itemize}
 		\item amazing, I am proud of your trying!

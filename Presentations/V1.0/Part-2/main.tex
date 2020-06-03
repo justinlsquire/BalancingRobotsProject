@@ -49,8 +49,9 @@
 
 \begin{frame}
 	\titlepage
+	\vspace{-1.8cm} 
 	\begin{center}
-		\includegraphics[height = 4.5cm]{minseg-M2V5}
+		\includegraphics[height = 5.5cm]{minseg-M2V5}
 	\end{center}
 	\note<1-1>{\begin{itemize}
 		\item maybe make Florian do some simple 'voice-music'
@@ -114,7 +115,7 @@
 				myarrow/.style = {rounded corners, -latex, thick}
 			]
 			%
-			\node (plant) [myblock] {you};
+			\node (plant) [myblock] {you under the shower};
 			%
 			\node (output) [myvariable, right = 3cm of plant.east] {how you feel};
 			\draw [myarrow] (plant) -- (output) node (auxnode) [coordinate, pos = 0.5] {};
@@ -141,7 +142,7 @@
 				myarrow/.style = {rounded corners, -latex, thick}
 			]
 			%
-			\node (plant) [myblock] {you};
+			\node (plant) [myblock] {the pen on your hand};
 			%
 			\node (output) [myvariable, right = 3cm of plant.east] {what you see};
 			\draw [myarrow] (plant) -- (output) node (auxnode) [coordinate, pos = 0.5] {};
@@ -199,7 +200,7 @@
 			%
 			\node (plant) [myblock] {the robot};
 			%
-			\node (output) [myvariable, right = 3cm of plant.east] {what the robot measures};
+			\node (output) [myvariable, right = 3cm of plant.east] {the angle};
 			\draw [myarrow] (plant) -- (output) node (auxnode) [coordinate, pos = 0.5] {};
 			%
 			\node (controller) [myvariable, below = 2cm of plant] {the robot's computer};

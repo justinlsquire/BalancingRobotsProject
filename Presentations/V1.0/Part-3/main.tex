@@ -1,0 +1,601 @@
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+\newif	\ifexternalize					%\externalizetrue			%
+\newif	\ifshowonlynotes				%\showonlynotestrue			%
+\newif	\ifhandout						%\handouttrue				%
+\newif	\ifshowsolutions				%\showsolutionstrue			%
+\newif	\ifshownotes					%\shownotestrue				%
+%																	%
+% enablers for conditional compiling through bash scripting			%
+\ifdefined\EXTERNALIZE	\externalizetrue	\fi						%
+\ifdefined\ONLYNOTES	\showonlynotestrue	\fi						%
+\ifdefined\HANDOUT		\handouttrue		\fi						%
+\ifdefined\SOLUTIONS	\showsolutionstrue	\fi						%
+\ifdefined\NOTES		\shownotestrue		\fi						%
+%																	%
+\input{./Scripts/preamble}											%
+\title		[Balancing Robots]	{Making robots balance \\ Part 3}	%
+\date		{} % empty = no dates. Alternatives: {\today} / {April 20, 2099}
+% \institute	[<++>]	{<++>}											%
+% \author		[<++>]	{<++>}											%
+\begin{document}													%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+
+
+% - an example where things do not work (change weights / voltages of the motors / wheels)
+% - how do we tune P?
+% - the same example as before, but now things work with a tuned P 
+% - unfortunately, an other example where things do not work (because the disturbances are even bigger than before)
+% - integral and derivative actions
+% - how to tune I and D
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item video of Justin's robot standing
+	\end{itemize}
+	\note<1-1>{\begin{itemize}
+		\item 
+	\end{itemize}}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item (turning around from a chair)
+		\item hej Justin! Yours stands, very nice!
+		\item and you people? how is your robot balancing?
+		\item hello, I am Steffi, and today we are finishing our learning how to make a robot balance on its wheels
+	\end{itemize}
+	\note<1-1>{\begin{itemize}
+		\item 
+	\end{itemize}}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}
+	\titlepage
+	\vspace{-1.8cm} 
+	\begin{center}
+		\includegraphics[height = 5.5cm]{minseg-M2V5}
+	\end{center}
+	\note<1-1>{\begin{itemize}
+		\item maybe make Florian do some simple 'voice-music'
+	\end{itemize}}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}{What are we doing today?}
+	\begin{itemize}
+		\item today we recap the P controller, and what it means
+		\item we then add two more ingredients to our 'artificial brain' that we are putting into our robot: the I controller and D controller
+		\item by mixing these three ingredients we will get our 'final' brain, a PID controller, a brain that is used practically everywhere, in the whole world
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{Our purposes}
+	\pause
+	\begin{itemize}
+		\item have fun
+		\pause
+		\item understand the world a bit better
+		\pause
+		\item see that math is useful
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What is going to happen in today's part}
+	\pause
+	\begin{itemize}
+		\item recall what is the ``P controller''
+		\pause
+		\item introduce the ``I and D controllers''
+		\pause
+		\item connect I and D with useful math concepts
+	\end{itemize}
+	\note<1-1>{\begin{itemize}
+		\item we will see also how these controllers are naturally connected with two math concepts that a lot of students hate -- but they should not be hated! They are cute, simple and - most importantly - very useful!
+	\end{itemize}}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}{Connecting things}
+	\begin{itemize}
+		\item let's recall what the P controller was, and how we arrived to it
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{Towards the P controller: our first heuristic}
+	\begin{center}
+		\begin{tikzpicture}
+			[
+				body/.style = {rectangle, minimum width = 0.7cm, minimum height = 2.4cm, rounded corners, fill = black},
+				wheel/.style = {circle, minimum size = 1.4cm, thick, fill = black!50!white, draw = black},
+			]
+			\node (body) [body, rotate = -30] {};
+			\node (wheel) [wheel] at (body.south) {};
+		\end{tikzpicture} \\
+		$\implies$ spin the wheels as fast as possible clockwise
+	\end{center}
+	\note<1-1>{\begin{itemize}
+		\item this approach is problematic because
+		\item this controller is ``too nervous'': as soon as we are not perfectly aligned then it reacts as much as it can
+		\item in practice with the problem of making the pen stand we saw that it does not make too much sense
+		\item (maybe re-show the example)
+	\end{itemize}}
+\end{frame}
+
+
+\begin{frame}{Towards the P controller: our second heuristic}
+	\begin{center}
+		\begin{tikzpicture}
+			[
+				body/.style = {rectangle, minimum width = 0.7cm, minimum height = 2.4cm, rounded corners, fill = black},
+				wheel/.style = {circle, minimum size = 1.4cm, thick, fill = black!50!white, draw = black},
+				myline/.style = {dashed, \StrongPrimary, thick},
+			]
+			\node (body) [body, rotate = -5] {};
+			\node (wheel) [wheel] at (body.south) {};
+			\draw [myline] (wheel) -- ++(0,3);
+			\draw [myline] (wheel) -- ++(0.3,2.7);
+			\draw [myline] (wheel) -- ++(0.6,2.3);
+		\end{tikzpicture} \\
+		$\implies$ depending on the zone, spin the wheels more or less fast
+	\end{center}
+	\note<1-1>{\begin{itemize}
+		\item recall that also this approach was a bit problematic
+		\item it is like having a car driver that turns the wheel in a clumsy way
+	\end{itemize}}
+\end{frame}
+
+
+\begin{frame}{The P (i.e., proportional) controller}
+	\begin{center}
+		\begin{tikzpicture}
+			[
+				body/.style = {rectangle, minimum width = 0.7cm, minimum height = 2.4cm, rounded corners, fill = black},
+				wheel/.style = {circle, minimum size = 1.4cm, thick, fill = black!50!white, draw = black},
+				myline/.style = {dashed, \StrongPrimary, thick},
+			]
+			\node (body) [body, rotate = -5] {};
+			\node (wheel) [wheel] at (body.south) {};
+			\draw [myline] (wheel) -- ++(0,3);
+		\end{tikzpicture} \\
+		$\implies$ speed of the wheels = $P \cdot $ angular error
+	\end{center}
+	\note<1-1>{\begin{itemize}
+		\item so we moved to the 'proportional' controller, our friend P controller
+		\item depending on the error, we have a proportional action
+	\end{itemize}}
+\end{frame}
+
+
+\begin{frame}{Remember: $P$ is a design choice!}
+	\begin{itemize}
+		\item $P$ small implies a 'gentle' control action
+		\item $P$ big implies an 'aggressive' control action
+	\end{itemize}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{footnotesize}
+	\begin{itemize}
+		\item but our brain is not complete if we make it only using the P ingredient
+		\item let me show you what I mean using another example (also to show how ubiquitous control is)
+		\item assume that I want to balance a ball on a board, and make the ball stay at the center of the board
+		\item my control action, that is, what I can do, is to move the board in this way
+		\item what is a P controller here? it is that depending on how far the ball is from the center, I tilt more or less
+		\item now remember: I may be more or less aggressive, that means choosing P bigger or smaller
+		\item but pretend to be in the open space now, and that there is some wind that is keeping blowing and pushing just a tiny bit the ball that I am balancing
+		\item what happens? let's have some wind assistant here: wind assistant, may you disturb me a bit?
+		\item so the wind pushes, and the P controller reacts
+		\item the wind makes a force, and the P controller makes a force too
+		\item whenever the two forces are equal, then we get an equilibrium
+		\item but at the equilibrium the ball is not at the point where I would like it to be
+		\item somehow the P controller by itself is not ``smart enough'' to realize that there is this disturbance, and eliminate it
+		\item let's see this through an animation
+	\end{itemize}
+	\end{footnotesize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}[t]{No wind = no problems}
+	\begin{center}
+		\begin{tikzpicture}
+		[
+			board/.style = {rectangle, rounded corners = 0.1cm, fill = white!50!gray, draw = white!50!gray, minimum width = 7cm, minimum height = 0.2cm},
+			boardcenter/.style = {circle, fill = black, draw = black, inner sep = 0cm, minimum size = 0.15cm},
+			ball/.style = {circle, minimum size = 1cm, draw = black, very thick},
+		]
+			%
+			\node (board) [board] {};
+			\node (boardcenter) [boardcenter] at (board.center) {};
+			\node (ball) [ball, anchor = south] at (board.north) {};
+			%
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}[t]{Some wind = some problems}
+	\begin{center}
+		\begin{tikzpicture}
+		[
+			board/.style = {rectangle, rounded corners = 0.1cm, fill = white!50!gray, draw = white!50!gray, minimum width = 7cm, minimum height = 0.2cm},
+			boardcenter/.style = {circle, fill = black, draw = black, inner sep = 0cm, minimum size = 0.15cm},
+			ball/.style = {circle, minimum size = 1cm, draw = black, very thick},
+			wind/.style = {very thick, densely dotted, blue},
+		]
+			%
+			\node (board) [board, rotate = 10] {};
+			\node (boardcenter) [boardcenter] at (board.center) {};
+			\node (ball) [ball, anchor = south] at (board.25) {};
+			%
+			\node (auxA) [coordinate, xshift = -1.0cm] at (ball.west) {};
+			\node (auxB) [coordinate, yshift =  0.2cm, xshift = -0.3cm] at (auxA) {};
+			\node (auxC) [coordinate, yshift = -0.2cm, xshift = -0.2cm] at (auxA) {};
+			%
+			\draw [wind] (auxA) -- ++(-2cm,0);
+			\draw [wind] (auxB) -- ++(-2cm,0);
+			\draw [wind] (auxC) -- ++(-2cm,0);
+			%
+			\draw [wind] (auxA) arc (-90:90:0.1);
+			\draw [wind] (auxA) arc (90:-90:0.1);
+			\draw [wind] (auxB) arc (-90:90:0.1);
+			\draw [wind] (auxC) arc (90:-90:0.1);
+			%
+		\end{tikzpicture}
+	\end{center}
+	\vspace{0.5cm} 
+	\pause
+	\begin{center}
+		\begin{tikzpicture}
+		[
+			axes/.style = {thick, -latex},
+			signal/.style = {thick, \StrongPrimary},
+		]
+			%
+			\draw [axes] (0,0) -- (8,0) node [below, pos = 0.5] {time};
+			\draw [axes] (0,0) -- (0,3) node [left, pos = 0.5] {error};
+			%
+			\foreach \t in {2,3,4,5,6}
+			{
+				\only<\t-\t>
+				{
+					\draw [signal] (0,1) -- (\t-1,1);
+					\node at (4,2) {after \t\ seconds};
+				}
+			}
+			%
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Discussion time!}
+	\begin{center}
+		\begin{tikzpicture}
+		[
+			board/.style = {rectangle, rounded corners = 0.1cm, fill = white!50!gray, draw = white!50!gray, minimum width = 7cm, minimum height = 0.2cm},
+			boardcenter/.style = {circle, fill = black, draw = black, inner sep = 0cm, minimum size = 0.15cm},
+			ball/.style = {circle, minimum size = 1cm, draw = black, very thick},
+			wind/.style = {very thick, densely dotted, blue},
+		]
+			%
+			\node (board) [board, rotate = 10] {};
+			\node (boardcenter) [boardcenter] at (board.center) {};
+			\node (ball) [ball, anchor = south] at (board.25) {};
+			%
+			\node (auxA) [coordinate, xshift = -1.0cm] at (ball.west) {};
+			\node (auxB) [coordinate, yshift =  0.2cm, xshift = -0.3cm] at (auxA) {};
+			\node (auxC) [coordinate, yshift = -0.2cm, xshift = -0.2cm] at (auxA) {};
+			%
+			\draw [wind] (auxA) -- ++(-2cm,0);
+			\draw [wind] (auxB) -- ++(-2cm,0);
+			\draw [wind] (auxC) -- ++(-2cm,0);
+			%
+			\draw [wind] (auxA) arc (-90:90:0.1);
+			\draw [wind] (auxA) arc (90:-90:0.1);
+			\draw [wind] (auxB) arc (-90:90:0.1);
+			\draw [wind] (auxC) arc (90:-90:0.1);
+			%
+		\end{tikzpicture}
+	\end{center}
+	\vspace{0.5cm} 
+	\begin{center}
+		\begin{tikzpicture}
+		[
+			axes/.style = {thick, -latex},
+			signal/.style = {thick, \StrongPrimary},
+		]
+			%
+			\draw [axes] (0,0) -- (8,0) node [below, pos = 0.5] {time};
+			\draw [axes] (0,0) -- (0,3) node [left, pos = 0.5] {error};
+			%
+			\draw [signal] (0,1) -- (7,1);
+			\node at (4,2) {\ItBoldPrimary{how may we solve this problem?}};
+			%
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item got some intuition? shared it with your friends?
+		\item let's see if we have the same idea!
+		\item let's see if you discovered the I controller by yourself!
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{The I (integral) ingredient: tilt not only proportionally to the current error, but also keep in mind the past history!}
+	\vspace{0.2cm} 
+	\begin{center}
+		\begin{tikzpicture}
+		[
+			board/.style = {rectangle, rounded corners = 0.1cm, fill = white!50!gray, draw = white!50!gray, minimum width = 7cm, minimum height = 0.2cm},
+			boardcenter/.style = {circle, fill = black, draw = black, inner sep = 0cm, minimum size = 0.15cm},
+			ball/.style = {circle, minimum size = 1cm, draw = black, very thick},
+			wind/.style = {very thick, densely dotted, blue},
+		]
+			%
+			\node (board) [board, rotate = 10] {};
+			\node (boardcenter) [boardcenter] at (board.center) {};
+			\node (ball) [ball, anchor = south] at (board.25) {};
+			%
+			\node (auxA) [coordinate, xshift = -1.0cm] at (ball.west) {};
+			\node (auxB) [coordinate, yshift =  0.2cm, xshift = -0.3cm] at (auxA) {};
+			\node (auxC) [coordinate, yshift = -0.2cm, xshift = -0.2cm] at (auxA) {};
+			%
+			\draw [wind] (auxA) -- ++(-2cm,0);
+			\draw [wind] (auxB) -- ++(-2cm,0);
+			\draw [wind] (auxC) -- ++(-2cm,0);
+			%
+			\draw [wind] (auxA) arc (-90:90:0.1);
+			\draw [wind] (auxA) arc (90:-90:0.1);
+			\draw [wind] (auxB) arc (-90:90:0.1);
+			\draw [wind] (auxC) arc (90:-90:0.1);
+			%
+		\end{tikzpicture}
+	\end{center}
+	\vspace{0.1cm} 
+	\begin{center}
+		\begin{tikzpicture}
+		[
+			axes/.style = {thick, -latex},
+			signal/.style = {thick, \StrongPrimary},
+		]
+			%
+			\draw [axes] (0,0) -- (8,0) node [below, pos = 0.5] {time};
+			\draw [axes] (0,0) -- (0,3) node [left, pos = 0.5] {error};
+			%
+			\draw [signal] (0,1) -- (7,1);
+			\node at (6,2.5) {P ingredient = ``how much error do we have now''};
+			\node at (6,1.5) {I ingredient = ``how much error have we accumulated''};
+			%
+		\end{tikzpicture}
+	\end{center}
+	\note<1-1>{\begin{itemize}
+		\item here I would explain things graphically with the graphical tablet
+		\item make clear that $I$ is a design choice
+	\end{itemize}}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item but, as before, how do we design $I$?
+		\item to understand we should ask ourselves: what is the effect of having different $I$s?
+		\item if I put $I = $ a tiny tiny number, what is going to happen?
+		\item if I put $I = $ a huge number, what is going to happen?
+		\item let's have a chat all together, and see what we think about this
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{Discussion time!}
+	\begin{itemize}
+		\item if I put $I = $ a tiny tiny number, what is going to happen?
+		\item if I put $I = $ a huge number, what is going to happen?
+	\end{itemize}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item good! So, the effects of choosing $I$ are kind of similar as before for $P$, but not quite the same: the bigger $I$, the more we use the past to decide what to do now
+		\item uhm, using the past errors to decide what to do now\ldots and may we also use the future errors to decide what to do now? Can we forecast which errors we are going to make in the future?
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\setbeamercolor{background canvas}{bg=white!80!red}
+\begin{frame}
+	\begin{itemize}
+		\item (this may be too much) 4 seconds of Sofie dressed like a magician making faces like she is trying to predict the future
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{Predicting the future errors}
+	\begin{center}
+		\begin{tikzpicture}
+		\begin{axis}
+		[
+			xmode					= linear,
+			ymode					= linear,
+			width					= 0.8\columnwidth,
+			height					= 0.45\columnwidth,
+			axis x line				= bottom,	% bottom | middle | top
+			axis y line				= left,		% left | middle | right
+			xtick					= {0,...,4},
+			ytick					= {0,...,4},
+			xmin					= 0,
+			xmax					= 5,
+			ymin					= 0,
+			ymax					= 5,
+			xlabel					= {time},
+			ylabel					= {error},
+		]
+			%
+			\addplot
+			[
+				no marks,
+				smooth,
+				domain	= 0:3,
+				samples = 100,
+			]
+			{(x^2 + 3)/(x + 1)};
+			%
+		\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	\note<1-1>{\begin{itemize}
+		\item easiest way of predicting = prolong given the current slope
+		\item slope = derivative
+	\end{itemize}}
+\end{frame}
+
+
+\begin{frame}{The D (derivative) ingredient: tilt not only proportionally to the current error and keeping in mind the past history, but also forecasting what is going to happen in the future!}
+	\pause
+	$$
+		\text{my action} = 
+		\pause
+			P \cdot \text{current error}
+		\pause
+		+	I \cdot \text{area of past error}
+		\pause
+		+	D \cdot \text{slope of current error}
+	$$
+	\note<1->{\begin{itemize}
+		\item the overall action combines all the single actions
+		\item the brain that we put in the robot is composed by 3 parts that help each other, and have kind of different purposes
+	\end{itemize}}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item let's make a summary:
+		\item P is how much I react to the current error
+		\item I is a memory term: if I have been making errors for some time, then compensate for them
+		\item D is trying to compensate for what I think the error will be in the next future. But watch out, predicting the future is a challenging thing, and the D term may make your brain quite nervous; try later on to put D big and you will see
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}{I and D, two concepts that you will encounter in the future!}
+	\begin{itemize}
+		\item I = integral = area; symbol:
+			$$
+				\int e(t) dt
+			$$
+		\item D = derivative = slope; symbol
+			$$
+				\frac{d e(t)}{d t}
+			$$
+	\end{itemize}
+	\note<1-1>{\begin{itemize}
+		\item maybe say that ``they are actually one the inverse of the other one, but no worries - you will have time to understand why''
+	\end{itemize}}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item and now I leave you with playing with the robot; choose different $P$s, different $I$s, and different $D$s, and see what happens
+		\item my proposal: make a robot race! let's see who finds the best combination!
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\begin{frame}
+	\begin{center}
+		$\rightarrow$ ``manual for the students'', section ``experimenting with the PID controller''
+	\end{center}
+	\note<1-1>{\begin{itemize}
+		\item for this, go to the manual and follow the instructions reported there in this section
+	\end{itemize}}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!black}
+\begin{frame}
+	\begin{itemize}
+		\item so, now I let you do, and close this series video - I hope you liked it and that in the why you learned something about the most common automatic control strategy, the PID controller!
+		\item please feel free to keep in touch, and good luck with all your wonderful projects!
+		\item bye!
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+\title	[Balancing Robots]	{Making robots balance}
+\begin{frame}
+	\titlepage
+	\vspace{-2.5cm} 
+	\begin{center}
+	 	\includegraphics[height = 5.5cm]{minseg-M2V5} \\
+		\texttt{steffi.knorn@ovgu.de}
+	\end{center}
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=white!80!red}
+\begin{frame}
+	\begin{itemize}
+		\item any Easter egg you would like to add :)
+	\end{itemize}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+\end{document}														%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+% ./FramesTemplates/template__citation.tex
+% ./FramesTemplates/template__empty_frame.tex
+% ./FramesTemplates/template__frame_with_blocks.tex
+% ./FramesTemplates/template__frame_with_colored_background.tex
+% ./FramesTemplates/template__frame_with_itemized_list.tex
+% ./FramesTemplates/template__frame_with_overlayed_figures.tex
+% ./FramesTemplates/template__frame_with_two_columns.tex
+% ./FramesTemplates/template__frame_with_two_columns_and_overlayed_figures.tex
+
+
+\begin{frame}{<++>}{<++>}
+	<++>
+	\note<1-1>{\begin{itemize}
+		\item <++>
+	\end{itemize}}
+\end{frame}
+<++>
+
+
