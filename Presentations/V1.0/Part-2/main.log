@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.11.2 (MiKTeX 2.9.7250 64-bit)  (format=lualatex 2019.11.24)  3 JUN 2020 18:40
+This is LuaTeX, Version 1.11.2 (MiKTeX 2.9.7250 64-bit)  (format=lualatex 2019.11.24)  4 JUN 2020 19:37
  system commands enabled.
 **main.tex
 (./main.tex
@@ -59,7 +59,7 @@ Lua module: luaotfload-tounicode 2019-11-10 3.11 luaotfload submodule / tounicod
 e
 Inserting `luaotfload.rewrite_fontname' at position 6 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.220 seconds
+luaotfload | main : initialization completed in 1.675 seconds
 (./Scripts/preamble.tex
 (C:/Users/damianov/AppData/Roaming/MiKTeX/2.9/tex/latex/beamer/beamer.cls
 Document Class: beamer 2019/09/29 v3.57 A class for typesetting presentations
@@ -1831,7 +1831,7 @@ Here is how much of LuaTeX's memory you used:
    32 hlist, 6 vlist, 5 rule, 14 disc, 3 local_par, 1 dir, 2 math, 107 glue, 27 
 kern, 20 penalty, 278 glyph, 105 attribute, 61 glue_spec, 54 attribute_list, 5 w
 rite, 20 pdf_colorstack nodes
-   avail lists: 1:2,2:1167,3:354,4:97,5:96,6:30,7:941,8:3,9:227,10:23,11:40
+   avail lists: 1:2,2:1167,3:354,4:97,5:96,6:18,7:941,8:3,9:182,10:23,11:40
  54520 multiletter control sequences out of 65536+200000
  61 fonts using 4184823 bytes
  67i,11n,113p,843b,848s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1846,7 +1846,7 @@ s/MiKTeX 2.9/fonts/type1/public/lm/lmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts
 mss12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmss8.pfb><C:/Progr
 am Files/MiKTeX 2.9/fonts/type1/public/lm/lmss9.pfb><C:/Program Files/MiKTeX 2.9
 /fonts/type1/public/lm/lmsso10.pfb>
-Output written on main.pdf (34 pages, 272593 bytes).
+Output written on main.pdf (34 pages, 272311 bytes).
 
 PDF statistics: 241 PDF objects out of 1000 (max. 8388607)
  69 named destinations out of 1000 (max. 131072)
