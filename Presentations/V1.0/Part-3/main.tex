@@ -193,18 +193,17 @@
 	\begin{footnotesize}
 	\begin{itemize}
 		\item but our brain is not complete if we make it only using the P ingredient
-		\item let me show you what I mean using another example (also to show how ubiquitous control is)
-		\item assume that I want to balance a ball on a board, and make the ball stay at the center of the board
-		\item my control action, that is, what I can do, is to move the board in this way
-		\item what is a P controller here? it is that depending on how far the ball is from the center, I tilt more or less
+		\item let me show you what I mean:
+		\item the ``P controller'' brain we put inside the robot makes the wheels move so that the robot stays upright
+		\item what is the P controller doing, actually? well, the more tilted the robot is, the more the wheels push
 		\item now remember: I may be more or less aggressive, that means choosing P bigger or smaller
-		\item but pretend to be in the open space now, and that there is some wind that is keeping blowing and pushing just a tiny bit the ball that I am balancing
-		\item what happens? let's have some wind assistant here: wind assistant, may you disturb me a bit?
-		\item so the wind pushes, and the P controller reacts
+		\item but pretend to be in the open space now, and that there is some wind that is keeping blowing and pushing just a tiny bit the robot
+		\item you can simulate it by using a hairdryer -- try!
+		\item anyway, what happens with the wind? the wind pushes, and the P controller reacts
 		\item the wind makes a force, and the P controller makes a force too
 		\item whenever the two forces are equal, then we get an equilibrium
-		\item but at the equilibrium the ball is not at the point where I would like it to be
-		\item somehow the P controller by itself is not ``smart enough'' to realize that there is this disturbance, and eliminate it
+		\item but at the equilibrium the robot is not perfectly vertical, and thus it is not how I would like it to be
+		\item somehow the ``P controller'' brain by itself is not ``smart enough'' to realize that there is this wind that is disturbing, and thus it cannot eliminate its effects
 		\item let's see this through an animation
 	\end{itemize}
 	\end{footnotesize}
@@ -215,15 +214,15 @@
 \begin{frame}[t]{No wind = no problems}
 	\begin{center}
 		\begin{tikzpicture}
-		[
-			board/.style = {rectangle, rounded corners = 0.1cm, fill = white!50!gray, draw = white!50!gray, minimum width = 7cm, minimum height = 0.2cm},
-			boardcenter/.style = {circle, fill = black, draw = black, inner sep = 0cm, minimum size = 0.15cm},
-			ball/.style = {circle, minimum size = 1cm, draw = black, very thick},
-		]
+			[
+				body/.style = {rectangle, minimum width = 0.7cm, minimum height = 2.4cm, rounded corners, fill = black},
+				wheel/.style = {circle, minimum size = 1.4cm, thick, fill = black!50!white, draw = black},
+				myline/.style = {dashed, \StrongPrimary, thick},
+			]
 			%
-			\node (board) [board] {};
-			\node (boardcenter) [boardcenter] at (board.center) {};
-			\node (ball) [ball, anchor = south] at (board.north) {};
+			\node (body) [body, rotate = 0] {};
+			\node (wheel) [wheel] at (body.south) {};
+			\draw [myline] (wheel) -- ++(0,3);
 			%
 		\end{tikzpicture}
 	\end{center}
@@ -233,18 +232,17 @@
 \begin{frame}[t]{Some wind = some problems}
 	\begin{center}
 		\begin{tikzpicture}
-		[
-			board/.style = {rectangle, rounded corners = 0.1cm, fill = white!50!gray, draw = white!50!gray, minimum width = 7cm, minimum height = 0.2cm},
-			boardcenter/.style = {circle, fill = black, draw = black, inner sep = 0cm, minimum size = 0.15cm},
-			ball/.style = {circle, minimum size = 1cm, draw = black, very thick},
-			wind/.style = {very thick, densely dotted, blue},
-		]
+			[
+				body/.style = {rectangle, minimum width = 0.7cm, minimum height = 2.4cm, rounded corners, fill = black},
+				wheel/.style = {circle, minimum size = 1.4cm, thick, fill = black!50!white, draw = black},
+				myline/.style = {dashed, \StrongPrimary, thick},
+				wind/.style = {very thick, densely dotted, blue},
+			]
 			%
-			\node (board) [board, rotate = 10] {};
-			\node (boardcenter) [boardcenter] at (board.center) {};
-			\node (ball) [ball, anchor = south] at (board.25) {};
+			\node (body) [body, rotate = -10] {};
+			\node (wheel) [wheel] at (body.south) {};
 			%
-			\node (auxA) [coordinate, xshift = -1.0cm] at (ball.west) {};
+			\node (auxA) [coordinate, xshift = -1.0cm] at (body.north) {};
 			\node (auxB) [coordinate, yshift =  0.2cm, xshift = -0.3cm] at (auxA) {};
 			\node (auxC) [coordinate, yshift = -0.2cm, xshift = -0.2cm] at (auxA) {};
 			%
@@ -259,7 +257,7 @@
 			%
 		\end{tikzpicture}
 	\end{center}
-	\vspace{0.5cm} 
+	\vspace{0.0cm} 
 	\pause
 	\begin{center}
 		\begin{tikzpicture}
@@ -288,18 +286,17 @@
 \begin{frame}{Discussion time!}
 	\begin{center}
 		\begin{tikzpicture}
-		[
-			board/.style = {rectangle, rounded corners = 0.1cm, fill = white!50!gray, draw = white!50!gray, minimum width = 7cm, minimum height = 0.2cm},
-			boardcenter/.style = {circle, fill = black, draw = black, inner sep = 0cm, minimum size = 0.15cm},
-			ball/.style = {circle, minimum size = 1cm, draw = black, very thick},
-			wind/.style = {very thick, densely dotted, blue},
-		]
+			[
+				body/.style = {rectangle, minimum width = 0.7cm, minimum height = 2.4cm, rounded corners, fill = black},
+				wheel/.style = {circle, minimum size = 1.4cm, thick, fill = black!50!white, draw = black},
+				myline/.style = {dashed, \StrongPrimary, thick},
+				wind/.style = {very thick, densely dotted, blue},
+			]
 			%
-			\node (board) [board, rotate = 10] {};
-			\node (boardcenter) [boardcenter] at (board.center) {};
-			\node (ball) [ball, anchor = south] at (board.25) {};
+			\node (body) [body, rotate = -10] {};
+			\node (wheel) [wheel] at (body.south) {};
 			%
-			\node (auxA) [coordinate, xshift = -1.0cm] at (ball.west) {};
+			\node (auxA) [coordinate, xshift = -1.0cm] at (body.north) {};
 			\node (auxB) [coordinate, yshift =  0.2cm, xshift = -0.3cm] at (auxA) {};
 			\node (auxC) [coordinate, yshift = -0.2cm, xshift = -0.2cm] at (auxA) {};
 			%
@@ -314,7 +311,7 @@
 			%
 		\end{tikzpicture}
 	\end{center}
-	\vspace{0.5cm} 
+	\vspace{0.0cm} 
 	\begin{center}
 		\begin{tikzpicture}
 		[
@@ -348,18 +345,17 @@
 	\vspace{0.2cm} 
 	\begin{center}
 		\begin{tikzpicture}
-		[
-			board/.style = {rectangle, rounded corners = 0.1cm, fill = white!50!gray, draw = white!50!gray, minimum width = 7cm, minimum height = 0.2cm},
-			boardcenter/.style = {circle, fill = black, draw = black, inner sep = 0cm, minimum size = 0.15cm},
-			ball/.style = {circle, minimum size = 1cm, draw = black, very thick},
-			wind/.style = {very thick, densely dotted, blue},
-		]
+			[
+				body/.style = {rectangle, minimum width = 0.7cm, minimum height = 2.4cm, rounded corners, fill = black},
+				wheel/.style = {circle, minimum size = 1.4cm, thick, fill = black!50!white, draw = black},
+				myline/.style = {dashed, \StrongPrimary, thick},
+				wind/.style = {very thick, densely dotted, blue},
+			]
 			%
-			\node (board) [board, rotate = 10] {};
-			\node (boardcenter) [boardcenter] at (board.center) {};
-			\node (ball) [ball, anchor = south] at (board.25) {};
+			\node (body) [body, rotate = -10] {};
+			\node (wheel) [wheel] at (body.south) {};
 			%
-			\node (auxA) [coordinate, xshift = -1.0cm] at (ball.west) {};
+			\node (auxA) [coordinate, xshift = -1.0cm] at (body.north) {};
 			\node (auxB) [coordinate, yshift =  0.2cm, xshift = -0.3cm] at (auxA) {};
 			\node (auxC) [coordinate, yshift = -0.2cm, xshift = -0.2cm] at (auxA) {};
 			%
@@ -374,7 +370,7 @@
 			%
 		\end{tikzpicture}
 	\end{center}
-	\vspace{0.1cm} 
+	\vspace{-0.9cm} 
 	\begin{center}
 		\begin{tikzpicture}
 		[
@@ -386,7 +382,7 @@
 			\draw [axes] (0,0) -- (0,3) node [left, pos = 0.5] {error};
 			%
 			\draw [signal] (0,1) -- (7,1);
-			\node at (6,2.5) {P ingredient = ``how much error do we have now''};
+			\node at (6,2.0) {P ingredient = ``how much error do we have now''};
 			\node at (6,1.5) {I ingredient = ``how much error have we accumulated''};
 			%
 		\end{tikzpicture}
@@ -478,7 +474,7 @@
 \end{frame}
 
 
-\begin{frame}{The D (derivative) ingredient: tilt not only proportionally to the current error and keeping in mind the past history, but also forecasting what is going to happen in the future!}
+\begin{frame}{The D (derivative) ingredient: consider how fast the error is changing!}
 	\pause
 	$$
 		\text{my action} = 
