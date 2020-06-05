@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.11.2 (MiKTeX 2.9.7250 64-bit)  (format=lualatex 2019.11.24)  2 JUN 2020 18:56
+This is LuaTeX, Version 1.11.2 (MiKTeX 2.9.7250 64-bit)  (format=lualatex 2019.11.24)  5 JUN 2020 19:48
  system commands enabled.
 **main.tex
 (./main.tex
@@ -59,7 +59,7 @@ Lua module: luaotfload-tounicode 2019-11-10 3.11 luaotfload submodule / tounicod
 e
 Inserting `luaotfload.rewrite_fontname' at position 6 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.243 seconds
+luaotfload | main : initialization completed in 1.233 seconds
 (./Scripts/preamble.tex
 (C:/Users/damianov/AppData/Roaming/MiKTeX/2.9/tex/latex/beamer/beamer.cls
 Document Class: beamer 2019/09/29 v3.57 A class for typesetting presentations
@@ -1708,10 +1708,10 @@ nefit from \pgfplotsset{compat=1.16} (current compat level: 1.14).
 <./Images/minseg-M2V5.jpg, id=22, 781.92125pt x 1027.84pt>
 File: ./Images/minseg-M2V5.jpg Graphic file (type jpg)
 <use ./Images/minseg-M2V5.jpg>
-Package luatex.def Info: ./Images/minseg-M2V5.jpg  used on input line 32.
-(luatex.def)             Requested size: 75.75081pt x 99.58464pt.
+Package luatex.def Info: ./Images/minseg-M2V5.jpg  used on input line 33.
+(luatex.def)             Requested size: 119.04893pt x 156.49014pt.
 
-Overfull \vbox (19.19852pt too high) detected at line 32
+Overfull \vbox (9.15297pt too high) detected at line 33
  []
 
 [1
@@ -1722,26 +1722,26 @@ inseg-M2V5.jpg>] (./main.toc) [2
 ] [3
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 49
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 50
 .
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/lm/t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 49
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 50
 .
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/lm/ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 49
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 50
 .
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/lm/omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 4
-9.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 5
+0.
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/lm/omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1749,14 +1749,14 @@ File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 <./Images/screenshot-github.png, id=48, 903.87688pt x 322.70563pt>
 File: ./Images/screenshot-github.png Graphic file (type png)
 <use ./Images/screenshot-github.png>
-Package luatex.def Info: ./Images/screenshot-github.png  used on input line 49.
+Package luatex.def Info: ./Images/screenshot-github.png  used on input line 50.
 (luatex.def)             Requested size: 358.50229pt x 127.99666pt.
  [4
 
 <./Images/screenshot-github.png>]
 File: ./Images/screenshot-github.png Graphic file (type png)
 <use ./Images/screenshot-github.png>
-Package luatex.def Info: ./Images/screenshot-github.png  used on input line 58.
+Package luatex.def Info: ./Images/screenshot-github.png  used on input line 59.
 (luatex.def)             Requested size: 358.50229pt x 127.99666pt.
  [5
 
@@ -1765,20 +1765,20 @@ Package luatex.def Info: ./Images/screenshot-github.png  used on input line 58.
 File: ./Images/github-repository-explorer.png Graphic file (type png)
 <use ./Images/github-repository-explorer.png>
 Package luatex.def Info: ./Images/github-repository-explorer.png  used on input 
-line 66.
+line 67.
 (luatex.def)             Requested size: 358.50229pt x 160.74097pt.
  [6
 
 <./Images/github-repository-explorer.png>]
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 74.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 75.
 LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <10.95> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 74.
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 75.
 <./Images/github-repository-explorer-2.png, id=68, 581.92406pt x 187.45032pt>
 File: ./Images/github-repository-explorer-2.png Graphic file (type png)
 <use ./Images/github-repository-explorer-2.png>
 Package luatex.def Info: ./Images/github-repository-explorer-2.png  used on inpu
-t line 74.
+t line 75.
 (luatex.def)             Requested size: 358.50229pt x 115.4829pt.
  [7
 
@@ -1787,7 +1787,7 @@ t line 74.
 File: ./Images/github-repository-explorer-3.png Graphic file (type png)
 <use ./Images/github-repository-explorer-3.png>
 Package luatex.def Info: ./Images/github-repository-explorer-3.png  used on inpu
-t line 82.
+t line 83.
 (luatex.def)             Requested size: 358.50229pt x 166.6486pt.
  [8
 
@@ -1798,7 +1798,7 @@ File: ./Images/github-repository-explorer-minseg-test.png Graphic file (type png
 )
 <use ./Images/github-repository-explorer-minseg-test.png>
 Package luatex.def Info: ./Images/github-repository-explorer-minseg-test.png  us
-ed on input line 90.
+ed on input line 91.
 (luatex.def)             Requested size: 358.50229pt x 140.66338pt.
 
 [9
@@ -1808,10 +1808,10 @@ ed on input line 90.
 File: ./Images/arduino-board-manager.png Graphic file (type png)
 <use ./Images/arduino-board-manager.png>
 Package luatex.def Info: ./Images/arduino-board-manager.png  used on input line 
-98.
-(luatex.def)             Requested size: 358.50229pt x 391.85179pt.
+99.
+(luatex.def)             Requested size: 199.1693pt x 217.69418pt.
 
-Overfull \vbox (198.47113pt too high) detected at line 98
+Overfull \vbox (24.31352pt too high) detected at line 99
  []
 
 [10
@@ -1820,11 +1820,11 @@ Overfull \vbox (198.47113pt too high) detected at line 98
 <./Images/arduino-board-tool.png, id=95, 505.13719pt x 384.6872pt>
 File: ./Images/arduino-board-tool.png Graphic file (type png)
 <use ./Images/arduino-board-tool.png>
-Package luatex.def Info: ./Images/arduino-board-tool.png  used on input line 106
+Package luatex.def Info: ./Images/arduino-board-tool.png  used on input line 107
 .
-(luatex.def)             Requested size: 358.50229pt x 273.01828pt.
+(luatex.def)             Requested size: 199.1693pt x 151.67682pt.
 
-Overfull \vbox (124.51787pt too high) detected at line 106
+Overfull \vbox (3.1764pt too high) detected at line 107
  []
 
 [11
@@ -1834,19 +1834,15 @@ Overfull \vbox (124.51787pt too high) detected at line 106
 File: ./Images/arduino-board-manager-upload.png Graphic file (type png)
 <use ./Images/arduino-board-manager-upload.png>
 Package luatex.def Info: ./Images/arduino-board-manager-upload.png  used on inpu
-t line 114.
-(luatex.def)             Requested size: 358.50229pt x 293.9152pt.
-
-Overfull \vbox (99.9262pt too high) detected at line 114
- []
-
-[12
+t line 115.
+(luatex.def)             Requested size: 199.1693pt x 163.28592pt.
+ [12
 
 <./Images/arduino-board-manager-upload.png>]
 <./Images/M2V3.2.png, id=110, 610.53094pt x 271.76532pt>
 File: ./Images/M2V3.2.png Graphic file (type png)
 <use ./Images/M2V3.2.png>
-Package luatex.def Info: ./Images/M2V3.2.png  used on input line 122.
+Package luatex.def Info: ./Images/M2V3.2.png  used on input line 123.
 (luatex.def)             Requested size: 358.50229pt x 159.58542pt.
  [13
 
@@ -1854,10 +1850,9 @@ Package luatex.def Info: ./Images/M2V3.2.png  used on input line 122.
 <./Images/M1V4.png, id=116, 599.23875pt x 243.15843pt>
 File: ./Images/M1V4.png Graphic file (type png)
 <use ./Images/M1V4.png>
-Package luatex.def Info: ./Images/M1V4.png  used on input line 130.
+Package luatex.def Info: ./Images/M1V4.png  used on input line 131.
 (luatex.def)             Requested size: 358.50229pt x 145.47691pt.
-
-[14
+ [14
 
 <./Images/M1V4.png>] [15
 
@@ -1871,24 +1866,24 @@ Package luatex.def Info: ./Images/M1V4.png  used on input line 130.
 \tf@snm=\write8
 
 \openout8 = main.snm
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 139.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 139.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 140.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 140.
  (./main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 139.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 139.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 140.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 140.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 9877F1242EA06A25698CDA1311E1CA2E;260.
 )
 
 Here is how much of LuaTeX's memory you used:
- 51799 strings out of 493869
+ 51805 strings out of 493869
  100000,1648299 words of node,token memory allocated
  2960 words of node memory still in use:
    20 hlist, 9 vlist, 3 rule, 9 disc, 3 local_par, 1 dir, 65 glue, 18 kern, 11 p
 enalty, 190 glyph, 71 attribute, 61 glue_spec, 37 attribute_list, 5 write, 10 pd
 f_colorstack nodes
    avail lists: 1:2,2:813,3:229,4:96,5:70,6:13,7:630,8:57,9:194,10:18,11:26
- 54464 multiletter control sequences out of 65536+200000
+ 54470 multiletter control sequences out of 65536+200000
  62 fonts using 4266543 bytes
  67i,11n,113p,843b,523s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/damianov/AppData/Roaming/MiKTeX/2.9/fonts/enc/dvips/mnsymbol/MnSymbolA
@@ -1898,7 +1893,7 @@ ram Files/MiKTeX 2.9/fonts/type1/public/lm/lmss10.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/public/lm/lmss12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
 lic/lm/lmss8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbo10.pfb
 ><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb>
-Output written on main.pdf (15 pages, 1341025 bytes).
+Output written on main.pdf (15 pages, 1340055 bytes).
 
 PDF statistics: 154 PDF objects out of 1000 (max. 8388607)
  33 named destinations out of 1000 (max. 131072)
