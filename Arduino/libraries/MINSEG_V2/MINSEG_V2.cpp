@@ -295,6 +295,12 @@ int16_t Minseg::getGyroXRaw(void){
 	
 } // and of getAccY
 
+int16_t Minseg::getGyroXAvg(void){
+	 //this average value is calculated in the updateIMU_RAW function for now
+	return gx_avg;
+	
+} // and of getGyroXAvg
+
 void Minseg::updateAccYg(void){
 	ay = (float)(Minseg::getAccYRaw() - ay_raw_offset) * ay_scale;
 } // end of updateAccYg
@@ -306,6 +312,16 @@ void Minseg::updateAccZg(void){
 void Minseg::updateGyroXdps(void){
 	gx = (float)(Minseg::getGyroXRaw() - gx_raw_offset) * gx_scale;
 } // end of updateGyroXdps
+
+
+float Minseg::getOrientationOffset(void){
+	
+	orientationOffset = (ALFA_GYRO_AVG)*atan2f(ay,az) + (1-ALFA_GYRO_AVG) * (lastOrientationOffset);
+	lastOrientationOffset = orientationOffset;
+	
+	return orientationOffset;
+	
+} // end of getOrientationOffset
 
 void Minseg::updateGyro(void){
 	//Minseg::updateGyroXdps();
@@ -442,10 +458,16 @@ void Minseg::clearIMU_FIFO(void)
 void Minseg::updateIMU_RAW(void)
 {
 	gxFifoBuffer[gxFifoCnt] = Minseg::getGyroXRaw();
+	
+	// update moving average gyro as well
+	gx_avg = (ALFA_GYRO_AVG) * (float)(gxFifoBuffer[gxFifoCnt]) + (1-ALFA_GYRO_AVG) * (float)(last_gx_avg);
+	last_gx_avg = gx_avg;	
+	
 	if (gxFifoCnt < 19)
 	{
 		gxFifoCnt++;
 	}
+	
 	ayFifoBuffer[ayFifoCnt] = Minseg::getAccYRaw();
 	if (ayFifoCnt < 19)
 	{

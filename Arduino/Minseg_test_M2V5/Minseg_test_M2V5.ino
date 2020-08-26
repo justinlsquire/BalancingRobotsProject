@@ -70,10 +70,10 @@ void setup() {
   // being ready to use
   controller.setupController();
 
-  // temporary - for my setup with MinSeg - JS/28Jul2019
-  //robot.gx_raw_offset = -60; // my gyro offset 
-  robot.gx_raw_offset = 180; // my gyro offset 
-  controller.orientationOffsetX = -1.55; // radians - mine is not too straight because I broke it and had to repair it
+  // set these based on the true observed values from the sensors 
+  // instructions will be done soon
+  robot.gx_raw_offset = -190; // gyro offset in raw units
+  controller.orientationOffsetX = -1.66; // vertical (balancing) orientation offset in radians
 
   // some experimental PID settings, before moving on to state space
   //controller.Kp = 65;
@@ -210,6 +210,12 @@ void controllerUpdate(void)
   controller.updateEstimator();
 
   // temporary stuff for debugging 
+
+  //Serial.println(robot.getGyroXAvg());
+  //Serial.println(robot.gx*57.4);
+  //Serial.println(robot.getOrientationOffset());
+  //Serial.println(controller.ex*57.4);
+  
   //Serial.println(robot.getGyroXRaw());
   //Serial.println(robot.gxFifoAvg);
   //Serial.println(robot.gx);

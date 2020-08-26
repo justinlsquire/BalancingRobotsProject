@@ -38,7 +38,7 @@ segControl::segControl(){
 	// initialize default wheel radius
 	wheelRadius = CONTROLLER_WHEEL_RADIUS_DEFUALT;
 	
-	wheelIntegralOnPID = 1; // turn on by default
+	wheelIntegralOnPID = 0;//1; // turn on by default
 	
 	
 } // end of constructor

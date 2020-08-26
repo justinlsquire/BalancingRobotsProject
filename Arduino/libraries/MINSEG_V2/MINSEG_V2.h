@@ -60,6 +60,8 @@
 
 #define ALFA_GYRO 0.9 // amount given to new value
 
+#define ALFA_GYRO_AVG 0.05 // amount given to new value
+
 class Minseg
 {
   public:
@@ -84,6 +86,8 @@ class Minseg
 	// gyro
 	int16_t gx_raw, gy_raw, gz_raw; // raw (integer) values of gyro
 	int16_t gx_raw_offset, gy_raw_offset, gz_raw_offset; // raw (integer) offset values of gyro
+	int16_t gx_avg;
+	int16_t last_gx_avg;
 	float gx_scale, gy_scale, gz_scale; // scale factors for converting raw gyro values to g* (rad/s)
 	float gx, gy, gz; // gyro values (in rad/s)
 	float last_gx,last_gy,last_gz;
@@ -102,6 +106,10 @@ class Minseg
 	int16_t azFifoBuffer[20];
 	int16_t azFifoAvg;
 	uint8_t azFifoCnt;
+	
+	// angle
+	float orientationOffset;
+	float lastOrientationOffset;
 
 	// magnetometer
 	int16_t mx_raw, my_raw, mz_raw; // raw (integer) values of magnetometer
@@ -164,6 +172,10 @@ class Minseg
 	int16_t getGyroXRaw();
 	int16_t getAccYRaw();
 	int16_t getAccZRaw();
+	
+	int16_t getGyroXAvg(); 
+	
+	float getOrientationOffset();
 	
 	// get the scaled values of the raw values
 	void updateGyroXdps();
