@@ -1,0 +1,21 @@
+\def\TablesRowsColor{black!8}
+\def\TablesColumnsColor{black!4}
+
+\newcolumntype
+{g}
+{
+	>{\centering \columncolor{\TablesColumnsColor} \arraybackslash}
+	p{0.15\textwidth}
+	<{}
+}
+
+\newcolumntype
+{w}
+{
+	>{\centering \arraybackslash}
+	p{0.15\textwidth}
+	<{}
+}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+

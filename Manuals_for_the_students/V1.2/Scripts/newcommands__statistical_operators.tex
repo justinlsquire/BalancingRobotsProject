@@ -1,0 +1,59 @@
+\newcommand{\Probability}			[0]	{\mathbb{P}}
+\newcommand{\ProbabilityOf}			[1]	{\Probability \left[ #1 \right]}
+\newcommand{\ProbabilityOfGiven}	[2]	{\ProbabilityOf{ #1 \; \left| \; #2 \right.}}
+
+
+\newcommand{\ProbabilityDistribution}		[0]	{P}
+\newcommand{\ProbabilityDistributionOf}		[1]	{\ProbabilityDistribution \left( #1 \right)}
+\newcommand{\ProbabilityDistributionOfGiven}[2]	{\ProbabilityDistributionOf{ #1 \left| #2 \right. }}
+%
+\newcommand{\ProbabilityDistributionOfRV}	[1]	{\ProbabilityDistribution_{#1}}
+\newcommand{\ProbabilityDistributionOfRVOf}	[2]	{\ProbabilityDistributionOfRV{#1} \left( #2 \right)}
+\newcommand{\ProbabilityDistributionOfRVOfGiven}	[3]
+		   {\ProbabilityDistributionOfRVOf{#1}{ #2 \left| #3 \right. }}
+
+
+\newcommand{\ProbabilityDensity}			[0]	{p}
+\newcommand{\ProbabilityDensityOf}			[1]	{\ProbabilityDensity \left( #1 \right)}
+\newcommand{\ProbabilityDensityOfGiven}		[2]	{\ProbabilityDensityOf{ #1 \left| #2 \right. }}
+%
+\newcommand{\ProbabilityDensityOfRV}		[1]	{\ProbabilityDensity_{#1}}
+\newcommand{\ProbabilityDensityOfRVOf}		[2]	{\ProbabilityDensityOfRV{#1} \left( #2 \right)}
+\newcommand{\ProbabilityDensityOfRVOfGiven}	[3] {\ProbabilityDensityOfRVOf{#1}{ #2 \left| #3 \right. }}
+
+
+\newcommand{\ProbabilityMassFunction}		[0]	{m}
+\newcommand{\ProbabilityMassFunctionOf}		[1]	{\ProbabilityMassFunction \left( #1 \right)}
+\newcommand{\ProbabilityMassFunctionOfGiven}[2]	{\ProbabilityMassFunctionOf{ #1 \left| #2 \right. }}
+%
+\newcommand{\ProbabilityMassFunctionOfRV}	[1]	{\ProbabilityMassFunction_{#1}}
+\newcommand{\ProbabilityMassFunctionOfRVOf}	[2]	{\ProbabilityMassFunctionOfRV{#1} \left( #2 \right)}
+\newcommand{\ProbabilityMassFunctionOfRVOfGiven}		[3]
+		   {\ProbabilityMassFunctionOfRVOf{#1}{ #2 \left| #3 \right. }}
+
+
+\newcommand{\Expectation}					[0]	{\mathbb{E}}
+\newcommand{\ExpectationOf}					[1]	{\Expectation \left[ #1 \right]}
+\newcommand{\ExpectationOfOnMeasure}		[2]	{\Expectation_{#2} \left[ #1 \right]}
+\newcommand{\ExpectationOfGiven}			[2]	{\ExpectationOf{ #1 \; \left| \; #2 \right. }}
+\newcommand{\ExpectationOfOnMeasureGiven}	[3]	{\ExpectationOfOnMeasure{#1 \; \left| \; #3 \right.}{#2}}
+
+
+\newcommand{\Variance}				[0]	{\mathrm{var}}
+\newcommand{\VarianceOf}			[1]	{\Variance \left( #1 \right)}
+\newcommand{\VarianceOfGiven}		[2]	{\VarianceOf{ #1 \; \left| \; #2 \right. }}
+
+
+\newcommand{\Covariance}			[0]	{\mathrm{cov}}
+\newcommand{\CovarianceOf}			[2]	{\Covariance \left( #1, #2 \right)}
+\newcommand{\CovarianceOfGiven}		[3]	{\Covariance \left( #1, #2 \; \left| \; #3 \right. \right)}
+
+
+\newcommand{\BayesEstimatorOfGiven}	[2]	{\widehat{\Expectation} \left[ #1 \; \left| \; #2 \right. \right] }
+
+
+\newcommand{\IndicatorFunctionOf}	[1]	{\mathds{1} \left\lbrace #1 \right\rbrace}
+
+
+\newcommand{\SufficientStatistic}	[0]	{T}
+\newcommand{\SufficientStatisticOf}	[1]	{\SufficientStatistic \left( #1 \right)}

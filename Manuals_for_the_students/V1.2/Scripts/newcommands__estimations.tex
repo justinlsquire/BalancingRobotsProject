@@ -1,0 +1,106 @@
+\newcommand{\EstimatedSignal}						[0]	{\widehat{\Signal}}
+\newcommand{\OptimallyEstimatedSignal}				[0]	{\widehat{\Signal}^{*}}
+\newcommand{\OptimallyBayesEstimatedSignal}			[0]	{\widehat{\Signal}^{*}_{\text{Bayes}}}
+\newcommand{\OptimallyCostFunctionEstimatedSignal}	[0]	{\widehat{\Signal}^{*}_{\text{c.f.}}}
+%
+\newcommand{\EstimatedSignalAt}						[1]	{\EstimatedSignal \left( #1 \right)}
+\newcommand{\OptimallyEstimatedSignalAt}			[1]	{\OptimallyEstimatedSignal \left( #1 \right)}
+\newcommand{\OptimallyBayesEstimatedSignalAt}		[1]	{\OptimallyBayesEstimatedSignal \left( #1 \right)}
+\newcommand{\OptimallyCostFunctionEstimatedSignalAt}[1]	{\OptimallyCostFunctionEstimatedSignal \left( #1 \right)}
+%
+\newcommand{\EstimatedSignalAtSet}						[1]	{\EstimatedSignal_{#1}}
+\newcommand{\OptimallyEstimatedSignalAtSet}				[1]	{\OptimallyEstimatedSignal_{#1}}
+\newcommand{\OptimallyBayesEstimatedSignalAtSet}		[1]	{\OptimallyBayesEstimatedSignal_{#1}}
+\newcommand{\OptimallyCostFunctionEstimatedSignalAtSet}	[1]	{\OptimallyCostFunctionEstimatedSignal_{#1}}
+
+
+
+
+\newcommand{\EstimatedEigenfunctionWeight}			[1]
+			{\widehat{a}_{#1}}
+\newcommand{\SetOfEstimatedEigenfunctionsWeights}	[0]
+			{\widehat{\SetOfEigenfunctionsWeights}}
+\newcommand{\EigenfunctionsWeightsEstimationError}	[0]
+			{\widetilde{\SetOfEigenfunctionsWeights}}
+
+
+
+
+\newcommand{\EstimatedEigenfunctionWeightOfSensor}			[2]
+			{\widehat{a}_{#1, #2}}
+\newcommand{\SetOfEstimatedEigenfunctionsWeightsOfSensor}	[1]
+			{\widehat{\SetOfEigenfunctionsWeights}_{#1}}
+\newcommand{\EigenfunctionsWeightsEstimationErrorOfSensor}	[1]
+			{\widetilde{\SetOfEigenfunctionsWeights}_{#1}}
+\newcommand{\LocallyEstimatedEigenfunctionWeightOfSensor}	[2]
+			{\widehat{a}_{#1, #2}^{loc}}
+
+
+
+
+\newcommand{\SetOfLocallyEstimatedEigenfunctionsWeights}				[0]
+			{\widehat{\SetOfEigenfunctionsWeights}^{\text{loc}}}
+\newcommand{\SetOfLocallyEstimatedEigenfunctionsWeightsOfSensor}		[1]
+			{\widehat{\SetOfEigenfunctionsWeights}^{\text{loc}}_{#1}}
+\newcommand{\SetOfLocallyBayesEstimatedEigenfunctionsWeights}			[0]
+			{\widehat{\SetOfEigenfunctionsWeights}_{\text{Bayes}}^{\text{loc}}}
+\newcommand{\SetOfLocallyCostFunctionEstimatedEigenfunctionsWeights}	[0]
+			{\widehat{\SetOfEigenfunctionsWeights}_{\text{c.f.}}^{\text{loc}}}
+%
+\newcommand{\SetOfLocallyBayesEstimatedEigenfunctionsWeightsOfSensor}			[1]
+			{\widehat{\SetOfEigenfunctionsWeights}_{\text{Bayes}, #1}^{\text{loc}}}
+\newcommand{\SetOfLocallyCostFunctionEstimatedEigenfunctionsWeightsOfSensor}	[1]
+			{\widehat{\SetOfEigenfunctionsWeights}_{\text{c.f.}, #1}^{\text{loc}}}
+%
+%
+\newcommand{\SetOfCentrallyEstimatedEigenfunctionsWeights}				[0]
+			{\widehat{\SetOfEigenfunctionsWeights}^{\text{cen}}}
+\newcommand{\SetOfCentrallyBayesEstimatedEigenfunctionsWeights}			[0]
+			{\widehat{\SetOfEigenfunctionsWeights}_{\text{Bayes}}^{\text{cen}}}
+\newcommand{\SetOfCentrallyCostFunctionEstimatedEigenfunctionsWeights}	[0]
+			{\widehat{\SetOfEigenfunctionsWeights}_{\text{c.f.}}^{\text{cen}}}
+%
+\newcommand{\SetOfCentrallyBayesEstimatedEigenfunctionsWeightsOfSensor}			[1]
+			{\widehat{\SetOfEigenfunctionsWeights}_{\text{Bayes}, #1}^{\text{cen}}}
+\newcommand{\SetOfCentrallyCostFunctionEstimatedEigenfunctionsWeightsOfSensor}	[1]
+			{\widehat{\SetOfEigenfunctionsWeights}_{\text{c.f.}, #1}^{\text{cen}}}
+%
+%
+\newcommand{\SetOfDistributelyEstimatedEigenfunctionsWeights}				[0]
+			{\widehat{\SetOfEigenfunctionsWeights}^{\text{dis}}}
+\newcommand{\SetOfDistributelyBayesEstimatedEigenfunctionsWeights}			[0]
+			{\widehat{\SetOfEigenfunctionsWeights}_{\text{Bayes}}^{\text{dis}}}
+\newcommand{\SetOfDistributelyCostFunctionEstimatedEigenfunctionsWeights}	[0]
+			{\widehat{\SetOfEigenfunctionsWeights}_{\text{c.f.}}^{\text{dis}}}
+%
+\newcommand{\SetOfDistributelyBayesEstimatedEigenfunctionsWeightsOfSensor}			[1]
+			{\widehat{\SetOfEigenfunctionsWeights}_{\text{Bayes}, #1}^{\text{dis}}}
+\newcommand{\SetOfDistributelyCostFunctionEstimatedEigenfunctionsWeightsOfSensor}	[1]
+			{\widehat{\SetOfEigenfunctionsWeights}_{\text{c.f.}, #1}^{\text{dis}}}
+
+
+
+
+\newcommand{\MaxAdmittableDistanceBtwOptimalCentralizedAndSuboptimalDistributedEstimates}	[0]
+			{d_{\text{o.c.}-\text{s.d.}}^{\text{max}}}
+
+
+
+\newcommand{\DistanceBtwLocalApproximatedBayesAndLocalApproximatedCostFunction}	[0]
+	{d_{\text{l.a.B. - l.a.c.f.}}}
+\newcommand{\DistanceBtwLocalOptimalBayesAndLocalApproximatedCostFunction}		[0]
+	{d_{\text{l.o.B. - l.a.c.f.}}}
+\newcommand{\DistanceBtwLocalOptimalBayesAndLocalApproximatedBayes}				[0]
+	{d_{\text{l.o.B. - l.a.B.}}}
+
+
+
+\newcommand{\NaiveDistributedEstimatorOfEigenfunctionsWeights}		[0]
+	{\widehat{\SetOfEigenfunctionsWeights}_{\text{dis}}^{\text{naive}}}
+%
+\newcommand{\GuessedDistributedEstimatorOfEigenfunctionsWeights}	[0]
+	{\widehat{\SetOfEigenfunctionsWeights}_{\text{dis}}^{\text{guess}}}
+\newcommand{\GuessedDistributedEstimatorOfEigenfunctionsWeightsOfGuess}	[1]
+	{\GuessedDistributedEstimatorOfEigenfunctionsWeights \left( #1 \right)}
+
+

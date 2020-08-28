@@ -1,0 +1,18 @@
+% put this in the first row of the main file
+\newif\ifexternalize
+\externalizetrue
+
+% put this in the ``packages'' part
+\newcommand{\figurefilename}[1]{\ifexternalize \tikzsetnextfilename{#1} \fi}
+\ifexternalize															%
+	\usetikzlibrary{external}											%
+	\tikzexternalize[shell escape=-enable-write18]						%
+	\tikzset{external/force remake}										%
+\fi																		%
+
+% call tikz figures as the following
+\figurefilename{figure-blabla}
+\begin{figure}[!htbp]
+	\input{figure-blabla}
+\end{figure}
+

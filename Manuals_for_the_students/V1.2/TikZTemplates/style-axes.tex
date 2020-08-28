@@ -1,0 +1,21 @@
+
+\pgfplotsset
+{
+	AxesStyle/.style =
+	{
+		axis x line				= bottom,	% bottom | middle | top
+		every inner x axis line/.append style	= {-latex},
+		hide x axis,
+		x dir					= reverse,
+		axis y line				= left,		% left | middle | right
+		every inner y axis line/.append style	= {-latex},
+		hide y axis,
+		y dir					= reverse,
+		axis on top,
+		enlarge x limits		= 0.0,
+	 	axis background/.style	= {fill = black!05!white},
+% 		xmode					= log,			% can't go in user-defined style! (limitations of pgfplots)
+% 		ymode					= linear,		% can't go in user-defined style! (limitations of pgfplots)
+	}
+}
+
