@@ -32,13 +32,13 @@
 
 // For the MinSeg, the euler estimate produces 90 degrees when upright 
 // this needs to be subtracted so it is balancing around the zero position
-#define ORIENTATION_OFFSET_DEFAULT 1.5708 // 90 deg offset (converted to rad)
+#define ORIENTATION_OFFSET_DEFAULT -1.5708 // 90 deg offset (converted to rad)
 
 
 // some default PID values that kind of worked for MinSeg
-#define KP_DEFAULT -18.0965 //100
-#define KI_DEFAULT 0.0 //10
-#define KD_DEFAULT -0.7904 // 0.4
+#define KP_DEFAULT 26.0
+#define KI_DEFAULT 165.0
+#define KD_DEFAULT 1.2
 #define N_DEFAULT 0.0 // derivative filter not implemented yet (maybe never)
 #define DEADZONE_DEFAULT 0.01 // volts under which motor output is cutoff
 #define INTEGRAL_MAX_DEFAULT 10.0 // anti-windup

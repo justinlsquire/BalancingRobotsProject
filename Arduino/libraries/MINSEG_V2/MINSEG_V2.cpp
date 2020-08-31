@@ -44,6 +44,8 @@ Minseg::Minseg(){
 	hasEncoders = 1;
 	hasAccel = 1;
 	hasMagnetometer = 0; // Has the hardware, can be implemented later
+	
+	encDir = 1; // forward by default (original MinSeg M2V5)
 
 } // end of constructor
 
@@ -498,6 +500,8 @@ void Minseg::updateEncoders(void){
 	enc1counts += encCountsDelta;
 	// update wheel position
 	x1 = enc1counts * countsToPositionWheel1;
+	
+	x1 *= encDir; // change sign based on hardware needs
 	
 	// only use motor speed if it is of interest
 	//mtr1Speed = encCountsDelta * countsToMtrSpeed1 / msPassed;

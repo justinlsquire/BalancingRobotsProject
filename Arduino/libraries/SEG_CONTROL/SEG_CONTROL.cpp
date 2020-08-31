@@ -126,7 +126,7 @@ void segControl::updateController(void){
 				error = ex;
 				
 				// update integral term
-				integralTerm += error * actualDt * Ki;
+				integralTerm += error * actualDt * (-Ki);
 				// check for anti-windup here
 				if (integralTerm > integralMax)
 				{
@@ -183,7 +183,7 @@ void segControl::updateController(void){
 				//wheelIntegralX1 = 0.3 * x1;
 				*/
 				
-				Vout1 = Kp * error + Kd * dTerm + integralTerm;// + 5.0 * x1_dot;// - wheelIntegralX1;// - x1 * 2;
+				Vout1 = (-Kp) * error + (-Kd) * dTerm + integralTerm;// + 5.0 * x1_dot;// - wheelIntegralX1;// - x1 * 2;
 				//Vout1 -= wheelIntegralX1;// * (0.01);
 				//Vout1 += 0.5 * (x1_dot + dTerm);
 				//Vout1 += 1.5 * wheelIntegralX1;

@@ -136,6 +136,9 @@ class Minseg
 	float countsToMtrSpeed1; // multiplication factor that is calculated once (to avoid slow floating point division)
     uint8_t enc1Direction; // 0 = normal, 1 = inverted	
 	float mtr1Voltage;
+	
+	// encoder direction flag
+	int8_t encDir;
 		
 	// # 2 (Left) Motor
 	uint8_t mtr2Active; // 0 = inactive, 1 = active

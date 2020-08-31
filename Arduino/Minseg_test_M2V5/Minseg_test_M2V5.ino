@@ -74,16 +74,17 @@ void setup() {
   // instructions will be done soon
   robot.gx_raw_offset = -190; // gyro offset in raw units
   controller.orientationOffsetX = -1.66; // vertical (balancing) orientation offset in radians
+  //robot.encDir = 1; // for older MinSeg M2V5
+  robot.encDir = -1; // for newer MinSeg M2V5
 
-  // some experimental PID settings, before moving on to state space
-  //controller.Kp = 65;
-  controller.Kp = -26;
-  //controller.Kp = 130;
-  controller.Ki = -165;
-  controller.Kd = -1.2;
+  // some experimental PID settings that work well for Minseg M2V5
+  controller.Kp = 26;
+  controller.Ki = 165;
+  controller.Kd = 1.2;
 
-  // set up numerical estimator and state space controller for now
+  // set up estimator and controller type here
   controller.estimatorType = ESTIMATOR_NUMERICAL;
+  //controller.estimatorType = ESTIMATOR_KALMAN; // needs work - not ready
   //controller.controlType = CONTROLLER_SS;
   controller.controlType = CONTROLLER_PID;
 
@@ -209,13 +210,38 @@ void controllerUpdate(void)
   // update estimator for control feedback signals
   controller.updateEstimator();
 
-  // temporary stuff for debugging 
 
-  //Serial.println(robot.getGyroXAvg());
-  //Serial.println(robot.gx*57.4);
-  //Serial.println(robot.getOrientationOffset());
-  //Serial.println(controller.ex*57.4);
+  //*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^
+  // Sensor calibration steps 
+  //*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^
   
+  // 1) Raw average gyro values - leave robot untouched on any surface,
+  //    uncomment the line below, upload code, and watch serial monitor
+  //    to see the output - use this value to set robot.gx_raw_offset (in setup)
+  //Serial.println(robot.getGyroXAvg());
+
+  // comment the line out again before moving on.
+
+  // you can confirm that the gyro offset worked by uncommenting this line
+  //Serial.println(robot.gx*57.4);
+  // (it should be around 0 when the robot is sitting still on any surface)
+
+  
+  // 2) Vertical orientation offset
+  //    uncomment the line below, upload code, and watch serial monitor while trying to
+  //    carefully hold the robot vertically balanced (gently using your fingers to maintain it
+  //    around the balance point)
+  //    use the value to set robot.orientationOffsetX (in setup)
+  //Serial.println(robot.getOrientationOffset());
+
+  // comment the line out again before moving on.
+
+  // you can confirm that the offset worked by uncommenting this line
+  //Serial.println(controller.ex*57.4);
+  // (it should be around 0 when the robot is vertical)
+
+  // temporary stuff for debugging only
+  // ---------------------------------------------
   //Serial.println(robot.getGyroXRaw());
   //Serial.println(robot.gxFifoAvg);
   //Serial.println(robot.gx);
@@ -225,9 +251,16 @@ void controllerUpdate(void)
   //Serial.println(controller.x1_dot);
   //Serial.println(controller.x1);
   //Serial.println(robot.mtr1Speed);
+  // ---------------------------------------------
+
+
+  //*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^
+  // End of sensor calibration steps 
+  //*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^
   
   // update controller output (calculate it)
   controller.updateController();
+  // debugging output
   //Serial.println(controller.Vout1);
 
   // this is detected based on the body angle of the robot
