@@ -85,8 +85,11 @@ void setup() {
   // set up estimator and controller type here
   controller.estimatorType = ESTIMATOR_NUMERICAL;
   //controller.estimatorType = ESTIMATOR_KALMAN; // needs work - not ready
-  //controller.controlType = CONTROLLER_SS;
-  controller.controlType = CONTROLLER_PID;
+  controller.controlType = CONTROLLER_SS;
+  //controller.controlType = CONTROLLER_PID;
+
+  // in development features
+  //controller.wheelIntegralOnPID = 1;
 
 
   // update turn timer - not needed currently (Feb, 2020)
@@ -308,7 +311,7 @@ void checkForSerial(void)
         }
         tempInt = recvString.toInt();
         // assign Kp value
-        controller.Kp = -((float)(tempInt));
+        controller.Kp = ((float)(tempInt));
         Serial.print('P');
         Serial.println(tempInt);
         break;
@@ -323,7 +326,7 @@ void checkForSerial(void)
         }
         tempInt = recvString.toInt();
         // assign Ki value
-        controller.Ki = -((float)(tempInt));
+        controller.Ki = ((float)(tempInt));
         Serial.print('I');
         Serial.println(tempInt);  
         // zero the integral term
@@ -340,7 +343,7 @@ void checkForSerial(void)
         }
         tempInt = recvString.toInt();
         // assign Kd value
-        controller.Kd = -((float)(tempInt))*0.01; // Kd is x 100
+        controller.Kd = ((float)(tempInt))*0.01; // Kd is x 100
         Serial.print('D');
         Serial.println(tempInt);        
         break;
