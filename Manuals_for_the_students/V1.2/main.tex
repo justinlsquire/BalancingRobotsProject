@@ -45,9 +45,11 @@
 \begin{frame}[t]{Instructions for installing the software: Arduino IDE}
 	If you have not done so yet, download and install the latest Arduino IDE from \url{https://www.arduino.cc/en/Main/Software}, \\ it should look like this:
 	\begin{center}
-		\includegraphics[width = 0.9\textwidth]{Screenshot_arduino_IDE}
+		\includegraphics[width = 0.7\textwidth]{Screenshot_arduino_IDE}
 	\end{center}
+	Note that you might get a ``Windows Security'' message asking whether you would like to install the ``Adafruit Industries LLC Ports'' and ``Arduino USB Driver'' software too. In case, install that too
 \end{frame}
+
 
 \begin{frame}[t]{Instructions for installing the software: Balancing Robot Project Software}
 	go to \url{https://github.com/justinlsquire/BalancingRobotsProject}, \\ it should look like this:
@@ -75,7 +77,7 @@
 
 
 \begin{frame}{Instructions for installing the software: Balancing Robot Project Libraries}
-	go to the ``Arduino'' folder, then the ``libraries'' folder, then highlight and \BoldItPrimary{copy} the two folders called ``MINSEG\_V2'' and ``SEG\_CONTROL'':
+	go to the ``Arduino'' folder inside this just downloaded repository, then the ``libraries'' folder, then highlight and \BoldItPrimary{copy} the two folders called ``MINSEG\_V2'' and ``SEG\_CONTROL'':
 	\begin{center}
 		\includegraphics[width = 0.9\textwidth]{github-repository-explorer-2}
 	\end{center}
@@ -83,7 +85,7 @@
 
 
 \begin{frame}{Instructions for installing the software: Balancing Robot Project Libraries}
-	go to your Arduino Libraries folder (note that the default location for Windows is \texttt{Documents $\mapsto$ Arduino $\mapsto$ Libraries}) and paste the two folders there
+go to your Arduino Libraries folder (note that the default location for Windows is \texttt{Documents $\mapsto$ Arduino $\mapsto$ Libraries}. Sometimes is also \texttt{C:\textbackslash Program Files (x86) \textbackslash Arduino \textbackslash libraries}) and paste the two folders there
 	\begin{center}
 		\includegraphics[width = 0.9\textwidth]{github-repository-explorer-3}
 	\end{center}
@@ -96,24 +98,25 @@
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
 \section{Connecting the robot}
-\begin{frame}{Connecting the robot: Connect the cable}
+\begin{frame}{Connecting the robot: Connect the hardware}
 	\begin{itemize}
+		\item Add six AA batteries to the back of the robot.
 		\item Use the usb cable to connect the robot to your computer. 
-		\item Add six AA batteries to the back.
-		\item Switch  ``Driver Enable'' at the top left corner to ``off''.
+		\item Switch the ``Driver Enable'' switch in the top left corner of the robot to ``off''.
 		\end{itemize}
 \end{frame}
 
 \begin{frame}{Connecting the robot: Open the file}
-	Go back to the GitHub repository folder \texttt{BalancingRobotsProject $\mapsto$ Arduino $\mapsto$ Minseg\_test\_M2V5}, and then open the ``Minseg\_test\_M2V5.ino'' file in Arduino
+	Go back to the GitHub repository folder \texttt{BalancingRobotsProject $\mapsto$ Arduino $\mapsto$ Minseg\_test\_M2V5}, and then open the ``Minseg\_test\_M2V5.ino'' file in Arduino (it should be fine to just double click on it, since the extension ``.ino'' should now be associated to the Arduino IDE program)
 	\begin{center}
 		\includegraphics[width = 0.9\textwidth]{github-repository-explorer-minseg-test}
 	\end{center}
+	If it is the first time that you open this type of file you may get some firewall alerts about javaw.exe. Allow access
 \end{frame}
 
 
 \begin{frame}{Connecting the robot: Select the board}
-	Go to \texttt{Tools $\mapsto$ Board} and select ``Arduino/Genuino Mega or Mega 2560''
+	Go to \texttt{Tools $\mapsto$ Board} and select ``Arduino/Genuino Mega or Mega 2560'' (sometimes one may have only ``Arduino Mega or Mega 2560''; that is ok too)
 	\begin{center}
 		\includegraphics[width = 0.5\textwidth]{arduino-board-manager}
 	\end{center}
@@ -139,8 +142,22 @@
 	\begin{center}
 		\includegraphics[width = 0.5\textwidth]{Screenshot_rawdataplot}
 	\end{center}
-	This will ensure that the ra data of the gyroscope can be read.
+	This will ensure that the raw data of the gyroscope can be read.
 \end{frame}
+
+- save
+- upload the code as said in the next session
+- open the plotter and select the baud rate, use 115200 (in the bottom left of the window)
+
+
+140
+
+
+-1.68
+
+if you do not see well the balancing number then do 
+  Serial.println(100 * robot.getOrientationOffset());
+
 
 \begin{frame}{Calibrating the sensors: Put the Minseg down}
 	Put the Minseg onto a flat surface and let it lay still.
@@ -171,6 +188,7 @@
 \begin{frame}{Calibrating the sensors: Set the raw offset}
 	Comment line 214 again so that it reads \texttt{//Serial.println(robot.getGyroXAvg());}.\\
 	Set the raw offset in line 75 to your average value. For instance, in our example, it is 372:
+	TODO ADD BETTER DESCRIPTION OF WHERE THIS CODE IS / HOW TO FIND IT
 	\begin{center}
 		\includegraphics[width = 0.9\textwidth]{Screenshot_set_raw_offset}
 	\end{center}
@@ -186,14 +204,17 @@
 \begin{frame}{Calibrating the sensors: Observe the orientation offset}
 	Similar to observing the raw offset,
 	\begin{itemize}
+		\item save the code (ctrl-S)
 		\item Upload the code to the Minseg.
 		\item Open the serial plotter.
 		\item Hold the Minseg carefully between your finger tips so that it balances!!
 		\item Observe the value when the robot is still and balances and note the average value.
 		\item In line 76, set \texttt{controller.orientationOffsetX }to the value you observed.
 		\item Comment line 216 again.
+		\item Save the code again (ctrl-S)
 		\end{itemize}
 \end{frame}
+
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
 \begin{frame}{Table of contents}
@@ -212,9 +233,18 @@
 
 
 
+
+
 \begin{frame}{Running the software: See the robot balance!}
-	Hold the Robot upright and make sure the switches are set to ``ON'', ``BATT'', and ``ON'' from the top down - the robot should start balancing if everything went well!
+
+	explain that now you first upload, then remove the cable, then move the switches, explain what each switch does so that people will understand
+
+	Hold the robot upright and make sure the switches are set to ``ON'', ``BATT'', and ``ON'' from the top down - the robot should start balancing if everything went well!
 \end{frame}
+
+
+explain that if one wants to re-upload the code from Arduino IDE there is the need to re-put the switch ``driver voltage'' back
+
 
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
