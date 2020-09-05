@@ -72,8 +72,8 @@ void setup() {
 
   // set these based on the true observed values from the sensors 
   // instructions will be done soon
-  robot.gx_raw_offset = -190; // gyro offset in raw units
-  controller.orientationOffsetX = -1.66; // vertical (balancing) orientation offset in radians
+  robot.gx_raw_offset = 373; // gyro offset in raw units
+  controller.orientationOffsetX = -1.64; // vertical (balancing) orientation offset in radians
   //robot.encDir = 1; // for older MinSeg M2V5
   robot.encDir = -1; // for newer MinSeg M2V5
 
@@ -235,7 +235,7 @@ void controllerUpdate(void)
   //    carefully hold the robot vertically balanced (gently using your fingers to maintain it
   //    around the balance point)
   //    use the value to set robot.orientationOffsetX (in setup)
-  //Serial.println(robot.getOrientationOffset());
+  //Serial.println(robot.getOrientationOffset()*100);
 
   // comment the line out again before moving on.
 

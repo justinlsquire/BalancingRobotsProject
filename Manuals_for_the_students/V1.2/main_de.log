@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.1)  28 AUG 2020 18:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.1)  5 SEP 2020 17:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1543,178 +1543,108 @@ Overfull \vbox (2.5865pt too high) detected at line 50
 File: ./Images/screenshot-github.png Graphic file (type png)
 
 <use ./Images/screenshot-github.png>
-Package pdftex.def Info: ./Images/screenshot-github.png used on input line 57.
+Package pdftex.def Info: ./Images/screenshot-github.png used on input line 59.
 (pdftex.def)             Requested size: 358.50229pt x 127.99666pt.
  [4
 
  <./Images/screenshot-github.png>]
-File: ./Images/screenshot-github.png Graphic file (type png)
-
-<use ./Images/screenshot-github.png>
-Package pdftex.def Info: ./Images/screenshot-github.png used on input line 66.
-(pdftex.def)             Requested size: 358.50229pt x 127.99666pt.
- [5
-
-]
-<./Images/github-repository-explorer.png, id=82, 554.07pt x 248.42813pt>
+<./Images/github-repository-explorer.png, id=77, 554.07pt x 248.42813pt>
 File: ./Images/github-repository-explorer.png Graphic file (type png)
 
 <use ./Images/github-repository-explorer.png>
 Package pdftex.def Info: ./Images/github-repository-explorer.png used on input 
-line 74.
+line 76.
 (pdftex.def)             Requested size: 358.50229pt x 160.74097pt.
- [6
+ [5
 
  <./Images/github-repository-explorer.png>]
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 82.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 84.
 LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <10.95> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 82.
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 84.
 
-<./Images/github-repository-explorer-2.png, id=88, 581.92406pt x 187.45032pt>
+<./Images/github-repository-explorer-2.png, id=83, 581.92406pt x 187.45032pt>
 File: ./Images/github-repository-explorer-2.png Graphic file (type png)
 
 <use ./Images/github-repository-explorer-2.png>
 Package pdftex.def Info: ./Images/github-repository-explorer-2.png used on inpu
-t line 82.
+t line 84.
 (pdftex.def)             Requested size: 358.50229pt x 115.4829pt.
- [7
+ [6
 
  <./Images/github-repository-explorer-2.png>]
-<./Images/github-repository-explorer-3.png, id=96, 631.60968pt x 293.59688pt>
+<./Images/github-repository-explorer-3.png, id=90, 631.60968pt x 293.59688pt>
 File: ./Images/github-repository-explorer-3.png Graphic file (type png)
 
 <use ./Images/github-repository-explorer-3.png>
 Package pdftex.def Info: ./Images/github-repository-explorer-3.png used on inpu
-t line 90.
+t line 93.
 (pdftex.def)             Requested size: 358.50229pt x 166.6486pt.
- [8
 
- <./Images/github-repository-explorer-3.png>] (./main_de.toc) [9
+Overfull \vbox (5.9256pt too high) detected at line 93
+ []
 
-] [10
+[7
+
+ <./Images/github-repository-explorer-3.png>] (./main_de.toc) [8
+
+] [9
 
 ]
-<./Images/github-repository-explorer-minseg-test.png, id=118, 590.95781pt x 231
+<./Images/github-repository-explorer-minseg-test.png, id=113, 590.95781pt x 231
 .86626pt>
 File: ./Images/github-repository-explorer-minseg-test.png Graphic file (type pn
 g)
  <use ./Images/github-repository-explorer-minseg-test.png>
 Package pdftex.def Info: ./Images/github-repository-explorer-minseg-test.png us
-ed on input line 112.
+ed on input line 115.
 (pdftex.def)             Requested size: 358.50229pt x 140.66338pt.
- [11
+ [10
 
  <./Images/github-repository-explorer-minseg-test.png>]
-<./Images/arduino-board-manager.png, id=124, 679.78969pt x 743.02594pt>
+<./Images/arduino-board-manager.png, id=119, 679.78969pt x 743.02594pt>
 File: ./Images/arduino-board-manager.png Graphic file (type png)
 
 <use ./Images/arduino-board-manager.png>
 Package pdftex.def Info: ./Images/arduino-board-manager.png used on input line 
-120.
+123.
 (pdftex.def)             Requested size: 199.1693pt x 217.69418pt.
 
-Overfull \vbox (24.31352pt too high) detected at line 120
+Overfull \vbox (39.2736pt too high) detected at line 123
+ []
+
+[11
+
+ <./Images/arduino-board-manager.png>]
+<./Images/arduino-board-tool.png, id=126, 505.13719pt x 384.6872pt>
+File: ./Images/arduino-board-tool.png Graphic file (type png)
+
+<use ./Images/arduino-board-tool.png>
+Package pdftex.def Info: ./Images/arduino-board-tool.png used on input line 132
+.
+(pdftex.def)             Requested size: 199.1693pt x 151.67682pt.
+
+Overfull \vbox (5.30554pt too high) detected at line 132
  []
 
 [12
 
- <./Images/arduino-board-manager.png>]
-<./Images/arduino-board-tool.png, id=131, 505.13719pt x 384.6872pt>
-File: ./Images/arduino-board-tool.png Graphic file (type png)
+ <./Images/arduino-board-tool.png>] (./main_de.toc) [13
 
-<use ./Images/arduino-board-tool.png>
-Package pdftex.def Info: ./Images/arduino-board-tool.png used on input line 128
-.
-(pdftex.def)             Requested size: 199.1693pt x 151.67682pt.
-
-Overfull \vbox (3.1764pt too high) detected at line 128
- []
-
-[13
-
- <./Images/arduino-board-tool.png>] (./main_de.toc) [14
+] (./main_de.toc)
+[14
 
 ]
-<./Images/Screenshot_rawdataplot.png, id=148, 391.4625pt x 143.53625pt>
-File: ./Images/Screenshot_rawdataplot.png Graphic file (type png)
+<./Images/arduino-board-manager-upload.png, id=151, 213.04594pt x 174.6525pt>
+File: ./Images/arduino-board-manager-upload.png Graphic file (type png)
 
-<use ./Images/Screenshot_rawdataplot.png>
-Package pdftex.def Info: ./Images/Screenshot_rawdataplot.png used on input line
- 143.
-(pdftex.def)             Requested size: 199.1693pt x 73.02948pt.
+<use ./Images/arduino-board-manager-upload.png>
+Package pdftex.def Info: ./Images/arduino-board-manager-upload.png used on inpu
+t line 215.
+(pdftex.def)             Requested size: 199.1693pt x 163.28592pt.
  [15
 
- <./Images/Screenshot_rawdataplot.png>] [16
-
-]
-<./Images/arduino-board-manager-upload.png, id=159, 213.04594pt x 174.6525pt>
-File: ./Images/arduino-board-manager-upload.png Graphic file (type png)
-
-<use ./Images/arduino-board-manager-upload.png>
-Package pdftex.def Info: ./Images/arduino-board-manager-upload.png used on inpu
-t line 154.
-(pdftex.def)             Requested size: 199.1693pt x 163.28592pt.
- [17
-
- <./Images/arduino-board-manager-upload.png>]
-<./Images/Screenshot_open_plotter.png, id=167, 961.5925pt x 345.29pt>
-File: ./Images/Screenshot_open_plotter.png Graphic file (type png)
-
-<use ./Images/Screenshot_open_plotter.png>
-Package pdftex.def Info: ./Images/Screenshot_open_plotter.png used on input lin
-e 161.
-(pdftex.def)             Requested size: 358.50229pt x 128.73pt.
- [18
-
- <./Images/Screenshot_open_plotter.png>]
-<./Images/Screenshot_view_rawoffset.png, id=174, 913.4125pt x 990.70125pt>
-File: ./Images/Screenshot_view_rawoffset.png Graphic file (type png)
-
-<use ./Images/Screenshot_view_rawoffset.png>
-Package pdftex.def Info: ./Images/Screenshot_view_rawoffset.png used on input l
-ine 169.
-(pdftex.def)             Requested size: 159.333pt x 172.80087pt.
-
-Overfull \vbox (10.86116pt too high) detected at line 169
- []
-
-[19
-
- <./Images/Screenshot_view_rawoffset.png>]
-<./Images/Screenshot_set_raw_offset.png, id=182, 729.72626pt x 81.30376pt>
-File: ./Images/Screenshot_set_raw_offset.png Graphic file (type png)
-
-<use ./Images/Screenshot_set_raw_offset.png>
-Package pdftex.def Info: ./Images/Screenshot_set_raw_offset.png used on input l
-ine 177.
-(pdftex.def)             Requested size: 358.50229pt x 39.94339pt.
- [20
-
- <./Images/Screenshot_set_raw_offset.png>]
-<./Images/Screenshot_oreintation_offset.png, id=189, 392.46625pt x 71.26625pt>
-File: ./Images/Screenshot_oreintation_offset.png Graphic file (type png)
-
-<use ./Images/Screenshot_oreintation_offset.png>
-Package pdftex.def Info: ./Images/Screenshot_oreintation_offset.png used on inp
-ut line 184.
-(pdftex.def)             Requested size: 358.50229pt x 65.10248pt.
- [21
-
- <./Images/Screenshot_oreintation_offset.png>] [22
-
-] (./main_de.toc) [23
-
-]
-File: ./Images/arduino-board-manager-upload.png Graphic file (type png)
-
-<use ./Images/arduino-board-manager-upload.png>
-Package pdftex.def Info: ./Images/arduino-board-manager-upload.png used on inpu
-t line 211.
-(pdftex.def)             Requested size: 199.1693pt x 163.28592pt.
- [24
-
-] [25
+ <./Images/arduino-board-manager-upload.png>] [16
 
 ]
 \tf@nav=\write7
@@ -1726,20 +1656,20 @@ t line 211.
 \tf@snm=\write9
 \openout9 = `main_de.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 221.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 221.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 225.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 225.
  (./main_de.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 221.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 221.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 225.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 225.
 Package rerunfilecheck Info: File `main_de.out' has not changed.
-(rerunfilecheck)             Checksum: 18E53D4A5902C6E9B4CA38409BB33E88;226.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 221.
+(rerunfilecheck)             Checksum: C4689570E289C11A4140E0E6EA48F421;233.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 225.
  ) 
 Here is how much of TeX's memory you used:
- 40976 strings out of 493013
- 1012892 string characters out of 6133344
+ 40914 strings out of 493013
+ 1011567 string characters out of 6133344
  1312578 words of memory out of 5000000
- 43618 multiletter control sequences out of 15000+600000
+ 43579 multiletter control sequences out of 15000+600000
  49538 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,11n,111p,779b,647s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1751,10 +1681,10 @@ exmf-dist/fonts/type1/public/lm/lmss12.pfb></usr/local/texlive/2016/texmf-dist/
 fonts/type1/public/lm/lmss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
 /public/lm/lmssbo10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
 lm/lmtt10.pfb>
-Output written on main_de.pdf (25 pages, 951689 bytes).
+Output written on main_de.pdf (16 pages, 602137 bytes).
 PDF statistics:
- 258 PDF objects out of 1000 (max. 8388607)
- 187 compressed objects within 2 object streams
- 55 named destinations out of 1000 (max. 500000)
- 180 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 198 PDF objects out of 1000 (max. 8388607)
+ 146 compressed objects within 2 object streams
+ 37 named destinations out of 1000 (max. 500000)
+ 155 words of extra memory for PDF output out of 10000 (max. 10000000)
 

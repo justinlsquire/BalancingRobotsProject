@@ -1,6 +1,6 @@
 \beamer@endinputifotherversion {3.36pt}
 \select@language {english}
-\beamer@sectionintoc {1}{Installing the software}{3}{0}{1}
-\beamer@sectionintoc {2}{Connecting the robot}{10}{0}{2}
-\beamer@sectionintoc {3}{Calibrating the sensors}{15}{0}{3}
-\beamer@sectionintoc {4}{Running the software}{24}{0}{4}
+\beamer@sectionintoc {1}{Installation der Software}{3}{0}{1}
+\beamer@sectionintoc {2}{Verbinden des Roboters}{9}{0}{2}
+\beamer@sectionintoc {3}{Kalibrieren der Sensoren}{14}{0}{3}
+\beamer@sectionintoc {4}{Ausführen der Software}{15}{0}{4}
