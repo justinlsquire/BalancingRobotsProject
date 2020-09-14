@@ -3,4 +3,4 @@
 \beamer@sectionintoc {1}{Installing the software}{3}{0}{1}
 \beamer@sectionintoc {2}{Connecting the robot}{10}{0}{2}
 \beamer@sectionintoc {3}{Calibrating the sensors}{15}{0}{3}
-\beamer@sectionintoc {4}{Running the software}{24}{0}{4}
+\beamer@sectionintoc {4}{Running the software}{27}{0}{4}

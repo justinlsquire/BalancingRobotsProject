@@ -226,7 +226,7 @@ void controllerUpdate(void)
   // comment the line out again before moving on.
 
   // you can confirm that the gyro offset worked by uncommenting this line
-  //Serial.println(robot.gx*57.4);
+ // Serial.println(robot.gx*57.4);
   // (it should be around 0 when the robot is sitting still on any surface)
 
   

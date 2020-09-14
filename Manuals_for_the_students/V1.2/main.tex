@@ -45,14 +45,14 @@
 \begin{frame}[t]{Instructions for installing the software: Arduino IDE}
 	If you have not done so yet, download and install the latest Arduino IDE from \url{https://www.arduino.cc/en/Main/Software}, \\ it should look like this:
 	\begin{center}
-		\includegraphics[width = 0.7\textwidth]{Screenshot_arduino_IDE}
+		\includegraphics[width = 0.6\textwidth]{Screenshot_arduino_IDE}
 	\end{center}
-	Note that you might get a ``Windows Security'' message asking whether you would like to install the ``Adafruit Industries LLC Ports'' and ``Arduino USB Driver'' software too. In case, install that too
+	Note that you might get a ``Windows Security'' message asking whether you would like to install the ``Adafruit Industries LLC Ports'' and ``Arduino USB Driver'' software too. In this case, install that as well.
 \end{frame}
 
 
 \begin{frame}[t]{Instructions for installing the software: Balancing Robot Project Software}
-	go to \url{https://github.com/justinlsquire/BalancingRobotsProject}, \\ it should look like this:
+	Go to \url{https://github.com/justinlsquire/BalancingRobotsProject}, \\ it should look like this:
 	\begin{center}
 		\includegraphics[width = 0.9\textwidth]{screenshot-github}
 	\end{center}
@@ -60,16 +60,16 @@
 
 
 \begin{frame}[t]{Instructions for installing the software: Balancing Robot Project Software}
-	download the software by clicking the ``clone or download'' button:
+	Download the software by clicking the ``clone or download'' button:
 	\begin{center}
 		\includegraphics[width = 0.9\textwidth]{screenshot-github}
 	\end{center}
-	in any folder you prefer, then unzip the downloaded file
+	in any folder you prefer. Then unzip the downloaded file.
 \end{frame}
 
 
 \begin{frame}{Instructions for installing the software: Balancing Robot Project Software}
-	open the unzipped file (sometimes called also ``repository'') in your file explorer:
+	Open the unzipped file (sometimes called also ``repository'') in your file explorer:
 	\begin{center}
 		\includegraphics[width = 0.9\textwidth]{github-repository-explorer}
 	\end{center}
@@ -77,7 +77,7 @@
 
 
 \begin{frame}{Instructions for installing the software: Balancing Robot Project Libraries}
-	go to the ``Arduino'' folder inside this just downloaded repository, then the ``libraries'' folder, then highlight and \BoldItPrimary{copy} the two folders called ``MINSEG\_V2'' and ``SEG\_CONTROL'':
+	Go to the ``Arduino'' folder inside this just downloaded repository, then the ``libraries'' folder, then highlight and \BoldItPrimary{copy} the two folders called ``MINSEG\_V2'' and ``SEG\_CONTROL'':
 	\begin{center}
 		\includegraphics[width = 0.9\textwidth]{github-repository-explorer-2}
 	\end{center}
@@ -85,7 +85,7 @@
 
 
 \begin{frame}{Instructions for installing the software: Balancing Robot Project Libraries}
-go to your Arduino Libraries folder (note that the default location for Windows is \texttt{Documents $\mapsto$ Arduino $\mapsto$ Libraries}. Sometimes is also \texttt{C:\textbackslash Program Files (x86) \textbackslash Arduino \textbackslash libraries}) and paste the two folders there
+Go to your Arduino Libraries folder (note that the default location for Windows is \texttt{Documents $\mapsto$ Arduino $\mapsto$ Libraries}. Sometimes is also \texttt{C:\textbackslash Program Files (x86) \textbackslash Arduino \textbackslash libraries}) and paste the two folders there:
 	\begin{center}
 		\includegraphics[width = 0.9\textwidth]{github-repository-explorer-3}
 	\end{center}
@@ -109,14 +109,14 @@ go to your Arduino Libraries folder (note that the default location for Windows 
 \begin{frame}{Connecting the robot: Open the file}
 	Go back to the GitHub repository folder \texttt{BalancingRobotsProject $\mapsto$ Arduino $\mapsto$ Minseg\_test\_M2V5}, and then open the ``Minseg\_test\_M2V5.ino'' file in Arduino (it should be fine to just double click on it, since the extension ``.ino'' should now be associated to the Arduino IDE program)
 	\begin{center}
-		\includegraphics[width = 0.9\textwidth]{github-repository-explorer-minseg-test}
+		\includegraphics[width = 0.8\textwidth]{github-repository-explorer-minseg-test}
 	\end{center}
 	If it is the first time that you open this type of file you may get some firewall alerts about javaw.exe. Allow access
 \end{frame}
 
 
 \begin{frame}{Connecting the robot: Select the board}
-	Go to \texttt{Tools $\mapsto$ Board} and select ``Arduino/Genuino Mega or Mega 2560'' (sometimes one may have only ``Arduino Mega or Mega 2560''; that is ok too)
+	Go to \texttt{Tools $\mapsto$ Board} and select ``Arduino/Genuino Mega or Mega 2560'' (sometimes one may have only ``Arduino Mega or Mega 2560''; that is ok too!)
 	\begin{center}
 		\includegraphics[width = 0.5\textwidth]{arduino-board-manager}
 	\end{center}
@@ -124,7 +124,7 @@ go to your Arduino Libraries folder (note that the default location for Windows 
 
 
 \begin{frame}{Connecting the robot: Select the port}
-	Go to \texttt{Tools $\mapsto$ Port} and select the COM port associated with the MinSeg you plugged in via the USB port (If you unplug the MinSeg and check this Port field again, you should see one missing\ldots This is the port that you should select when you plug back in the MinSeg.)
+	Go to \texttt{Tools $\mapsto$ Port} and select the COM port associated with the MinSeg you plugged in via the USB port. (If you unplug the MinSeg and check this Port field again, you should see one missing\ldots This is the port that you should select when you plug back in the MinSeg.)
 	\begin{center}
 		\includegraphics[width = 0.5\textwidth]{arduino-board-tool}
 	\end{center}
@@ -137,30 +137,42 @@ go to your Arduino Libraries folder (note that the default location for Windows 
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
 \section{Calibrating the sensors}
-\begin{frame}{Calibrating the sensors: First step: raw offset}
-	Uncomment line 214 (or search for the line in case it has moved) so that it reads \texttt{Serial.println(robot.getGyroXAvg());} (without // !!)
+
+\begin{frame}{Calibrating the sensors: Open the code}
+	Find the right part of code for the calibration of the robot entitled
+	\texttt{Sensor calibration steps}
 	\begin{center}
-		\includegraphics[width = 0.5\textwidth]{Screenshot_rawdataplot}
+		\includegraphics[width = 0.5\textwidth]{Screenshot_calibration_section}
+	\end{center}
+	The calibration routine is written out / explained in the code as well. So, we are basically going to follow these instructions step by step.
+\end{frame}
+
+
+
+\begin{frame}{Calibrating the sensors: First step: raw offset}
+	Uncomment line 224 (or search for the line in case it has moved) so that it reads \texttt{Serial.println(robot.getGyroXAvg());} (without // !!)
+	\begin{center}
+		\includegraphics[width = 0.7\textwidth]{Screenshot_rawdataplot}
 	\end{center}
 	This will ensure that the raw data of the gyroscope can be read.
 \end{frame}
 
-- save
-- upload the code as said in the next session
-- open the plotter and select the baud rate, use 115200 (in the bottom left of the window)
-
-
-140
-
-
--1.68
-
-if you do not see well the balancing number then do 
-  Serial.println(100 * robot.getOrientationOffset());
+%- save
+%- upload the code as said in the next session
+%- open the plotter and select the baud rate, use 115200 (in the bottom left of the window)
+%
+%
+%140
+%
+%
+%-1.68
+%
+%if you do not see well the balancing number then do 
+%  Serial.println(100 * robot.getOrientationOffset());
 
 
 \begin{frame}{Calibrating the sensors: Put the Minseg down}
-	Put the Minseg onto a flat surface and let it lay still.
+	Put the Minseg onto a flat surface and let it lay absolutely still.
 \end{frame}
 
 \begin{frame}{Calibrating the sensors: Upload the code}
@@ -178,27 +190,39 @@ if you do not see well the balancing number then do
 \end{frame}
 
 \begin{frame}{Calibrating the sensors: Observe the raw measurement}
-	Make sure that the Minseg is laying absolutely still. Observe the values and note down the average value. Simply observing the curve should be enough.
+	Observe the values / the curve and note down the average value. (Here: roughly 372)
 	\begin{center}
 		\includegraphics[width = 0.4\textwidth]{Screenshot_view_rawoffset}
 	\end{center}
-	In this case here, the average is roughly 372.
+	Make sure to select ``115200 baud'' in the box at the bottom left of the plot window!
 \end{frame}
 
 \begin{frame}{Calibrating the sensors: Set the raw offset}
-	Comment line 214 again so that it reads \texttt{//Serial.println(robot.getGyroXAvg());}.\\
-	Set the raw offset in line 75 to your average value. For instance, in our example, it is 372:
-	TODO ADD BETTER DESCRIPTION OF WHERE THIS CODE IS / HOW TO FIND IT
+	Comment line 224 again so that it reads \texttt{//Serial.println(robot.getGyroXAvg());}.\\
+	Find the line of code setting the gyro offset, which reads\\
+	\texttt{robot.gx\_raw\_offset = 373; // gyro offset in raw units}\\
+	and replace the offset value with the average that you observed above.
 	\begin{center}
 		\includegraphics[width = 0.9\textwidth]{Screenshot_set_raw_offset}
 	\end{center}
 \end{frame}
 
+\begin{frame}{Calibrating the sensors: Test the raw offset}
+	Test whether the setting of the raw offset is correct by uncommenting line 229 so that it reads
+	\texttt{Serial.println(robot.gx*57.4);}
+	\begin{center}
+		\includegraphics[width = 0.9\textwidth]{Screenshot_rawoffset_test}
+	\end{center}
+	upload the code to the Minseg, place it still on a flat surface and observe the values in the serial plotter.\\
+	If the calibration was successful, the plotted values should be around 0. Comment line 229 afterwards again.
+\end{frame}
+
 \begin{frame}{Calibrating the sensors: Second step: orientation offset}
-	Uncomment line 216 (or search for the line in case it has moved) so that it reads \texttt{Serial.println(robot.getOrientationOffset());} (without // !!)
+	Uncomment line 238 (or search for the line in case it has moved) so that it reads \texttt{Serial.println(robot.getOrientationOffset()*100);} (without // !!)
 	\begin{center}
 		\includegraphics[width = 0.9\textwidth]{Screenshot_oreintation_offset}
 	\end{center}
+	NOTE: This plots the value times a factor of 100 (!!) to allow to see the usually small value in more detail / higher resolution.
 \end{frame}
 
 \begin{frame}{Calibrating the sensors: Observe the orientation offset}
@@ -209,10 +233,20 @@ if you do not see well the balancing number then do
 		\item Open the serial plotter.
 		\item Hold the Minseg carefully between your finger tips so that it balances!!
 		\item Observe the value when the robot is still and balances and note the average value.
-		\item In line 76, set \texttt{controller.orientationOffsetX }to the value you observed.
-		\item Comment line 216 again.
+		\item In line 76, set \texttt{controller.orientationOffsetX} to the value you observed divided by 100 (!!) .
+		\item Comment line 238 again.
 		\item Save the code again (ctrl-S)
 		\end{itemize}
+\end{frame}
+
+\begin{frame}{Calibrating the sensors: Test the orientation offset}
+	Test whether the setting of the orientation offset is correct by uncommenting line 243 so that it reads
+	\texttt{Serial.println(controller.ex*57.4);}
+	\begin{center}
+		\includegraphics[width = 0.9\textwidth]{Screenshot_orientationoffset_test}
+	\end{center}
+	upload the code to the Minseg, hold it carefully so that it balances and observe the values in the serial plotter.\\
+	If the calibration was successful, the plotted values should be around 0. Comment line 243 afterwards again and save the code.
 \end{frame}
 
 
@@ -237,13 +271,13 @@ if you do not see well the balancing number then do
 
 \begin{frame}{Running the software: See the robot balance!}
 
-	explain that now you first upload, then remove the cable, then move the switches, explain what each switch does so that people will understand
+	%explain that now you first upload, then remove the cable, then move the switches, explain what each switch does so that people will understand
 
 	Hold the robot upright and make sure the switches are set to ``ON'', ``BATT'', and ``ON'' from the top down - the robot should start balancing if everything went well!
 \end{frame}
 
 
-explain that if one wants to re-upload the code from Arduino IDE there is the need to re-put the switch ``driver voltage'' back
+%explain that if one wants to re-upload the code from Arduino IDE there is the need to re-put the switch ``driver voltage'' back
 
 
 
